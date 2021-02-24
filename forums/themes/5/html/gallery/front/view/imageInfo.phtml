@@ -1,0 +1,278 @@
+<ips:template parameters="$image, $slider, $next=NULL, $prev=NULL" />
+
+<div class='ipsColumns ipsColumns_collapsePhone'>
+	<div class='ipsColumn ipsColumn_fluid'>
+		{{if $image->hidden() === 1 and $image->canUnhide()}}
+			<div class="ipsBox ipsPad ipsAreaBackground_light ipsSpacer_bottom">
+				<p class="ipsType_reset ipsType_normal"><i class='fa fa-warning'></i> {lang="image_pending_approval"}</p>
+				<br>
+				<ul class='ipsList_inline'>
+					<li><a href="{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unhide' ) )}" class="ipsButton ipsButton_small ipsButton_positive" title='{lang="approve_title_image"}'><i class="fa fa-check-circle"></i> &nbsp;{lang="approve"}</a></li>
+					{{if $image->canDelete()}}				
+						<li><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'delete' ) )}' data-confirm title='{lang="delete_title"}' class="ipsButton ipsButton_small ipsButton_negative"><i class='fa fa-times'></i> &nbsp;{lang="delete"}</a></li>
+					{{endif}}
+				</ul>
+			</div>
+		{{endif}}
+
+		<div class='ipsBox ipsPad' data-role='imageDescription'>
+			<h1 class='ipsType_pageTitle ipsType_break'>
+				{{if $image->prefix() OR ( $image->canEdit() AND $image::canTag( NULL, $image->container() ) AND $image::canPrefix( NULL, $image->container() ) )}}
+					<span {{if !$image->prefix()}}class='ipsHide'{{endif}} {{if ( $image->canEdit() AND $image::canTag( NULL, $image->container() ) AND $image::canPrefix( NULL, $image->container() ) )}}data-editablePrefix{{endif}}>
+						{template="prefix" group="global" app="core" params="$image->prefix( TRUE ), $image->prefix()"}
+					</span>
+				{{endif}}
+				{{if $image->canEdit()}}
+					<div class='ipsContained ipsType_break' data-controller="core.front.core.moderation">{{if $image->locked()}}<i class='fa fa-lock'></i> {{endif}}
+						<span data-role="editableTitle" title='{lang="click_hold_edit"}'>{$image->caption}</span>
+					</div>
+				{{else}}
+					<div class='ipsContained ipsType_break'>{{if $image->locked()}}<i class='fa fa-lock'></i> {{endif}}{$image->caption}</div>
+				{{endif}}
+				{{if $image->hidden() === 1}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_warning" data-ipsTooltip title='{lang="pending_approval"}'><i class='fa fa-warning'></i></span>
+				{{elseif $image->hidden() === -1}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_warning" data-ipsTooltip title='{$image->hiddenBlurb()}'><i class='fa fa-eye-slash'></i></span>
+				{{endif}}
+				{{if $image->canUnfeature()}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_positive" data-ipsTooltip title='{lang="featured"}'><i class='fa fa-star'></i></span>
+				{{endif}}
+			</h1>
+			<div class='ipsPhotoPanel ipsPhotoPanel_mini ipsClearfix ipsSpacer_bottom ipsSpacer_top'>
+				{template="userPhoto" app="core" group="global" params="$image->author(), 'mini', $image->warningRef()"}
+				<div>
+					<div class='ipsPos_right ipsResponsive_noFloat ipsResponsive_hidePhone'>
+						{template="follow" app="core" group="global" params="'gallery', 'image', $image->id, $image->followers()->count( TRUE )"}
+					</div>
+					<p class='ipsType_reset ipsType_normal ipsType_blendLinks'>
+						{lang="byline_nodate_itemprop" htmlsprintf="$image->author()->link( $image->warningRef() )"}
+					</p>
+					<ul class='ipsList_inline'>
+						<li class='ipsType_light'>{datetime="$image->date"}</li>
+						<li class='ipsType_light'>{lang="num_views_with_number" pluralize="$image->views"}</li>
+						{{if $image->author()->member_id OR $image->canChangeAuthor()}}
+							{{if $image->author()->member_id}}
+								<li><a href='{url="app=core&module=members&controller=profile&id={$image->author()->member_id}&do=content&type=gallery_image" base="front" seoTitles="$image->author()->members_seo_name" seoTemplate="profile_content"}'>{lang="find_users_images"}</a></li>
+							{{endif}}
+							{{if $image->canChangeAuthor()}}
+								<li><a href='{$image->url()->setQueryString( array( 'do' => 'changeAuthor' ) )}' data-ipsDialog data-ipsDialog-size='narrow' data-ipsDialog-title="{lang="change_author"}" title='{lang="change_author_ititle"}'>{lang="change_author"}</a></li>
+							{{endif}}
+						{{endif}}
+					</ul>
+				</div>
+			</div>
+
+			{{if $image->description}}
+				<div class='ipsType_medium ipsType_richText ipsType_break ipsSpacer_both' data-controller="core.front.core.lightboxedImages">
+					{$image->content()|raw}
+				</div>
+			{{endif}}
+
+			{{if count( $image->tags() ) OR ( $image->canEdit() AND $image::canTag( NULL, $image->container() ) )}}
+				{template="tags" group="global" app="core" params="$image->tags(), FALSE, FALSE, ( $image->canEdit() AND $image::canTag( NULL, $image->container() ) ) ? $image->url() : NULL"}
+				<br>
+			{{endif}}
+
+			{{if $image->credit_info && $image->copyright}}
+				<div class='ipsGrid ipsGrid_collapsePhone'>
+					<div class='ipsGrid_span6'>
+			{{endif}}
+
+				{{if $image->credit_info}}
+					<h3 class='ipsType_minorHeading'>{lang="image_credit_info"}</h3>
+					<div class='ipsType_richText ipsType_medium'>
+						{$image->credit_info}
+					</div>
+				{{endif}}
+
+			{{if $image->credit_info && $image->copyright}}
+					</div>
+					<div class='ipsGrid_span6'>
+			{{endif}}
+
+				{{if $image->copyright}}
+					<h3 class='ipsType_minorHeading'>{lang="image_copyright"}</h3>
+					<div class='ipsType_richText'>
+						&copy; {$image->copyright}
+					</div>
+				{{endif}}
+
+			{{if $image->credit_info && $image->copyright}}
+					</div>
+				</div>
+			{{endif}}
+
+			<hr class='ipsHr'>
+
+			{{if $image instanceof \IPS\Content\Reputation and settings.reputation_enabled}}
+				<div class='ipsPos_right ipsResponsive_noFloat'>
+					{template="reputation" app="core" group="global" params="$image"}
+				</div>
+			{{endif}}
+
+			{{if $image->canEdit() or $image->canFeature() or $image->canPin() or $image->canUnfeature() or $image->canHide() or $image->canUnhide() or $image->canMove() or $image->canLock() or $image->canUnlock() or $image->canDelete()}}
+				<a href='#elImageActions_menu' id='elImageActions' class='ipsButton ipsButton_light ipsButton_verySmall' data-ipsMenu>{lang="manage_image"} <i class='fa fa-caret-down'></i></a>
+				<ul id='elImageActions_menu' class='ipsMenu ipsMenu_auto ipsHide'>
+					{{if $image->canEdit()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->setQueryString( array( 'do' => 'edit' ) )}' title="{lang="gallery_edit_details_title"}">{lang="gallery_edit_details"}</a></li>
+					{{endif}}
+					{{if $image->canFeature()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'feature' ) )}' title="{lang="feature_title_image"}">{lang="feature"}</a></li>
+					{{endif}}
+					{{if $image->canUnfeature()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unfeature' ) )}' title="{lang="unfeature_title_image"}">{lang="unfeature"}</a></li>
+					{{endif}}
+					{{if $image->canPin()}}
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'pin' ) )}' title="{lang="pin_title_image"}">{lang="pin"}</a></li>
+					{{endif}}
+					{{if $image->canUnpin()}}
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unpin' ) )}' title="{lang="unpin_title_image"}">{lang="unpin"}</a></li>
+					{{endif}}
+					{{if $image->canHide()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'hide' ) )}' title="{lang="hide_title_image"}" data-ipsDialog data-ipsDialog-title="{lang="hide"}">{lang="hide"}</a></li>
+					{{endif}}
+					{{if $image->canUnhide()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unhide' ) )}' title="{{if $image->hidden() === 1}}{lang="approve_title_image"}{{else}}{lang="unhide_title_image"}{{endif}}">{{if $image->hidden() === 1}}{lang="approve"}{{else}}{lang="unhide"}{{endif}}</a></li>
+					{{endif}}
+					{{if $image->canLock()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'lock' ) )}' title="{lang="lock_title_image"}">{lang="lock"}</a></li>
+					{{endif}}
+					{{if $image->canUnlock()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unlock' ) )}' title="{lang="unlock_title_image"}">{lang="unlock"}</a></li>
+					{{endif}}
+					{{if $image->canMove()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->setQueryString( array( 'do' => 'move' ) )}' data-ipsDialog data-ipsDialog-size='narrow' data-ipsDialog-title="{lang="move"}"  title="{lang="gallery_move_title"}">{lang="move"}</a></li>
+					{{endif}}
+					{{if $image->canDelete()}}				
+						<li class='ipsMenu_item'><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'delete' ) )}' data-confirm  title="{lang="delete_title_image"}">{lang="delete"}</a></li>
+					{{endif}}
+					{{if \IPS\Member::loggedIn()->modPermission('can_view_moderation_log')}}
+						<li class='ipsMenu_sep'><hr></li>
+						<li class="ipsMenu_item"><a href='{$image->url()->csrf()->setQueryString( array( 'do' => 'modLog' ) )}' data-ipsDialog data-ipsDialog-title='{lang="moderation_history"}'>{lang="moderation_history"}</a></li>
+					{{endif}}
+				</ul>
+			{{endif}}
+
+			{{if !\IPS\Member::loggedIn()->group['gbw_no_report'] }}
+				&nbsp;&nbsp;<a href='{$image->url('report')}' data-ipsDialog data-ipsDialog-size='narrow' data-ipsDialog-title="{lang="report_image"}" data-ipsDialog-remoteSubmit data-ipsDialog-flashMessage="{lang="report_submit_success"}" title="{lang="report_image"}">{lang="report_image"}</a>
+			{{endif}}
+			<div class='ipsResponsive_showPhone ipsResponsive_block ipsSpacer_both'>
+				{template="follow" app="core" group="global" params="'gallery', 'image', $image->id, $image->followers()->count( TRUE )"}
+			</div>
+			{{if count( $image->shareLinks() )}}
+				<div class='ipsSpacer_top'>
+					{template="sharelinks" app="core" group="global" params="$image"}
+				</div>
+			{{endif}}	
+		</div>
+	</div>
+	<div class='ipsColumn ipsColumn_wide' id='elGalleryImageStats'>
+		<div class='ipsBox ipsPad' data-role="imageStats">
+			{{if $image->directContainer()->allow_rating}}
+				<div class='ipsType_center'>
+					{$image->rating()|raw}
+				</div>
+				<hr class='ipsHr'>
+			{{endif}}
+
+			{{if $image->gps_show}}
+				{$image->map( 240, 100 )|raw}
+				<div class='ipsType_small'>
+					{$image->loc_short}
+					{{if $image->canEdit() }}
+						<br><br>
+						<a href='#' id='elMapForm' data-ipsMenu data-ipsMenu-closeOnClick='false'>{lang="map_privacy"} <i class='fa fa-caret-down'></i></a>
+						<div class='ipsMenu ipsMenu_auto ipsHide ipsPad' id='elMapForm_menu'>
+							{$image->enableMapForm()|raw}
+						</div>
+					{{endif}}
+				</div>
+				<hr class='ipsHr'>
+			{{elseif $image->canEdit() AND $image->gps_raw}}
+				<div class='ipsFaded'>
+					{$image->map( 240, 100 )|raw}
+					<div class='ipsType_small'>
+						{$image->loc_short}
+					</div>
+				</div>
+				{{if $image->canEdit() }}
+					<div class='ipsType_small ipsSpacer_top'>
+						<strong>{lang="map_not_being_shown"}</strong>
+						<a href='#' id='elMapForm' data-ipsMenu data-ipsMenu-closeOnClick='false'>{lang="map_privacy"} <i class='fa fa-caret-down'></i></a>
+						<div class='ipsMenu ipsMenu_auto ipsHide ipsPad' id='elMapForm_menu'>
+							{$image->enableMapForm()|raw}
+						</div>
+					</div>
+				{{endif}}
+				<hr class='ipsHr'>
+			{{endif}}
+
+			{{if $image->directContainer() instanceof \IPS\gallery\Album}}
+				<div>
+					<strong class='ipsType_minorHeading'>{lang="from_the_album"}</strong>
+					<br>
+					<h3 class='ipsType_sectionHead'><div class='ipsContained ipsType_break'><a href='{$image->directContainer()->url()}' class='ipsType_normal ipsTruncate ipsTruncate_line'>{$image->directContainer()->_title}</a></div></h3>
+					<ul class='ipsList_inline ipsType_medium'>
+						<li><i class='fa fa-camera'></i> <strong>{lang="num_images" pluralize="$image->directContainer()->count_imgs"}</strong></li>
+						{{if $image->container()->allow_comments and $image->directContainer()->allow_comments}}
+							<li><i class='fa fa-comments'></i> <strong>{lang="num_comments" pluralize="$image->directContainer()->count_comments"}</strong></li>
+						{{endif}}
+					</ul>
+				</div>
+				<hr class='ipsHr'>
+			{{endif}}
+
+			{{if count($image->metadata)}}
+				<h2 class='ipsType_minorHeading'>{lang="gallery_metadata"}</h2>
+				<div class='cGalleryExif'>
+					{{if isset( $image->metadata['EXIF.FocalLength'] ) || ( isset( $image->metadata['IFD0.Make'] ) AND isset( $image->metadata['IFD0.Model'] ) ) || isset( $image->metadata['EXIF.ShutterSpeedValue'] ) || isset( $image->metadata['COMPUTED.ApertureFNumber'] ) || isset( $image->metadata['Exif.Photo.ISOSpeed'] )}}
+						<h3 class='ipsType_reset ipsType_small'>
+							{{if isset( $image->metadata['IFD0.Make'] ) AND isset( $image->metadata['IFD0.Model'] )}}
+								<strong>{lang="gallery_exif_camera"} {$image->metadata['IFD0.Make']} {$image->metadata['IFD0.Model']}</strong>
+							{{else}}
+								<strong>{lang="camera_information"}</strong>
+							{{endif}}
+						</h3>
+						<ul class='ipsList_inline cGalleryExif_data'>
+							{{if isset( $image->metadata['EXIF.FocalLength'] )}}
+								<li data-ipsTooltip title='{lang="EXIF.FocalLength"}'>
+									<span><i class='fa fa-arrows-h'></i></span>
+									{$image->focallength}
+								</li>
+							{{endif}}
+							{{if isset( $image->metadata['EXIF.ExposureTime'] )}}
+								<li data-ipsTooltip title='{lang="EXIF.ExposureTime"}'>
+									<span><i class='fa fa-clock-o'></i></span>
+									{$image->metadata['EXIF.ExposureTime']}
+								</li>
+							{{endif}}
+							{{if isset( $image->metadata['COMPUTED.ApertureFNumber'] )}}
+								<li data-ipsTooltip title='{lang="COMPUTED.ApertureFNumber"}'>
+									<span class='cGalleryExif_f'>f</span>
+									{$image->metadata['COMPUTED.ApertureFNumber']}
+								</li>
+							{{endif}}
+							{{if isset( $image->metadata['Exif.Photo.ISOSpeed'] ) || isset( $image->metadata['EXIF.ISOSpeedRatings'] )}}
+								<li data-ipsTooltip title='{lang="gallery_exif_isospeed"}'>
+									<span class='cGalleryExif_iso'>ISO</span>
+									{{if isset( $image->metadata['Exit.Photo.ISOSpeed'] )}}
+										{$image->metadata['Exif.Photo.ISOSpeed']}
+									{{else}}
+										{{if is_array( $image->metadata['EXIF.ISOSpeedRatings'] )}}
+											{expression="implode( '/', $image->metadata['EXIF.ISOSpeedRatings'] )"}
+										{{else}}
+											{$image->metadata['EXIF.ISOSpeedRatings']}
+										{{endif}}
+									{{endif}}
+								</li>
+							{{endif}}
+						</ul>
+						<a href='{$image->url( 'metadata' )}' data-ipsDialog data-ipsDialog-title='{lang="view_all_photo_info"}'>{lang="view_all_photo_info"}</a>
+					{{else}}
+						<a href='{$image->url( 'metadata' )}' data-ipsDialog data-ipsDialog-title='{lang="view_all_photo_info"}'>{lang="view_photo_info"}</a>
+					{{endif}}
+				</div>
+			{{endif}}
+		</div>
+	</div>
+</div>

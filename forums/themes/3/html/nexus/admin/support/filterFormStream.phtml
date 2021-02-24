@@ -1,0 +1,25 @@
+<ips:template parameters="$input, $options" />
+<div class="ipsClearfix">
+	{{foreach $options as $stream}}
+		<div class="cNexusStream">
+			<input type="radio" name="stream" value="{$stream->id}" id="elRadio_stream_{$stream->id}" {{if $input->value == $stream->id}}checked{{endif}} data-action="quickToggle" data-url="{url="app=nexus&module=support&controller=requests&stream={$stream->id}"}">
+			&nbsp;
+			<label for='elRadio_stream_{$stream->id}' id='elRadio_stream_{$stream->id}_label' class="ipsCursor_pointer">
+				{$stream->title}
+				({$stream->count( \IPS\Member::loggedIn() )})
+				{{if $stream->temporary}}
+					<span class="ipsType_small"><a href="{url="app=nexus&module=support&controller=requests&do=saveStream&id={$stream->id}"}" data-ipsMenu id="elSaveStream">{lang="save"}</a></span>
+				{{elseif is_int( $stream->id )}}
+					<span class="ipsType_small"><a href="{url="app=nexus&module=support&controller=requests&do=editStream&id={$stream->id}"}" data-action="editStream">{lang="edit"}</a></span>
+				{{endif}}
+			</label>
+		</div>
+	{{endforeach}}
+	<div class="cNexusStream">
+		<input type="radio" name="stream" value="custom" id="elRadio_stream_custom" data-control="toggle" data-toggles="elFilterFormFull" {{if $input->value == 'custom'}}checked{{endif}} data-action="quickToggle">
+		&nbsp;
+		<label for='elRadio_stream_custom' id='elRadio_stream_custom_label'>
+			{lang="support_stream_other"}
+		</label>
+	</div>
+</div>

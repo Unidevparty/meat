@@ -1,0 +1,140 @@
+<ips:template parameters="" />
+<div data-controller="valuation.front.index.main">
+	<section class="valHeader">
+		<div class="ipsGrid">
+			<div class="ipsGrid_span8">
+				<div class="ipsClearfix ipsSpacer_bottom">
+					<h1 class="ipsType_pageTitle">{lang="valuation_home_text0"}</h1>
+				</div>
+				<div class="ipsType_normal">{lang="valuation_home_text1"}</div>
+				<!-- <div class="ipsClearfix ipsSpacer_both">
+					<h2 class="ipsType_sectionHead">Для чего нужна оценка:</h2>
+				</div>
+				<ul class="ipsType_normal" style="margin: 0;-webkit-padding-start: 0;list-style-type:none;">
+					<li>Пункт 1</li>
+					<li>Пункт 2</li>
+					<li>Пункт 3</li>
+					<li>Пункт 4</li>
+					<li>Пункт 5</li>
+				</ul> -->
+			</div>
+			<div class='ipsGrid_span3 hide'>
+				<img src='{resource="big-04.jpg" app="forums" location="admin"}' width='180' height='180'>  
+			</div>
+			<div class="ipsGrid_span2 hide" style="margin: 0px 4% 0px 0px;">
+				<img src='{resource="big-03.jpg" app="forums" location="front"}' width='180' height='120'>  
+			</div>
+			<div class="ipsGrid_span8" style='margin: 0px 4% 15px'>
+				<div class="ipsClearfix ipsSpacer_bottom">
+					<h1 class="ipsType_pageTitle">Почему мы ?</h1>
+				</div>
+				<div class="ipsType_normal">
+					Наши эксперты имеют многолетний опыт работы на реальном производстве и на вторичном рынке пищевого оборудования. Они способны с высокой точностью определить текущую рыночную стоимость вашей машины и степень ее ликвидности.<br>Основываясь на нашей оценке и наших рекомендациях, вы сможете максимально быстро и выгодно продать ненужное вам оборудование. Не имея такой оценки, вы рискуете выставить либо слишком высокую цену и не продать машину либо продать ее слишком дешево.
+				</div>
+			</div>
+			<div class="ipsGrid_span12 ipsType_center ipsAreaBackground_light ipsPad">
+				<div class="ipsClearfix ipsSpacer_bottom valSubmit">
+					<h2 class="ipsType_sectionHead">{lang="valuation_create_request"}</h1>
+				</div>
+				{{if !member.member_id}}
+					<div class="">{lang="valuation_home_draft"}</div>
+					<div class="ipsSpacer_top">
+						<ul class='ipsButton_split'>
+							<li><a href="/register" class="ipsButton ipsButton_small ipsButton_primary">{lang="valuation_register"}</a></li>
+							<li><a href="#scrollToHere" class="ipsButton ipsButton_small ipsButton_important" data-action="scrollToSubmit">{lang="valuetion_as_guest"}</a></li>
+						</ul>
+					</div>
+				{{else}}
+					<div class='ipsType_normal'>
+						{lang="valuation_registered_desc"}
+					</div>
+					<div class="ipsSpacer_top">
+						<a href="#scrollToHere" class="ipsButton ipsButton_small ipsButton_primary" data-action="scrollToSubmit">{lang="valuation_create_request_button"}</a>
+					</div>
+				{{endif}}
+			</div>
+		</div>
+	</section>
+
+	<section class="valSteps">
+		<div class="ipsClearfix ipsSpacer_bottom ipsType_center">
+			<h2 class="ipsType_sectionHead">{lang="valuation_home_easy"}</h2>
+		</div>
+
+		<div class="ipsGrid" data-ipsGrid data-ipsGrid-equalHeights='row'>
+			<div class="ipsGrid_span3 ipsType_center ipsPad ipsAreaBackground_light valStep">
+				<p class="valStep_number"><span>1</span></p>
+				<div class="ipsType_normal ipsSpacer_top">{lang="valuation_steps_1"}</div>
+			</div>
+			<div class="ipsGrid_span3 ipsType_center ipsPad ipsAreaBackground_light valStep">
+				<p class="valStep_number"><span>2</span></p>
+				<div class="ipsType_normal ipsSpacer_top">{lang="valuation_steps_2"}</div>
+			</div>
+			<div class="ipsGrid_span3 ipsType_center ipsPad ipsAreaBackground_light valStep">
+				<p class="valStep_number"><span>3</span></p>
+				<div class="ipsType_normal ipsSpacer_top">{lang="valuation_steps_3"}</div>
+			</div>
+			<div class="ipsGrid_span3 ipsType_center ipsPad ipsAreaBackground_light valStep">
+				<p class="valStep_number"><span>4</span></p>
+				<div class="ipsType_normal ipsSpacer_top">{lang="valuation_steps_4"}</div>
+			</div>
+		</div>
+	</section>
+	<div class="ipsGrid">
+		<div class="ipsGrid_span12">
+			<div class="ipsClearfix ipsSpacer_bottom">
+				<h1 class="ipsType_pageTitle">Как мы работаем ?</h1>
+			</div>
+			<div class="ipsType_normal">
+				<p>Все обращения (через веб-сайт или по телефону) поступают к специалисту, который проводит первичную оценку предоставленных данных. В случае, если данных недостаточно он связывается с заказчиком для получения  уточнений.
+
+				<p>В случае экспресс-оценки заказчик получает ответ по электронной почте  в течение 24-48  часов.<br>
+					В случае заказа комплексной оценки эксперт предоставляет письменный отчет в течение <b>3 рабочих дней</b> после посещения предприятия.</p>
+
+				<p>Мы также <b>предоставляем</b> заключения об остаточной стоимости оборудования, рассчитанной по стандартным методикам. Такое заключение может быть предоставлено в банк для получения кредита под залог оборудования или в государственные органы (например, в арбитражный суд).</p>
+			</div>
+		</div>
+		<hr class='valBorder'>
+		<div class="ipsGrid_span12">
+			<div class="ipsClearfix ipsSpacer_bottom">
+				<h1 class="ipsType_pageTitle">Для чего нужен сервис по экспресс-оценке?</h1>
+			</div>
+			<div class="ipsType_normal">
+				<p>Мы рекомендуем пользоваться онлайн-оценкой на первом этапе, когда необходимо понять реальную стоимость имеющегося у вас оборудования и принять принципиальное решение о его дальнейшей судьбе.</p>
+				<center><p class="ipsMessage ipsMessage_info redMessage" style='width: 65%'>Официальная оценка не совпадает с рыночной примерно в 95% случаев, а если еще добавить колебания спроса на рынке, то можно получить неверное представление о ценности машины.</p></center>
+				<p>Приведем пример. Иногда наши клиенты сталкиваются с ситуацией, когда на производстве имеется новая машина, которая не нашла применения, но была куплена согласно европейскому проекту. К примеру, новый пресс для свиных ребер стоит от 40000 евро. Стоимость пресса возрастом три года и в отличном состоянии по официальной оценке составит 30000 евро, а реально такую машину не продать и за 10000 евро, так как никто в России такую чисто европейскую технологию не использует.
+				</p>
+
+
+			</div>
+		</div>
+	</div>
+	<hr class='valBorder'>
+	<section class="valAgreement">
+		<div class="ipsClearfix ipsSpacer_bottom ipsType_center">
+			<h2 class="ipsType_sectionHead" id="scrollToHere">{lang="valuation_home_place"}</h2>
+			<div class="ipsType_normal">{lang="valuation_home_place_desc"}</div>
+		</div>
+
+		<div class="ipsPad ipsType_normal valAgreementWindow" data-role="agreementWindow">
+			{lang="valuationAgreement"}
+		</div>
+
+		<div class='ipsForm ipsGrid ipsType_left'>
+			<ul class="ipsGrid_span8">
+				<li class='ipsFieldRow ipsFieldRow_checkbox valFromAgree'>
+					<span class='ipsCustomInput'>
+						<input type='checkbox' id='agree' data-action="changeAgree"> 
+						<span></span>
+					</span>
+					<div class='ipsFieldRow_content'>
+						<label for='agree'>{lang="valuation_home_agreed"}</label>
+					</div>
+				</li>
+			</ul>
+			<span class="ipsGrid_span4 ipsType_right">
+				<a href='{url="app=valuation&module=valuation&controller=index&do=plans" seoTemplate="index_plans"}' class="ipsButton ipsButton_primary ipsButton_disabled" data-action="selectPlan">{lang="valuation_select_plan"}</a>
+			</span>
+		</div>
+	</section>
+</div>

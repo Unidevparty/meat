@@ -1,0 +1,112 @@
+<ips:template parameters="$category=NULL, $subcategories=NULL" />
+
+<div class='ipsBox' id='elNexusCategoriesBox'>
+	<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="browse_store"}</h2>
+	<div class='ipsPad_half'>
+		{{if count( $subcategories )}}
+			<div class='ipsSideMenu ipsSideMenu_withRadios ipsType_medium' id='elCategories_menu'>
+				<h3 class='ipsSideMenu_mainTitle ipsAreaBackground_light ipsType_medium'>
+					<a href='#elCategories_menu' class='ipsPad_double' data-action='openSideMenu'><i class='fa fa-bars'></i> &nbsp;{lang="categories"}&nbsp;<i class='fa fa-caret-down'></i></a>
+				</h3>
+				<p class='ipsType_reset ipsType_medium cNexusCategoriesBox_back'>
+					<a href='{url="app=nexus&module=store&controller=store" seoTemplate="store"}'><i class='fa fa-chevron-left'></i> {lang="all_categories"}</a>
+				</p>
+				<hr class='ipsHr'>
+				<h4 class='ipsSideMenu_title ipsSpacer_top ipsSpacer_half'>{$category->_title}</h4>
+				<ul class='ipsSideMenu_list'>
+					{{foreach $subcategories as $idx => $subcategory}}
+						<li>
+							<a href='{$subcategory->url()}' class='ipsSideMenu_item'><strong>{$subcategory->_title}</strong></a>
+							{{if $subcategory->hasSubgroups()}}
+								<ul class='ipsSideMenu_list'>
+									{{foreach $subcategory->children( 'view', NULL, FALSE ) as $cidx => $child}}
+										<li>
+											{{if $cidx >= 5}}
+												<a href='{$subcategory->url()}' class='ipsSideMenu_item'><span class='ipsType_light ipsType_small'>{lang="and_x_more" pluralize="count( $subcategory->children( 'view', NULL, FALSE ) ) - 5"}</span></a>
+												{{break;}}
+											{{else}}
+												<a href="{$child->url()}" class='ipsSideMenu_item ipsTruncate ipsTruncate_line'>{$child->_title}</a>
+											{{endif}}
+										</li>
+									{{endforeach}}
+								</ul>
+							{{endif}}
+						</li>
+					{{endforeach}}
+				</ul>
+			</div>
+		{{elseif $category && $category->parent()}}
+			{{$siblings = $category->parent()->children( 'view', NULL, FALSE );}}
+			<div class='ipsSideMenu ipsSideMenu_withRadios ipsType_medium' id='elCategories_menu'>
+				<h3 class='ipsSideMenu_mainTitle ipsAreaBackground_light ipsType_medium'>
+					<a href='#elCategories_menu' class='ipsPad_double' data-action='openSideMenu'><i class='fa fa-bars'></i> &nbsp;{lang="categories"}&nbsp;<i class='fa fa-caret-down'></i></a>
+				</h3>
+				<p class='ipsType_reset ipsType_medium cNexusCategoriesBox_back'>
+					<a href='{$category->parent()->url()}' class='ipsType_medium'><i class='fa fa-chevron-left'></i> {$category->parent()->_title}</a>
+				</p>				
+				<hr class='ipsHr'>
+				<h4 class='ipsSideMenu_title ipsSpacer_top ipsSpacer_half'>{$category->_title}</h4>
+				<ul class='ipsSideMenu_list'>
+					{{foreach $siblings as $idx => $sibling}}
+						<li>
+							<a href='{$sibling->url()}' class='ipsSideMenu_item {{if $category && $category == $sibling}}ipsSideMenu_itemActive{{endif}}'>{$sibling->_title}</a>
+							{{if $sibling instanceof \IPS\nexus\Package\Group && $sibling->hasSubgroups()}}
+								<ul class='ipsSideMenu_list'>
+									{{foreach $sibling->children( 'view', NULL, FALSE ) as $cidx => $child}}
+										<li>
+											{{if $cidx >= 5}}
+												<a href='{$sibling->url()}' class='ipsSideMenu_item'><span class='ipsType_light ipsType_small'>{lang="and_x_more" pluralize="count( $sibling->children( 'view', NULL, FALSE ) ) - 5"}</span></a>
+												{{break;}}
+											{{else}}
+												<a href="{$child->url()}" class='ipsSideMenu_item ipsTruncate ipsTruncate_line'>{$child->_title}</a>
+											{{endif}}
+										</li>
+									{{endforeach}}
+								</ul>
+							{{endif}}
+						</li>
+					{{endforeach}}
+				</ul>
+			</div>
+		{{else}}
+			<div class='ipsSideMenu ipsSideMenu_withRadios ipsType_medium' id='elCategories_menu'>
+				<h3 class='ipsSideMenu_mainTitle ipsAreaBackground_light ipsType_medium'>
+					<a href='#elCategories_menu' class='ipsPad_double' data-action='openSideMenu'><i class='fa fa-bars'></i> &nbsp;{lang="categories"}&nbsp;<i class='fa fa-caret-down'></i></a>
+				</h3>
+				<ul class='ipsSideMenu_list'>
+					{{foreach \IPS\nexus\Package\Group::roots() as $group}}
+						<li>
+							<a href='{$group->url()}' class='ipsSideMenu_item {{if $category && $category == $group}}ipsSideMenu_itemActive{{endif}}'><strong>{$group->_title}</strong></a>
+							{{if $group->hasSubgroups()}}
+								<ul class='ipsSideMenu_list'>
+									{{foreach $group->children( 'view', NULL, FALSE ) as $idx => $child}}
+										<li>
+											{{if $idx >= 5}}
+												<a href='{$group->url()}' class='ipsSideMenu_item'><span class='ipsType_light ipsType_small'>{lang="and_x_more" pluralize="count( $group->children( 'view', NULL, FALSE ) ) - 5"}</span></a>
+												{{break;}}
+											{{else}}
+												<a href="{$child->url()}" class='ipsSideMenu_item ipsTruncate ipsTruncate_line'>{$child->_title}</a>
+											{{endif}}
+										</li>
+									{{endforeach}}
+								</ul>
+							{{endif}}
+						</li>
+					{{endforeach}}
+				</ul>
+			</div>
+		{{endif}}
+
+		{{if ( settings.nexus_gift_vouchers and count( json_decode( settings.nexus_gift_vouchers, TRUE ) ) ) or settings.nexus_gift_vouchers_free}}
+			<div class='ipsType_center ipsAreaBackground_light ipsPad'>
+				<h3 class='ipsType_sectionHead'>{lang="gift_vouchers"}</h3><br>
+				<ul class='ipsList_inline ipsSpacer_top ipsSpacer_half'>
+					<li><a href="{url="app=nexus&module=store&controller=gifts" seoTemplate="store_giftvouchers"}" class='ipsButton ipsButton_verySmall ipsButton_light'>{lang="buy"}</a></li>
+					<li><a href="{url="app=nexus&module=store&controller=gifts&do=redeem" seoTemplate="store_giftvouchers_redeem"}" data-ipsDialog data-ipsDialog-size='narrow' data-ipsDialog-title='{lang="redeem_gift_voucher"}' class='ipsButton ipsButton_verySmall ipsButton_light'>{lang="redeem"}</a></li>
+				</ul>
+			</div>
+		{{endif}}
+		
+		{template="chooseCurrency" group="store" params="$category ? $category->url() : \IPS\Http\Url::internal('app=nexus&module=store&controller=store', 'front', 'store')"}
+	</div>
+</div>

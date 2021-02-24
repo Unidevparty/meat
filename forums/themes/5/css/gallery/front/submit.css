@@ -1,0 +1,426 @@
+.cGalleryDialog_header {
+	height: 100px;
+}
+
+/* Step bar */
+.cGallerySteps {
+	display: table;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+	
+	.cGallerySteps > li {
+		display: table-cell;
+		width: 1%;
+		text-align: center;
+		position: relative;
+		margin-top: 35px;
+	}
+
+	.cGallerySteps > li:before {
+		content: attr( data-step );
+		font-size: 22px;
+		font-weight: 300;
+		display: block;
+		width: 42px;
+		height: 42px;
+		line-height: 42px;
+		border-radius: 42px;
+		text-align: center;
+		color: #fff;
+		background: #b4b4b4;
+		margin: 0 auto 5px auto;
+		z-index: 2000;
+		position: relative;
+	}
+
+		.cGallerySteps > li span,
+		.cGallerySteps > li a {
+			font-size: 14px;
+			color: #b4b4b4;
+		}
+
+		.cGallerySteps > li span:before,
+		.cGallerySteps > li span:after,
+		.cGallerySteps > li a:before,
+		.cGallerySteps > li a:after {
+			content: '';
+			display: block;
+			height: 6px;
+			background: #b4b4b4;
+			position: absolute;
+			top: 19px;
+			width: 50%;
+		}
+
+		html[dir="ltr"] .cGallerySteps > li span:before,
+		html[dir="ltr"] .cGallerySteps > li a:before,
+		html[dir="rtl"] .cGallerySteps > li span:after,
+		html[dir="rtl"] .cGallerySteps > li a:after {
+			left: 0;
+		}
+
+			.cGallerySteps > li:first-child span:before,
+			.cGallerySteps > li:first-child a:before,
+			.cGallerySteps > li:last-child span:after,
+			.cGallerySteps > li:last-child a:after {
+				display: none;
+			}
+
+		html[dir="rtl"] .cGallerySteps > li span:before,
+		html[dir="rtl"] .cGallerySteps > li a:before,
+		html[dir="ltr"] .cGallerySteps > li span:after,
+		html[dir="ltr"] .cGallerySteps > li a:after {
+			right: 0;
+		}
+
+		/* Done steps */
+		.cGallerySteps > li.cGallerySteps_done:before {
+			background: #5a895c;
+			font-family: 'FontAwesome';
+			content: '\f00c';
+		}
+
+			.cGallerySteps > li.cGallerySteps_done span:after,
+			.cGallerySteps > li.cGallerySteps_done + li span:before,
+			.cGallerySteps > li.cGallerySteps_done a:after,
+			.cGallerySteps > li.cGallerySteps_done + li a:before,
+			.cGallerySteps > li.cGallerySteps_active:before {
+				background: #5a895c;
+			}
+
+			.cGallerySteps > li.cGallerySteps_active span,
+			.cGallerySteps > li.cGallerySteps_active a {
+				font-weight: bold;
+			}
+
+		.cGallerySteps > li.cGallerySteps_done span,
+		.cGallerySteps > li.cGallerySteps_active span,
+		.cGallerySteps > li.cGallerySteps_done a,
+		.cGallerySteps > li.cGallerySteps_active a {
+			color: #222;
+		}
+
+/* Step 1: Choose album */
+.cGallerySubmit_albumChoice {
+	max-width: 1100px;
+	margin: 20px auto 0;
+}
+
+	.cGallerySubmit_albumChoice .ipsSelectTree {
+		margin: 0 auto;
+	}
+
+#elGallerySubmit_albumChooser {
+	min-height: 200px;
+	max-height: 200px;
+	overflow: auto;
+}
+	
+	html[dir="ltr"] #elGallerySubmit_albumChooser {
+		padding-right: 15px;
+	}
+	html[dir="rtl"] #elGallerySubmit_albumChooser {
+		padding-left: 15px;
+	}
+
+	#elGallerySubmit_albumChooser > li > div {
+		position: relative;
+		border: 1px solid rgba(0,0,0,0.1);
+		border-radius: 3px;
+		margin-bottom: 7px;
+	}
+
+		#elGallerySubmit_albumChooser > li > div ul.ipsType_medium {
+			line-height: 1;
+		}
+
+	#elGallerySubmit_albumChooser > li > div:hover {
+		background: #e4eff7;
+		cursor: pointer;
+	}
+
+	#elGallerySubmit_albumChooser > li > input[type="radio"]:checked + div {
+		background: #5490c0;
+		color: #fff;
+	}
+
+		#elGallerySubmit_albumChooser > li > input[type="radio"]:checked + div:before {
+			content: '\f00c';
+			font-family: "FontAwesome";
+			font-size: 36px;
+			position: absolute;
+			top: 17px;
+			opacity: 0.6;
+			color: #fff;
+		}
+
+			html[dir="ltr"] #elGallerySubmit_albumChooser > li > input[type="radio"]:checked + div:before {
+				right: 17px;
+			}
+			html[dir="rtl"] #elGallerySubmit_albumChooser > li > input[type="radio"]:checked + div:before {
+				left: 17px;
+			}
+
+		#elGallerySubmit_albumChooser > li > input[type="radio"]:checked + div .ipsType_light {
+			color: #fff;
+			opacity: 0.7;
+		}
+
+.cGallerySubmit_albumImage {
+	width: 40px;
+	height: 40px;
+	background-color: rgba(0,0,0,0.3);
+}
+
+	html[dir="ltr"] .cGallerySubmit_albumImage {
+		float: left;
+	}
+	html[dir="rtl"] .cGallerySubmit_albumImage {
+		float: right;
+	}
+
+html[dir="ltr"] .cGallerySubmit_albumInfo {
+	margin-left: 47px;
+}
+html[dir="rtl"] .cGallerySubmit_albumInfo {
+	margin-right: 47px;
+}
+
+.cGallerySubmit_chooseCategory {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: auto;
+}
+
+/* Step 2: Upload files */
+.cGallerySubmit_uploadImages {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.cGallerySubmit_uploadForm {
+	position: absolute;
+	top: 0;
+	bottom: 75px;
+	left: 0;
+	right: 0;
+	overflow: auto;
+}
+
+.cGallerySubmit_uploadImages > form {
+	height: 100%;
+}
+.cGallerySubmit_uploadImages .ipsAttachment_dropZone {
+	border-width: 6px;
+	border-style: dashed;
+	{prefix="transition" value="none"}
+}
+
+.cGallerySubmit_uploadImages .ipsAttachment_dropZone:not( .ipsDragging ) {
+	background: transparent;
+	border-color: #e0e0e0;
+}
+
+/* Positioning required to make the dialog full screen */
+.cGalleryDialog_content {
+	position: relative;
+	height: 600px;
+}
+
+	/* But if we're in a dialog, change the styles to make everything faaaancy */
+	.ipsDialog_content .cGalleryDialog_content {
+		position: absolute;
+		top: 100px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: auto;
+	}
+	
+	.ipsDialog_content .cGalleryDialog_content.cGalleryDialog_content_moderated {
+		top: 150px;
+	}
+	
+.cGallerySubmit_uploadImages > form > .ipsGrid {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	bottom: 70px;
+	right: 30px;
+}
+
+/* Step 3: Image info */
+
+.cGallerySubmit_strip, .cGallerySubmit_infoForm, .cGallerySubmit_bottomBar, .cGallerySubmit_infoPanel {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.cGallerySubmit_strip {
+	width: 250px;
+	overflow: auto;
+	background: #212223;
+}
+	
+	html[dir="ltr"] .cGallerySubmit_strip {
+		right: auto;
+	}
+	html[dir="rtl"] .cGallerySubmit_strip {
+		left: auto;
+	}
+
+.cGallerySubmit_infoForm {
+	overflow: auto;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+	html[dir="ltr"] .cGallerySubmit_infoForm {
+		left: 250px;
+	}
+	html[dir="rtl"] .cGallerySubmit_infoForm {
+		right: 250px;
+	}
+	
+	.cGallerySubmit_infoForm > section {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+.cGallerySubmit_bottomBar {
+	top: auto;
+	border-top: 1px solid rgba(0,0,0,0.075);
+	height: 75px;
+}
+
+.cGallerySubmit_infoPanel {
+	bottom: 75px;
+}
+
+.cGallerySubmit_strip {
+	text-align: center;
+}
+
+	.cGallerySubmit_strip li {
+		display: inline-block;
+		margin-bottom: 30px;
+		position: relative;
+	}
+
+		.cGallerySubmit_strip li:not( .cGallerySubmit_current ) :hover {
+			border-color: rgba(0,0,0,0.4);
+		}
+
+	.cGallerySubmit_strip .cGalleryTrimmedImage {
+		width: 150px;
+		height: 150px;
+		margin: 0 auto;
+		border: 5px solid transparent;
+		background-color: #333;
+		background-size: cover;
+		background-position: 50%;
+		background-repeat: no-repeat;
+		overflow: hidden;
+	}
+
+		.cGallerySubmit_strip .cGalleryTrimmedImage a {
+			width: 150px;
+			height: 150px;
+			display: block;
+		}
+
+		.cGallerySubmit_strip .cGalleryTrimmedImage img {
+			display: none;
+		}
+
+	.cGallerySubmit_strip .cGallerySubmit_current .cGalleryTrimmedImage {
+		border-color: #5490c0;
+	}
+
+		.cGallerySubmit_strip .cGallerySubmit_current:after {
+			content: '';
+			display: block;
+			width: 0;
+			height: 0;
+			border-width: 20px;
+			border-style: solid;
+			position: absolute;
+			top: 50%;
+			margin-top: -20px;
+		}
+
+			html[dir="ltr"] .cGallerySubmit_strip .cGallerySubmit_current:after {
+				border-color: transparent transparent transparent #5490c0;
+				left: 100%;
+			}
+			html[dir="rtl"] .cGallerySubmit_strip .cGallerySubmit_current:after {
+				border-color: transparent #5490c0 transparent transparent;
+				right: 100%;
+			}
+
+.cGallerySubmit_done:not( .cGallerySubmit_current ) > div {
+	opacity: 0.6;
+}
+
+.cGallerySubmit_done:before {
+	display: block;
+	content: "\f00c";
+	font-family: "FontAwesome";
+	border: 1px solid rgba(255,255,255,0.6);
+	text-align: center;
+	line-height: 30px;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	color: #fff;
+	position: absolute;
+	top: -5px;
+	box-shadow: 0px 1px 0px rgba(0,0,0,0.6);
+	background: #5a895c;
+	z-index: 200;
+}
+html[dir="ltr"] .cGallerySubmit_done:before {
+	right: -5px;
+}
+html[dir="rtl"] .cGallerySubmit_done:before {
+	left: -5px;
+}
+
+.ipsApp button.cGallerySubmit_button {
+	font-size: 66px;
+	background: transparent;
+	color: #555;
+	opacity: 0.4;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	margin-top: -20px;
+	border: 0;
+	height: 150px; /* Make the clickable area bigger for ease */
+	width: 60px;
+	outline: 0;
+}
+	
+	html[dir="ltr"] .ipsApp button.cGallerySubmit_nextButton,
+	html[dir="rtl"] .ipsApp button.cGallerySubmit_prevButton {
+		right: 15px;
+		text-align: right;
+	}
+	html[dir="rtl"] .ipsApp button.cGallerySubmit_nextButton,
+	html[dir="ltr"] .ipsApp button.cGallerySubmit_prevButton {
+		left: 15px;
+		text-align: left;
+	}
+
+	.ipsApp button.cGallerySubmit_button:hover {
+		opacity: 1;
+	}

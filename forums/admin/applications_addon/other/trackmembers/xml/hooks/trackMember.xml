@@ -1,0 +1,3962 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hookexport>
+  <hookdata>
+    <config>
+      <hook_name>Track Members: Hook</hook_name>
+      <hook_desc>Will log actions for tracked members</hook_desc>
+      <hook_author>Adriano Faria</hook_author>
+      <hook_email>administracao@sosinvision.com.br</hook_email>
+      <hook_website>http://www.sosinvision.com.br</hook_website>
+      <hook_update_check/>
+      <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:1:{s:6:"forums";a:3:{s:8:"app_name";s:6:"Forums";s:11:"min_version";i:34006;s:11:"max_version";i:0;}}s:20:"hook_php_version_min";s:0:"";s:20:"hook_php_version_max";s:0:"";}]]></hook_requirements>
+      <hook_version_human>1.1.2</hook_version_human>
+      <hook_version_long>10002</hook_version_long>
+      <hook_extra_data><![CDATA[a:3:{s:7:"display";a:1:{s:12:"replacements";s:33:"Skin Replacements:  track_members";}s:8:"language";a:2:{s:18:"core_public_global";a:1:{i:0;s:15:"track_view_logs";}s:17:"core_public_modcp";a:7:{i:0;s:22:"modcp_tab_trackmembers";i:1;s:23:"trackmembers__no_recent";i:2;s:19:"trackmembers_nrlogs";i:3;s:25:"trackmembers_lastest_logs";i:4;s:21:"trackmembers_all_logs";i:5;s:25:"trackmembers_stoptracking";i:6;s:30:"trackmembers_lastest_logs_from";}}s:12:"replacements";a:1:{i:0;s:13:"track_members";}}]]></hook_extra_data>
+      <hook_key>trackMembers</hook_key>
+      <hook_global_caches/>
+    </config>
+  </hookdata>
+  <hookfiles>
+    <file>
+      <hook_file_real>trackMembers_newUser.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_newUser</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:7:"members";s:15:"classToOverload";s:17:"membersMemberSync";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_newUser extends (~extends~)
+{
+	/**
+    * This method is run when a new account is created
+    *
+    * @param    array       $member    Array of member data
+    * @return    @e void
+    */
+    public function onCreateAccount( $member )
+    {
+		if ( ipsRegistry::$settings['trackmembers_newusers'] )
+		{
+			$limit = intval( ipsRegistry::$settings['trackmembers_newusers_limit'] ) ? IPS_UNIX_TIME_NOW + ( 86400 * ipsRegistry::$settings['trackmembers_newusers_limit'] ) : 0;
+
+			$member['member_tracked']   		= 1;
+			$member['member_tracked_deadline']	= $limit;
+
+			$to_update = array( 'member_tracked'   			=> $member['member_tracked'],
+								'member_tracked_deadline'	=> $member['member_tracked_deadline']
+			);
+			
+			ipsRegistry::DB()->update( 'members', $to_update, "member_id=".$member['member_id'] );
+		}
+
+		if ( is_callable('parent::onCreateAccount') )
+		{
+        	return parent::onCreateAccount( $member );
+		}
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_userCard.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>trackMembers_userCard</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:12:"skin_profile";s:12:"skinFunction";s:8:"showCard";s:4:"type";s:2:"if";s:2:"id";s:11:"cardGallery";s:8:"position";s:10:"post.endif";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_userCard
+{
+	public $registry;
+	public $member;
+	public $cache;
+	
+	public function __construct()
+	{
+		$this->registry = ipsRegistry::instance();
+		$this->memberData =& $this->registry->member()->fetchMemberData();
+		$this->request    =& $this->registry->fetchRequest();
+		$this->settings   =& $this->registry->fetchSettings();
+		$this->lang       =  $this->registry->getClass('class_localization');
+	}
+	
+	public function getOutput()
+	{
+		$string = "";
+
+		if ( !IPSMember::isInGroup( $this->memberData, explode( ',', $this->settings['trackmembers_cantrackgroups'] ) ) )
+		{
+			return;
+		}
+
+		$member_id	= intval( $this->request['mid'] );
+
+		$member	    = $this->registry->output->getTemplate('profile')->functionData['showCard'][0]['member'];
+
+		if ( !$member['member_tracked'] )
+		{
+			return;
+		}
+
+		return $this->registry->output->getTemplate( 'trackmembers' )->profileCardButton( $member['member_id'] );
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_likesystem.php</hook_file_real>
+      <hook_type>commandHooks</hook_type>
+      <hook_classname>trackMembers_likesystem</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:21:"public_core_ajax_like";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_likesystem extends (~extends~)
+{
+	/**
+     * Save like
+     *
+     * @param	integer		$relid		Relationship ID
+     * @return	@e void
+     */
+    protected function _save( $relid )
+	{
+		if( !$this->memberData['member_id'] )
+		{
+			return $this->returnNull();
+		}
+		
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, $relid ) )
+		{
+			return parent::_save( $relid );
+		}
+
+    	$like_notify	= intval( $this->request['like_notify'] );
+    	$like_freq		= trim( $this->request['like_freq'] );
+    	$like_anon		= intval( $this->request['like_anon'] );
+
+    	/* Set data */
+ 		$result = $this->_like->add( $relid, $this->memberData['member_id'], array( 'like_notify_do' => $like_notify, 'like_notify_freq' => $like_freq ), $like_anon );
+
+		$like = $this->_like->getDataByMemberIdAndRelationshipId( $relid, $this->memberData['member_id'] );
+
+		if ( $like['like_app'] == 'forums' AND $like['like_area'] == 'forums' )
+		{
+			$link_forum = $this->registry->getClass('output')->buildSEOUrl( "showforum={$relid}", 'public', $this->registry->class_forums->forum_by_id[ $relid ]['name_seo'], 'showforum' );
+			$forum		= "<a href='{$link_forum}'>{$this->registry->class_forums->forum_by_id[ $relid ]['name']}</a>";
+
+			$text1 		= sprintf( $this->lang->words['followed_forum'], $forum );
+			$text2 		= $this->lang->words['follow_forum'];
+		}
+
+		if ( $like['like_app'] == 'forums' AND $like['like_area'] == 'topics' )
+		{
+	        $topic = $this->registry->getClass('topics')->getTopicById( $relid );
+
+			$link_topic = $this->registry->getClass('output')->buildSEOUrl( "showtopic={$relid}", 'public', $topic['title_seo'], 'showtopic' );
+			$topic		= "<a href='{$link_topic}'>{$topic['title']}</a>";
+			
+			$text1 		= sprintf( $this->lang->words['followed_topic'], $topic );
+			$text2 		= $this->lang->words['follow_topic'];
+		}
+
+		if ( $like['like_app'] == 'downloads' AND $like['like_area'] == 'files' )
+		{
+			$fileData = $this->DB->buildAndFetch( array( 'select' => '*',
+										 			  	 'from'   => 'downloads_files',
+										 			  	 'where'  => 'file_id=' . $relid ) );
+
+			$link_file	= $this->registry->output->buildSEOUrl( "app=downloads&amp;showfile=" . $fileData['file_id'], "public", $fileData['file_name_furl'], "idmshowfile" );
+			$file		= "<a href='{$link_file}'>{$fileData['file_name']}</a>";
+
+			$text1 		= sprintf( $this->lang->words['followed_file'], $file );
+			$text2 		= $this->lang->words['follow_file'];
+		}
+
+		if ( $like['like_app'] == 'gallery' AND $like['like_area'] == 'images' )
+		{
+			$imgData = $this->DB->buildAndFetch( array( 'select' => '*',
+										 			  	 'from'   => 'gallery_images',
+										 			  	 'where'  => 'image_id=' . $relid ) );
+
+			$link_image	= $this->registry->output->buildSEOUrl( "app=gallery&amp;image=" . $imgData['image_id'], "public", $imgData['image_caption_seo'], "viewimage" );
+			$img_url	= "<a href='{$link_image}'>{$imgData['image_caption']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['followed_image'], $img_url );
+			$text2 		= $this->lang->words['follow_image'];
+		}
+
+		if ( $like['like_app'] == 'blog' AND $like['like_area'] == 'entries' )
+		{
+			$entry = $this->DB->buildAndFetch( array( 	'select' => '*',
+										 				'from'   => 'blog_entries',
+										 			  	'where'  => 'entry_id=' . $relid ) );
+
+			$link_entry	= $this->registry->output->buildSEOUrl( "app=blog&blogid={$entry['blog_id']}&showentry={$entry['entry_id']}", 'public', $entry['entry_name_seo'], 'showentry' );
+			$img_url	= "<a href='{$link_entry}'>{$entry['entry_name']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['followed_entry'], $img_url );
+			$text2 		= $this->lang->words['follow_entry'];
+		}
+
+		if ( $like['like_app'] == 'tutorials' AND $like['like_area'] == 'articles' )
+		{
+			$tut = $this->DB->buildAndFetch( array( 	'select' => '*',
+										 				'from'   => 'tutorials_articles',
+										 			  	'where'  => 'a_id=' . $relid ) );
+
+			$link_tut	= $this->registry->output->buildSEOUrl( 'app=tutorials&amp;article=' . $tut['a_id'], 'public', $tut['a_name_seo'], 'article' );
+			$img_url	= "<a href='{$link_tut}'>{$tut['a_name']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['followed_tutorial'], $img_url );
+			$text2 		= $this->lang->words['follow_tutorial'];
+		}
+
+		if ( $like['like_app'] == 'links' AND $like['like_area'] == 'links' )
+		{
+			$link 		= $this->DB->buildAndFetch( array(  'select' => '*',
+															'from' => 'links',
+															'where' => 'link_id = ' . $relid
+			) );
+
+			$link_link	= $this->registry->output->buildSEOUrl('app=links&amp;showlink=' . $link['link_id'], 'public', $link['link_seo_title'], 'showlink');
+			$link_url	= "<a href='{$link_link}'>{$link['link_title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['followed_link'], $link_url );
+			$text2 		= $this->lang->words['follow_link'];
+		}
+
+		if ( $like['like_app'] == 'calendar' AND $like['like_area'] == 'events' )
+		{
+			$event = $this->DB->buildAndFetch( array( 'select' 	=> '*',
+													  'from' 	=> 'cal_events',
+													  'where' 	=> 'event_id = ' . $relid
+			) );
+
+			$event_link	= $this->registry->output->buildSEOUrl( "app=calendar&amp;module=calendar&amp;section=view&amp;do=showevent&amp;event_id={$event['event_id']}", 'public', $event['event_title_seo'], 'cal_event' );
+			$link_url	= "<a href='{$event_link}'>{$event['event_title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['followed_event'], $link_url );
+			$text2 		= $this->lang->words['follow_event'];
+		}
+
+		if ( $like['like_app'] == 'videos' AND $like['like_area'] == 'videos' )
+		{
+			$video 		= $this->DB->buildAndFetch( array(  'select' 	=> '*',
+													  		'from' 		=> 'videos',
+													  		'where' 	=> 'tid = ' . $relid
+			) );
+
+			$link_video	= $this->registry->output->buildSEOUrl( "app=videos&amp;do=view&amp;id=" . $video['tid'], "public", $video['seo_title'], "video_view" );
+			$link_url	= "<a href='{$link_video}'>{$video['title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['followed_video'], $link_url );
+			$text2 		= $this->lang->words['follow_video'];
+		}
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> __FUNCTION__,
+							'function_id'	=> $relid,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $this->returnHtml( $this->_like->render( 'summary', $relid ) );
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_statusUpdate.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_statusUpdate</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:4:"core";s:15:"classToOverload";s:12:"memberStatus";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_statusUpdate extends (~extends~)
+{
+    /**
+     * Create a status update for a member
+     *
+     * @param	array	[Array of member data for member updating their status - will use ->getAuthor() if null]
+     * @param   array   [Array of member data for owner of status update. If null and StatusOwner empty, getAuthor will be used]
+     * @return	array	Status information
+     */
+	public function create( $author=null, $owner=null )
+	{
+		$result = parent::create( $author, $owner );
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, FALSE ) )
+		{
+			return $result;
+		}
+
+		$statusUrl = $this->registry->output->buildSEOUrl( 'app=members&amp;module=profile&amp;section=status&amp;type=single&amp;status_id=' . $result['status_id'], 'publicNoSession', array( $result['status_member_id'], $this->memberData['members_seo_name'] ), 'members_status_single' );
+		//$statusUrl = $this->registry->output->buildSEOUrl( 'app=members&amp;module=profile&amp;section=status&amp;type=single&amp;status_id=' . $result['status_id'], 'publicNoSession' );
+		
+		$text = sprintf( $this->lang->words['new_statusupdate'], $statusUrl );
+
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text,
+							'app'			=> $this->lang->words['new_su'],
+							'date'			=> time(),
+							'function'		=> __FUNCTION__,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $result;
+	}
+
+    /**
+     * Create a status update for a member
+     *
+     * @param	array	[Array of member data for member updating their status - will use ->getAuthor() if null]
+     * @param	array	[Array of status information OR status ID OR uses $this->_internalData['StatusData'] if none]
+     * @return	array	Reply information
+     */
+    public function reply( $author=null, $status=null )
+	{
+		$result = parent::reply( $author, $status );
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, FALSE ) )
+		{
+			return $result;
+		}
+
+		$statusUrl = $this->registry->output->buildSEOUrl( 'app=members&amp;module=profile&amp;section=status&amp;type=single&amp;status_id=' . $result['reply_status_id'], 'publicNoSession', array( $result['reply_member_id'], $this->memberData['members_seo_name'] ), 'members_status_single' );
+		//$statusUrl = $this->registry->output->buildSEOUrl( 'app=members&amp;module=profile&amp;section=status&amp;type=single&amp;status_id=' . $result['reply_status_id'], 'publicNoSession' );
+		
+		$text = sprintf( $this->lang->words['new_statusupdate_reply'], $statusUrl );
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text,
+							'app'			=> $this->lang->words['reply_su'],
+							'date'			=> time(),
+							'function'		=> __FUNCTION__,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $result;
+	}
+
+    /**
+     * Delete reply
+     *
+     * @param	array	[Array of member data for member updating their status - will use ->getAuthor() if null]
+     * @param	array	[Array of status information OR status ID OR uses $this->_internalData['StatusData'] if none]
+	 * @param	array	[Array of status reply information OR reply ID OR uses $this->_internalData['ReplyData'] if none]
+     * @return	boolean
+     */
+    public function deleteReply( $author=null, $status=null, $reply=null )
+    {
+		$result = parent::deleteReply( $author, $status, $reply );
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, FALSE ) )
+		{
+			return $return;
+		}
+
+		$statusUrl = $this->registry->output->buildSEOUrl( 'app=members&amp;module=profile&amp;section=status&amp;type=single&amp;status_id=' . $result['reply_status_id'], 'publicNoSession' );
+		
+		$text = sprintf( $this->lang->words['delete_statusupdate'], $statusUrl );
+
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text,
+							'app'			=> $this->lang->words['delete_su_reply'],
+							'date'			=> time(),
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $result;
+	}
+
+    /**
+     * Delete status
+     *
+     * @param	array	[Array of member data for member updating their status - will use ->getAuthor() if null]
+     * @param	array	[Array of status information OR status ID OR uses $this->_internalData['StatusData'] if none]
+     * @return	boolean
+     */
+    public function deleteStatus( $author=null, $status=null )
+    {
+		$result = parent::deleteStatus( $author, $status );
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, FALSE ) )
+		{
+			return $return;
+		}
+
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $this->lang->words['delete_statusupdate'],
+							'app'			=> $this->lang->words['delete_su'],
+							'date'			=> time(),
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $result;
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_memberSynch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_memberSynch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:7:"members";s:15:"classToOverload";s:17:"membersMemberSync";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_memberSynch extends (~extends~)
+{
+	/**
+	 * This method is ren when a user successfully logs in
+	 *
+	 * @param	array	 $member	Array of member data
+	 * @return	@e void
+	 */
+	public function onLogin( $member )
+	{
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $member, __FUNCTION__, FALSE ) )
+		{
+			$to_insert = array(	'member_id'		=> $member['member_id'],
+								'description' 	=> ipsRegistry::getClass( 'class_localization' )->words['do_login'],
+								'app'			=> ipsRegistry::getClass( 'class_localization' )->words['sign_in'],
+								'date'			=> time(),
+								'function'		=> __FUNCTION__,
+								'ip_address'	=> $this->registry->member()->ip_address
+			);
+	
+			ipsRegistry::DB()->insert( "members_tracker", $to_insert, TRUE );
+		}
+		
+		if ( is_callable('parent::onLogin') )
+		{
+        	return parent::onLogin( $member );
+		}
+	}
+
+	/**
+	 * This method is run when a user logs out
+	 *
+	 * @param	array	 $member	Array of member data
+	 * @return	@e void
+	 */
+	public function onLogOut( $member )
+	{
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $member, __FUNCTION__, FALSE ) )
+		{
+			$to_insert = array(	'member_id'		=> $member['member_id'],
+								'description' 	=> ipsRegistry::getClass( 'class_localization' )->words['do_logout'],
+								'app'			=> ipsRegistry::getClass( 'class_localization' )->words['sign_out'],
+								'date'			=> time(),
+								'function'		=> __FUNCTION__,
+								'ip_address'	=> $this->registry->member()->ip_address
+			);
+	
+			ipsRegistry::DB()->insert( "members_tracker", $to_insert, TRUE );
+		}
+		
+		if ( is_callable('parent::onLogOut') )
+		{
+        	return parent::onLogOut( $member );
+		}
+	}
+
+	/**
+	 * This method is run after a users display name is successfully changed
+	 *
+	 * @param	integer	$id			Member ID
+	 * @param	string	$new_name	New display name
+	 * @return	@e void
+	 */
+	public function onNameChange( $id, $new_name )
+	{
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $id, __FUNCTION__, FALSE ) )
+		{
+			$text = sprintf( ipsRegistry::getClass( 'class_localization' )->words['changed_username'], $new_name );
+	
+			$to_insert = array(	'member_id'		=> $id,
+								'description' 	=> $text,
+								'app'			=> ipsRegistry::getClass( 'class_localization' )->words['change_dn'],
+								'date'			=> time(),
+								'function'		=> __FUNCTION__,
+								'ip_address'	=> $this->registry->member()->ip_address
+			);
+	
+			ipsRegistry::DB()->insert( "members_tracker", $to_insert, TRUE );
+		}
+		
+		if ( is_callable('parent::onNameChange') )
+		{
+        	return parent::onNameChange( $id, $new_name );
+		}
+	}
+
+	/**
+	 * This method is run after a users password is successfully changed
+	 *
+	 * @param	integer	$id						Member ID
+	 * @param	string	$new_plain_text_pass	The new password
+	 * @return	@e void
+	 */
+	public function onPassChange( $id, $new_plain_text_pass )
+	{
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $id, __FUNCTION__, FALSE ) )
+		{
+			$to_insert = array(	'member_id'		=> $id,
+								'description' 	=> ipsRegistry::getClass( 'class_localization' )->words['changed_password'],
+								'app'			=> ipsRegistry::getClass( 'class_localization' )->words['change_pw'],
+								'date'			=> time(),
+								'function'		=> __FUNCTION__,
+								'ip_address'	=> $this->registry->member()->ip_address
+			);
+	
+			ipsRegistry::DB()->insert( "members_tracker", $to_insert, TRUE );
+		}
+		if ( is_callable('parent::onPassChange') )
+		{
+        	return parent::onPassChange( $id, $new_plain_text_pass );
+		}
+	}
+
+	/**
+	 * This method is run after a users email address is successfully changed
+	 *
+	 * @param  integer  $id		 Member ID
+	 * @param  string   $new_email  New email address
+	 * @param  string	$old_email	Old email address
+	 * @return void
+	 */
+	public function onEmailChange( $id, $new_email, $old_email )
+	{
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $id, __FUNCTION__, FALSE ) )
+		{
+			$text = sprintf( ipsRegistry::getClass( 'class_localization' )->words['changed_email'], $old_email, $new_email );
+	
+			$to_insert = array(	'member_id'		=> $id,
+								'description' 	=> $text,
+								'app'			=> ipsRegistry::getClass( 'class_localization' )->words['change_email'],
+								'date'			=> time(),
+								'function'		=> __FUNCTION__,
+								'ip_address'	=> $this->registry->member()->ip_address
+			);
+	
+			ipsRegistry::DB()->insert( "members_tracker", $to_insert, TRUE );
+		}
+		if ( is_callable('parent::onEmailChange') )
+		{
+        	return parent::onEmailChange( $id, $new_email, $old_email );
+		}
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_friends.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_friends</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:7:"members";s:15:"classToOverload";s:17:"profileFriendsLib";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_friends extends (~extends~)
+{
+    /**
+	 * Adds a friend to the account that is logged in or specified
+	 *
+	 * @param	integer	$friend_id			The friend being added to the account
+	 * @param	integer	$from_id			The requesting member, defaults to current member
+	 * @param	boolean	$forceApproval		Automatically approve, regardless of setting
+	 * @param	boolean	$sendNotification	If false, no notification will be sent to the member being added
+	 * @return	string						Error Key or blank for success
+	 */
+	public function addFriend( $friend_id, $from_id=0, $forceApproval=false, $sendNotification=true )
+	{
+		$result = parent::addFriend( $friend_id, $from_id, $forceApproval, $sendNotification );
+
+		if( $result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, $friend_id ) )
+		{
+			return $result;
+		}
+		
+		$friend = IPSMember::load( $friend_id );
+		$userLink  = $this->registry->getClass('output')->buildSEOUrl( "showuser={$friend['member_id']}", 'public', $friend['members_seo_name'], 'showuser' );
+		
+		$text = sprintf( $this->registry->class_localization->words['new_friend_desc'], $userLink, $friend['members_display_name'] );
+
+
+		$to_insert = array(	'member_id'		=> $from_id ? $from_id : $this->memberData['member_id'],
+							'description' 	=> $text,
+							'app'			=> $this->registry->class_localization->words['new_friend'],
+							'date'			=> time(),
+							'function'		=> __FUNCTION__,
+							'function_id'	=> $friend_id,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $result;
+	}
+	
+	/**
+	 * Removes a friend from the logged in account
+	 *
+	 * @param	integer	$friend_id	The friend being removed
+	 * @param	integer	$from_id	The requesting member, defaults to current member
+	 * @return	string				Error Key or blank for success
+	 */	
+	public function removeFriend( $friend_id, $from_id=0 )
+	{
+		$result = parent::removeFriend( $friend_id, $from_id );
+		
+		if( $result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, $friend_id ) )
+		{
+			return $result;
+		}
+		
+		$friend = IPSMember::load( $friend_id );
+		$userLink  = $this->registry->getClass('output')->buildSEOUrl( "showuser={$friend['member_id']}", 'public', $friend['members_seo_name'], 'showuser' );
+		
+		$text = sprintf( $this->registry->class_localization->words['removed_friend_desc'], $userLink, $friend['members_display_name'] );
+
+
+		$to_insert = array(	'member_id'		=> $from_id ? $from_id : $this->memberData['member_id'],
+							'description' 	=> $text,
+							'app'			=> $this->registry->class_localization->words['removed_friend'],
+							'date'			=> time(),
+							'function'		=> __FUNCTION__,
+							'function_id'	=> $friend_id,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $result;
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_profileTemplate.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>trackMembers_profileTemplate</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:12:"skin_profile";s:12:"skinFunction";s:13:"profileModern";s:4:"type";s:2:"if";s:2:"id";s:13:"checkModTools";s:8:"position";s:11:"pre.startif";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+ 
+class trackMembers_profileTemplate
+{
+	public $registry;
+	public $member;
+	
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->settings 	=& $this->registry->fetchSettings();
+		$this->member   	= $this->registry->member();
+		$this->memberData 	=& $this->registry->member()->fetchMemberData();
+		$this->lang			=  $this->registry->getClass('class_localization');
+		
+		$this->lang->loadLanguageFile( array( 'public_trackmembers' ), 'trackmembers' );
+	}
+	
+	public function getOutput()
+	{	
+		$member	= $this->registry->output->getTemplate('profile')->functionData['profileModern'][0]['member'];
+
+		if ( !IPSMember::isInGroup( $this->memberData, explode( ',', $this->settings['trackmembers_cantrackgroups'] ) ) OR !IPSMember::isInGroup( $member, explode( ',', $this->settings['trackmembers_groups'] ) ) )
+		{
+			return;
+		}
+
+		return $this->registry->getClass('output')->getTemplate( 'trackmembers' )->showProfileStuff( $member );
+	}	
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_forums.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_forums</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:6:"forums";s:15:"classToOverload";s:14:"classPostForms";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_forums extends (~extends~)
+{
+	/**
+	 * Capture the data for a new topic
+	 */
+	public function addTopic()
+	{
+		$result = parent::addTopic();
+
+		if( ! $result )
+		{
+			return $result;
+		}
+
+		$topicData	= $this->getTopicData();
+		$postData	= $this->getPostData();
+		
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, $topicData['tid'] ) )
+		{
+			return $result;
+		}
+
+		$forumData  = $this->registry->getClass('class_forums')->getForumById( $topicData['forum_id'] );
+
+		$link_topic = $this->registry->getClass('output')->buildSEOUrl( "showtopic={$topicData['tid']}", 'public', $topicData['title_seo'], 'showtopic' );
+		$topic 		= "<a href='{$link_topic}' title='".$this->lang->words['view_topic']."'>{$topicData['title']}</a>";
+
+		$link_forum = $this->registry->getClass('output')->buildSEOUrl( "showforum={$topicData['forum_id']}", 'public', $forumData['name_seo'], 'showforum' );
+		$forum		= "<a href='{$link_forum}' title='".$this->lang->words['view_forum']."'>{$forumData['name']}</a>";
+
+		$text = sprintf( $this->lang->words['new_topic'], $topic, $forum );
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text,
+							'app'			=> $this->lang->words['create_topic'],
+							'date'			=> time(),
+							'function'		=> __FUNCTION__,
+							'function_id'	=> $topicData['tid'],
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $return;
+	}
+
+	/**
+	 * Capture data for a new reply to a topic
+	 */
+	public function addReply()
+	{
+		$result = parent::addReply();
+
+		if( ! $result )
+		{
+			return $result;
+		}
+
+		if( $this->_isMergingPosts )
+		{
+			return $result;
+		}
+
+		$topicData = $this->getTopicData();
+		$postData = $this->getPostData();
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		/* New replies should always be logged. Pass '0' to stop an unnecessary query */
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, FALSE ) )
+		{
+			return $result;
+		}
+
+		$link_post  = $this->registry->output->buildSEOUrl( "showtopic={$topicData['tid']}&amp;view=findpost&amp;p={$postData['pid']}", 'public', $topicData['title_seo'], 'showtopic' );
+		$post		= "<a href='{$link_post}' title='".$this->lang->words['view_post']."'>{$topicData['title']}</a>";
+
+		$text = sprintf( $this->lang->words['new_reply'], $post );
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text,
+							'app'			=> $this->lang->words['reply_topic'],
+							'date'			=> time(),
+							'function'		=> __FUNCTION__,
+							'function_id'	=> $postData['pid'],
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $return;
+	}
+
+	/**
+	 * Capture the data for an edited post
+	 */
+	public function editPost()
+	{
+		$result = parent::editPost();
+
+		if( ! $result )
+		{
+			return $result;
+		}
+
+		$topicData	= $this->editSetUp();
+		$pid		= intval( $this->request['p'] );
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, $topicData['tid'] ) )
+		{
+			return $result;
+		}
+
+		$forumData  = $this->registry->getClass('class_forums')->getForumById( $topicData['forum_id'] );
+
+		$link_topic = $this->registry->getClass('output')->buildSEOUrl( "showtopic={$topicData['tid']}", 'public', $topicData['title_seo'], 'showtopic' );
+		$topic 		= "<a href='{$link_topic}' title='".$this->lang->words['view_topic']."'>{$topicData['title']}</a>";
+
+		$link_post 	= $this->registry->output->buildSEOUrl( "showtopic={$topicData['tid']}&amp;view=findpost&amp;p={$pid}", 'public', $topicData['title_seo'], 'showtopic' );
+		$post		= "<a href='{$link_post}' title='".$this->lang->words['view_post']."'>#{$pid}</a>";
+
+		$text = sprintf( $this->lang->words['post_edited'], $post, $topic );
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text,
+							'app'			=> $this->lang->words['edit_post'],
+							'date'			=> time(),
+							'function'		=> __FUNCTION__,
+							'function_id'	=> $topicData['tid'],
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $return;
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_reputation.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_reputation</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:4:"core";s:15:"classToOverload";s:20:"classReputationCache";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_reputation extends (~extends~)
+{
+	/**
+	 * Adds a rating to the index and updates caches
+	 *
+	 * @access	public
+	 * @param	string		$type		Type of content, ex; Post
+	 * @param	integer		$type_id	ID of the type, ex: pid
+	 * @param	integer		$rating		Either 1 or -1
+	 * @param	string		$message	Message associated with this rating
+	 * @param	integer		$member_id	Id of the owner of the content being rated
+	 * @param	string		[$app]		App for this content, by default the current application
+	 * @todo 	[Future] Move forum notifications to an onRep memberSync callback
+	 * @return	bool
+	 */
+	public function addRate( $type, $type_id, $rating, $message='', $member_id=0, $app='' )
+	{
+		$return = parent::addRate( $type, $type_id, $rating, $message, $member_id, $app );
+		
+		if ( ! $return )
+		{
+			return $return;
+		}
+
+		if ( $rating == -1 AND $this->isLikeMode() )
+		{
+			return $return;
+		}
+		
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, __FUNCTION__, $type_id ) )
+		{
+			if ( $app == 'forums' AND $type == 'pid' )
+			{
+				$topicData = $this->DB->buildAndFetch( array(
+		                                			'select'   => 't.title, t.title_seo',
+		                                			'from'     => array( 'topics' => 't' ),
+		                                			'add_join' => array(
+		                                                	array(
+		                                                    	'select' => 'p.topic_id',
+		                                                    	'from'   => array( 'posts' => 'p' ),
+		                                                    	'where'  => 'p.topic_id=t.tid',
+		                                                    	'type'   => 'left'
+		                                            		) ),
+	                                				'where'	   => 'p.pid = '.$type_id
+	        	) );			
+	
+				$link_topic = $this->registry->getClass('output')->buildSEOUrl( "showtopic={$topicData['topic_id']}", 'public', $topicData['title_seo'], 'showtopic' );
+				$topic 		= "<a href='{$link_topic}'>{$topicData['title']}</a>";
+				$link_post  = $this->registry->output->buildSEOUrl( "showtopic={$topicData['topic_id']}&amp;view=findpost&amp;p={$type_id}", 'public', $topicData['title_seo'], 'showtopic' );
+				$post		= "<a href='{$link_post}'>{$this->lang->words['tm_post']}</a>";
+	
+	
+				if( $this->isLikeMode() )
+				{
+					$text1 = $rating == 1 ? sprintf( $this->lang->words['liked_post'], $post, $topic ) : sprintf( $this->lang->words['unliked_post'], $post, $topic );
+					$text2 = $this->lang->words['like_system'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+	
+					$text1 = sprintf( $this->lang->words['reputation_point'], $rate, $post, $topic );
+					$text2 = $this->lang->words['reputation_system'];				
+				}
+				
+				$function =  '__FUNCTION__';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_file_comments', $type_id ) )
+		{
+			if ( $app == 'downloads' AND $type == 'comment_id' )
+			{
+				$joins[] 	= array( 'select' => 'f.*', 'from' => array( 'downloads_files' => 'f' ), 'where' => 'c.comment_fid=f.file_id', 'type' => 'left' );
+
+				$imgData = $this->DB->buildAndFetch( array( 'select' 	=> '*',
+										 					'from'   	=> array( 'downloads_comments' => 'c' ),
+											 				'where'  	=> 'comment_id=' . $type_id,
+															'add_join'	=> $joins
+				) );
+	
+				$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$type_id}&parentId={$imgData['comment_fid']}&fromApp=downloads-files", 'public' );
+				$link_image	= $this->registry->output->buildSEOUrl( "app=downloads&amp;showfile=" . $imgData['file_id'], "public", $imgData['file_name_furl'], "idmshowfile" );
+				$img_url	= "<a href='{$link_image}'>{$imgData['file_name']}</a>";
+		
+				if( $this->isLikeMode() )
+				{
+					$text1 = sprintf( $this->lang->words['like_file_review'], $comm_link, $img_url );
+					$text2 = $this->lang->words['like_system_file_review'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['added_reputation_file_review'], $rate, $comm_link, $img_url );
+					$text2 = $this->lang->words['reputation_file_review'];				
+				}
+				
+				$function =  'addRate_file_comments';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_images', $type_id ) )
+		{
+			if ( $app == 'gallery' AND $type == 'image_id' )
+			{
+				$imgData = $this->DB->buildAndFetch( array( 'select' => '*',
+										 					'from'   => 'gallery_images',
+											 				'where'  => 'image_id=' . $type_id ) );
+	
+				$link_image	= $this->registry->output->buildSEOUrl( "app=gallery&amp;image=" . $imgData['image_id'], "public", $imgData['image_caption_seo'], "viewimage" );
+				$img_url	= "<a href='{$link_image}'>{$imgData['image_caption']}</a>";
+		
+				if( $this->isLikeMode() )
+				{
+					$text1 = $rating == 1 ? sprintf( $this->lang->words['liked_img'], $img_url ) : sprintf( $this->lang->words['unliked_img'], $img_url );
+					$text2 = $this->lang->words['like_system_images'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['img_reputation_point'], $rate, $img_url );
+					$text2 = $this->lang->words['reputation_system_images'];				
+				}
+	
+				$function =  'addRate_images';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_comments', $type_id ) )
+		{
+			if ( $app == 'gallery' AND $type == 'comment_id' )
+			{
+				$joins[] 	= array( 'select' => 'i.*', 'from' => array( 'gallery_images' => 'i' ), 'where' => 'c.comment_img_id=i.image_id', 'type' => 'left' );
+
+				$imgData = $this->DB->buildAndFetch( array( 'select' 	=> '*',
+										 					'from'   	=> array( 'gallery_comments' => 'c' ),
+											 				'where'  	=> 'comment_id=' . $type_id,
+															'add_join'	=> $joins
+				) );
+	
+				$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$type_id}&parentId={$imgData['comment_img_id']}&fromApp=gallery-images", 'public' );
+				$link_image	= $this->registry->output->buildSEOUrl( "app=gallery&amp;image=" . $imgData['image_id'], "public", $imgData['image_caption_seo'], "viewimage" );
+				$img_url	= "<a href='{$link_image}'>{$imgData['image_caption']}</a>";
+		
+				if( $this->isLikeMode() )
+				{
+					$text1 = $rating == 1 ? sprintf( $this->lang->words['liked_img_comment'], $comm_link, $img_url ) : sprintf( $this->lang->words['unliked_img'], $comm_link, $img_url );
+					$text2 = $this->lang->words['like_system_comments'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['img_reputation_point_comment'], $rate, $img_url );
+					$text2 = $this->lang->words['reputation_system_comments'];				
+				}
+				
+				$function =  'addRate_comments';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_entry', $type_id ) )
+		{
+			if ( $app == 'blog' AND $type == 'entry_id' )
+			{
+				$entry   = $this->DB->buildAndFetch( array( 'select' => '*',
+										 					'from'   => 'blog_entries',
+											 				'where'  => 'entry_id=' . $type_id
+				) );
+
+				$link_entry	= $this->registry->output->buildSEOUrl( "app=blog&blogid={$entry['blog_id']}&showentry={$entry['entry_id']}", 'public', $entry['entry_name_seo'], 'showentry' );
+				$img_url	= "<a href='{$link_entry}'>{$entry['entry_name']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					$text1 = $rating == 1 ? sprintf( $this->lang->words['liked_entry'], $img_url ) : sprintf( $this->lang->words['unliked_entry'], $img_url );
+					$text2 = $this->lang->words['like_system_entry'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['entry_reputation_point'], $rate, $img_url );
+					$text2 = $this->lang->words['reputation_system_entry'];				
+				}
+
+				$function =  'addRate_entry';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_entry_comment', $type_id ) AND $rating == 1 )
+		{
+			if ( $app == 'blog' AND $type == 'comment_id' )
+			{
+				$joins[] 	= array( 'select' => 'e.*', 'from' => array( 'blog_entries' => 'e' ), 'where' => 'c.entry_id=e.entry_id', 'type' => 'left' );
+
+				$entry = $this->DB->buildAndFetch( array( 'select' 	=> '*',
+										 					'from'   	=> array( 'blog_comments' => 'c' ),
+											 				'where'  	=> 'comment_id=' . $type_id,
+															'add_join'	=> $joins
+				) );
+	
+				$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$type_id}&parentId={$entry['entry_id']}&fromApp=blog-entries", 'public' );
+				$link_entry	= $this->registry->output->buildSEOUrl( "app=blog&blogid={$entry['blog_id']}&showentry={$entry['entry_id']}", 'public', $entry['entry_name_seo'], 'showentry' );
+				$img_url	= "<a href='{$link_entry}'>{$entry['entry_name']}</a>";
+		
+				if( $this->isLikeMode() )
+				{
+					$text1 = $rating == 1 ? sprintf( $this->lang->words['liked_entry_comment'], $comm_link, $img_url ) : sprintf( $this->lang->words['unliked_entry_comment'], $comm_link, $img_url );
+					$text2 = $this->lang->words['like_system_comments'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['entry_reputation_point_comment'], $rate,$comm_link, $img_url );
+					$text2 = $this->lang->words['reputation_system_entry_comments'];				
+				}
+				
+				$function =  'addRate_entry_comment';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_tutorial', $type_id ) )
+		{
+			if ( $app == 'tutorials' AND $type == 'a_id' )
+			{
+				$tut   	 = $this->DB->buildAndFetch( array( 'select' => '*',
+										 					'from'   => 'tutorials_articles',
+											 				'where'  => 'a_id=' . $type_id
+				) );
+
+				$link_tut	= $this->registry->output->buildSEOUrl( 'app=tutorials&amp;article=' . $tut['a_id'], 'public', $tut['a_name_seo'], 'article' );
+				$img_url	= "<a href='{$link_tut}'>{$tut['a_name']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					if ( $rating == 1 )
+					{
+						$text1 = sprintf( $this->lang->words['liked_tutorial'], $img_url );
+					}
+					
+					if ( $rating == -1 )
+					{
+						$text1 = sprintf( $this->lang->words['unliked_tutorial'], $img_url );
+					}
+
+					$text2 = $this->lang->words['like_system_tutorials'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['tutorial_reputation_point'], $rate, $img_url );
+					$text2 = $this->lang->words['reputation_system_tutorials'];				
+				}
+
+				$function =  'addRate_tutorial';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_tutorial_comment', $type_id ) )
+		{
+			if ( $app == 'tutorials' AND $type == 'cid' )
+			{
+				$joins[] 	= array( 'select' => 'a.*', 'from' => array( 'tutorials_articles' => 'a' ), 'where' => 'c.aid=a.a_id', 'type' => 'left' );
+
+				$entry = $this->DB->buildAndFetch( array( 	'select' 	=> 'c.*',
+										 					'from'   	=> array( 'tutorials_comments' => 'c' ),
+											 				'where'  	=> 'cid=' . $type_id,
+															'add_join'	=> $joins
+				) );
+	
+				$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$type_id}&parentId={$entry['a_id']}&fromApp=tutorials-articles", 'public' );
+				$link_tut	= $this->registry->output->buildSEOUrl( 'app=tutorials&amp;article=' . $entry['a_id'], 'public', $entry['a_name_seo'], 'article' );
+				$img_url	= "<a href='{$link_tut}'>{$entry['a_name']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					if ( $rating == 1 )
+					{
+						$text1 = sprintf( $this->lang->words['liked_tutorial_comment'], $comm_link, $img_url );
+					}
+					
+					if ( $rating == -1 )
+					{
+						$text1 = sprintf( $this->lang->words['unliked_tutorial_comment'], $img_url );
+					}
+
+					$text2 = $this->lang->words['like_system_tutorials_comments'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['tutorial_comment_reputation_point'], $rate, $comm_link, $img_url );
+					$text2 = $this->lang->words['reputation_system_tutorials_comments'];				
+				}
+
+				$function =  'addRate_tutorial_comment';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_link', $type_id ) )
+		{
+			if ( $app == 'links' AND $type == 'link_id' )
+			{
+				$link = $this->DB->buildAndFetch( array( 'select' => 'link_id, link_title, link_seo_title', 'from' => 'links', 'where' => 'link_id = ' . $type_id ) );
+				
+				$link_link	= $this->registry->output->buildSEOUrl('app=links&amp;showlink=' . $link['link_id'], 'public', $link['link_seo_title'], 'showlink');
+				
+				$link_url	= "<a href='{$link_link}'>{$link['link_title']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					if ( $rating == 1 )
+					{
+						$text1 = sprintf( $this->lang->words['liked_link'], $link_url );
+					}
+
+					$text2 = $this->lang->words['like_system_links'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['link_reputation_point'], $rate, $img_url );
+					$text2 = $this->lang->words['reputation_system_links'];				
+				}
+
+				$function =  'addRate_link';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_links_comment', $type_id ) )
+		{
+			if ( $app == 'links' AND $type == 'comment_id' )
+			{
+				$joins[] 	= array( 'select' => 'l.*', 'from' => array( 'links' => 'l' ), 'where' => 'c.comment_link_id=l.link_id', 'type' => 'left' );
+
+				$link = $this->DB->buildAndFetch( array( 	'select' 	=> 'c.*',
+										 					'from'   	=> array( 'links_comments' => 'c' ),
+											 				'where'  	=> 'comment_id=' . $type_id,
+															'add_join'	=> $joins
+				) );
+	
+				$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$type_id}&parentId={$link['link_id']}&fromApp=links-links", 'public' );
+				$link_link	= $this->registry->output->buildSEOUrl('app=links&amp;showlink=' . $link['link_id'], 'public', $link['link_seo_title'], 'showlink');
+				$link_url	= "<a href='{$link_link}'>{$link['link_title']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					if ( $rating == 1 )
+					{
+						$text1 = sprintf( $this->lang->words['liked_link_comment'], $comm_link, $link_url );
+					}
+
+					$text2 = $this->lang->words['like_system_links_comments'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['link_comment_reputation_point'], $rate, $comm_link, $link_url );
+					$text2 = $this->lang->words['reputation_system_links_comments'];				
+				}
+
+				$function =  'addRate_tutorial_comment';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_event', $type_id ) )
+		{
+			if ( $app == 'calendar' AND $type == 'event_id' )
+			{
+				$event = $this->DB->buildAndFetch( array( 'select' => 'event_id, event_title, event_title_seo', 'from' => 'cal_events', 'where' => 'event_id = ' . $type_id ) );
+
+				$link_event	= $this->registry->output->buildSEOUrl( "app=calendar&amp;module=calendar&amp;section=view&amp;do=showevent&amp;event_id={$event['event_id']}", 'public', $event['event_title_seo'], 'cal_event' );
+				
+				$link_url	= "<a href='{$link_event}'>{$event['event_title']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					if ( $rating == 1 )
+					{
+						$text1 = sprintf( $this->lang->words['liked_event'], $link_url );
+					}
+
+					$text2 = $this->lang->words['like_system_event'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['event_reputation_point'], $rate, $link_url );
+					$text2 = $this->lang->words['reputation_system_event'];				
+				}
+
+				$function =  'addRate_event';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_event_comment', $type_id ) )
+		{
+			if ( $app == 'calendar' AND $type == 'comment_id' )
+			{
+				$joins[] 	= array( 'select' => 'e.*', 'from' => array( 'cal_events' => 'e' ), 'where' => 'c.comment_eid=e.event_id', 'type' => 'left' );
+
+				$event = $this->DB->buildAndFetch( array( 	'select' 	=> 'c.*',
+										 					'from'   	=> array( 'cal_event_comments' => 'c' ),
+											 				'where'  	=> 'comment_id=' . $type_id,
+															'add_join'	=> $joins
+				) );
+
+				$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$type_id}&parentId={$event['event_id']}&fromApp=calendar-events", 'public' );
+				$evemt_link	= $this->registry->output->buildSEOUrl( "app=calendar&amp;module=calendar&amp;section=view&amp;do=showevent&amp;event_id={$event['event_id']}", 'public', $event['event_title_seo'], 'cal_event' );
+				$link_url	= "<a href='{$evemt_link}'>{$event['event_title']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					if ( $rating == 1 )
+					{
+						$text1 = sprintf( $this->lang->words['liked_event_comment'], $comm_link, $link_url );
+					}
+
+					$text2 = $this->lang->words['like_system_event_comments'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['event_comment_reputation_point'], $rate, $comm_link, $link_url );
+					$text2 = $this->lang->words['reputation_system_event_comments'];				
+				}
+
+				$function =  'addRate_event_comment';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_video', $type_id ) )
+		{
+			if ( $app == 'videos' AND $type == 'tid' )
+			{
+				$data		= $this->DB->buildAndFetch( array(  'select' => '*',
+										 						'from'   => 'videos',
+											 					'where'  => 'tid=' . $type_id
+				) );
+
+				$link_video	= $this->registry->output->buildSEOUrl( "app=videos&amp;do=view&amp;id=" . $data['tid'], "public", $data['seo_title'], "video_view" );
+				$img_url	= "<a href='{$link_video}'>{$data['title']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					if ( $rating == 1 )
+					{
+						$text1 = sprintf( $this->lang->words['liked_video'], $img_url );
+					}
+
+					$text2 = $this->lang->words['like_system_videos'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['video_reputation_point'], $rate, $img_url );
+					$text2 = $this->lang->words['reputation_system_videos'];				
+				}
+
+				$function =  'addRate_video';
+			}
+		}
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addRate_video_comment', $type_id ) )
+		{
+			if ( $app == 'videos' AND $type == 'comment_id' )
+			{
+				$joins[] 	= array( 'select' => 'v.*', 'from' => array( 'videos' => 'v' ), 'where' => 'c.video_id=v.tid', 'type' => 'left' );
+
+				$video = $this->DB->buildAndFetch( array( 	'select' 	=> 'c.*',
+										 					'from'   	=> array( 'videos_comments' => 'c' ),
+											 				'where'  	=> 'comment_id=' . $type_id,
+															'add_join'	=> $joins
+				) );
+	
+				$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$type_id}&parentId={$video['tid']}&fromApp=videos-videos", 'public' );
+				$link_video	= $this->registry->output->buildSEOUrl( "app=videos&amp;do=view&amp;id=" . $video['tid'], "public", $video['seo_title'], "video_view" );
+				$img_url	= "<a href='{$link_video}'>{$video['title']}</a>";
+
+				if( $this->isLikeMode() )
+				{
+					if ( $rating == 1 )
+					{
+						$text1 = sprintf( $this->lang->words['liked_video_comment'], $comm_link, $img_url );
+					}
+
+					$text2 = $this->lang->words['like_system_videos_comments'];
+				}
+				else
+				{
+					$rate  = $rating == 1 ? 'positive' : 'negative';
+		
+					$text1 = sprintf( $this->lang->words['tutorial_comment_reputation_point'], $rate, $comm_link, $img_url );
+					$text2 = $this->lang->words['reputation_system_videos_comments'];				
+				}
+
+				$function =  'addRate_video_comment';
+			}
+		}
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> $function,
+							'function_id'	=> $type_id,
+							'ip_address'	=> $this->member->ip_address
+		);
+	
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		
+		return $return;
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_profile.php</hook_file_real>
+      <hook_type>commandHooks</hook_type>
+      <hook_classname>trackMembers_profile</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:27:"public_members_profile_view";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_profile extends (~extends~)
+{
+	/**
+	 * Modern profile
+	 *
+	 * @return	@e void		[Outputs to screen]
+	 */
+ 	protected function _viewModern()
+	{
+ 		//-----------------------------------------
+ 		// INIT
+ 		//-----------------------------------------
+
+		$member_id			= intval( $this->request['id'] ) ? intval( $this->request['id'] ) : intval( $this->request['MID'] );
+
+		if( !$member_id )
+		{
+			$this->registry->output->showError( 'profiles_no_member', 10246.0, null, null, 404 );
+		}
+
+		//-----------------------------------------
+		// Grab all data...
+		//-----------------------------------------
+
+		$member	= IPSMember::load( $member_id, 'profile_portal,pfields_content,sessions,groups', 'id' );
+
+		//-----------------------------------------
+		// Can we access?
+		//-----------------------------------------
+
+		if ( !$this->memberData['g_mem_info'] && ( $this->memberData['member_id'] != $member['member_id'] ) )
+		{
+			$this->registry->output->showError( 'profiles_off', 10245, null, null, 403 );
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $this->memberData, __FUNCTION__, $member['member_id'] ) AND $member['member_id'] != $this->memberData['member_id'] )
+		{
+			$user_link  = $this->registry->getClass('output')->buildSEOUrl( "showuser={$member['member_id']}", 'public', $member['members_seo_name'], 'showuser' );
+			$user 		= "<a href='{$user_link}'>{$member['members_display_name']}</a>";
+	
+			$text = sprintf( $this->lang->words['profile_visited'], $user );
+	
+			$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+								'description' 	=> $text,
+								'app'			=> $this->lang->words['view_profile'],
+								'date'			=> time(),
+								'function'		=> __FUNCTION__,
+								'function_id'	=> $member['member_id'],
+								'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+		
+		return parent::_viewModern();
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_pm.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_pm</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:7:"members";s:15:"classToOverload";s:18:"messengerFunctions";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_pm extends (~extends~)
+{
+
+	/**
+	 * Sends a new personal message. Very simple.
+	 *
+	 * @param	int				TO Member ID
+	 * @param	int				FROM Member ID
+	 * @param	array 			Array of InviteUser Names (display name)
+	 * @param	string			Message Title
+	 * @param	string			Message Content
+	 * @param	array 			Options array[ 'isSystem' (if true, then user will have no record of sending this PM) postKey, 'isDraft', 'sendMode' (invite/copy), 'topicID' ] If a topicID is passed, it's presumed that it was a draft....
+	 * @return	mixed			TRUE or FALSE or Exception
+	 *
+	 * <code>
+	 * Exception Codes:
+	 * TOPIC_ID_NOT_EXISTS:				Topic ID does not exist (re-sending a draft)
+	 * NOT_ALL_INVITE_USERS_EXIST: 		Not all invite users exist (check $this->exceptionData for a list of names)
+	 * NOT_ALL_INVITE_USERS_CAN_PM:		Not all invite users can PM (check $this->exceptionData for a list of names)
+	 * INVITE_USERS_BLOCKED:			Some invite users have been blocked (check $this->exceptionData for a list of names)
+	 * TO_USER_DOES_NOT_EXIST:		    The 'to' user ID does not exist
+	 * FROM_USER_DOES_NOT_EXIST:		The 'from' user ID does not exist
+	 * TO_USER_CANNOT_USE_PM:		    The 'to' user does not have access to PM system
+	 * TO_USER_FULL:					The 'to' user cannot accept any more PMs (inbox full)
+	 * FROM_USER_BLOCKED:			    The 'from' user has been blocked by the 'to' user
+	 * CANNOT_SAVE_TO_SENT_FOLDER:	    The 'from' user does not have space to store a copy of the message in their sent folder
+	 * MSG_TITLE_EMPTY:				    The 'msgTitle' variable is empty
+	 * MSG_CONTENT_EMPTY:			    The 'msgContent' varable is empty
+	 * CANT_SEND_TO_SELF:				The main recipient and sender are the same
+	 * CANT_INVITE_SELF:				The sender is in the invite list
+	 * CANT_INVITE_RECIPIENT:			The main recipient is in the invite list
+	 * FLOOD_STOP						Flood control will not allow this message to send
+	 * </code>
+	 */
+	public function sendNewPersonalTopic( $toMemberID, $fromMemberID, $inviteUsers, $msgTitle, $msgContent, $options=array() )
+	{
+		try
+		{
+			$return = parent::sendNewPersonalTopic( $toMemberID, $fromMemberID, $inviteUsers, $msgTitle, $msgContent, $options );
+
+			if ( $return == TRUE )
+			{
+				require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+				if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, FALSE ) )
+				{
+					return $return;
+				}
+
+				$member = IPSMember::load( $toMemberID, 'core' );
+		
+				$user_link  = $this->registry->getClass('output')->buildSEOUrl( "showuser={$member['member_id']}", 'public', $member['members_seo_name'], 'showuser' );
+				$user 		= "<a href='{$user_link}'>{$member['members_display_name']}</a>";
+
+				$text = sprintf( $this->lang->words['sent_pm'], $user );
+
+				$to_insert = array(	'member_id'		=> $fromMemberID,
+									'description' 	=> $text,
+									'app'			=> $this->lang->words['new_pm'],
+									'date'			=> time(),
+									'function'		=> __FUNCTION__,
+									'ip_address'	=> $this->member->ip_address
+				);
+		
+				$this->DB->insert( "members_tracker", $to_insert, TRUE );
+			}
+
+			return $return;
+		}
+		catch( Exception $e )
+		{
+			throw new Exception( $e->getMessage() );
+		}
+	}
+	
+	public function sendReply( $fromMemberID, $topicID, $msgContent, $options=array() )
+	{
+		try
+		{
+			$return = parent::sendReply( $fromMemberID, $topicID, $msgContent, $options );
+			
+			if ( $return == TRUE )
+			{
+				require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+				if ( ! trackMembersLib::canTrack( $this->memberData, __FUNCTION__, FALSE ) )
+				{
+					return $return;
+				}
+				
+				/* Fetch topic data */
+				$topicData = $this->DB->buildAndFetch( array( 'select' => '*',
+										 			  'from'   => 'message_topics',
+										 			  'where'  => 'mt_id=' . $topicID ) );
+				
+				$member = IPSMember::load( array( $topicData['mt_starter_id'], $topicData['mt_to_member_id'] ), 'core' );
+
+				
+				$toMember = $this->memberData['member_id'] == $topicData['mt_starter_id'] ? $member[ $topicData['mt_to_member_id'] ] : $member[ $topicData['mt_starter_id'] ];
+
+				$starterUserLink  = $this->registry->getClass('output')->buildSEOUrl( "showuser={$member[ $topicData['mt_starter_id'] ]['member_id']}", 'public', $member[ $topicData['mt_starter_id'] ]['members_seo_name'], 'showuser' );
+				$toUserLink  = $this->registry->getClass('output')->buildSEOUrl( "showuser={$member[ $topicData['mt_to_member_id'] ]['member_id']}", 'public', $member[ $topicData['mt_to_member_id'] ]['members_seo_name'], 'showuser' );
+				
+				$starterUserLink 		= "<a href='{$starterUserLink}'>{$member[ $topicData['mt_starter_id'] ]['members_display_name']}</a>";
+				$toUserLink 		= "<a href='{$toUserLink}'>{$member[ $topicData['mt_to_member_id'] ]['members_display_name']}</a>";
+
+				$text = sprintf( $this->lang->words['replied_pm'], $starterUserLink, $toUserLink );
+				
+				$to_insert = array(	'member_id'		=> $fromMemberID,
+									'description' 	=> $text,
+									'app'			=> $this->lang->words['reply_pm'],
+									'date'			=> time(),
+									'function'		=> __FUNCTION__,
+									'function_id'	=> $topicID,
+									'ip_address'	=> $this->member->ip_address
+				);
+		
+				$this->DB->insert( "members_tracker", $to_insert, TRUE );
+			}
+			
+			return $return;
+		}
+		catch( Exception $e )
+		{
+			throw new Exception( $e->getMessage() );
+		}
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_viewTopic.php</hook_file_real>
+      <hook_type>commandHooks</hook_type>
+      <hook_classname>trackMembers_viewTopic</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:27:"public_forums_forums_topics";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_viewTopic extends (~extends~)
+{
+	/**
+	* Needs to hook as far down as possible, 
+	* to ensure we have permission to view topic.
+	*
+	* @param	array	Array of post data
+	* @return	string	HTML parsed by attachment class
+	*/
+ 	public function topicSetUp( $topicData )
+	{
+		$topicData = parent::topicSetUp( $topicData );
+		
+ 		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $this->memberData, __FUNCTION__, $topicData['tid'] ) )
+		{
+			$topic_link  = $this->registry->getClass('output')->buildSEOUrl( "showtopic={$topicData['tid']}", 'public', $topicData['title_seo'], 'showtopic' );
+			$user 		= "<a href='{$topic_link}'>{$topicData['title']}</a>";
+	
+			$text = sprintf( $this->lang->words['topic_viewed'], $user );
+	
+			$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+								'description' 	=> $text,
+								'app'			=> $this->lang->words['view_topic'],
+								'date'			=> time(),
+								'function'		=> __FUNCTION__,
+								'function_id'	=> $topicData['tid'],
+								'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+		
+		return $topicData;
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_warnSystem.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_warnSystem</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:17:"memberWarningPost";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+	  <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_warnSystem
+{
+	protected $registry;
+
+	public function __construct()
+	{
+		$this->registry	= ipsRegistry::instance();
+		$this->settings =& $this->registry->fetchSettings();
+	}
+
+	public function handleData( $data )
+	{
+		if ( !$this->settings['trackmembers_onoff'] OR !$this->settings['trackmembers_ws'] )
+		{
+			return $data;
+		}
+
+		$alert	= intval( $data['wl_member'] );
+		$member	= IPSMember::load( $alert );
+
+		if ( !IPSMember::isInGroup( $member, explode( ',', $this->settings['trackmembers_groups'] ) ) )
+		{
+			return $data;
+		}
+
+		$limit = intval( $this->settings['trackmembers_ws_limit'] ) ? IPS_UNIX_TIME_NOW + ( 86400 * $this->settings['trackmembers_ws_limit'] ) : 0;
+
+		IPSMember::save( $alert, array( 'core' => array( 'member_tracked' => 1, 'member_tracked_deadline' => $limit ) ) );
+
+		return $data;
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_memberList.php</hook_file_real>
+      <hook_type>templateHooks</hook_type>
+      <hook_classname>trackMembers_memberList</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";s:10:"skin_mlist";s:12:"skinFunction";s:16:"member_list_show";s:4:"type";s:2:"if";s:2:"id";s:5:"notus";s:8:"position";s:11:"pre.startif";}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_memberList
+{
+	public $registry;
+	public $settings;
+	public $pids = array();
+	
+	public function __construct()
+	{
+		$this->registry 	=  ipsRegistry::instance();
+		$this->member   	= $this->registry->member();
+		$this->memberData 	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+		$this->DB         	=  $this->registry->DB();
+		$this->lang		  	= $this->registry->getClass('class_localization');
+		$this->cache	  	=& $this->registry->cache()->fetchCaches();
+		$this->request    	=& $this->registry->fetchRequest();
+		$this->registry->class_localization->loadLanguageFile( array( 'public_profile', 'members' ) );
+	}
+	
+	public function getOutput()
+	{
+		return '';
+	}
+	
+	public function replaceOutput( $output, $key )
+	{
+		if ( IPSMember::isInGroup( $this->memberData, explode( ',', $this->settings['trackmembers_cantrackgroups'] ) ) )
+		{
+			$tag	= '<!--hook.' . $key . '-->';
+			$last	= 0;
+
+			foreach( $this->registry->output->getTemplate('mlist')->functionData['member_list_show'][0]['members'] as $data )
+			{
+				$pos = strpos( $output, $tag, $last );
+			
+				if( $pos !== FALSE )
+				{
+					$link = $this->settings['base_url'] . "app=trackmembers&module=core&section=trackmembers&mid=" . $data['member_id'] . "&amp;auth_key=" . $this->member->form_hash;
+	
+					$string	= $this->registry->output->getTemplate( 'trackmembers' )->memberList( $data );
+
+					$output	= substr_replace( $output, $string . $tag, $pos, strlen( $tag ) ); 
+					$last	= $pos + strlen( $tag . $string );
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		
+		return $output;
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_downloadsActions.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_downloadsActions</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:9:"downloads";s:15:"classToOverload";s:13:"topicsLibrary";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_downloadsActions extends (~extends~)
+{
+    public function sortTopic( $file, $category, $type='new', $mid_override=0 )
+    {
+        require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( $type == 'new' )
+		{
+			$function 	= 'addFile';
+			$word1		= 'added_file';
+			$word2		= 'add_file';
+		}
+		else
+		{
+			$function 	= 'editFile';
+			$word1		= 'edited_file';
+			$word2		= 'edit_file';
+		}
+		
+		$myType 		= $type == 'new' ? 'new' : 'edit';
+
+		if ( $type == $myType AND !trackMembersLib::canTrack( $this->memberData, $function, FALSE ) )
+		{
+			return parent::sortTopic( $file, $category, $type, $mid_override );
+		}
+		else
+		{
+			$link_file	= $this->registry->output->buildSEOUrl( "app=downloads&amp;showfile=" . $file['file_id'], "public", $file['file_name_furl'], "idmshowfile" );
+			$fileurl	= "<a href='{$link_file}'>{$file['file_name']}</a>";
+
+			$text1 		= sprintf( $this->lang->words[ $word1 ], $fileurl );
+			$text2 		= $this->lang->words[ $word2 ];
+		}
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> $function,
+							'function_id'	=> $file['file_id'],
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+        return parent::sortTopic( $file, $category, $type, $mid_override );
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_tutorialsActionsAddComment.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_tutorialsActionsAddComment</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:26:"tutorialCommentAddPostSave";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_tutorialsActionsAddComment
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addTutorialComment', FALSE ) )
+		{
+			$tut = $this->DB->buildAndFetch( array( 'select' => 'a_id, a_name, a_name_seo', 'from' => 'tutorials_articles', 'where' => 'a_id = ' . $data['comment_parent_id'] ) );
+
+			$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$data['comment_id']}&parentId={$data['comment_parent_id']}&fromApp=tutorials-articles", 'public' );
+			$link_tut	= $this->registry->output->buildSEOUrl( 'app=tutorials&amp;article=' . $tut['a_id'], 'public', $tut['a_name_seo'], 'article' );
+			$fileurl	= "<a href='{$link_tut}'>{$tut['a_name']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_tutorial_comment'], $comm_link, $fileurl );
+			$text2 		= $this->lang->words['add_tutorial_comment'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addTutorialComment',
+								 'function_id'	=> $tut['a_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_downloadsActionsFileComment.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_downloadsActionsFileComment</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:26:"downloadCommentAddPostSave";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_downloadsActionsFileComment
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addComment', FALSE ) )
+		{
+			$file = $this->DB->buildAndFetch( array( 'select' => 'file_id, file_name, file_name_furl', 'from' => 'downloads_files', 'where' => 'file_id = ' . $data['comment_parent_id'] ) );
+
+			$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$data['comment_id']}&parentId={$data['comment_parent_id']}&fromApp=downloads-files", 'public' );
+			$link_file	= $this->registry->output->buildSEOUrl( "app=downloads&amp;showfile=" . $file['file_id'], "public", $file['file_name_furl'], "idmshowfile" );
+			$fileurl	= "<a href='{$link_file}'>{$file['file_name']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_file_comment'], $comm_link, $fileurl );
+			$text2 		= $this->lang->words['add_file_comment'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addComment',
+								 'function_id'	=> $file['file_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_downloadsReportFile.php</hook_file_real>
+      <hook_type>commandHooks</hook_type>
+      <hook_classname>trackMembers_downloadsReportFile</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:34:"public_downloads_moderate_moderate";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+class trackMembers_downloadsReportFile extends (~extends~)
+{
+	public function _reportBroken()
+	{
+		if ( $this->request['do_broken'] == 1 )
+		{
+			require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+	
+			if ( trackMembersLib::canTrack( $this->memberData, __FUNCTION__, FALSE ) )
+			{
+				$file = $this->DB->buildAndFetch( array( 'select' => 'file_id, file_name, file_name_furl', 'from' => 'downloads_files', 'where' => 'file_id = ' . intval( $this->request['id'] ) ) );
+		
+				$link_file	= $this->registry->output->buildSEOUrl( "app=downloads&amp;showfile=" . $file['file_id'], "public", $file['file_name_furl'], "idmshowfile" );
+				$fileurl	= "<a href='{$link_file}'>{$file['file_name']}</a>";
+		
+				$text1 		= sprintf( $this->lang->words['reported_file_broken'], $fileurl );
+				$text2 		= $this->lang->words['report_file_broken'];
+		
+				$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+									 'description' 	=> $text1,
+									 'app'			=> $text2,
+									 'date'			=> time(),
+									 'function'		=> __FUNCTION__,
+									 'function_id'	=> $file['file_id'],
+									 'ip_address'	=> $this->member->ip_address
+				);
+		
+				$this->DB->insert( "members_tracker", $to_insert, TRUE );
+			}
+		}
+
+		parent::_reportBroken();
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_galleryManageAlbums.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_galleryManageAlbums</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:7:"gallery";s:15:"classToOverload";s:16:"gallery_moderate";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_galleryManageAlbums extends (~extends~)
+{
+	public function createAlbum( array $album )
+	{
+		try
+		{
+			$return = parent::createAlbum( $album );
+			
+			if ( is_array( $return ) AND count( $return ) )
+			{
+				require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+				if ( trackMembersLib::canTrack( $this->memberData, 'createAlbum', FALSE ) )
+				{
+					$link_album	= $this->registry->output->buildSEOUrl( 'app=gallery&amp;album=' . $return['album_id'], 'public', $return['album_name_seo'], 'viewalbum' );
+					$albumurl	= "<a href='{$link_album}'>{$return['album_name']}</a>";
+			
+					$text1 		= sprintf( $this->lang->words['created_album'], $albumurl );
+					$text2 		= $this->lang->words['create_album'];
+			
+					$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+										 'description' 	=> $text1,
+										 'app'			=> $text2,
+										 'date'			=> time(),
+										 'function'		=> 'createAlbum',
+										 'function_id'	=> $return['album_id'],
+										 'ip_address'	=> $this->member->ip_address
+					);
+
+					$this->DB->insert( "members_tracker", $to_insert, TRUE );
+				}
+			}
+			
+			return $return;
+		}
+		catch( Exception $e )
+		{
+			throw new Exception( $e->getMessage() );
+		}
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_galleryAddImage.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_galleryAddImage</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:19:"galleryPostAddImage";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_galleryAddImage
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $image )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addImage', FALSE ) )
+		{
+			$link_image	= $this->registry->output->buildSEOUrl( "app=gallery&amp;image=" . $image['image_id'], "public", $image['image_caption_seo'], "viewimage" );
+			$fileurl	= "<a href='{$link_image}'>{$image['image_caption']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_image'], $fileurl );
+			$text2 		= $this->lang->words['add_image'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addImage',
+								 'function_id'	=> $image['image_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $image;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_galleryEditImage.php</hook_file_real>
+      <hook_type>commandHooks</hook_type>
+      <hook_classname>trackMembers_galleryEditImage</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:25:"public_gallery_post_image";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_galleryEditImage extends (~extends~)
+{
+	/**
+	 * Saves an edited image
+	 *
+	 * @param	array		$image		Image data
+	 * @param	array		$album		Album data
+	 * @param	array		$category	Category data
+	 * @return	@e void
+	 */
+	protected function _editSave( $image, $album=array(), $category=array() )
+	{
+		//-----------------------------------------
+		// Check we have an image
+		//-----------------------------------------
+
+		if ( !$image['image_id'] )
+		{
+			$this->registry->output->showError( 'error_img_not_found', 10764.1, null, null, 403 );
+		}
+
+		//-----------------------------------------
+		// Check secure key
+		//-----------------------------------------
+
+		if ( $this->request['secure_key'] != $this->member->form_hash )
+		{
+			$this->registry->output->showError( 'no_permission', 10764.11, null, null, 403 );
+		}
+
+		//-----------------------------------------
+		// Verify we can edit
+		//-----------------------------------------
+
+		if ( !$this->registry->gallery->helper('categories')->checkIsModerator( $image['image_category_id'], null, 'mod_can_edit' ) AND ( !$this->registry->gallery->helper('image')->isOwner( $image ) OR !$this->memberData['g_edit_own'] ) )
+		{
+			$this->registry->output->showError( 'no_permission', 10764.2, null, null, 403 );
+		}
+		
+		//-----------------------------------------
+		// INIT
+		//-----------------------------------------
+
+		$errors		= array();
+		$caption	= trim($this->request['image_caption']);
+		
+		//-----------------------------------------
+		// Got a caption?
+		//-----------------------------------------
+
+		if( !$caption )
+		{
+			$errors[] = $this->lang->words['gerror_no_title'];
+		}
+		
+		if ( count($errors) && !isset($this->request['preview']) )
+		{
+			return $this->_editForm( $image, $album, $category, $errors );
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $this->memberData, 'editImage', FALSE ) )
+		{
+			$link_image	= $this->registry->output->buildSEOUrl( "app=gallery&amp;image=" . $image['image_id'], "public", $image['image_caption_seo'], "viewimage" );
+			$img_url	= "<a href='{$link_image}'>{$image['image_caption']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['edited_image'], $img_url );
+			$text2 		= $this->lang->words['edit_image'];
+	
+			$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+								'description' 	=> $text1,
+								'app'			=> $text2,
+								'date'			=> time(),
+								'function'		=> 'editImage',
+								'function_id'	=> $member['member_id'],
+								'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+		
+		return parent::_editSave( $image, $album, $category );
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_galleryActionsImageComment.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_galleryActionsImageComment</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:25:"galleryCommentAddPostSave";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_galleryActionsImageComment
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addImageComment', FALSE ) )
+		{
+			$image = $this->DB->buildAndFetch( array( 'select' => 'image_id, image_caption, image_caption_seo', 'from' => 'gallery_images', 'where' => 'image_id = ' . $data['comment_parent_id'] ) );
+
+			$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$data['comment_id']}&parentId={$data['comment_parent_id']}&fromApp=gallery-images", 'public' );
+			$link_image	= $this->registry->output->buildSEOUrl( "app=gallery&amp;image=" . $image['image_id'], "public", $image['image_caption_seo'], "viewimage" );
+			$img_url	= "<a href='{$link_image}'>{$image['image_caption']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_image_comment'], $comm_link, $img_url );
+			$text2 		= $this->lang->words['add_image_comment'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addImageComment',
+								 'function_id'	=> $file['file_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_blogsNewBlog.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_blogsNewBlog</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:4:"blog";s:15:"classToOverload";s:13:"blogFunctions";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_blogsNewBlog extends (~extends~)
+{
+	/* New blog */
+	public function createBlog( $blogData, $member=null, $silence=false )
+	{
+		try
+		{
+			$data = parent::createBlog( $blogData, $member, $silence );
+
+			if ( is_array( $data ) AND count( $data ) )
+			{
+				require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+				if ( trackMembersLib::canTrack( $this->memberData, 'createBlog', FALSE ) )
+				{
+					$link_blog	= $this->registry->output->buildSEOUrl( 'app=blog&amp;module=display&amp;section=blog&amp;blogid=' . $data['blog_id'], 'public', $data['blog_seo_name'], 'showblog' );
+					$img_url	= "<a href='{$link_blog}'>{$data['blog_name']}</a>";
+			
+					$text1 		= sprintf( $this->lang->words['created_blog'], $img_url );
+					$text2 		= $this->lang->words['create_blog'];
+			
+					$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+										 'description' 	=> $text1,
+										 'app'			=> $text2,
+										 'date'			=> time(),
+										 'function'		=> 'createBlog',
+										 'function_id'	=> $data['blog_id'],
+										 'ip_address'	=> $this->member->ip_address
+					);
+		
+					$this->DB->insert( "members_tracker", $to_insert, TRUE );
+				}
+			}
+			
+			return $data;
+		}
+		catch( Exception $e )
+		{
+			throw new Exception( $e->getMessage() );
+		}
+	}
+
+	/* New entry */
+	public function sendBlogLikeNotifications($blog, $entry)
+	{
+		try
+		{
+			$data = parent::sendBlogLikeNotifications($blog, $entry);
+
+			require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+			if ( trackMembersLib::canTrack( $this->memberData, 'addEntry', FALSE ) )
+			{
+				$link_entry	= $this->registry->output->buildSEOUrl( "app=blog&blogid={$entry['blog_id']}&showentry={$entry['entry_id']}", 'public', $entry['entry_name_seo'], 'showentry' );
+				$img_url	= "<a href='{$link_entry}'>{$entry['entry_name']}</a>";
+		
+				$text1 		= sprintf( $this->lang->words['added_entry'], $img_url );
+				$text2 		= $this->lang->words['add_entry'];
+		
+				$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+									 'description' 	=> $text1,
+									 'app'			=> $text2,
+									 'date'			=> time(),
+									 'function'		=> 'addEntry',
+									 'function_id'	=> $entry['entry_id'],
+									 'ip_address'	=> $this->member->ip_address
+				);
+		
+				$this->DB->insert( "members_tracker", $to_insert, TRUE );
+			}
+
+			return $data;
+		}
+		catch( Exception $e )
+		{
+			throw new Exception( $e->getMessage() );
+		}
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_blogsCommentEntry.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_blogsCommentEntry</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:18:"blogPostAddComment";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_blogsCommentEntry
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addEntryComment', FALSE ) )
+		{
+			$entry = $this->DB->buildAndFetch( array( 'select' => 'entry_id, blog_id, entry_name, entry_name_seo', 'from' => 'blog_entries', 'where' => 'entry_id = ' . $data['comment_parent_id'] ) );
+
+			$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$data['comment_id']}&parentId={$data['comment_parent_id']}&fromApp=blog-entries", 'public' );
+			$link_entry	= $this->registry->output->buildSEOUrl( "app=blog&blogid={$entry['blog_id']}&showentry={$entry['entry_id']}", 'public', $entry['entry_name_seo'], 'showentry' );
+			$img_url	= "<a href='{$link_entry}'>{$entry['entry_name']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_entry_comment'], $comm_link, $img_url );
+			$text2 		= $this->lang->words['add_entry_comment'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addEntryComment',
+								 'function_id'	=> $file['file_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_classifiedsAddAdvert.php</hook_file_real>
+      <hook_type>commandHooks</hook_type>
+      <hook_classname>trackMembers_classifiedsAddAdvert</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:34:"public_classifieds_listing_listing";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_classifiedsAddAdvert extends (~extends~)
+{
+	// Convert temp uploads into permanent
+	
+
+	protected function makeAttachmentsPermanent($post_key = "", $rel_id = "", $rel_module = "", $args = array())
+	{
+		$cnt = array('cnt' => 0 );
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+		if ( trackMembersLib::canTrack( $this->memberData, 'add_advert', FALSE ) )
+		{
+			if ( !$this->request['item_id'] )
+			{
+				$item = $this->DB->buildAndFetch( array( 'select' => 'item_id, name, seo_title',
+											 			 'from'   => 'classifieds_items',
+											 			 'where'  => 'item_id = ' . $rel_id
+				) );
+	
+				$ad_link  	= $this->registry->output->buildSEOUrl( 'app=classifieds&amp;module=core&amp;do=view_item&amp;item_id=' . $item['item_id'], 'public', $item['seo_title'], 'view_item' );
+				$link 		= "<a href='{$ad_link}'>{$item['name']}</a>";
+		
+				$text1 		= sprintf( $this->lang->words['added_advert'], $link );
+				$text2 		= $this->lang->words['add_advert'];
+			}
+			else
+			{
+				$item = $this->DB->buildAndFetch( array( 'select' => 'item_id, name, seo_title',
+											 			 'from'   => 'classifieds_items',
+											 			 'where'  => 'item_id = ' . $this->request['item_id']
+				) );
+
+				$ad_link  	= $this->registry->output->buildSEOUrl( 'app=classifieds&amp;module=core&amp;do=view_item&amp;item_id=' . $item['item_id'], 'public', $item['seo_title'], 'view_item' );
+				$link 		= "<a href='{$ad_link}'>{$item['name']}</a>";
+		
+				$text1 		= sprintf( $this->lang->words['edited_advert'], $link );
+				$text2 		= $this->lang->words['edit_advert'];
+			}
+	
+			$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+								'description' 	=> $text1,
+								'app'			=> $text2,
+								'date'			=> time(),
+								'function'		=> 'add_advert',
+								'function_id'	=> $item['item_id'],
+								'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+		
+		return parent::makeAttachmentsPermanent($post_key, $rel_id, $rel_module, $args);
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_tutorialsAddTutorial.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_tutorialsAddTutorial</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:9:"tutorials";s:15:"classToOverload";s:4:"post";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_tutorialsAddTutorial extends (~extends~)
+{
+	public function addTutorial( $type='new' )
+	{
+		try
+		{
+			$tut = parent::addTutorial( $type );
+
+			if ( $tut == TRUE )
+			{
+				$tutorial = $this->getTutorialData();
+
+				require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+				if ( trackMembersLib::canTrack( $this->memberData, 'addTutorial', FALSE ) )
+				{
+					$link_tut	= $this->registry->output->buildSEOUrl( 'app=tutorials&amp;article=' . $tutorial['a_id'], 'public', $tutorial['a_name_seo'], 'article' );
+					$tuturl		= "<a href='{$link_tut}'>{$tutorial['a_name']}</a>";
+			
+					$text1 		= sprintf( $this->lang->words['added_tutorial'], $tuturl );
+					$text2 		= $this->lang->words['add_tutorial'];
+			
+					$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+										 'description' 	=> $text1,
+										 'app'			=> $text2,
+										 'date'			=> time(),
+										 'function'		=> 'addTutorial',
+										 'function_id'	=> $tutorial['a_id'],
+										 'ip_address'	=> $this->member->ip_address
+					);
+
+					$this->DB->insert( "members_tracker", $to_insert, TRUE );
+				}
+			}
+			
+			return $return;
+		}
+		catch( Exception $e )
+		{
+			throw new Exception( $e->getMessage() );
+		}
+	}
+
+	public function editTutorial()
+	{
+		try
+		{
+			$tut = parent::editTutorial();
+
+			if ( $tut == TRUE )
+			{
+				$tutorial = $this->getTutorialData();
+
+				require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+		
+				if ( trackMembersLib::canTrack( $this->memberData, 'editTutorial', FALSE ) )
+				{
+					$link_tut	= $this->registry->output->buildSEOUrl( 'app=tutorials&amp;article=' . $tutorial['a_id'], 'public', $tutorial['a_name_seo'], 'article' );
+					$tuturl		= "<a href='{$link_tut}'>{$tutorial['a_name']}</a>";
+			
+					$text1 		= sprintf( $this->lang->words['edited_tutorial'], $tuturl );
+					$text2 		= $this->lang->words['edit_tutorial'];
+			
+					$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+										 'description' 	=> $text1,
+										 'app'			=> $text2,
+										 'date'			=> time(),
+										 'function'		=> 'editTutorial',
+										 'function_id'	=> $tutorial['a_id'],
+										 'ip_address'	=> $this->member->ip_address
+					);
+
+					$this->DB->insert( "members_tracker", $to_insert, TRUE );
+				}
+			}
+			
+			return $return;
+		}
+		catch( Exception $e )
+		{
+			throw new Exception( $e->getMessage() );
+		}
+	}
+}]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_linkAddLink.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_linkAddLink</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:20:"linksAddLinkPostSave";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_linkAddLink
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addLink', FALSE ) )
+		{
+			$link_link	= $this->registry->output->buildSEOUrl('app=links&amp;showlink=' . $data['link_id'], 'public', $data['link_seo_title'], 'showlink');
+			$link_url	= "<a href='{$link_link}'>{$data['link_title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_link'], $link_url );
+			$text2 		= $this->lang->words['add_link'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addLink',
+								 'function_id'	=> $data['link_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_linkEditLink.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_linkEditLink</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:21:"linksEditLinkPostSave";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_linkEditLink
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'editLink', FALSE ) )
+		{
+			$link_link	= $this->registry->output->buildSEOUrl('app=links&amp;showlink=' . $data['link_id'], 'public', $data['link_seo_title'], 'showlink');
+			$link_url	= "<a href='{$link_link}'>{$data['link_title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['edited_link'], $link_url );
+			$text2 		= $this->lang->words['edit_link'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'editLink',
+								 'function_id'	=> $data['link_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_linkAddCommenttLink.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_linkAddCommenttLink</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:27:"linksAddLinkCommentPostSave";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_linkAddCommenttLink
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addLinkComment', FALSE ) )
+		{
+			$link = $this->DB->buildAndFetch( array( 'select' => 'link_id, link_title, link_seo_title', 'from' => 'links', 'where' => 'link_id = ' . $data['comment_parent_id'] ) );
+
+			$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$data['comment_id']}&parentId={$data['comment_parent_id']}&fromApp=links-links", 'public' );
+			$link_link	= $this->registry->output->buildSEOUrl('app=links&amp;showlink=' . $link['link_id'], 'public', $link['link_seo_title'], 'showlink');
+			$img_url	= "<a href='{$link_link}'>{$link['link_title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_link_comment'], $comm_link, $img_url );
+			$text2 		= $this->lang->words['add_link_comment'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addLinkComment',
+								 'function_id'	=> $data['link_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_calendarAddEvent.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_calendarAddEvent</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:16:"calendarAddEvent";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+class trackMembers_calendarAddEvent
+{
+	protected $request;
+	
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+	
+	public function handleData( $data )
+	{
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addEvent', FALSE ) )
+		{
+			$this->DB->query("SELECT MAX( event_id ) as eventId FROM ".ipsRegistry::dbFunctions()->getPrefix()."cal_events");
+			$event = $this->DB->fetch();
+			
+			$eventId  = $event['eventId'] + 1;
+
+			$link_event	= $this->registry->output->buildSEOUrl( "app=calendar&amp;module=calendar&amp;section=view&amp;do=showevent&amp;event_id={$eventId}", 'public', $data['event_title_seo'], 'cal_event' );
+			$event_url	= "<a href='{$link_event}'>{$data['event_title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_event'], $event_url );
+			$text2 		= $this->lang->words['add_event'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addEvent',
+								 'function_id'	=> $eventId,
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+		return $data;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_calendarEditEvent.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_calendarEditEvent</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:17:"calendarEditEvent";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+class trackMembers_calendarEditEvent
+{
+	protected $request;
+	
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+	
+	public function handleData( $data )
+	{
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'editEvent', FALSE ) )
+		{
+			$myEvent = $this->DB->buildAndFetch( array( 'select' 	=> 'event_id',
+										 			  	 'from'   	=> 'cal_events',
+										 			  	 'where'  	=> 'event_id = ' . $this->request['event_id'] ) );
+
+			$link_event	= $this->registry->output->buildSEOUrl( "app=calendar&amp;module=calendar&amp;section=view&amp;do=showevent&amp;event_id={$myEvent['event_id']}", 'public', $data['event_title_seo'], 'cal_event' );
+			$event_url	= "<a href='{$link_event}'>{$data['event_title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['edited_event'], $event_url );
+			$text2 		= $this->lang->words['edit_event'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'editEvent',
+								 'function_id'	=> $eventId,
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+		return $data;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_calendarAddEventComment.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_calendarAddEventComment</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:26:"calendarCommentAddPostSave";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_calendarAddEventComment
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addEventComment', FALSE ) )
+		{
+
+			$event = $this->DB->buildAndFetch( array( 'select' => 'event_id, event_title, event_title_seo', 'from' => 'cal_events', 'where' => 'event_id = ' . $data['comment_parent_id'] ) );
+
+			$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$data['comment_id']}&parentId={$data['comment_parent_id']}&fromApp=calendar-events", 'public' );
+			$link_event	= $this->registry->output->buildSEOUrl( "app=calendar&amp;module=calendar&amp;section=view&amp;do=showevent&amp;event_id={$event['event_id']}", 'public', $event['event_title_seo'], 'cal_event' );
+			$fileurl	= "<a href='{$link_event}'>{$event['event_title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_event_comment'], $comm_link, $fileurl );
+			$text2 		= $this->lang->words['add_event_comment'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addEventComment',
+								 'function_id'	=> $cal['event_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_videossystemActionsAddVideo.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_videossystemActionsAddVideo</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:21:"videosAddVideoAfterDB";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_videossystemActionsAddVideo
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'add_video', FALSE ) )
+		{
+			$link_video	= $this->registry->output->buildSEOUrl( "app=videos&amp;do=view&amp;id=" . $data['video_id'], "public", $data['seo_title'], "video_view" );
+			$videourl	= "<a href='{$link_video}'>{$data['title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_video'], $videourl );
+			$text2 		= $this->lang->words['add_video'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'add_video',
+								 'function_id'	=> $data['video_id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_videossystemActionsEditVideo.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_videossystemActionsEditVideo</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:22:"videosEditVideoAfterDB";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_videossystemActionsEditVideo
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'edit_video', FALSE ) )
+		{
+			$link_video	= $this->registry->getClass('output')->buildSEOUrl( "app=videos&amp;do=view&amp;id=".$this->request['id'], 'public', $data['seo_title'], 'video_view' );
+			$videourl	= "<a href='{$link_video}'>{$data['title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['edited_video'], $videourl );
+			$text2 		= $this->lang->words['edit_video'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'edit_video',
+								 'function_id'	=> $this->request['id'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_videossystemActionsAddVideoComment.php</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>trackMembers_videossystemActionsAddVideoComment</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:24:"videosCommentAddPostSave";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_videossystemActionsAddVideoComment
+{
+	public function __construct()
+	{
+		$this->registry		= ipsRegistry::instance();
+		$this->DB			= $this->registry->DB();
+		$this->request		=& $this->registry->fetchRequest();
+		$this->lang			= $this->registry->getClass('class_localization');
+		$this->member   	= $this->registry->member();
+		$this->memberData	=& $this->registry->member()->fetchMemberData();
+		$this->settings   	=& $this->registry->fetchSettings();
+	}
+
+    public function handleData( $data )
+    {
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( trackMembersLib::canTrack( $this->memberData, 'addVideoComment', FALSE ) )
+		{
+			$vid = $this->DB->buildAndFetch( array( 'select' => 'tid, title, seo_title', 'from' => 'videos', 'where' => 'tid = ' . $data['comment_parent_id'] ) );
+
+			$comm_link	= $this->registry->output->buildUrl( "app=core&module=global&section=comments&do=findComment&comment_id={$data['comment_id']}&parentId={$data['comment_parent_id']}&fromApp=videos-videos", 'public' );
+			$link_video	= $this->registry->getClass('output')->buildSEOUrl( "app=videos&amp;do=view&amp;id=".$vid['tid'], 'public', $vid['seo_title'], 'video_view' );
+			$fileurl	= "<a href='{$link_video}'>{$vid['title']}</a>";
+	
+			$text1 		= sprintf( $this->lang->words['added_video_comment'], $comm_link, $fileurl );
+			$text2 		= $this->lang->words['add_video_comment'];
+	
+			$to_insert 	= array( 'member_id'	=> $this->memberData['member_id'],
+								 'description' 	=> $text1,
+								 'app'			=> $text2,
+								 'date'			=> time(),
+								 'function'		=> 'addVideoComment',
+								 'function_id'	=> $vid['tid'],
+								 'ip_address'	=> $this->member->ip_address
+			);
+	
+			$this->DB->insert( "members_tracker", $to_insert, TRUE );
+		}
+
+        return $data;
+    }
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_forumSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_forumSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:6:"forums";s:15:"classToOverload";s:20:"search_engine_forums";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_forumSearch extends (~extends~)
+{
+	public function search()
+	{
+		$result = parent::search();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'forum_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['forum_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'forum_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_memberSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_memberSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:7:"members";s:15:"classToOverload";s:21:"search_engine_members";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_memberSearch extends (~extends~)
+{
+	public function _membersSearch()
+	{
+		$result = parent::_membersSearch();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'member_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['member_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'member_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_calendarSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_calendarSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:8:"calendar";s:15:"classToOverload";s:22:"search_engine_calendar";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_calendarSearch extends (~extends~)
+{
+	public function search()
+	{
+		$result = parent::search();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'calendar_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['calendar_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'calendar_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_blogSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_blogSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:4:"blog";s:15:"classToOverload";s:18:"search_engine_blog";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_blogSearch extends (~extends~)
+{
+	public function _entriesSearch()
+	{
+		$result = parent::_entriesSearch();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'blog_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['blog_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'blog_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_downloadsSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_downloadsSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:9:"downloads";s:15:"classToOverload";s:23:"search_engine_downloads";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_downloadsSearch extends (~extends~)
+{
+	public function _filesSearch()
+	{
+		$result = parent::_filesSearch();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'downloads_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['downloads_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'downloads_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_GallerySearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_GallerySearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:7:"gallery";s:15:"classToOverload";s:21:"search_engine_gallery";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_GallerySearch extends (~extends~)
+{
+	public function _imagesSearch()
+	{
+		$result = parent::_imagesSearch();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'gallery_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['gallery_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'gallery_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_classifiedsSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_classifiedsSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:11:"classifieds";s:15:"classToOverload";s:25:"search_engine_classifieds";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_classifiedsSearch extends (~extends~)
+{
+	public function search()
+	{
+		$result = parent::search();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'advert_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['advert_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'advert_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_linksSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_linksSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:5:"links";s:15:"classToOverload";s:19:"search_engine_links";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_linksSearch extends (~extends~)
+{
+	public function search()
+	{
+		$result = parent::search();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'links_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['links_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'links_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_tutorialsSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_tutorialsSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:9:"tutorials";s:15:"classToOverload";s:23:"search_engine_tutorials";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_tutorialsSearch extends (~extends~)
+{
+	public function _articlesSearch()
+	{
+		$result = parent::_articlesSearch();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'tutorials_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['tutorials_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'tutorials_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+    <file>
+      <hook_file_real>trackMembers_videosSearch.php</hook_file_real>
+      <hook_type>libraryHooks</hook_type>
+      <hook_classname>trackMembers_videosSearch</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:0:"";s:14:"libApplication";s:6:"videos";s:15:"classToOverload";s:20:"search_engine_videos";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+
+/**
+ * Product Title:		(SOS34) Track Member
+ * Product Version:		1.1.2
+ * Author:				Adriano Faria
+ * Website:				SOS Invision
+ * Website URL:			http://forum.sosinvision.com.br/
+ * Email:				administracao@sosinvision.com.br
+ */
+
+class trackMembers_videosSearch extends (~extends~)
+{
+	public function _videosSearch()
+	{
+		$result = parent::_videosSearch();
+
+		if( !$result )
+		{
+			return $result;
+		}
+
+		require_once( IPSLib::getAppDir( 'trackmembers' ) . '/sources/library.php' );
+
+		if ( ! trackMembersLib::canTrack( $this->memberData, 'videos_search', FALSE ) )
+		{
+			return $result;
+		}
+
+		$text1	= sprintf( $this->lang->words['search_done'], str_replace( '+', "",  IPSSearchRegistry::get('in.clean_search_term') ) );
+		$text2	= $this->lang->words['videos_search'];
+
+		$to_insert = array(	'member_id'		=> $this->memberData['member_id'],
+							'description' 	=> $text1,
+							'app'			=> $text2,
+							'date'			=> time(),
+							'function'		=> 'videos_search',
+							'function_id'	=> 0,
+							'ip_address'	=> $this->member->ip_address
+		);
+
+		$this->DB->insert( "members_tracker", $to_insert, TRUE );
+
+		return $result;
+	}
+}
+?>]]></hooks_source>
+    </file>
+
+  </hookfiles>
+  <hookextras_settings/>
+  <hookextras_language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_global</word_pack>
+      <word_key>track_view_logs</word_key>
+      <word_default>View tracking logs</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_modcp</word_pack>
+      <word_key>modcp_tab_trackmembers</word_key>
+      <word_default>Tracked Members</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_modcp</word_pack>
+      <word_key>trackmembers__no_recent</word_key>
+      <word_default>No member is being tracked now</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_modcp</word_pack>
+      <word_key>trackmembers_nrlogs</word_key>
+      <word_default>Total Logs</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_modcp</word_pack>
+      <word_key>trackmembers_lastest_logs</word_key>
+      <word_default>Last 10 Actions</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_modcp</word_pack>
+      <word_key>trackmembers_all_logs</word_key>
+      <word_default>View All Actions</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_modcp</word_pack>
+      <word_key>trackmembers_stoptracking</word_key>
+      <word_default>Stop Tracking</word_default>
+    </language>
+    <language>
+      <word_app>core</word_app>
+      <word_pack>public_modcp</word_pack>
+      <word_key>trackmembers_lastest_logs_from</word_key>
+      <word_default>Last 10 logged actions of</word_default>
+    </language>
+  </hookextras_language>
+  <hookextras_modules/>
+  <hookextras_help/>
+  <hookextras_templates>
+    <templates>
+      <template_group>skin_modcp</template_group>      
+      <template_content><![CDATA[<script>function logsPopup( elem, mid )
+	{
+		var _url = ipb.vars['base_url'] + '&app=trackmembers&module=ajax&secure_key=' + ipb.vars['secure_hash'] + '&section=setup&do=logs&mid=' + mid;
+		new ipb.Popup( 'logs' + id, {
+			type: 'pane',
+			modal: false,
+			hideAtStart: false,
+			ajaxURL: _url,
+			close: 'a[rel="close"]',
+			w: '600px',
+			h: 800
+		});
+	}</script>
+<div>{$pages}</div>
+{parse template="subTabLoop" group="modcp" params=""}
+<div class='clearfix'>
+	<table class='ipb_table'>
+		<tr class='header'>
+			<th scope='col' width="20%">{$this->lang->words['ipm_name']}</th>
+			<th scope='col' width="18%">{$this->lang->words['ipm_group']}</th>
+			<th scope='col' width="12%">{$this->lang->words['trackmembers_nrlogs']}</th>
+			<th scope='col' width="50%">&nbsp;</th>
+		</tr>
+		<if test="haswarnings:|:is_array( $members ) AND count( $members )">
+			{parse striping="tracklogs" classes="row1,row2 altrow"}
+			<foreach loop="logs:$members as $member">
+				<tr class='{parse striping="tracklogs"}'>
+					<td><img src='{$member['pp_mini_photo']}' class='ipsUserPhoto ipsUserPhoto_mini' alt='' /> {parse template="userHoverCard" group="global" params="$member"}</td>
+					<td>{IPSMember::makeNameFormatted( '' , $member['member_group_id'] )}</td>
+					<td>{$member['cnt']}</td>
+					<td>
+						<ul class='ipsList_inline right'>
+							<li><span class='ipsButton_secondary clickable' onclick='logsPopup( this, {$member['member_id']} )'>{$this->lang->words['trackmembers_lastest_logs']}</span></li>
+							<li><a href='{parse url="app=trackmembers&amp;module=core&amp;section=trackmembers&amp;mid={$member['member_id']}" base="public"}' class='ipsButton_secondary'>{$this->lang->words['trackmembers_all_logs']}</a></li>
+							<li><a data-confirmaction="true" href='{parse url="app=trackmembers&amp;module=core&amp;section=trackmembers&amp;do=untrack&amp;mid={$member['member_id']}" base="public"}' class='ipsButton_secondary important'>{$this->lang->words['trackmembers_stoptracking']}</a></li>
+						</ul>
+					</td>
+				</tr>
+			</foreach>
+		<else />
+			<tr>
+				<td class="no_messages" colspan="3">{$this->lang->words['trackmembers__no_recent']}</td>
+			</tr>
+		</if>
+	</table>
+	<div>{$pages}</div>
+</div>]]></template_content>
+      <template_name>trackedMembers</template_name>
+      <template_data>$members, $pages</template_data>
+      <template_updated>1363526153</template_updated>
+      <template_removable>1</template_removable>
+      <template_added_to>1</template_added_to>
+      <template_user_added>1</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </templates>
+    <templates>
+      <template_group>skin_modcp</template_group>      
+      <template_content><![CDATA[<h3>{$this->lang->words['trackmembers_lastest_logs_from']} {$name}</h3>
+<div class='ipsBox'>
+	<div class='clearfix'>
+		<table class='ipb_table'>
+			<tr class='header'>
+				<th scope='col' style='width: 25%'>Date</th>
+				<th scope='col' style='width: 55%'>Description</th>
+				<th scope='col' style='width: 20%'>Action</th>
+			</tr>
+			{parse striping="logs" classes="row1,row2 altrow"}
+			<foreach loop="logs:$logs as $r">
+				<tr class='{parse striping="logs"}'>
+					<td>{parse date="$r['date']" format="SHORT"}</td>
+					<td>{$r['description']}</td>
+					<td align='center'>{$r['app']}</td>
+				</tr>
+			</foreach>
+		</table>
+	</div>
+</div>]]></template_content>
+      <template_name>trackedMembersLogs</template_name>
+      <template_data>$logs, $name</template_data>
+      <template_updated>1363526153</template_updated>
+      <template_removable>1</template_removable>
+      <template_added_to>1</template_added_to>
+      <template_user_added>1</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </templates>
+    <templates>
+      <template_group>skin_mlist</template_group>      
+      <template_content><![CDATA[<li><a class='ipsButton_secondary' href='{parse url="app=trackmembers&module=core&section=trackmembers&mid={$mid}&auth_key={$this->member->form_hash}" base="public"}' title='{$this->lang->words['track_view_logs']}'>{parse replacement="edit_folder"}</a></li>]]></template_content>
+      <template_name>trackMembers</template_name>
+      <template_data>$mid</template_data>
+      <template_updated>1363526153</template_updated>
+      <template_removable>1</template_removable>
+      <template_added_to>1</template_added_to>
+      <template_user_added>1</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </templates>
+  </hookextras_templates>
+  <hookextras_css/>
+  <hookextras_replacements>
+    <replacements>
+      <replacement_key>track_members</replacement_key>
+      <replacement_content><![CDATA[<img src='{style_image_url}/track_member.png' alt='{lang:track_view_logs}' />]]></replacement_content>
+      <replacement_added_to>1</replacement_added_to>
+      <replacement_master_key/>
+    </replacements>
+  </hookextras_replacements>
+  <hookextras_tasks/>
+  <hookextras_database_create/>
+  <hookextras_database_alter/>
+  <hookextras_database_update/>
+  <hookextras_database_insert/>
+</hookexport>

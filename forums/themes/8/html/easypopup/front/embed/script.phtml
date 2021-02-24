@@ -1,0 +1,96 @@
+<ips:template parameters="$popup, $content, $stylestart, $styleend" />
+{$stylestart|raw}
+	#espopup_{$popup->id} { width: {$popup->w}px; height: {$popup->h}px; display: none; }
+	@media screen and (max-width: {$popup->w}px) {
+		#espopup_{$popup->id}, #popupcontent_{$popup->id} {
+			left: 0px !important; width: 100%; height: auto;
+		}
+		#popupcontent_{$popup->id} iframe {
+			position: relative; height: 100%; margin-bottom: -5px;
+		}		
+	}
+{$styleend|raw}
+<!-- Конфиг Карусели -->
+<script src='{resource="owl.carousel-min.js" app="core" location="admin"}'></script>
+ <script>
+  $(document).ready(function() {
+    $(".owl-carousel").owlCarousel({
+    pagination : true,
+    navigation : false,
+    slideSpeed : 300,
+    paginationSpeed : 400,
+    autoPlay: 10000,
+    items : 1, 
+    itemsDesktop : false,
+    itemsDesktopSmall : false,
+    itemsTablet: false,
+    itemsMobile : false,
+    stopOnHover : true,
+    responsive: true,
+
+    });
+
+  });
+</script>
+<!-- The end -->
+<script type="text/javascript">
+$( document ).ready(function() {
+	setTimeout( function() { LoadESPopup_{$popup->id}(); }, {$popup->wait} );
+	function LoadESPopup_{$popup->id}()
+	{
+		{{if $popup->showtime > 0}}if ( ips.utils.cookie.get( 'espopup_{$popup->id}' ) ) { return; }{{endif}}
+		{{if $popup->showpagecount != 0}}
+			{{$pageview = intval( str_replace("+", "", $popup->showpagecount) ) - 1;}}
+			{{$pageview = $pageview > 0 ? $pageview : 1;}}		
+			if ( !ips.utils.cookie.get( 'espp_pageview_{$popup->id}' ) )
+			{
+				{{if $pageview != 1}}
+					ips.utils.cookie.set( 'espp_pageview_{$popup->id}', 1 ); return;
+				{{else}}
+					ips.utils.cookie.set( 'espp_pageview_{$popup->id}', 2 );
+				{{endif}}
+			}
+			else
+			{
+				{{if mb_stripos( $popup->showpagecount, "+" ) === false}}
+					if ( parseInt( ips.utils.cookie.get( 'espp_pageview_{$popup->id}' ) ) > {$pageview} ) { return; }
+				{{endif}}
+				if ( parseInt( ips.utils.cookie.get( 'espp_pageview_{$popup->id}' ) ) < {$pageview} )
+				{
+					ips.utils.cookie.set( 'espp_pageview_{$popup->id}', parseInt( ips.utils.cookie.get( 'espp_pageview_{$popup->id}' ) ) + 1 );
+					return;
+				}
+				{{if mb_stripos( $popup->showpagecount, "+" ) === false}}
+					else ips.utils.cookie.set( 'espp_pageview_{$popup->id}', parseInt( ips.utils.cookie.get( 'espp_pageview_{$popup->id}' ) ) + 1 );
+				{{else}}
+					else ips.utils.cookie.set( 'espp_pageview_{$popup->id}', 0 );
+				{{endif}}
+			}
+		{{endif}}
+		$('#espopup_{$popup->id}').bPopup({
+			appendTo: 'body', zIndex: 10000, 
+			position: {{if $popup->position}}[{$popup->position|raw}]{{else}}['auto','auto']{{endif}},
+			modalColor: {{if $popup->modalcolor}}'{$popup->modalcolor}'{{else}}'#000'{{endif}},			
+			speed: {$popup->speed},
+			positionStyle: 'fixed',
+			transition: '{$popup->transitionOpen}',
+			transitionClose: '{$popup->transitionClose}',	
+			scrollBar: {{if $popup->scrollBar == 1}}true{{else}}false{{endif}},				
+			modalClose: {{if $popup->modalClose == 1}}true{{else}}false{{endif}},	
+			{{if $popup->autoclose > 0}}
+				autoClose: {$popup->autoclose},
+				onOpen: function() {
+					countDownTimer( {$popup->id}, {$popup->autoclose} );	
+				}, 
+			{{endif}}
+			onClose: function() {
+				$('#espopup_{$popup->id}').html(''); 
+				{{if $popup->showtime > 0}}ppSetCookie( {$popup->id}, {$popup->showtime} );{{endif}}
+				{{if $popup->redirect && $popup->redirect != (string) \IPS\Request::i()->url()}}window.location.href = "{$popup->redirect}";{{endif}}
+			}			
+		});
+		var ppContent = "{$content}";
+		$('#popupcontent_{$popup->id}').html( ppDecodeEntities(ppContent) );
+	}
+});
+</script>

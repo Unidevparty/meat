@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>AutoAward by Blog</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>AutoAward by Blog</subitemtitle>
+					<subsection>blog</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>AutoAward by Gallery</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>AutoAward by Gallery</subitemtitle>
+					<subsection>gallery</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>gallery</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>AutoAward by Post</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>AutoAward by Post</subitemtitle>
+					<subsection>post</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>post</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>AutoAward by Download</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>AutoAward by Download</subitemtitle>
+					<subsection>download</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>download</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>AutoAward by Nexus</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>AutoAward by Nexus</subitemtitle>
+					<subsection>nexus</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>nexus</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>AutoAward by Subscription</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>AutoAward by Subscription</subitemtitle>
+					<subsection>subscription</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>subscription</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

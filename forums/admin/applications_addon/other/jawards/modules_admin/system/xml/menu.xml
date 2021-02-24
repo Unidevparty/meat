@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>System Overview</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>System Overview</subitemtitle>
+					<subsection>root</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>system_overview</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Cabinet Permissions</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Cabinet Permissions</subitemtitle>
+					<subsection>cabinet</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>cabinet_permissions</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

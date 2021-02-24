@@ -1,0 +1,2 @@
+<ips:template parameters="$row" />
+<a href="{url="app=nexus&module=customers&controller=view&id={$row['member_id']}"}">{{if $row['cm_first_name'] and $row['cm_last_name']}}{$row['cm_last_name']}, {$row['cm_first_name']}{{else}}{$row['name']}{{endif}}</a>

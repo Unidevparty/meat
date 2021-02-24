@@ -1,0 +1,95 @@
+<ips:template parameters="$table, $headers, $rows, $quickSearch" original_group="listing" key="database_listing_categoryTable" />
+<div class='ipsBox'  data-baseurl='{$table->baseUrl}' data-resort='{$table->resortKey}' data-controller='core.global.core.table{{if $table->canModerate()}},core.front.core.moderation{{endif}}'>
+	{{if $table->canModerate()}}
+		<form action="{$table->baseUrl->csrf()}" method="post" data-role='moderationTools' data-ipsPageAction>
+	{{endif}}
+			{{if ! count($rows)}}
+				<div class="ipsPad">
+					{lang="cms_no_records_to_show" sprintf="\IPS\cms\Databases::load( \IPS\cms\Databases\Dispatcher::i()->databaseId )->recordWord()"}
+				</div>
+			{{else}}
+				<ol class='ipsDataList ipsDataList_zebra ipsClear cCmsListing {{foreach $table->classes as $class}}{$class} {{endforeach}}' id='elTable_{$table->uniqueId}' data-role="tableRows">
+					{template="$table->rowsTemplate[1]" params="$table, $headers, $rows" object="$table->rowsTemplate[0]"}
+				</ol>
+			{{endif}}
+			{{if $table->canModerate()}}
+			<div class="ipsAreaBackground ipsPad ipsClearfix" data-role="pageActionOptions">
+				<div class="ipsPos_right">
+					<select name="modaction" data-role="moderationAction">
+						{{if $table->canModerate('unhide')}}
+							<option value='approve' data-icon='check-circle'>{lang="approve"}</option>
+						{{endif}}
+						{{if $table->canModerate('feature') or $table->canModerate('unfeature')}}
+							<optgroup label="{lang="feature"}" data-icon='star' data-action='feature'>
+								{{if $table->canModerate('feature')}}
+									<option value='feature'>{lang="feature"}</option>
+								{{endif}}
+								{{if $table->canModerate('unhide')}}
+									<option value='unfeature'>{lang="unfeature"}</option>
+								{{endif}}
+							</optgroup>
+						{{endif}}
+						{{if $table->canModerate('pin') or $table->canModerate('unpin')}}
+							<optgroup label="{lang="pin"}" data-icon='thumb-tack' data-action='pin'>
+								{{if $table->canModerate('pin')}}
+									<option value='pin'>{lang="pin"}</option>
+								{{endif}}
+								{{if $table->canModerate('unpin')}}
+									<option value='unpin'>{lang="unpin"}</option>
+								{{endif}}
+							</optgroup>
+						{{endif}}
+						{{if $table->canModerate('hide') or $table->canModerate('unhide')}}
+							<optgroup label="{lang="hide"}" data-icon='eye' data-action='hide'>
+								{{if $table->canModerate('hide')}}
+									<option value='hide'>{lang="hide"}</option>
+								{{endif}}
+								{{if $table->canModerate('unhide')}}
+									<option value='unhide'>{lang="unhide"}</option>
+								{{endif}}
+							</optgroup>
+						{{endif}}
+						{{if $table->canModerate('lock') or $table->canModerate('unlock')}}
+							<optgroup label="{lang="lock"}" data-icon='lock' data-action='lock'>
+								{{if $table->canModerate('lock')}}
+									<option value='lock'>{lang="lock"}</option>
+								{{endif}}
+								{{if $table->canModerate('unlock')}}
+									<option value='unlock'>{lang="unlock"}</option>
+								{{endif}}
+							</optgroup>
+						{{endif}}
+						{{if $table->canModerate('move')}}
+							<option value='move' data-icon='arrow-right'>{lang="move"}</option>
+						{{endif}}
+						{{if $table->canModerate('split_merge')}}
+							<option value='merge' data-icon='level-up'>{lang="merge"}</option>
+						{{endif}}
+						{{if $table->canModerate('delete')}}
+							<option value='delete' data-icon='trash'>{lang="delete"}</option>
+						{{endif}}
+						{{if $table->canModerate('future_publish')}}
+							<option data-icon="arrow-circle-o-up" value='publish'>{lang="publish"}</option>
+						{{endif}}
+						{{if $table->savedActions}}
+							<optgroup label="{lang="saved_actions"}" data-icon='tasks' data-action='saved_actions'>
+								{{foreach $table->savedActions as $k => $v}}
+									<option value='savedAction-{$k}'>{$v}</option>
+								{{endforeach}}
+							</optgroup>
+						{{endif}}
+					</select>
+					<button type="submit" class="ipsButton ipsButton_alternate ipsButton_verySmall">{lang="submit"}</button>
+				</div>
+			</div>
+		</form>
+	{{endif}}
+	
+	{{if $table->pages > 1}}
+		
+			<div data-role="tablePagination">
+				{template="pagination" group="global" app="core" location="global" params="$table->baseUrl, $table->pages, $table->page, $table->limit, TRUE, $table->getPaginationKey()"}
+			</div>
+		
+	{{endif}}
+</div>

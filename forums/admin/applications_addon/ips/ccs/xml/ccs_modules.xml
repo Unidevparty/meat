@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<moduleexport>
+  <modulegroup>
+    <module>
+      <sys_module_title>Страницы</sys_module_title>
+      <sys_module_application>ccs</sys_module_application>
+      <sys_module_key>pages</sys_module_key>
+      <sys_module_description>Просмотр страниц</sys_module_description>
+      <sys_module_version>1.0.0</sys_module_version>
+      <sys_module_protected>1</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>0</sys_module_position>
+      <sys_module_admin>0</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Менеджер страниц</sys_module_title>
+      <sys_module_application>ccs</sys_module_application>
+      <sys_module_key>pages</sys_module_key>
+      <sys_module_description>Управление страницами</sys_module_description>
+      <sys_module_version>1.0.0</sys_module_version>
+      <sys_module_protected>1</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>1</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Статьи</sys_module_title>
+      <sys_module_application>ccs</sys_module_application>
+      <sys_module_key>articles</sys_module_key>
+      <sys_module_description>Управление статьями</sys_module_description>
+      <sys_module_version>1.0.0</sys_module_version>
+      <sys_module_protected>1</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>2</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Базы данных</sys_module_title>
+      <sys_module_application>ccs</sys_module_application>
+      <sys_module_key>databases</sys_module_key>
+      <sys_module_description>Управление пользовательскими базами данных</sys_module_description>
+      <sys_module_version/>
+      <sys_module_protected>1</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>3</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Блоки</sys_module_title>
+      <sys_module_application>ccs</sys_module_application>
+      <sys_module_key>blocks</sys_module_key>
+      <sys_module_description>Создание и настройка блоков для страниц</sys_module_description>
+      <sys_module_version>1.0</sys_module_version>
+      <sys_module_protected>1</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>4</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Шаблоны</sys_module_title>
+      <sys_module_application>ccs</sys_module_application>
+      <sys_module_key>templates</sys_module_key>
+      <sys_module_description>Управление шаблонами страниц и блоков</sys_module_description>
+      <sys_module_version>1.0</sys_module_version>
+      <sys_module_protected>1</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>5</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Медиа-менеджер</sys_module_title>
+      <sys_module_application>ccs</sys_module_application>
+      <sys_module_key>media</sys_module_key>
+      <sys_module_description>Управление медиа контентом</sys_module_description>
+      <sys_module_version>1.0.0</sys_module_version>
+      <sys_module_protected>0</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>6</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Настройки</sys_module_title>
+      <sys_module_application>ccs</sys_module_application>
+      <sys_module_key>settings</sys_module_key>
+      <sys_module_description>Управление настройками для CCS</sys_module_description>
+      <sys_module_version>1.0.0</sys_module_version>
+      <sys_module_protected>0</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>7</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+  </modulegroup>
+</moduleexport>

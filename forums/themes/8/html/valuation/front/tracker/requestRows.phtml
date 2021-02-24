@@ -1,0 +1,55 @@
+<ips:template parameters="$table, $headers, $requests" />
+{{foreach $requests as $id => $request}}
+	{{$obj = \IPS\valuation\Tracker\Request::load( $request['r_id'] );}}
+	{{$title = "valuation_manufacturer_" . $request['r_manufacturer'];}}
+	{{$type = "valuation_type_" . $request['r_type'];}}
+	<tr class='ipsClearfix ipsDataItem'> <!-- @todo Если дубликат, то подсвечиваем -->
+		<td class='ipsType_center cNexusSupportTable_icon'>
+			<span class="ipsType_light ipsType_medium">#{$request['r_id']}</span>
+		</td>
+		<td class='cNexusSupportTable_body ipsPos_top'>
+			<span class='ipsType_large'><a href="{$obj->url()}">{lang="$type"}: {lang="$title"}{{if $request['r_released']}}, {$request['r_released']} год.{{endif}}</a></span>
+			<p class='ipsType_medium ipsType_reset'>
+				<span class="ipsType_light"><strong>{lang="valuation_condition"}</strong>: {lang="valuation_condition_{$request['r_condition']}"}. <strong>{lang="valuation_city"}</strong>: {$request['r_city']}</span>
+			</p>
+		</td>
+		<td>
+			Экспресс
+		</td>
+		<td>
+			{{if \IPS\Member::loggedIn()->currentRole()}}
+				<strong>
+					{{if $request['r_request_member']}}
+						<a href="{member="url()" id="$request['r_request_member']"}">{member="name" id="$request['r_request_member']"}</a>
+					{{else}}
+						{{if $request['r_firstname']}}{$request['r_firstname']}{{endif}}
+						{{if $request['r_middlename']}} {$request['r_middlename']}{{endif}}
+						{{if $request['r_lastname']}} {$request['r_lastname']}{{endif}}
+					{{endif}}
+				</strong><br>
+			{{endif}}
+
+			{datetime="$request['r_request_created']"}
+		</td>
+		<td>
+			{$request['r_request_status']|raw}
+		</td>
+		<td>
+			{{if $request['r_resolve_price']}}{expression="\IPS\Member::loggedIn()->language()->formatNumber( $request['r_resolve_price'], 1 )"} руб.{{endif}}
+		</td>
+		<td>
+			{$request['r_request_assigned']|raw}
+		</td>
+		{{if \IPS\Member::loggedIn()->currentRole()}}
+			{{$statuses = $obj->getStatuses();}}
+			{{$statuses = is_array( $statuses ) ? implode( ' ', $statuses ) : '';}}
+
+			<td class="ipsType_center">
+				<span class='ipsCustomInput'>
+					<input type='checkbox' data-role='moderation' name="moderate[{$obj->id}]" data-actions="{$statuses|raw}" data-state="read inactive">
+					<span></span>
+				</span>
+			</td>
+		{{endif}}
+	</tr>
+{{endforeach}}

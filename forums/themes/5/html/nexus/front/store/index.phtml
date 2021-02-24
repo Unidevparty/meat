@@ -1,0 +1,71 @@
+<ips:template parameters="$credits, $newProducts, $popularProducts" />
+
+{template="pageHeader" group="global" app="core" params="\IPS\Member::loggedIn()->language()->get('store')"}
+
+{{if $credits->amount->isGreaterThanZero()}}
+	<div class='ipsMessage ipsMessage_general'>
+		{lang="store_credit_message" sprintf="$credits"}
+	</div>
+{{endif}}
+
+<section>
+	<ul class='ipsGrid ipsGrid_collapsePhone' data-ipsGrid data-ipsGrid-minItemSize='200' data-ipsGrid-maxItemSize='350' data-ipsGrid-equalHeights='row'>
+		{{foreach \IPS\nexus\Package\Group::roots() as $group}}
+			<li class='ipsGrid_span4 cNexusCategoryBlock'>
+				<a href='{$group->url()}' data-grid-ratio='40' {{if $group->image}}style="background-image: url( '{expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), $group->image )"}' );"{{endif}}>
+					<h2 class='ipsType_sectionHead ipsTruncate ipsTruncate_line'>{$group->_title}</h2>
+				</a>
+			</li>
+		{{endforeach}}
+	</ul>
+</section>
+
+<section class='ipsSpacer_top'>
+{{if count( \IPS\nexus\Package\Item::featured() )}}	
+	<h2 class='ipsType_sectionHead'>{lang="featured_products"}</h2>
+	<hr class='ipsHr'>
+	<div class='ipsCarousel ipsClearfix' data-ipsCarousel data-ipsCarousel-showDots>
+		<ul class='cNexusCarousel cNexusCategory_grid ipsClearfix' data-role="carouselItems">
+			{{foreach \IPS\nexus\Package\Item::featured() as $package}}
+				{template="packageBlock" group="store" params="$package, TRUE, TRUE"}
+			{{endforeach}}
+		</ul>
+		<span class='ipsCarousel_shadow ipsCarousel_shadowLeft'></span>
+		<span class='ipsCarousel_shadow ipsCarousel_shadowRight'></span>
+		<a href='#' class='ipsCarousel_nav ipsHide' data-action='prev'><i class='fa fa-chevron-left'></i></a>
+		<a href='#' class='ipsCarousel_nav ipsHide' data-action='next'><i class='fa fa-chevron-right'></i></a>
+	</div>
+{{endif}}
+	
+	{{if count( $newProducts )}}
+		<h2 class='ipsType_sectionHead ipsSpacer_top ipsSpacer_double'>{lang="new_products"}</h2>
+		<hr class='ipsHr'>
+		<div class='ipsCarousel ipsClearfix' data-ipsCarousel data-ipsCarousel-showDots>
+			<ul class='cNexusCarousel cNexusCategory_grid ipsClearfix' data-role="carouselItems">
+				{{foreach $newProducts as $package}}
+					{template="packageBlock" group="store" params="$package, TRUE, TRUE"}
+				{{endforeach}}
+			</ul>
+			<span class='ipsCarousel_shadow ipsCarousel_shadowLeft'></span>
+			<span class='ipsCarousel_shadow ipsCarousel_shadowRight'></span>
+			<a href='#' class='ipsCarousel_nav ipsHide' data-action='prev'><i class='fa fa-chevron-left'></i></a>
+			<a href='#' class='ipsCarousel_nav ipsHide' data-action='next'><i class='fa fa-chevron-right'></i></a>
+		</div>
+	{{endif}}
+
+	{{if count( $popularProducts )}}
+		<h2 class='ipsType_sectionHead ipsSpacer_top ipsSpacer_double'>{lang="popular_products"}</h2>
+		<hr class='ipsHr'>
+		<div class='ipsCarousel ipsClearfix' data-ipsCarousel data-ipsCarousel-showDots>
+			<ul class='cNexusCarousel cNexusCategory_grid ipsClearfix' data-role="carouselItems">
+				{{foreach $popularProducts as $package}}
+					{template="packageBlock" group="store" params="$package, TRUE, TRUE"}
+				{{endforeach}}
+			</ul>
+			<span class='ipsCarousel_shadow ipsCarousel_shadowLeft'></span>
+			<span class='ipsCarousel_shadow ipsCarousel_shadowRight'></span>
+			<a href='#' class='ipsCarousel_nav ipsHide' data-action='prev'><i class='fa fa-chevron-left'></i></a>
+			<a href='#' class='ipsCarousel_nav ipsHide' data-action='next'><i class='fa fa-chevron-right'></i></a>
+		</div>
+	{{endif}}
+</section>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Queues</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Queues</subitemtitle>
+					<subsection>queues</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>queues_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>hosting_queues</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Servers</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Servers</subitemtitle>
+					<subsection>servers</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>servers_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>hosting_servers</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Error Log</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Error Log</subitemtitle>
+					<subsection>errors</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>errors_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>hosting_errors</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Hosting Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Hosting Settings</subitemtitle>
+					<subsection>settings</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>settings_hosting</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>settings_hosting</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Expected Output Monitoring</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Expected Output Monitoring</subitemtitle>
+					<subsection>eom</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>eom_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>hosting_eom</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

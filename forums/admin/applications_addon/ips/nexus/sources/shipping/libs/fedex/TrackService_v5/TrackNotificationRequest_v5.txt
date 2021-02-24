@@ -1,0 +1,48 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v5="http://fedex.com/ws/track/v5">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v5:TrackNotificationRequest>
+         <v5:WebAuthenticationDetail>
+            <v5:UserCredential>
+               <v5:Key></v5:Key>
+               <v5:Password></v5:Password>
+            </v5:UserCredential>
+         </v5:WebAuthenticationDetail>
+         <v5:ClientDetail>
+            <v5:AccountNumber></v5:AccountNumber>
+            <v5:MeterNumber></v5:MeterNumber>   
+            <v5:IntegratorId>12345</v5:IntegratorId>   
+            <v5:Localization>
+               <v5:LanguageCode>EN</v5:LanguageCode>      
+            </v5:Localization>
+         </v5:ClientDetail>
+         <v5:TransactionDetail>   
+            <v5:CustomerTransactionId>Get Track Notification For Ground Shipment</v5:CustomerTransactionId>   
+            <v5:Localization>
+               <v5:LanguageCode>EN</v5:LanguageCode>      
+            </v5:Localization>
+         </v5:TransactionDetail>
+         <v5:Version>
+            <v5:ServiceId>trck</v5:ServiceId>
+            <v5:Major>5</v5:Major>
+            <v5:Intermediate>0</v5:Intermediate>
+            <v5:Minor>0</v5:Minor>
+         </v5:Version>
+         <v5:TrackingNumber>484505474017274</v5:TrackingNumber>
+         <v5:SenderEMailAddress>Rohit_Borse@syntelinc.com</v5:SenderEMailAddress>
+         <v5:SenderContactName>Rohit Borse</v5:SenderContactName>
+         <v5:NotificationDetail>
+            <v5:PersonalMessage>Track Notification</v5:PersonalMessage>
+            <v5:Recipients>
+               <v5:EMailNotificationRecipientType>SHIPPER</v5:EMailNotificationRecipientType>
+               <v5:EMailAddress>Rohit_Borse@syntelinc.com</v5:EMailAddress>
+               <v5:NotificationEventsRequested>ON_DELIVERY</v5:NotificationEventsRequested>
+               <v5:Format>HTML</v5:Format>
+               <v5:Localization>
+                  <v5:LanguageCode>EN</v5:LanguageCode>
+               </v5:Localization>
+            </v5:Recipients>
+         </v5:NotificationDetail>
+      </v5:TrackNotificationRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

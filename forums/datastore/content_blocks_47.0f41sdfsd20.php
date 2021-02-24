@@ -1,0 +1,5 @@
+<?php
+
+return <<<'VALUE'
+"\tfunction content_blocks_47(  ) {\n\t\t$return = '';\n\t\t$return .= <<<CONTENT\n\n\nCONTENT;\n\n$return .= \\IPS\\core\\Advertisement::loadByLocation( 'hydro' );\n$return .= <<<CONTENT\n\r\n<br>\r\n\nCONTENT;\n\n$return .= \\IPS\\core\\Advertisement::loadByLocation( 'ad_stern' );\n$return .= <<<CONTENT\n\r\n<br>\r\n\nCONTENT;\n\n$return .= \\IPS\\core\\Advertisement::loadByLocation( 'ad_news_sidebar_obor' );\n$return .= <<<CONTENT\n\r\n<br>\r\n\nCONTENT;\n\n$return .= \\IPS\\core\\Advertisement::loadByLocation( 'expocrimea' );\n$return .= <<<CONTENT\n\r\n<br>\r\n\nCONTENT;\n\n$return .= \\IPS\\core\\Advertisement::loadByLocation( 'partner-m' );\n$return .= <<<CONTENT\n\r\n<br>\r\n\nCONTENT;\n\n$return .= \\IPS\\core\\Advertisement::loadByLocation( 'ad_forumagroyug' );\n$return .= <<<CONTENT\n\r\n<br>\r\n\nCONTENT;\n\n$return .= \\IPS\\core\\Advertisement::loadByLocation( 'krasfair' );\n$return .= <<<CONTENT\n\r\n<br>\r\n\r\n\nCONTENT;\n\n\t\treturn $return;\n}"
+VALUE;

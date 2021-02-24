@@ -1,0 +1,8 @@
+<ips:template parameters="$member, $check" />
+{{if $check}}
+<li>
+	<a href='{url="app=core&module=members&controller=profile&do=change&id={$member->member_id}"}' class='ipsButton ipsButton_overlaid' data-ipsDialog data-ipsDialog-modal='true' data-ipsDialog-title='{lang="f_change_group"}'>
+		<i class='fa fa-pencil'></i>&nbsp;<span class='ipsResponsive_hidePhone ipsResponsive_inline'>&nbsp;&nbsp;{lang="f_change_group"}</span>
+	</a>
+</li>
+{{endif}}

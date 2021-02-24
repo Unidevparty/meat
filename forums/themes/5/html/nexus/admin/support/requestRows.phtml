@@ -1,0 +1,36 @@
+<ips:template parameters="$table, $headers, $requests" />
+
+{{if count( $requests )}}
+	{{foreach $requests as $id => $request}}
+		{{$obj = \IPS\nexus\Support\Request::load( $request['r_id'] );}}
+		<tr class='ipsClearfix {{if in_array( $id, $table->extra )}}ipsTable_highlight{{endif}}'>
+			<td class='ipsType_center cNexusSupportTable_icon'>
+				<span class='ipsItemStatus'>{{if $obj->unread()}}<i class="fa fa-circle"></i>{{endif}}</span>
+			</td>
+			<td class='cNexusSupportTable_body ipsPos_top'>
+				{{if $obj->severity and $obj->severity->icon}}<img src="{file="$obj->severity->icon" extension="nexus_Support"}">{{endif}}
+				<span class='ipsType_large{{if $obj->severity and $obj->severity->color != '000'}} ipsType_blendLinks{{endif}}' {{if $obj->severity and $obj->severity->color != '000'}}style='color:#{$obj->severity->color}'{{endif}}>{$request['r_title']|raw}</span>
+				<div class='ipsType_medium ipsType_richText ipsContained ipsType_break' data-ipsTruncate data-ipsTruncate-size='1 lines' data-ipsTruncate-type='remove'>
+					{$obj->truncated}
+				</div>
+				<p class='ipsType_medium ipsType_reset '>
+					<span class='ipsType_light'>{lang="in_department" sprintf="$request['dpt_position']"}</span> {{if isset( $request['r_staff'] )}}&nbsp;&nbsp;<strong class='ipsType_success'>{lang="assigned_to_x" sprintf="$request['r_staff']"}</strong>{{endif}}
+				</p>
+			</td>
+			<td class='cNexusSupportTable_status'>
+				{$request['status_position']|raw}
+			</td>
+			<td class='cNexusSupportTable_customer ipsType_blendLinks'>
+				<strong>{$request['r_member']|raw}</strong>
+				<p class='ipsType_reset ipsType_medium'>{$request['r_started']|raw}</p>
+			</td>
+			<td class='cNexusSupportTable_lastReply ipsType_blendLinks'>
+				<strong>{$request['r_last_reply_by']|raw}</strong>
+				<p class='ipsType_reset ipsType_medium'>{$request['r_last_reply']|raw}</p>
+			</td>
+			<td class='cNexusSupportTable_replies'>
+				<span class='ipsCommentCount'>{$request['r_replies']}</span>
+			</td>
+		</tr>
+	{{endforeach}}
+{{endif}}

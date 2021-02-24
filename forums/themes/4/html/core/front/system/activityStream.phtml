@@ -1,0 +1,16 @@
+<ips:template parameters="$results, $pagination" />
+{{if $pagination}}
+	<div class="ipsButtonBar ipsPad_half ipsClearfix ipsClear">
+		{$pagination|raw}
+	</div>
+{{endif}}
+<ol class='ipsDataList ipsDataList_large cSearchActivity'>
+	{{foreach $results as $activity}}
+		{$activity->activityStreamHtml()|raw}
+	{{endforeach}}
+</ol>
+{{if $pagination}}
+	<div class="ipsButtonBar ipsPad_half ipsClearfix ipsClear">
+		{$pagination|raw}
+	</div>
+{{endif}}

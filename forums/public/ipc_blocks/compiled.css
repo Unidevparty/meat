@@ -1,0 +1,20 @@
+.ccsBase
+*{margin:0;padding:0}.ccsBase ol, .ccsBase
+ul{list-style:none}.ccsBase h1,.ccsBase h2,.ccsBase h3,.ccsBase h4,.ccsBase h5,.ccsBase
+h6{font-size:100%;font-weight:normal}.ccsBase{font:normal 13px helvetica, arial, sans-serif;background:#fff}.ccsBase
+.ccsBlockTitle{background:#262626;font-size:16px;color:#fff;padding:10px
+8px}.ccsRow_1{background:#fbfbfb}.ccsRow_2{background:#f5f5f5}.ccsRow_3{background:#e6e6e6}.ccsRow_4{}.ccsText_light{color:#b5b5b5}.ccsText_small{font-size:12px}.ccsText_block{line-height:1.6;margin-top:5px}.ccsPad_medium{padding:15px}.ccsPad_small{padding:10px}.ccsPad_smaller{padding:5px}.ccsImage_thumbnail{background:#fff;border:1px
+solid #d2d2d2;-webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.2);-moz-box-shadow:0px 1px 2px rgba(0,0,0,0.2);box-shadow:0px 1px 2px rgba(0,0,0,0.2)}.ccsUserPhoto{border:1px
+solid #d2d2d2;-webkit-box-shadow:0px 1px 2px rgba(0,0,0,0.2);-moz-box-shadow:0px 1px 2px rgba(0,0,0,0.2);box-shadow:0px 1px 2px rgba(0,0,0,0.2)}.ccsUserPhoto_small{width:30px;height:30px}.ccsUserPhoto_medium{width:50px;height:50px}.ccsUserPhoto_large{width:75px;height:75px}.ccsBase
+h2{font-size:15px}.ccsBase
+h2.ccsHeadline{font-size:20px}.ccsBadge{background:#e6e6e6;padding:4px
+8px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;display:inline-block;color:#6c6c6c;font-size:11px;font-weight:bold}.ccsClearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}.ccsPos_left{float:left}.ccsPos_right{float:right}.ccsClickable{cursor:pointer}.ccsStatuses_status{margin-bottom:15px}.ccsStatus_bubble{-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;position:relative}.ccsStatus_bubble:after{content:"";position:absolute;bottom:-18px;left:10px;border-width:18px 0 0 18px;border-style:solid;border-color:#e6e6e6 transparent;display:block;width:0}.ccsStatus_info{margin:5px
+0 0 40px}.ccsStatus_info
+img{margin-right:8px}.ccsGenericList
+.ccsGenericList_content{word-wrap:break-word;margin-left:40px}.ccsGenericList .ccsGenericList_content>p{margin-top:5px}.ccsGenericList
+.ccsUserPhoto{margin-right:5px}.ccsNewsFeed_item
+.ccsHeadline{margin-bottom:5px}.ccsNewsFeed_item{border-bottom:3px solid #f2f2f2}.ccsArticles_block{display:inline-block;overflow:hidden;float:left;margin-bottom:10px}.ccsArticles_img{overflow:hidden}.ccsArticles_img>img{position:relative}.ccsArticles_block
+h2{margin-top:10px}.ccsSlideshow{position:relative;overflow:hidden;height:400px}.ccsSlideshow_images{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden}.ccsSlideshow_images>img{position:absolute}.ccsSlideshow_move{position:absolute;width:40px;height:40px;background:rgba(0,0,0,0.6) url(http://www.meat-expert.ru/public/ipc_blocks/gallery_images_1325776623/scroller.png);-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;top:50%;margin-top:-20px;z-index:10000;opacity:0.2;-webkit-transition:all 0.4s linear;-moz-transition:all 0.4s linear}.ccsSlideshow_moveLeft{left:10px;background-position:left center}.ccsSlideshow_moveRight{right:10px;background-position:right center}.ccsSlideshow:hover
+.ccsSlideshow_move{opacity:0.9}h2.ccsSlideshow_title{margin-bottom:5px}.ccsSlideshow_imageinfo>div{position:absolute;bottom:10px;left:10px;right:10px;padding:10px;background:rgba(0,0,0,0.7);color:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px}.ccsSlideshow_info{width:80%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}h2.ccsTicker_title{font-size:13px;font-weight:bold;display:inline;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ccsTicker{position:relative}.ccsTicker
+ul{position:absolute;left:120px;right:50px;top:0}.ccsTicker
+li{position:absolute;left:0;right:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ccsTicker>p{position:absolute;right:0;top:0}.ccsTicker_nav{display:inline-block;width:16px;height:16px;line-height:12px;text-align:center;font-size:15px}.ccsTopicRow_date{min-width:120px;text-align:center;display:inline-block}.ccsTopicRow_snippet,.ccsTopicRow{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+	<group>
+		<grouptitle>Settings</grouptitle>
+		<grouplang>Settings</grouplang>
+		<items>
+			<item>
+				<key>manage_settings</key>
+				<string>Can edit settings?</string>
+			</item>
+		</items>
+	</group>	
+</permissions>

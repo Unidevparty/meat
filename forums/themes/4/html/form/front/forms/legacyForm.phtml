@@ -1,0 +1,23 @@
+<ips:template parameters="$content" />
+<ul class="ipsToolList ipsToolList_horizontal ipsResponsive_hidePhone ipsClearfix">
+    {{if member.group['g_fs_view_logs']}}
+        <li class='ipsToolList_primaryAction'>
+            <a class="ipsButton ipsButton_medium ipsButton_important ipsButton_fullWidth" href="{url="app=form&controller=logs" seoTemplate="form_logs"}">
+            	{lang="view_logs"}
+            </a>
+        </li>
+    {{endif}}
+    <li class='ipsToolList_primaryAction'>
+        <a class="ipsButton ipsButton_medium ipsButton_important ipsButton_fullWidth" href="{url="app=form&do=formlist" seoTemplate="form_list"}">
+        	{lang="show_forms"}
+        </a>
+    </li>    
+</ul>
+
+{template="pageHeader" group="global" app="core" params="\IPS\Member::loggedIn()->language()->addToStack('contact_form')"}
+
+<div class='ipsBox ipsPad'>
+<div class='ipsType_normal ipsType_richText'>
+	{$content|raw}
+</div>
+</div>

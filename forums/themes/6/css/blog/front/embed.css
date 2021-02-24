@@ -1,0 +1,12 @@
+.cBlogEmbeddedPreview {
+	line-height: 1.4;
+}
+
+.cBlogEmbedded_stats {
+	max-width: 270px;
+	margin-top: 5px !important;
+}
+
+.cBlogEmbedded_stats > li {
+	margin-bottom: 0 !important;
+}

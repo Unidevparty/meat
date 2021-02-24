@@ -1,0 +1,5 @@
+<?php
+
+return <<<'VALUE'
+{"built":1612537337,"html":"\n<h3 class='ipsType_reset ipsWidget_title'>\n\tWho's Online\n\t\n\t\t&nbsp;&nbsp;<span class='ipsType_light ipsType_unbold ipsType_medium'>1 Member, 0 Anonymous, 180 Guests<\/span>\n\t\n\t<span class='ipsType_medium ipsType_light ipsType_unbold ipsType_blendLinks'><a href='https:\/\/meat-expert.ru\/forums\/online\/'>(See full list)<\/a><\/span>\n<\/h3>\n<div class='ipsWidget_inner ipsPad'>\n\t\n\t\t<ul class='ipsList_inline ipsList_csv ipsList_noSpacing ipsType_normal'>\n\t\t\t\n\t\t\t\t<li>\n<a href='https:\/\/meat-expert.ru\/forums\/profile\/13832-svetlana-korelskaya\/' data-ipsHover data-ipsHover-target='https:\/\/meat-expert.ru\/forums\/profile\/13832-svetlana-korelskaya\/?do=hovercard' title=\"Go to \u0421\u0432\u0435\u0442\u043b\u0430\u043d\u0430 \u041a\u043e\u0440\u0435\u043b\u044c\u0441\u043a\u0430\u044f's profile\" class=\"ipsType_break\"><span style='color:brown'>\u0421\u0432\u0435\u0442\u043b\u0430\u043d\u0430 \u041a\u043e\u0440\u0435\u043b\u044c\u0441\u043a\u0430\u044f<\/span><\/a><\/li>\n\t\t\t\n\t\t<\/ul>\n\t\t\n\t\n<\/div>"}
+VALUE;

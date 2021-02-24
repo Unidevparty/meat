@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Departments</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Departments</subitemtitle>
+					<subsection>departments</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>departments_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>support_departments</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Custom Support Fields</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Custom Support Fields</subitemtitle>
+					<subsection>customfields</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>cfields_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>support_cfields</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Staff</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Staff</subitemtitle>
+					<subsection>staff</subsection>
+					<subitemurl>staff_view</subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>support_staff</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Statuses</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Statuses</subitemtitle>
+					<subsection>statuses</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>statuses_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>support_statuses</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Severities</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Severities</subitemtitle>
+					<subsection>severities</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>severities_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>support_severities</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Stock Actions</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Stock Actions</subitemtitle>
+					<subsection>stockactions</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>stockactions_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>support_stockactions</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Support Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Support Settings</subitemtitle>
+					<subsection>settings</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>support_settings</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>support_settings</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

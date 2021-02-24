@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<languageexport>
+  <languagegroup>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>last_awarded</word_key>
+      <word_default>Last Awarded</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>hide_awarded</word_key>
+      <word_default>Hide Awarded</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>give_award_title</word_key>
+      <word_default>Giving an Award to</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>give_award_msg</word_key>
+      <word_default><![CDATA[Please choose an award to give from the menu, you may also add notes to this award if you'd like.]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>give_award_continue</word_key>
+      <word_default>Give Award</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>given_by_unknown</word_key>
+      <word_default>Unknown</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>error_no_permission</word_key>
+      <word_default>You do not have permission to access this page</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>error_no_awards</word_key>
+      <word_default><![CDATA[There currently aren't any awards to display for you.]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>error_no_awarded</word_key>
+      <word_default><![CDATA[There aren't any users with this award]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>error_listings_disabled</word_key>
+      <word_default>Sorry, but the board administrator has disabled this page.</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>error_invalid_request</word_key>
+      <word_default>The URL you have followed is invalid</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>enter_award_notes</word_key>
+      <word_default>Notes</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>description</word_key>
+      <word_default>Description</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>choose_award</word_key>
+      <word_default>Choose an Award</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>award_removed</word_key>
+      <word_default>Award Removed</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>award_info</word_key>
+      <word_default>Name / Description</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>award_icon</word_key>
+      <word_default>Award Image</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>award_given_on</word_key>
+      <word_default>Given on</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>award_given_by</word_key>
+      <word_default>by</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>award_added</word_key>
+      <word_default>Award Added</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>awards_title_post</word_key>
+      <word_default><![CDATA[User's Awards]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>awards_signature_post</word_key>
+      <word_default><![CDATA[User's Awards]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>awards_profile_view_unawarded</word_key>
+      <word_default>Not yet awarded</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>awards_profile_view_title</word_key>
+      <word_default><![CDATA[User's Awards]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>awards_profile_tab_title</word_key>
+      <word_default>Awards</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>awards_achievement_post</word_key>
+      <word_default>Achievements</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>awarded</word_key>
+      <word_default>Awarded</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>award</word_key>
+      <word_default>Award</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>no_awards</word_key>
+      <word_default>No Awards</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>pending_approval</word_key>
+      <word_default>Pending Approval</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>profile_public_award</word_key>
+      <word_default>Give an Award</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>remove_award</word_key>
+      <word_default>Remove Award</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>statistics</word_key>
+      <word_default>Statistics</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>times_awarded</word_key>
+      <word_default>Times Awarded</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>title</word_key>
+      <word_default>Awards</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>public_awards</word_pack>
+      <word_key>view_awarded</word_key>
+      <word_default>View Awarded</word_default>
+    </lang>
+  </languagegroup>
+</languageexport>

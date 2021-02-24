@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hookexport>
+  <hookdata>
+    <config>
+      <hook_name>(JAASP) [HQ] Awards Auto-Award by Subscription Payments</hook_name>
+      <hook_desc>Add an Award when a payment is made via the Subscriptions Application</hook_desc>
+      <hook_author>InvisionHQ</hook_author>
+      <hook_email>reficul@lamoneta.it</hook_email>
+      <hook_website>http://bbcode.it</hook_website>
+      <hook_update_check>https://jlogica.com/resource_updates.php?resource=jaasp</hook_update_check>
+      <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:2:{s:7:"jawards";a:3:{s:8:"app_name";s:14:"JLogica Awards";s:11:"min_version";i:313;s:11:"max_version";i:0;}s:13:"subscriptions";a:3:{s:8:"app_name";s:21:"Subscriptions Manager";s:11:"min_version";i:0;s:11:"max_version";i:0;}}s:20:"hook_php_version_min";s:0:"";s:20:"hook_php_version_max";s:0:"";}]]></hook_requirements>
+      <hook_version_human>3.0.21 (Build 375)</hook_version_human>
+      <hook_version_long>375</hook_version_long>
+      <hook_extra_data><![CDATA[a:2:{s:7:"display";a:1:{s:8:"settings";s:57:"Setting groups: (JAASP) AutoAward on Subscription Payment";}s:13:"settingGroups";a:1:{s:0:"";s:5:"jaasp";}}]]></hook_extra_data>
+      <hook_key>jaasp</hook_key>
+      <hook_global_caches/>
+    </config>
+  </hookdata>
+  <hookfiles/>
+  <hookextras_settings>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_title>(JAASP) AutoAward on Subscription Payment</conf_title_title>
+      <conf_title_desc>Awards AutoAwarding by Subscription Payments</conf_title_desc>
+      <conf_title_noshow>0</conf_title_noshow>
+      <conf_title_keyword>jaasp</conf_title_keyword>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_tab>JAwards</conf_title_tab>
+    </setting>
+    <setting>
+      <conf_id>703</conf_id>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description>This is the user id which will be entered as who gave the award.</conf_description>
+      <conf_group>75</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jaasp_autouser</conf_key>
+      <conf_value/>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaasp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_id>702</conf_id>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Activate auto-awarding by subscription payments.</conf_description>
+      <conf_group>75</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaasp_enabled</conf_key>
+      <conf_value/>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaasp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </hookextras_settings>
+  <hookextras_language/>
+  <hookextras_modules/>
+  <hookextras_help/>
+  <hookextras_templates/>
+  <hookextras_css/>
+  <hookextras_replacements/>
+  <hookextras_tasks/>
+  <hookextras_database_create/>
+  <hookextras_database_alter/>
+  <hookextras_database_update/>
+  <hookextras_database_insert/>
+</hookexport>

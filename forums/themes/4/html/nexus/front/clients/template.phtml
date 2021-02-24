@@ -1,0 +1,34 @@
+<ips:template parameters="$content" />
+
+<h1 class='ipsType_pageTitle'>{lang="module__nexus_clients"}</h1>
+<div class="ipsColumns ipsColumns_collapsePhone ipsSpacer_top">
+	<div class="ipsColumn ipsColumn_wide">
+		<div class='ipsAreaBackground_light ipsPad'>
+			<div class="ipsSideMenu" id='elBillingAndPurchasesMenu' data-ipsSideMenu>
+				<h3 class="ipsSideMenu_mainTitle ipsAreaBackground_reset ipsType_medium">
+					<a href="#elBillingAndPurchasesMenu" class="ipsPad_double" data-action="openSideMenu"><i class="fa fa-bars"></i> &nbsp;{lang="module__nexus_clients"}&nbsp;<i class="fa fa-caret-down"></i></a>
+				</h3>
+				<ul class="ipsSideMenu_list">
+					{{foreach \IPS\nexus\Customer::loggedIn()->clientAreaLinks() as $k}}
+						<li class="ipsSideMenu_item {{if request.controller === $k}}ipsSideMenu_itemActive{{endif}}">
+							{{if $k === 'invoices'}}
+								<a href="{url="app=nexus&module=clients&controller={$k}" seoTemplate="clients" protocol="\IPS\Settings::i()->nexus_https"}">
+							{{elseif $k === 'networkStatus'}}
+								<a href="{url="app=nexus&module=clients&controller={$k}" seoTemplate="clients{$k}"}">
+							{{else}}
+								<a href="{url="app=nexus&module=clients&controller={$k}" seoTemplate="clients{$k}" protocol="\IPS\Settings::i()->nexus_https"}">
+							{{endif}}
+								{lang="client_{$k}"}
+							</a>
+						</li>
+					{{endforeach}}
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="ipsColumn ipsColumn_fluid">
+		<div>
+			{$content|raw}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+<ips:template parameters="$image, $sizes" />
+
+{template="pageHeader" group="global" app="core" params="sprintf( \IPS\Member::loggedIn()->language()->get('all_image_sizes'), $image->caption )"}
+
+<p class='ipsType_reset ipsSpacer_bottom'>
+	<a href='{$image->url()}' title='{lang="back_to_image_page"}'><i class='fa fa-chevron-left'></i> {lang="back_to_image_page"}</a>
+</p>
+
+<ul class='ipsButton_split'>
+	<li><a href='{$image->url()->setQueryString( 'imageSize', 'thumb' )}' class='ipsButton {{if \IPS\Request::i()->imageSize == 'thumb'}}ipsButton_primary{{else}}ipsButton_light{{endif}} ipsButton_verySmall' title='{lang="size_thumb"}'>{lang="size_thumb"} <span class='ipsType_light ipsResponsive_hidePhone ipsResponsive_inline'>({$sizes['thumb'][0]}x{$sizes['thumb'][1]})</span></a></li>
+	<li><a href='{$image->url()->setQueryString( 'imageSize', 'small' )}' class='ipsButton {{if \IPS\Request::i()->imageSize == 'small'}}ipsButton_primary{{else}}ipsButton_light{{endif}}  ipsButton_verySmall' title='{lang="size_small"}'>{lang="size_small"} <span class='ipsType_light ipsResponsive_hidePhone ipsResponsive_inline'>({$sizes['small'][0]}x{$sizes['small'][1]})</span></a></li>
+	<li><a href='{$image->url()->setQueryString( 'imageSize', 'medium' )}' class='ipsButton {{if \IPS\Request::i()->imageSize == 'medium' or !\IPS\Request::i()->imageSize}}ipsButton_primary{{else}}ipsButton_light{{endif}} ipsButton_verySmall' title='{lang="size_medium"}'>{lang="size_medium"} <span class='ipsType_light ipsResponsive_hidePhone ipsResponsive_inline'>({$sizes['medium'][0]}x{$sizes['medium'][1]})</span></a></li>
+	<li><a href='{$image->url()->setQueryString( 'imageSize', 'large' )}' class='ipsButton {{if \IPS\Request::i()->imageSize == 'large'}}ipsButton_primary{{else}}ipsButton_light{{endif}}  ipsButton_verySmall' title='{lang="size_large"}'>{lang="size_large"} <span class='ipsType_light ipsResponsive_hidePhone ipsResponsive_inline'>({$sizes['large'][0]}x{$sizes['large'][1]})</span></a></li>
+</ul>
+
+<div id='elGalleryImage_sized'>
+	{{if \IPS\Request::i()->imageSize == 'medium' OR !\IPS\Request::i()->imageSize}}
+		<a href='{file="$image->masked_file_name" extension="gallery_Images"}'><img src='{file="$image->medium_file_name" extension="gallery_Images"}' alt='{$image->caption}' title='{$image->caption}'></a>
+	{{elseif \IPS\Request::i()->imageSize == 'large'}}
+		<a href='{file="$image->masked_file_name" extension="gallery_Images"}'><img src='{file="$image->masked_file_name" extension="gallery_Images"}' alt='{$image->caption}' title='{$image->caption}'></a>
+	{{elseif \IPS\Request::i()->imageSize == 'small'}}
+		<a href='{file="$image->masked_file_name" extension="gallery_Images"}'><img src='{file="$image->small_file_name" extension="gallery_Images"}' alt='{$image->caption}' title='{$image->caption}'></a>
+	{{elseif \IPS\Request::i()->imageSize == 'thumb'}}
+		<a href='{file="$image->masked_file_name" extension="gallery_Images"}'><img src='{file="$image->thumb_file_name" extension="gallery_Images"}' alt='{$image->caption}' title='{$image->caption}'></a>
+	{{endif}}
+</div>
+
+{{if $image->credit_info}}
+	<h3 class='ipsType_minorHeading'>{lang="image_credit_info"}</h3>
+	<div class='ipsType_richText ipsType_medium ipsSpacer_bottom'>
+		{$image->credit_info}
+	</div>
+{{endif}}
+
+{{if $image->copyright}}
+	<h3 class='ipsType_minorHeading'>{lang="image_copyright"}</h3>
+	<div class='ipsType_richText ipsSpacer_bottom'>
+		&copy; {$image->copyright}
+	</div>
+{{endif}}

@@ -1,0 +1,58 @@
+Options -Indexes
+AddDefaultCharset UTF-8
+<IfModule mod_rewrite.c>
+
+    #Redirect 301 /forums/record/novosti-otrasli/ https://meat-expert.ru/news
+
+    Options -MultiViews
+    RewriteEngine On
+
+
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{REQUEST_URI} !^/robots.txt$
+    RewriteRule ^ https://localhost%{REQUEST_URI} [R=301,L]
+
+	RewriteEngine On
+	RewriteCond %{HTTP_HOST} ^www.localhost$ [NC]
+	RewriteRule ^(.*)$ http://localhost/$1 [R=301,L]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+	RedirectMatch 301 ^/forums/record/novosti-otrasli$ https://localhost/news
+	RedirectMatch 301 ^/forums/record/novosti-otrasli/$ https://localhost/news
+
+    RewriteCond %{REQUEST_URI} ^/blogs/
+    RewriteRule ^(.*)$ https://meat-expert.ru/forums/$1 [L,R=301]
+    RewriteCond %{REQUEST_URI} ^/screenshots/
+    RewriteRule ^(.*)$ https://meat-expert.ru/forums/$1 [L,R=301]
+    RewriteCond %{REQUEST_URI} ^/downloads/
+    RewriteRule ^(.*)$ https://meat-expert.ru/forums/$1 [L,R=301]
+    RewriteCond %{REQUEST_URI} ^/topic/
+    RewriteRule ^(.*)$ https://meat-expert.ru/forums/$1 [L,R=301]
+    RewriteCond %{REQUEST_URI} ^/gallery/
+    RewriteRule ^(.*)$ https://meat-expert.ru/forums/$1 [L,R=301]
+    RewriteCond %{REQUEST_URI} ^/record/
+    RewriteRule ^(.*)$ https://meat-expert.ru/forums/$1 [L,R=301]
+    RewriteCond %{REQUEST_URI} ^/files/
+    RewriteRule ^(.*)$ https://meat-expert.ru/forums/$1 [L,R=301]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URI} ^/uploads/
+    RewriteRule ^(.*)$ https://meat-expert.ru/forums/$1 [L,R=301]
+
+
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+</IfModule>

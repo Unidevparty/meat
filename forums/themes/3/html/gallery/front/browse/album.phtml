@@ -1,0 +1,84 @@
+<ips:template parameters="$album, $table" />
+
+<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle ipsType_break"><div class='ipsContained ipsType_break'>{$album->_title}</div></h1>
+	<div class='ipsPos_right ipsResponsive_noFloat ipsResponsive_hidePhone'>
+		{{$followerCount = \IPS\gallery\Image::containerFollowerCount( $album );}}
+		{template="follow" app="core" group="global" params="'gallery', 'album', $album->_id, $followerCount"}
+	</div>
+</div>
+<hr class='ipsHr ipsResponsive_hidePhone'>
+
+<div class='ipsColumns ipsColumns_collapsePhone'>
+	<div class='ipsColumn ipsColumn_wide'>
+		{{if $album->coverPhoto('medium')}}
+			<div class='ipsAreaBackground ipsPad_half ipsSpacer_bottom'>
+				<img src='{$album->coverPhoto('medium')}' class='ipsImage' alt=''>
+			</div>
+		{{endif}}
+
+		{{if $album->type === 2}}
+			<span class="ipsBadge ipsBadge_warning">{lang="album_private_badge"}</span>
+		{{elseif $album->type === 3}}
+			<span class="ipsBadge ipsBadge_warning">{lang="album_friend_only_badge"}</span>
+		{{endif}}
+
+		<div class='ipsPhotoPanel ipsPhotoPanel_tiny ipsClearfix ipsSpacer_both'>
+			{template="userPhoto" group="global" app="core" params="\IPS\Member::load( $album->owner_id ), 'tiny'"}
+			<div>
+				<strong class='ipsType_minorHeading'>{lang="album_created_by"}</strong><br>
+				{expression="\IPS\Member::load( $album->owner_id )->name"}
+			</div>
+		</div>
+
+		{{if $album->description}}
+			<div class='ipsType_medium ipsType_richText ipsSpacer_top'>
+				{$album->description|raw}
+			</div>
+		{{endif}}
+
+		<ul class='ipsList_inline ipsType_medium ipsClear ipsSpacer_top'>
+			<li><i class='fa fa-camera'></i> {lang="num_images" pluralize="$album->count_imgs"}</li>
+			{{if $album->allow_comments}}
+				<li><i class='fa fa-comment'></i> {lang="num_comments" pluralize="$album->count_comments"}</li>
+			{{endif}}
+		</ul>
+		
+		<hr class='ipsHr'>
+		<ul class='ipsList_inline'>
+			{{if $album->canDelete() }}
+				<li><a href='{$album->url()->setQueryString( array( 'do' => 'deleteAlbum', 'csrfKey' => \IPS\Session::i()->csrfKey ) )}' data-ipsDialog data-ipsDialog-title="{lang="delete_album"}" title="{lang="delete_album"}">{lang="delete_album"}</a></li>
+			{{endif}}
+
+			{{if $album->canEdit() }}
+				<li><a href='{$album->url()->setQueryString( array( 'do' => 'editAlbum', 'csrfKey' => \IPS\Session::i()->csrfKey ) )}' title="{lang="edit_album"}" data-ipsDialog data-ipsDialog-title="{lang="edit_album"}">{lang="edit_album"}</a></li>
+			{{endif}}
+		</ul>
+
+		{{if count( $album->_event )}}
+			<hr class='ipsHr'>
+			<div class='ipsSpacer_top cGalleryEvents'>
+				<h2 class='ipsType_sectionHead'>{lang="events_in_album" pluralize="count( $album->_event )"}</h2>
+				{template="eventBlocks" group="view" app="calendar" params="$album->_event"}
+			</div>
+		{{endif}}
+	</div>
+	<div class='ipsColumn ipsColumn_fluid'>
+		{{if $album->can('add')}}
+			<ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsSpacer_bottom ipsResponsive_hidePhone">
+				{template="categoryButtons" group="browse" params="$album->can('add'), $album->category(), $album"}
+			</ul>
+		{{endif}}
+		<div class='ipsBox'>
+			{$table|raw}
+		</div>
+	</div>
+	{{if $album->can('add')}}
+		<ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsResponsive_showPhone ipsResponsive_block">
+			{template="categoryButtons" group="browse" params="$album->can('add'), $album->category(), $album"}
+		</ul>
+	{{endif}}
+	<div class='ipsResponsive_showPhone ipsResponsive_block'>
+		{template="follow" app="core" group="global" params="'gallery', 'album', $album->_id, $followerCount"}
+	</div>
+</div>

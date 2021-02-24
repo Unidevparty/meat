@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Support Requests</grouptitle>
+		<grouplang>tickets_tickets</grouplang>
+		<items>
+			<item>
+				<key>sr_view</key>
+				<string>Can view support requests?</string>
+			</item>
+			<item>
+				<key>sr_add</key>
+				<string>Can log new support requests?</string>
+			</item>
+			<item>
+				<key>sr_delete</key>
+				<string>Can delete support requests?</string>
+			</item>
+			<item>
+				<key>sr_reply_delete</key>
+				<string>Can delete replies?</string>
+			</item>
+			<item>
+				<key>block_sev</key>
+				<string>Can revoke/restore members' permission to set severities?</string>
+			</item>
+			<item>
+				<key>sr_ratings</key>
+				<string>Can see the ratings that customers have given on support replies?</string>
+			</item>
+			<item>
+				<key>sr_ratings_feedback</key>
+				<string>Can see the feedback that customers have given on support replies? (Requires permission to see ratings)</string>
+			</item>
+		</items>
+	</group>
+</permissions>

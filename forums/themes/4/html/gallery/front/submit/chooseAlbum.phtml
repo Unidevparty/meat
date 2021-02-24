@@ -1,0 +1,33 @@
+<ips:template parameters="$category, $createAlbumForm, $canCreateAlbum, $maximumAlbums, $existingAlbumForm" />
+<div data-controller='gallery.front.submit.chooseCategory' class='ipsType_center ipsSpacer_top ipsSpacer_double'>
+	<h2 class='ipsType_reset ipsType_large'>{lang="uploading_to_x" sprintf="$category->_title"}</h2>
+	<form action="{url="app=gallery&module=gallery&controller=submit&chosenCategory={$category->_id}&noAlbum=1" seoTemplate="gallery_submit"}">
+		<noscript>
+			<button type="submit" class="ipsButton ipsButton_link">{lang="use_no_album"} <i class='fa fa-caret-right'></i></button>
+		</noscript>
+	 	<a href='#' class='ipsType_normal ipsJS_show' data-action='continueNoAlbum'>{lang="use_no_album"} <i class='fa fa-caret-right'></i></a>
+	</form>
+</div>
+
+<div class='ipsGrid ipsGrid_collapsePhone ipsPad cGallerySubmit_albumChoice'>
+	<div class='ipsGrid_span6'>
+		<h2 class='ipsType_pageTitle'>{lang="create_new_album"}</h2>
+		<hr class='ipsHr'>
+		{{if $createAlbumForm}}
+			{$createAlbumForm|raw}
+		{{elseif !$canCreateAlbum}}
+			<p class='ipsType_light'>{lang="cannot_create_album"}</p>
+		{{else}}
+			<p class='ipsType_light'>{lang="used_max_albums" sprintf="$maximumAlbums"}</p>
+		{{endif}}
+	</div>
+	<div class='ipsGrid_span6'>
+		<h2 class='ipsType_pageTitle'>{lang="choose_existing_album"}</h2>
+		<hr class='ipsHr'>
+		{{if $existingAlbumForm}}
+			{$existingAlbumForm|raw}
+		{{else}}
+			<p class='ipsType_light'>{lang="no_existing_albums"}</p>
+		{{endif}}
+	</div>
+</div>

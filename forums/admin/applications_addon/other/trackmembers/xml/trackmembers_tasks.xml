@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export>
+  <group>
+    <row>
+      <task_id>40</task_id>
+      <task_title>Prune Logs</task_title>
+      <task_file>trackmembers.php</task_file>
+      <task_next_run>1316491200</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>4</task_hour>
+      <task_minute>0</task_minute>
+      <task_cronkey>b894bfd18bf811e9d7b7a6f118146f57</task_cronkey>
+      <task_log>1</task_log>
+      <task_description>Runs daily to prune tracking log table</task_description>
+      <task_enabled>1</task_enabled>
+      <task_key>trackmembers</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>trackmembers</task_application>
+    </row>
+  </group>
+</export>

@@ -1,0 +1,101 @@
+<ips:template parameters="$form" />
+<div class="ipsGrid">
+  <div class="ipsGrid_span12">
+				<div class="ipsClearfix ipsSpacer_bottom">
+					<h1 class="ipsType_pageTitle">Для чего нужен сервис по экспресс-оценке?</h1>
+				</div>
+				<div class="ipsType_normal">
+  <p>Мы рекомендуем пользоваться онлайн-оценкой на первом этапе, когда необходимо понять реальную стоимость имеющегося у Вас оборудования и принять принципиальное решение о его дальнейшей судьбе.</p>
+<center><img style='max-width: 100%;' src='{resource="sll.jpg" app="forums" location="front"}' width='500' height='280'>
+                 <p style="width: 38.7%;" class="ipsMessage ipsMessage_info">Официальная оценка не совпадает с рыночной примерно в 85% случаев, и не всегда в большую сторону.</p></center>
+		</div>
+     </div>
+  </div>
+<div class="ipsType_center">
+
+	<section class="ipsAreaBackground ipsPad">
+		<table class="ipsTable ipsTable_responsive ipsTable_zebra ipsAreaBackground_light valPlans">
+			<thead>
+				<tr>
+					<th>&nbsp;</th>
+					<th>{lang="valuation_plan1_title"}</th>
+					<th>{lang="valuation_plan2_title"}</th>
+					<th>{lang="valuation_plan3_title"}</th>
+				</tr>
+			</thead>
+			<tbody class="ipsType_normal">
+				<tr>
+					<td>{lang="valuation_plan0_days"}</td>
+					<td>{lang="valuation_plan1_days"}</td>
+					<td>{lang="valuation_plan2_days"}</td>
+					<td>{lang="valuation_plan3_days"}</td>
+				</tr>
+			
+				<tr>
+					<td>{lang="valuation_plan0_todo"}</td>
+					<td>{lang="valuation_plan1_todo"}</td>
+					<td>{lang="valuation_plan2_todo"}</td>
+					<td>{lang="valuation_plan3_todo"}</td>
+				</tr>
+			
+				<tr>
+					<td>{lang="valuation_plan0_progress"}</td>
+					<td>{lang="valuation_plan1_progress"}</td>
+					<td colspan="2">{lang="valuation_plan23_progress"}</td>
+				</tr>
+			
+				<tr>
+					<td>{lang="valuation_plan0_price"}</td>
+					<td>{lang="valuation_plan1_price"}</td>
+					<td colspan="2">{lang="valuation_plan23_price"}</td>
+				</tr>
+			
+				<tr>
+					<td>{lang="valuation_plan0_promo"}</td>
+					<td>{lang="valuation_plan1_promo"}</td>
+					<td>{lang="valuation_plan2_promo"}</td>
+					<td>{lang="valuation_plan3_promo"}</td>
+				</tr>
+			
+				<tr>
+					<td>{lang="valuation_plan0_ideal"}</td>
+					<td>{lang="valuation_plan1_ideal"}</td>
+					<td colspan="2">{lang="valuation_plan23_ideal"} </td>
+				</tr>
+			</tbody>
+
+			<tfoot>
+				<tr>
+					<td>&nbsp;</td>
+					<td><a href='{url="app=valuation&module=valuation&controller=requests&do=create&plan=1" seoTemplate="request_create"}' class="ipsButton ipsButton_light ipsButton_small">{lang="valuation_plans_select"}</a> </td>
+					<td><a href='{url="app=valuation&module=valuation&controller=requests&do=create&plan=2" seoTemplate="request_create"}' class="ipsButton ipsButton_light ipsButton_small">{lang="valuation_plans_select"}</a></td>
+					<td><a href='{url="app=valuation&module=valuation&controller=requests&do=create&plan=3" seoTemplate="request_create"}' class="ipsButton ipsButton_light ipsButton_small">{lang="valuation_plans_select"}</a></td>
+				</tr>
+			</tfoot>
+		</table>
+	</section>
+
+	{{if !member.member_id}}<br><br><br>{lang="valuation_plans_draft"}{{endif}}
+</div>
+<br>
+<div class="ipsGrid">
+	<div class="ipsGrid_span12">
+				<div class="ipsClearfix ipsSpacer_bottom">
+					<h1 class="ipsType_pageTitle">Как мы работаем?</h1>
+				</div>
+				<div class="ipsType_normal">
+  <p>Все обращения (через веб-сайт или по телефону) поступают к специалисту, который проводит первичную оценку предоставленных данных. В случае если данных недостаточно, он связывается с заказчиком для получения уточнений.</p>
+ <p>В случае экспресс-оценки заказчик получает ответ по электронной почте в течение 24–48 часов.</p>
+ <p>В случае заказа комплексной оценки эксперт предоставляет вам письменный отчет в течение трех рабочих дней после посещения предприятия.</p>
+ <p>Мы также предоставляем заключения об остаточной стоимости оборудования, рассчитанной по стандартным методикам. Такое заключение может быть предоставлено в банк для получения кредита под залог оборудования или в государственные органы (например, в арбитражный суд).</p>
+ <p>Реальную цену оборудования на рынке б/у можем назвать только мы, используя уникальную технологию оценки и бесценный опыт наших экспертов!</p>
+		</div>
+     </div>
+  <div class='ipsGrid_span12 ipsType_center'>
+    <img src='{resource="big-02.jpg" app="forums" location="front"}' width='400' height='267'>
+    </div>
+  </div>
+<hr class='valBorder'>
+
+
+

@@ -1,0 +1,122 @@
+<ips:template parameters="$title,$html,$location=array()" />
+<!DOCTYPE html>
+<html lang="{expression="\IPS\Member::loggedIn()->language()->bcp47()"}" dir="{{if member.language()->isrtl}}rtl{{else}}ltr{{endif}}">
+	<head>
+		<title>{expression="output.getTitle( $title )"}</title>
+		<!--[if lt IE 9]>
+			{{foreach \IPS\Theme::i()->css( 'extra/ie8.css', 'core' ) as $css}}<link rel="stylesheet" type="text/css" href="{$css}">{{endforeach}}
+		    <script src="{url="applications/core/interface/html5shiv/html5shiv.js" base="none" protocol="\IPS\Http\Url::PROTOCOL_RELATIVE"}"></script>
+		<![endif]-->
+		{template="includeMeta" app="core" group="global" location="global" params=""}
+		{template="includeCSS" app="core" group="global" location="global" params=""}
+		{template="includeJS" if="theme.js_include != 'footer'" app="core" group="global" location="global" params=""}
+		{template="favico" app="core" group="global" location="front" params=""}
+  		<link rel="stylesheet" href="http://www.owlcarousel.owlgraphic.com/assets/owlcarousel/assets/owl.carousel.min.css">
+  </head>
+	<body class='ipsApp ipsApp_front {{if isset( \IPS\Request::i()->cookie['hasJS'] )}}ipsJS_has{{else}}ipsJS_none{{endif}} ipsClearfix{{foreach output.bodyClasses as $class}} {$class}{{endforeach}}' {{if output.globalControllers}}data-controller='{expression="implode( ',', output.globalControllers )"}'{{endif}} {{if isset( output.inlineMessage )}}data-message="{expression="output.inlineMessage"}"{{endif}} data-pageApp='{$location['app']}' data-pageLocation='front' data-pageModule='{$location['module']}' data-pageController='{$location['controller']}' itemscope itemtype="http://schema.org/WebSite">
+	<div class="leftShadow">
+      <div class="rightShadow">
+      <meta itemprop="url" content="{setting="base_url"}">
+		<a href='#elContent' class='ipsHide' title='{lang="jump_to_content_desc"}' accesskey='m'>{lang="jump_to_content"}</a>
+		{template="offlineMessage" if="!settings.site_online && \IPS\Member::loggedIn()->group['g_access_offline']" app="core" group="global" params=""}
+		<div id='ipsLayout_header' class='ipsClearfix'>
+			{template="updateWarning" app="core" group="global" params=""}
+			{template="lkeyWarning" app="core" group="global" location="global" params=""}
+			{{if !in_array('ipsLayout_minimal', \IPS\Output::i()->bodyClasses )}}{template="mobileNavBar" app="core" group="global" params=""}{{endif}}
+			<header>
+				<div class='ipsLayout_container'>
+					{template="logo" app="core" group="global" params=""}
+					{{if !in_array('ipsLayout_minimal', \IPS\Output::i()->bodyClasses )}}{template="userBar" app="core" group="global" params=""}{{endif}}
+                	<div class='wa_rotate_banner'>
+                    	<style type="text/css">
+.imghover { cursor: pointer; }
+</style>
+
+<script type="text/javascript">
+var a = Math.round(Math.random()*2);
+image = new Array();
+image[0] = 'http://meat-expert.pro/images/alpha/1.jpg';
+image[1] = 'http://meat-expert.pro/images/alpha/2.jpg';
+image[2] = 'http://meat-expert.pro/images/alpha/3.jpg';
+image[3] = 'http://meat-expert.pro/images/alpha/4.jpg';
+image[4] = 'http://meat-expert.pro/images/alpha/5.jpg';
+image[5] = 'http://meat-expert.pro/images/alpha/6.jpg';
+image[5] = 'http://meat-expert.pro/images/alpha/7.jpg';
+var i = Math.round(Math.random()*2);
+url = new Array();
+url[0] = 'http://edlw.ru';
+url[1] = 'http://edlw.ru';
+url[2] = 'http://edlw.ru/catalog/edible_collagen/';
+url[3] = 'http://edlw.ru/catalog/edible_collagen/devro-rondo-f-i-devro-premium-fresh-/';
+url[4] = 'http://edlw.ru';
+url[5] = 'http://edlw.ru';
+url[6] = 'http://edlw.ru';
+
+document.write ("<a href='"+url[i]+"' class='branding_adv' rel='external nofollow'><img src="+image[a]+" class=\"imghover\" \"></a>");
+</script>
+
+                  	</div>
+				</div>
+			</header>
+			{template="navBar" app="core" group="global" params=""}
+		</div>
+		<main role='main' id='ipsLayout_body' class='ipsLayout_container'>
+			<div id='ipsLayout_contentArea'>
+				<div id='ipsLayout_contentWrapper'>
+					{template="breadcrumb" app="core" group="global" params="true, 'top'"}
+                  <ul style="text-align: center; background: #fff; " class="ipsList_inline ipsType_center ipsList_reset">
+                    <li class='ipsResponsive_inlineBlock  ipsPad_half ipsResponsive_halfwide_exmobile'>{advertisement="ad_header_left"}</li>
+                    <li class='ipsResponsive_inlineBlock  ipsPad_half ipsResponsive_halfwide_exmobile'>{advertisement="ad_header_right"}</li>
+                  </ul>
+                    {template="widgetContainer" group="global" app="core" params="'header', 'horizontal'"}
+					{template="sidebar" if="theme.sidebar_position == 'left'" app="core" group="global" params="'left'"}
+				<div>	
+                  <div id='ipsLayout_mainArea'>
+						<a id='elContent'></a>
+						{advertisement="ad_global_header"}
+						{template="acknowledgeWarning" if="\IPS\Member::loggedIn()->members_bitoptions['unacknowledged_warnings']" params="\IPS\Member::loggedIn()->warnings( 1, FALSE )" group="global" app="core"}
+						
+						{$html|raw}
+						{template="widgetContainer" group="global" app="core" params="'footer', 'horizontal'"}
+					</div>
+					{template="sidebar" if="theme.sidebar_position == 'right'" app="core" group="global" params="'right'"}
+                  	<ul style="text-align: center; background: #fff; " class="ipsList_inline ipsType_center ipsList_reset">
+                    <li class='ipsResponsive_inlineBlock  ipsPad_half ipsResponsive_halfwide_exmobile'>{advertisement="ad_footer_left"}</li>
+                    <li class='ipsResponsive_inlineBlock  ipsPad_half ipsResponsive_halfwide_exmobile'>{advertisement="ad_footer_right"}</li>
+                  </ul>
+					{template="breadcrumb" app="core" group="global" params="false, 'bottom'"}
+                  
+				</div>
+                </div>
+			</div>
+			{template="inlineMessage" if="member.msg_show_notification and $conversation = \IPS\core\Messenger\Conversation::latestUnreadConversation()" app="core" group="global" params="$conversation->comments( 1, 0, 'date', 'desc' )"}
+        </main>
+       {template="_custom_footer" app="core" group="global" location="front" params=""}
+		<footer id='ipsLayout_footer' class='ipsClearfix'>
+			<div class='ipsLayout_container'>
+				{advertisement="ad_global_footer"}
+				{template="footer" app="core" group="global" params=""}
+			</div>
+		</footer>
+		{{if !in_array('ipsLayout_minimal', \IPS\Output::i()->bodyClasses )}}{template="mobileNavigation" if="theme.responsive" app="core" group="global" params=""}{{endif}}
+		{template="includeJS" if="theme.js_include == 'footer'" app="core" group="global" location="global" params=""}
+		{{if settings.ipbseo_ga_enabled}}
+			{setting="ipseo_ga"}
+		{{endif}}
+		{template="viglink" if="settings.viglink_enabled" app="core" group="global" params=""}
+		{template="metaTagEditor" if="isset( $_SESSION['live_meta_tags'] ) and $_SESSION['live_meta_tags'] and member.isAdmin()" app="core" group="global" params=""}
+		<!--ipsQueryLog-->
+		<!--ipsCachingLog-->
+		{expression="output.endBodyCode" raw="true"}
+      </div>
+      </div>
+      <!-- <script>
+        $(document).ready(function() {
+
+	var randomBg = 'url(images/alpha/' + Math.ceil(Math.random() * 7) + '.jpg)';
+	$('body').css('background', randomBg)
+
+});
+        </script> -->
+  </body>
+</html>

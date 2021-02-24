@@ -1,0 +1,7 @@
+<ips:template parameters="$canSubmitFiles, $currentCategory=NULL" />
+
+{{if $canSubmitFiles AND ( !$currentCategory OR $currentCategory->can('add') ) }}
+<li class='ipsToolList_primaryAction'>
+	<a class="ipsButton ipsButton_medium ipsButton_important ipsButton_fullWidth" href="{{if $currentCategory}}{url="app=downloads&module=downloads&controller=submit&category={$currentCategory->id}&_new=1" seoTemplate="downloads_submit"}{{else}}{url="app=downloads&module=downloads&controller=submit&_new=1" seoTemplate="downloads_submit"}{{endif}}" data-ipsDialog data-ipsDialog-title='{lang="submit_a_file"}' data-ipsDialog-size='narrow'>{lang="submit_a_file"}</a>
+</li>
+{{endif}}

@@ -1,0 +1,7 @@
+<ips:template parameters="$comment, $check" />
+
+{{if $check}}
+<li>
+	<a href='{url="app=core&module=members&controller=profile&do=change&id={$comment->author()->member_id}"}' class='' data-ipsDialog data-ipsDialog-modal='true' data-ipsDialog-title='{lang="f_change_group"}'>{lang="f_change_group"}</a>
+</li>
+{{endif}}

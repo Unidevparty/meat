@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<languageexport>
+  <languagegroup>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_location</word_key>
+      <word_default>Display Location</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_location_desc</word_key>
+      <word_default>Where awards will be displayed</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_perm</word_key>
+      <word_default>Public Awarding Permissions</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_perm_desc</word_key>
+      <word_default>Which groups can publicly award this award? (Not applicable for Badges)</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_savechanges</word_key>
+      <word_default> Save Changes </word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_saveor</word_key>
+      <word_default>or</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_enable</word_key>
+      <word_default>Enable</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_enabledisable</word_key>
+      <word_default>Enable/Disable</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_helppage</word_key>
+      <word_default>Help Using this Page</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_helpshowhide</word_key>
+      <word_default>Show/Hide Information</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_hide</word_key>
+      <word_default>Hide</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_mahelp</word_key>
+      <word_default><![CDATA[This page allows you to manage your awards, and the categories which your awards reside in. In an attempt to limit the amount of time you have to wait for pages to load, I have included some quick AJAX functionality. The sections below cover each function you may want to do.
+<br />
+<br />
+<strong style='text-decoration:underline;'>Altering Category Titles:</strong>
+<br />
+To edit a category's title you must double click the title, and then a text box will appear. To save or cancel, click in the box and then click out of it. (TIP: To retrieve the original value, erase the field and then save it.)
+<br />
+<br />
+<strong style='text-decoration:underline;'>Changing Order of Awards and Categories:</strong>
+<br />
+Just like other pages in this Admin CP, you can use the drag handel icon to alter the order of the categories and awards on this page.
+<br />
+In the case of some Award category types (eg Badge) the order of the Awards decides which image will be displayed if the user has multiple Award images when only one is allowable.
+<br />
+<br />
+<strong style='text-decoration:underline;'>Changing Visibility of Awards and Categories:</strong>
+<br />
+If you would like to hide an award, or a category, you can! To do this just click the check mark (%enabledImage%), or the cross (%disabledImage%). The check will appear if the award/category is currently enabled, and the cross is just the opposite. You will not be able to enable categories which do not have any awards in them.
+<br />
+<br />
+<strong style='text-decoration:underline;'>Changing Visibility inside the Awards Cabinet:</strong>
+<br />
+In addition to enabling/disabling Awards and Categories you are able to hide Awards from the display cabinet. Just click the eye %showImage% - Visible or %hideImage% - Hidden. This is especially designed to allow for non-award graphics to be added for users.]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_icon_warn</word_key>
+      <word_default><![CDATA[Leave this blank to not change the award's icon!!!]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_icon_desc</word_key>
+      <word_default>This is the image representation for this award. It should be about 40x40 pixels, only upload image files.</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_icon</word_key>
+      <word_default>Award Icon</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_cattitle_desc</word_key>
+      <word_default/>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_cattitle</word_key>
+      <word_default>Change Category Title</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_badge_desc</word_key>
+      <word_default>Which groups will have this badge displayed (only effective for award in the badge grouping)</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_badge</word_key>
+      <word_default>Badge Group</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awardname_desc</word_key>
+      <word_default>The award will be identified by this</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awardname</word_key>
+      <word_default>Award Name</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awardlongdesc_desc</word_key>
+      <word_default>Long description (html allowed) for use in Cabinets.</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awardlongdesc</word_key>
+      <word_default>Long Description</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awarddesc_descno</word_key>
+      <word_default>Text to diplay to explain how to get this award in the unAwarded/Achievement boxes only.</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awarddesc_desc</word_key>
+      <word_default>Brief description about this award.</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awarddescno</word_key>
+      <word_default>Tooltip for unAwarded/Achievement display</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awarddesc</word_key>
+      <word_default>Short Description</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awardcategory_desc</word_key>
+      <word_default>Choose the category you want this award to be placed into.</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_awardcategory</word_key>
+      <word_default>Category</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit_award</word_key>
+      <word_default>Editing Award:</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_editcat_title</word_key>
+      <word_default>Edit this Category</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_editcat</word_key>
+      <word_default>Edit Category</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_editaward</word_key>
+      <word_default>Edit Award:</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_edit</word_key>
+      <word_default>Edit</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_disable</word_key>
+      <word_default>Disable</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_doubleclick</word_key>
+      <word_default>Double Click to Edit</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_dirwrite</word_key>
+      <word_default><![CDATA[Please make sure that the directory "auto_awarding" is readable by your system]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_deletecat_title</word_key>
+      <word_default>Delete this Category</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_delhasawards</word_key>
+      <word_default><![CDATA[This category has awards, what do you want to do with them? &nbsp;&nbsp;&nbsp; ]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_deletecatno</word_key>
+      <word_default><![CDATA[Can&apos;t delete the default Category]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_submit</word_key>
+      <word_default>Submit</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_deletecat</word_key>
+      <word_default>Delete Category</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_delete</word_key>
+      <word_default>Delete</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_delcat</word_key>
+      <word_default>Deleting Category</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_delaward</word_key>
+      <word_default>Are you sure that you would like to delete this award, this action cannot be undone.</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_delareyousure</word_key>
+      <word_default>Are you sure that you would like to delete this category, this action cannot be undone.</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_continue</word_key>
+      <word_default> Continue </word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_auto_awards</word_key>
+      <word_default>Auto Awarding Managment</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_cancel</word_key>
+      <word_default>Cancel</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_autotype</word_key>
+      <word_default>Auto-Award Type</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_addnewcat</word_key>
+      <word_default>Add New Category</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_addnewaward</word_key>
+      <word_default>Add New Award</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_addingaward</word_key>
+      <word_default>Adding Award</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_addaward</word_key>
+      <word_default> Adding Award </word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_addauto</word_key>
+      <word_default>Add New Auto-Award Function</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_addaatype</word_key>
+      <word_default>Auto-Award Type</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_addaafun</word_key>
+      <word_default>Adding New Auto-Award Function</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_manage_awards</word_key>
+      <word_default>Manage Awards</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_noaafun</word_key>
+      <word_default><![CDATA[There aren't any auto-award functions.]]></word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_ormoveto</word_key>
+      <word_default>or move to....</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_pleasechooseone</word_key>
+      <word_default>Please Choose One</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_show</word_key>
+      <word_default>Show</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_show_on_frontend</word_key>
+      <word_default>Show on Frontend</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_show_on_frontend_desc</word_key>
+      <word_default>Should this category be listed in the Awards Cabinet</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_type_achievement</word_key>
+      <word_default>Achievement</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_type_badge</word_key>
+      <word_default>Badge</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_type_naked</word_key>
+      <word_default>Naked</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_type_profile</word_key>
+      <word_default>Profile</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_type_signature</word_key>
+      <word_default>Signature</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_yesdelete</word_key>
+      <word_default>Yes, Delete</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_cabinet_permissions</word_key>
+      <word_default>Cabinet View Permissions</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_manage</word_pack>
+      <word_key>ja_manage_cabinet</word_key>
+      <word_default>Manage Cabinet Permissions</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_menulang</word_pack>
+      <word_key>menu__cabinet_permissions</word_key>
+      <word_default>Cabinet Permissions</word_default>
+    </lang>
+    <lang>
+      <word_app>jawards</word_app>
+      <word_pack>admin_menulang</word_pack>
+      <word_key>menu__system_overview</word_key>
+      <word_default>Overview</word_default>
+    </lang>
+  </languagegroup>
+</languageexport>

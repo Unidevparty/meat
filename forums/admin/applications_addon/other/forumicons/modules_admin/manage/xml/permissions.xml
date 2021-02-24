@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Manage Icons</grouptitle>
+		<items>
+			<item>
+				<key>manage</key>
+				<string>Can manage forum icons?</string>
+			</item>																							
+		</items>
+	</group>
+</permissions>

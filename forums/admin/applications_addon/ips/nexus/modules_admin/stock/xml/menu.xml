@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Packages</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Packages</subitemtitle>
+					<subsection>packages</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>packages_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>stock_packages</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Custom Package Fields</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Custom Package Fields</subitemtitle>
+					<subsection>customfields</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>cfields_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>stock_customfields</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Tax Classes</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Tax Classes</subitemtitle>
+					<subsection>tax</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>tax_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>stock_tax</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Shipping Methods</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Shipping Methods</subitemtitle>
+					<subsection>shipping</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>shipping_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>stock_shipping</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Donation Goals</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Donation Goals</subitemtitle>
+					<subsection>donations</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>donates_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>stock_donations</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Coupons</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Coupons</subitemtitle>
+					<subsection>coupons</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>coupons_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>stock_coupons</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Fraud Rules</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Fraud Rules</subitemtitle>
+					<subsection>fraud</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>fraud_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>stock_fraud</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Payment Gateways</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Payment Gateways</subitemtitle>
+					<subsection>gateways</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>gateways_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>stock_gateways</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Store &amp; Client Area Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Store &amp; Client Area Settings</subitemtitle>
+					<subsection>settings</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>settings_store</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>settings_store</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

@@ -1,0 +1,6 @@
+.ipsBadge_green { background: #7ba60d; }
+.ipsBadge_red {	background: #bf1d00; }
+
+#mobileImageWrap .galmedium, #mobileImageWrap .galattach {
+	max-width: 100%;
+}

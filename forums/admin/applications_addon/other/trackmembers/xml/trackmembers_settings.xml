@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settingexport>
+  <settinggroup>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_title_title>Track Members</conf_title_title>
+      <conf_title_desc>Settings for this application</conf_title_desc>
+      <conf_title_tab>Apps</conf_title_tab>
+      <conf_title_app>trackmembers</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>System online?</conf_title>
+      <conf_description>If enabled, users can be tracked.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>trackmembers_onoff</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>General Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Flood control</conf_title>
+      <conf_description>This will prevent the same log entry from being added it if occurs within the set amount of minutes.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>trackmembers_floodControl</conf_key>
+      <conf_default>5</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Forum view: log entries per page in profile</conf_title>
+      <conf_description>This will be the number of log entries per page on profile view.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>trackmembers_nrpv</conf_key>
+      <conf_default>10</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Admin CP view: log entries per page in log page</conf_title>
+      <conf_description>This will be the number of log entries per page on Admin CP view log page.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>trackmembers_nrav</conf_key>
+      <conf_default>10</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Can Track Users</conf_title>
+      <conf_description>Users from selected groups can set users to be warned</conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>trackmembers_cantrackgroups</conf_key>
+      <conf_default/>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1 )
+{
+	if ( is_array( $_POST['trackmembers_cantrackgroups'] ) )
+	{
+		$_POST['trackmembers_cantrackgroups'] = implode( ",", $_POST['trackmembers_cantrackgroups'] );
+	}
+	else
+	{
+		$_POST['trackmembers_cantrackgroups'] = "";
+	}
+	
+	$key = 'trackmembers_cantrackgroups';
+}
+if ( $show == 1 )
+{
+	$key = 'trackmembers_cantrackgroups[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Track User Groups</conf_title>
+      <conf_description>Users from selected groups can be tracked if wished.</conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>trackmembers_groups</conf_key>
+      <conf_default/>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1 )
+{
+	if ( is_array( $_POST['trackmembers_groups'] ) )
+	{
+		$_POST['trackmembers_groups'] = implode( ",", $_POST['trackmembers_groups'] );
+	}
+	else
+	{
+		$_POST['trackmembers_groups'] = "";
+	}
+	
+	$key = 'trackmembers_groups';
+}
+if ( $show == 1 )
+{
+	$key = 'trackmembers_groups[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Track a member when warned by a moderator?</conf_title>
+      <conf_description>If enabled, all members who have been warned by a moderator will be automatically tracked</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>trackmembers_ws</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group>Warn System Integration</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number of days</conf_title>
+      <conf_description><![CDATA[If you chose to track members when they are warned by a moderator, you can specify how many days will last the tracking<br /><br />1 - The warned member will be automatically tracked IF his groups is enabled on groups that can be tracked<br />2 - Fill with 0 (zero) if you do not want to limit the number of days. This will make the warned member to be tracked definitely and you will need to stop tracking manually in member profile eventually]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>trackmembers_ws_limit</conf_key>
+      <conf_default>3</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Track new users</conf_title>
+      <conf_description>If enabled, new users will be automatically tracked</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>trackmembers_newusers</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>9</conf_position>
+      <conf_start_group>New Users</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number of days</conf_title>
+      <conf_description><![CDATA[If you chose to track new users, you can specify how many days will last the tracking<br /><br />Fill with 0 (zero) if you do not want to limit the number of days. This will make the new member to be tracked definitely and you will need to stop tracking manually in member profile eventually]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>trackmembers_newusers_limit</conf_key>
+      <conf_default>3</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>10</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Prune tracking logs</conf_title>
+      <conf_description>If enabled, logs will be automatically deleted after the number of days in next setting</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>trackmembers_log</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>11</conf_position>
+      <conf_start_group>Log Management</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number of days</conf_title>
+      <conf_description><![CDATA[This setting will only take effect if you also enable the previous setting (Prune Logs)]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>trackmembers_log_days</conf_key>
+      <conf_default>60</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>12</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>trackmembers</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </settinggroup>
+</settingexport>

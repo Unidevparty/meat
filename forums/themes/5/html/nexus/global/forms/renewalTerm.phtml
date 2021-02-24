@@ -1,0 +1,37 @@
+<ips:template parameters="$name, $value, $options" />
+{{$term = $value->getTerm();}}
+<div class='cNexusStack cNexusStack_usergroup'>
+	<ol class='ipsList_reset'>
+		<li data-step='{lang="price"}'>
+			{{if $options['allCurrencies']}}
+				{{foreach \IPS\nexus\Money::currencies() as $currency}}
+					<input type="number" name="{$name}[amount_{$currency}]" size="4" data-decimals="2" data-decpoint="{expression="\IPS\Member::loggedIn()->language()->locale['decimal_point']"}" data-thousandsseparator="{expression="\IPS\Member::loggedIn()->language()->locale['thousands_sep']"}" step="0.01" value="{{if isset( $value->cost[ $currency ] )}}{$value->cost[ $currency ]->amount}{{endif}}" class="ipsField_short ipsField_stackItemNoMargin"> {$currency}<br>
+				{{endforeach}}
+			{{else}}
+				<input type="number" name="{$name}[amount]" size="4" data-decimals="2" data-decpoint="{expression="\IPS\Member::loggedIn()->language()->locale['decimal_point']"}" data-thousandsseparator="{expression="\IPS\Member::loggedIn()->language()->locale['thousands_sep']"}" step="0.01" value="{$value->cost->amountAsString()}" class="ipsField_short ipsField_stackItemNoMargin">
+				{{if count( \IPS\nexus\Money::currencies() ) === 1}}
+					{$value->cost->currency}
+				{{else}}
+					<select name="{$name}[currency]">
+						{{foreach \IPS\nexus\Money::currencies() as $currency}}
+							<option value="{$currency}" {{if $currency === $value->cost->currency}}selected{{endif}}>{$currency}</option>
+						{{endforeach}}
+					</select>
+				{{endif}}
+			{{endif}}
+		</li>
+		<li data-step='{lang="every"}'>
+			<input type="number" name="{$name}[term]" size="4" value="{$term['term']}" class="ipsField_tiny ipsField_stackItemNoMargin"  {{if $options['lockTerm']}}disabled{{endif}}>
+			<select name="{$name}[unit]" {{if $options['lockTerm']}}disabled{{endif}}>
+				<option value="d" {{if $term['unit'] === 'd'}}selected{{endif}}>{lang="days"}</option>
+				<option value="m" {{if $term['unit'] === 'm'}}selected{{endif}}>{lang="months"}</option>
+				<option value="y" {{if $term['unit'] === 'y'}}selected{{endif}}>{lang="years"}</option>
+			</select>
+		</li>
+		{{if $options['addToBase']}}
+			<li data-step='{lang="and"}'>
+				<input type="checkbox" name="{$name}[add]" id="{$name}_add" {{if $value->addToBase}}checked{{endif}}> {lang="add_to_purchase_price"}<br>
+			</li>
+		{{endif}}
+	</ol>
+</div>

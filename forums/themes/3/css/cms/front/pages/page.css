@@ -1,0 +1,17 @@
+/* ----- */
+
+.ipsWidget.ipsWidget_horizontal[data-blockid^="app_cms"]:not(.ipsBox) {
+	padding: 0px !important;
+}
+
+#elCmsPageWrap .cWidgetContainer_managing ul {
+	margin-top: 10px;
+}
+
+a.ipsPages_csv:after {
+	content: ', ';
+}
+
+a.ipsPages_csv:last-child:after {
+	content: '';
+}

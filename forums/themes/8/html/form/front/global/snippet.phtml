@@ -1,0 +1,12 @@
+<ips:template parameters="$activity, $type='activity'" />
+{{$item = $activity;}}
+<div class='cSearchActivity_info ipsContained'>
+	<div class='ipsColumns'>
+		<div class='ipsColumn ipsColumn_fluid'>
+			{{if $type != 'search'}}<a href='{$item->url()}' class='ipsType_normal ipsType_break'>{$item->mapped('title')}</a>{{endif}}
+			<div class='ipsType_medium ipsType_richText ipsContained ipsSpacer_both ipsSpacer_half' data-ipsTruncate data-ipsTruncate-size='3 lines' data-ipsTruncate-type='remove'>
+				{$item->truncated()|raw}
+			</div>
+		</div>
+	</div>
+</div>

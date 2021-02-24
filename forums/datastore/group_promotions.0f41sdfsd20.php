@@ -1,0 +1,5 @@
+<?php
+
+return <<<'VALUE'
+{"1":{"promote_id":1,"promote_position":1,"promote_enabled":1,"promote_filters":"{\"core_Reputation\":{\"reputation_operator\":\"any\",\"reputation_score\":\"0\"},\"core_Content\":{\"content_count_operator\":\"gt\",\"content_count_score\":\"10\"},\"core_Lastpost\":{\"range\":{\"start\":\"\",\"end\":\"\"}},\"core_Lastvisit\":{\"range\":{\"start\":\"\",\"end\":\"\"}},\"core_Group\":{\"groups\":\"3\"},\"core_Joined\":{\"range\":{\"start\":\"\",\"end\":\"\"}}}","promote_actions":"{\"primary_group\":\"7\",\"secondary_group\":[],\"secondary_remove\":[]}"},"2":{"promote_id":2,"promote_position":2,"promote_enabled":1,"promote_filters":"{\"core_Reputation\":{\"reputation_operator\":\"any\",\"reputation_score\":\"0\"},\"core_Content\":{\"content_count_operator\":\"gt\",\"content_count_score\":\"4\"},\"core_Lastpost\":{\"range\":{\"start\":\"\",\"end\":\"\"}},\"core_Lastvisit\":{\"range\":{\"start\":\"\",\"end\":\"\"}},\"core_Group\":{\"groups\":\"16\"},\"core_Joined\":{\"range\":{\"start\":\"\",\"end\":\"\"}}}","promote_actions":"{\"primary_group\":\"16\",\"secondary_group\":[],\"secondary_remove\":[]}"}}
+VALUE;

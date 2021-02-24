@@ -1,0 +1,31 @@
+<ips:template parameters="$stepNames, $activeStep, $output, $baseUrl, $showSteps" />
+
+{{if !request.isAjax()}}
+	<h1 class='ipsType_sectionTitle ipsType_reset'>{lang="add_gallery_image"}</h1>
+{{endif}}
+<div data-controller='gallery.front.submit.wizard'>
+	<div class='cGalleryDialog_header ipsType_center ipsPad ipsAreaBackground'>
+		<ul class='ipsList_reset cGallerySteps'>
+			{{$doneSteps = TRUE;}}
+			{{foreach $stepNames as $step => $name}}
+				{{if $activeStep == $name}}{{$doneSteps = FALSE;}}{{endif}}
+				<li data-step='{expression="$step + 1"}' data-stepName='{$name}' class='{{if $doneSteps}}cGallerySteps_done{{elseif $activeStep == $name}}cGallerySteps_active{{endif}}'>
+					{{if $doneSteps}}
+						<a href="{$baseUrl->setQueryString( '_step', $name )}" data-action="wizardLink">
+					{{else}}
+						<span>
+					{{endif}}
+					{lang="$name"}
+					{{if $doneSteps}}
+						</a>
+					{{else}}
+						</span>
+					{{endif}}
+				</li>
+			{{endforeach}}
+		</ul>
+	</div>
+	<div class='cGalleryDialog_content {{if \IPS\gallery\Image::moderateNewItems( \IPS\Member::loggedIn() )}}cGalleryDialog_content_moderated{{endif}}' data-role="wizardContent">
+		{$output|raw}
+	</div>
+</div>

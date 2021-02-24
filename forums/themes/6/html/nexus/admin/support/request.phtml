@@ -1,0 +1,534 @@
+<ips:template parameters="$request" />
+
+{{if isset( \IPS\Request::i()->pending ) and \IPS\Request::i()->pending}}
+	<div class="ipsMessage ipsMessage_error ipsJS_hide" data-controller="nexus.admin.support.pendingalert">
+		{lang="support_pending"}
+	</div>
+{{endif}}
+
+<h1 class='ipsType_pageTitle ipsSpacer_bottom ipsSpacer_half ipsFaded_withHover cNexusSupportRequest_title'>
+	{$request->title}
+	<a href='{$request->acpUrl()->setQueryString( 'do', 'editTitle' )}' class='ipsType_normal ipsFaded ipsFaded_more' data-ipsDialog data-ipsDialog-title="{lang="edit_support_request_title"}">({lang="edit"})</a>
+	<span class="ipsType_normal ipsType_light">#{$request->id}</span>
+</h1>
+<ul class='ipsList_inline ipsType_reset ipsType_normal'>
+	<li {{if !$request->severity or $request->severity->color == '000'}}class="ipsHide"{{endif}} data-role="requestSeverityBadge">
+		{{if $request->severity and $request->severity->color != '000'}}
+			<span class='cNexusSupportBadge' style="background-color: #{$request->severity->color}">{$request->severity->_title}</span>
+		{{endif}}
+	</li>
+	<li data-role="requestStatusBadge">{template="status" group="support" params="$request->status"}</li>
+	<li>{lang="request_created_ago" sprintf="\IPS\DateTime::formatInterval( \IPS\DateTime::ts( $request->mapped('date') )->diff( new \IPS\DateTime ), 2 )"}</li>
+	<li {{if !$request->staff}}class="ipsHide"{{endif}} data-role="requestAssignedToBadge">
+		<strong class='ipsType_success' data-role="requestAssignedToText">
+			{{if $request->staff}}
+				{lang="assigned_to_x" sprintf="( $request->staff->member_id === \IPS\Member::loggedIn()->member_id ) ? \IPS\Member::loggedIn()->language()->addToStack('you') : $request->staff->name"}
+			{{endif}}
+		</strong>
+	</li>
+</ul>
+
+<hr class="ipsHr">
+
+{{$previous = $request->nextPrevious( 1 );}}
+{{$next = $request->nextPrevious();}}
+{{if $next or $previous}}
+	<nav class="ipsPager ipsPager_small ipsGrid ipsClearFix ipsList_inline ipsSpacer_bottom">
+		<div class="ipsGrid_span6 ipsPager_prev">
+			{{if $previous}}
+				<a href="{$previous->acpUrl()}" title="{lang="keyboard_shortcut_prev_req"}" data-ipsTooltip data-role="prevRequestLink">
+					<span class="ipsPager_type">{lang="prev_request"}</span>
+					<span class="ipsPager_title ipsType_break ipsTruncate ipsTruncate_line">{$previous->title}</span>
+				</a>
+			{{endif}}
+		</div>
+		<div class="ipsGrid_span6 ipsType_right ipsPager_next">
+			{{if $next}}
+				<a href="{$next->acpUrl()}" title="{lang="keyboard_shortcut_next_req"}" data-ipsTooltip data-role="nextRequestLink">
+					<span class="ipsPager_type">{lang="next_request"}</span>
+					<span class="ipsPager_title ipsType_break ipsTruncate ipsTruncate_line">{$next->title}</span>
+				</a>
+			{{endif}}
+		</div>
+	</nav>
+	<br>
+{{endif}}
+
+{{$purchase = $request->purchase;}}
+<p class="ipsMessage ipsMessage_error {{if ( $purchase and $purchase->active ) or !$purchase or !$request->department->require_package}}ipsHide{{endif}}" data-role="purchaseWarning" data-purchaseWarning="purchaseWarningInactiveRequired">{lang="request_purchase_inactive"}</p>
+<p class="ipsMessage ipsMessage_warning {{if ( $purchase and $purchase->active ) or !$purchase or $request->department->require_package or !$request->department->packages}}ipsHide{{endif}}" data-role="purchaseWarning" data-purchaseWarning="purchaseWarningInactiveOptional">{lang="request_purchase_inactive_optional"}</p>
+<p class="ipsMessage ipsMessage_error {{if $purchase or !$request->department->require_package}}ipsHide{{endif}}" data-role="purchaseWarning" data-purchaseWarning="purchaseWarningNoneRequired">{lang="request_purchase_none"}</p>
+<p class="ipsMessage ipsMessage_warning {{if $purchase or $request->department->require_package or !$request->department->packages}}ipsHide{{endif}}" data-role="purchaseWarning" data-purchaseWarning="purchaseWarningNoneOptional">{lang="request_purchase_none_optional"}</p>
+{{if $purchase}}
+	<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="associated_purchase"}</h2>
+	<div class="ipsAreaBackground ipsPad">
+		<div class="ipsColumns ipsColumns_collapsePhone">
+			<div class="ipsColumn {{if $purchase->custom_fields}}ipsColumn_veryWide{{else}}ipsColumn_fluid{{endif}}">
+				<div class="ipsType_center ipsPad ipsAreaBackground_reset">
+					<div class='ipsSpacer_bottom ipsSpacer_half'>
+						<span class='ipsType_sectionHead'><a href="{$purchase->acpUrl()}">{$purchase->_name}</a></span>
+						<span class="ipsType_small ipsType_light">#{$purchase->id}</span>
+						{{if $purchase->cancelled}}
+							<span class="ipsBadge ipsBadge_style5">{lang="purchase_canceled"}</span>
+						{{elseif !$purchase->active}}
+							<span class="ipsBadge ipsBadge_style6">{lang="purchase_expired"}</span>
+						{{endif}}
+					</div>
+					{{if $licenseKey = $request->purchase->licenseKey()}}
+						<div class="ipsType_large ipsType_monospace cNexusLicenseKey ipsSpacer_bottom ipsSpacer_half ipsContained ipsType_break">
+							{$licenseKey->key}
+						</div>
+					{{endif}}
+					{$purchase->acpSupportView()|raw}
+					<ul class='ipsList_reset ipsType_medium ipsSpacer_bottom ipsSpacer_half'>
+						<li>{lang="ps_start"} {$purchase->start->localeDate()}</li>
+						{{if $purchase->expire}}
+							<li>{lang="ps_expire"} {$purchase->expire->localeDate()}</li>
+						{{endif}}
+						{{if $purchase->grace_period}}
+							<li>
+								{lang="p_grace_period"}
+								{{$grace = new \DateInterval( 'PT' . $purchase->grace_period . 'S' );}}
+								{expression="\IPS\DateTime::formatInterval( \IPS\DateTime::create()->diff( \IPS\DateTime::create()->add( $grace ) ), 0 )"}
+							</li>
+						{{endif}}
+						{{if $purchase->renewals}}
+							<li>{$purchase->renewals}</li>
+							{{if $purchase->billing_agreement}}
+								<li>
+									{lang="ps_billing_agreement"}
+									<a href="{$purchase->billing_agreement->acpUrl()}">{$purchase->billing_agreement->gw_id}</a>
+									{{if $purchase->billing_agreement->canceled}}
+										({lang="billing_agreement_canceled"})
+									{{endif}}
+								</li>
+							{{endif}}
+						{{endif}}
+						{{if $parent = $purchase->parent()}}
+							<li>
+								{lang="ps_parent"}
+								<a href="{$parent->acpUrl()}">{$parent->name}</a>
+							</li>
+						{{endif}}
+					</ul>
+					{{if $purchase->childrenCount()}}
+						<ul class='ipsList_inline ipsSpacer_bottom ipsSpacer_half ipsType_blendLinks'>
+							{{foreach $purchase->children( NULL ) as $child}}
+								<li>
+									<a href='{$child->acpUrl()}'>
+										{{if $child->cancelled}}
+											<i class='fa fa-times-circle' title="{lang="purchase_canceled"}" data-ipsTooltip></i>
+										{{elseif !$child->active}}
+											<i class='fa fa-exclamation-circle' title="{lang="purchase_expired"}" data-ipsTooltip></i>
+										{{else}}
+											<i class='fa fa-check'></i>
+										{{endif}}
+										{$child->name}
+									</a>
+								</li>
+							{{endforeach}}
+						</ul>
+					{{endif}}
+				</div>
+			</div>
+			{{if $purchase->custom_fields}}
+				<div class="ipsColumn ipsColumn_fluid">
+					<ul class="ipsDataList ipsDataList_reducedSpacing cNexusPurchaseInfoList ipsAreaBackground_reset">
+						{{foreach $purchase->custom_fields as $k => $v}}
+							{{try { $pfield = \IPS\nexus\Package\CustomField::load( $k ); } catch( \Exception $e ) { $pfield = NULL; } }}
+							{{if $pfield}}
+								<li class="ipsDataItem">
+									<span class="ipsDataItem_generic ipsDataItem_size6"><strong>{lang="nexus_pfield_{$k}"}</strong></span>
+									<span class="ipsDataItem_generic ipsContained ipsType_break">{expression="$pfield->displayValue( $v )" raw="true"}</span>
+								</li>
+							{{endif}}
+						{{endforeach}}
+					</ul>
+				</div>
+			{{endif}}
+		</div>
+	</div>
+{{endif}}
+
+
+<div class="ipsColumns ipsColumns_collapseTablet cNexusSupportRequest ipsSpacer_top">
+	<div class='ipsColumn ipsColumn_fluid'>
+		<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="support_responses"}</h2>
+		<section class='ipsBox'>
+			<div data-controller='nexus.admin.support.replyArea' class='cNexusSupportForm ipsAreaBackground ipsPad'>
+				<div class="ipsTabs ipsTabs_small ipsClearfix" id="elSupportForm" data-ipsTabBar data-ipsTabBar-contentArea="#elSupportForm_content">
+					<a href="#elSupportForm" data-action="expandTabs"><i class="fa fa-caret-down"></i></a>
+					<ul role="tablist">
+						<li>
+							<a href="#" id="elStaffForm" class="ipsTabs_item ipsType_center ipsTabs_activeItem" data-role='replyTab' role="tab" aria-selected="true">{lang="staff_reply"}</a>
+						</li>
+						<li>
+							<a href='#' id='elNoteForm' class='ipsTabs_item ipsType_center' data-role='noteTab' role="tab" aria-selected="false">{lang="staff_note"}</a>
+						</li>
+					</ul>
+				</div>
+				<div id="elSupportForm_content" class="ipsTabs_panels ipsTabs_contained ipsClearfix">
+					<div id="ipsTabs_elSupportForm_elStaffForm_panel" class="ipsTabs_panel ipsAreaBackground_reset ipsClearfix" aria-hidden="false" data-role="replyForm">
+						{$request->staffReplyForm()|raw}
+					</div>
+					<div id="ipsTabs_elSupportForm_elNoteForm_panel" class="ipsTabs_panel ipsAreaBackground_reset ipsClearfix" aria-hidden="false" data-role="noteForm">
+						{$request->noteForm()|raw}
+					</div>
+				</div>			
+			</div>
+			<div class='ipsPad ipsAreaBackground_light' data-controller='core.front.core.commentFeed' {{if settings.auto_polling_enabled}}data-autoPoll{{endif}} data-baseURL='{$request->acpUrl()}' data-feedID='request-{$request->id}'>
+				{{$order = isset( \IPS\Request::i()->order ) ? \IPS\Request::i()->order : ( isset( \IPS\Request::i()->cookie['support_replies_order'] ) ? \IPS\Request::i()->cookie['support_replies_order'] : 'desc' );}}
+				<div class="ipsType_right ipsType_small">
+					{{if $order === 'desc'}}
+						<a href='{expression="\IPS\Request::i()->url()->setQueryString( array( 'order' => 'asc', 'page' => 1 ) )"}' class=''>{lang="responses_asc"}</a> &middot; {lang="responses_desc"}
+					{{else}}
+						{lang="responses_asc"} &middot; <a href='{expression="\IPS\Request::i()->url()->setQueryString( array( 'order' => 'desc', 'page' => 1 ) )"}' class=''>{lang="responses_desc"}</a>
+					{{endif}}
+				</div>
+				<br>
+				{{if $request->commentPageCountIncludingNotes() > 1}}
+					<div class='ipsSpacer_bottom'>
+						{$request->commentPagination( array(), 'pagination', $request->commentPageCountIncludingNotes(), $request->acpUrl() )|raw}
+					</div>
+				{{endif}}
+				
+				<div data-controller='nexus.admin.support.multimod'>
+					<form action="{$request->acpUrl()->setQueryString('do', 'multimod')}" method="post" data-ipsPageAction data-role='moderationTools'>
+						<input type="hidden" name="csrfKey" value="{expression="\IPS\Session::i()->csrfKey"}">
+						{{foreach $request->repliesAndLog( $order ) as $comment}}
+							{{if $comment instanceof \IPS\nexus\Support\Reply}}
+								{$comment->html()|raw}
+							{{else}}
+								<p class='ipsType_reset ipsType_medium ipsSpacer_bottom cNexusSupportRequest_action'>
+									{{if $comment->action === 'status'}}
+										<i class='fa fa-tag'></i> &nbsp;&nbsp;{lang="reply_action_status" sprintf="$comment->member->name, $comment->new ? $comment->new->_title : '?'"}
+									{{elseif $comment->action === 'department'}}
+										<i class='fa fa-folder'></i> &nbsp;&nbsp;{lang="reply_action_moved" sprintf="$comment->member->name, $comment->new ? $comment->new->_title : '?'"}
+									{{elseif $comment->action === 'severity'}}
+										<i class='fa fa-exclamation'></i> &nbsp;&nbsp;{lang="reply_action_severity" sprintf="$comment->member->name, $comment->new ? $comment->new->_title : '?'"}
+									{{elseif $comment->action === 'purchase'}}
+										{{if $comment->new}}
+											{{$link = "<a href='{$comment->new->acpUrl()}'>{$comment->new->name}</a>";}}
+											<i class='fa fa-cube'></i> &nbsp;&nbsp;{lang="reply_action_associate" sprintf="$comment->member->name" htmlsprintf="$link"}
+										{{else}}
+											<i class='fa fa-minus-circle'></i> &nbsp;&nbsp;{lang="reply_action_unassociate" sprintf="$comment->member->name"}
+										{{endif}}
+									{{elseif $comment->action === 'staff'}}
+										{{if $comment->new}}
+											<i class='fa fa-user'></i> &nbsp;&nbsp;{lang="reply_action_assign" sprintf="$comment->member->name, $comment->new->name"}</a>
+										{{else}}
+											<i class='fa fa-minus-circle'></i> &nbsp;&nbsp;{lang="reply_action_unassign" sprintf="$comment->member->name"}
+										{{endif}}
+									{{elseif $comment->action === 'split_away'}}
+										{{if $comment->new}}
+											<i class='fa fa-expand'></i> &nbsp;&nbsp;{lang="reply_action_split_away_from" sprintf="$comment->member->name, $comment->new->acpUrl(), $comment->new->title"}
+										{{else}}
+											<i class='fa fa-expand'></i> &nbsp;&nbsp;{lang="reply_action_split_away" sprintf="$comment->member->name"}
+										{{endif}}
+									{{elseif $comment->action === 'split_new'}}
+										{{if $comment->old}}
+											<i class='fa fa-expand'></i> &nbsp;&nbsp;{lang="reply_action_split_new_to" sprintf="$comment->member->name, $comment->old->acpUrl(), $comment->old->title"}
+										{{else}}
+											<i class='fa fa-expand'></i> &nbsp;&nbsp;{lang="reply_action_split_new" sprintf="$comment->member->name"}
+										{{endif}}
+									{{elseif $comment->action === 'previous_request'}}
+										{{if $comment->old}}
+											<i class='fa fa-envelope-o'></i> &nbsp;&nbsp;{lang="reply_action_previous_request" sprintf="$comment->old->acpUrl(), $comment->old->title"}
+										{{elseif $comment->new}}
+											<i class='fa fa-envelope-o'></i> &nbsp;&nbsp;{lang="reply_action_previous_request_new" sprintf="$comment->new->acpUrl(), $comment->new->title"}
+										{{else}}
+											<i class='fa fa-envelope-o'></i> &nbsp;&nbsp;{lang="reply_action_previous_request_none"}
+										{{endif}}
+									{{elseif $comment->action === 'autoresolve_warning'}}
+										<i class='fa fa-tag'></i> &nbsp;&nbsp;{lang="reply_action_autoresolve_warning"}
+									{{elseif $comment->action === 'autoresolve'}}
+										<i class='fa fa-tag'></i> &nbsp;&nbsp;{lang="reply_action_autoresolve" sprintf="$comment->new ? $comment->new->_title : '?'"}
+									{{endif}}
+		
+									<span class='ipsType_light cNexusAdminSupportMessage_date'>{datetime="$comment->date"}</span>
+								</p>
+							{{endif}}
+						{{endforeach}}
+						<div class="ipsClearfix" data-role="pageActionOptions">
+							<div class="ipsPos_right">
+								<select name="modaction" data-role="moderationAction">
+									<option value="split" data-icon="expand">{lang="split"}</option>
+									<option value="delete" data-icon="trash">{lang="delete"}</option>
+								</select>
+								<button type="submit" class="ipsButton ipsButton_alternate ipsButton_verySmall">{lang="submit"}</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				{{if $request->commentPageCountIncludingNotes() > 1}}
+					<div class='ipsSpacer_top'>
+						{$request->commentPagination( array(), 'pagination', $request->commentPageCountIncludingNotes(), $request->acpUrl() )|raw}
+					</div>
+				{{endif}}
+			</div>
+		</section>
+	</div>
+	<div class='ipsColumn ipsColumn_veryWide cNexusSupportRequest_metaInfo'>
+		<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="support_info_customer"}</h2>
+		<div class='ipsPad ipsAreaBackground ipsSpacer_bottom'>
+			<div class="ipsAreaBackground_reset ipsPad ipsSpacer_bottom">
+				<div class='ipsType_center'>
+					
+					{{if $photo = $request->supportAuthor()->photo()}}
+						{{if $link = $request->supportAuthor()->url()}}
+							<a href="{$link}"><img src='{$photo}' class='ipsUserPhoto ipsUserPhoto_medium' alt=''></a>
+						{{else}}
+							<img src='{$photo}' class='ipsUserPhoto ipsUserPhoto_medium'>
+						{{endif}}
+					{{endif}}
+
+					<p class='ipsType_reset ipsType_break'>
+						<span class='ipsType_large'>
+							{{if $name = $request->supportAuthor()->name()}}
+								{{if $link = $request->supportAuthor()->url()}}
+									<strong><a href="{$link}">{$name}</a></strong>
+								{{else}}
+									<strong>{$name}</strong>
+								{{endif}}
+							{{else}}
+								<strong>{lang="request_member"}</strong>
+							{{endif}}
+						</span>
+					</p>
+					
+					{{if $meta = $request->supportAuthor()->meta()}}
+						<hr class='ipsHr'>
+						<ul class='ipsList_reset ipsType_medium'>
+							{{foreach $meta as $meta}}
+								<li>{$meta}</li>
+							{{endforeach}}
+						</ul>
+					{{endif}}
+					
+					{{if member.hasAcpRestriction( 'nexus', 'customers', 'customer_notes_view' ) and $request->member}}
+						<hr class='ipsHr'>
+						<p class='ipsType_reset ipsType_medium'>
+							{{if $noteCount = $request->supportAuthor()->noteCount()}}
+								<strong><a href='{url="app=nexus&module=customers&controller=view&id={$request->member}&view=notes&support={$request->id}"}' data-ipsDialog data-ipsDialog-title="{lang="customer_notes"}">{lang="num_customer_notes" pluralize="$noteCount"}</a></strong>
+							{{else}}
+								{lang="num_customer_notes" pluralize="0"}
+							{{endif}}
+							{{if member.hasAcpRestriction( 'nexus', 'customers', 'customer_notes_add' )}}
+								&nbsp;&nbsp;<a href='{url="app=nexus&module=customers&controller=view&id={$request->member}&do=noteForm&support={$request->id}"}' data-ipsDialog data-ipsDialog-title="{lang="add_note"}">{lang="add_note"}</a>
+							{{endif}}
+						</p>
+					{{endif}}
+
+					{{if ( $request->member && \IPS\Member::loggedIn()->hasAcpRestriction( 'core', 'members', 'member_login' ) AND !\IPS\Member::load( $request->member )->isBanned() )}}
+						<p class='ipsType_reset ipsType_medium'>
+							<a href='{url="app=core&module=members&controller=members&do=login&id={$request->member}"}' target='_blank'>{lang="sign_in_as_customer"}</a>
+						</p>
+					{{endif}}
+				</div>	
+			</div>
+			
+			{{$otherRequests = $request->supportAuthor()->supportRequests( 10, $request );}}
+			{{$invoices = member.hasAcpRestriction( 'nexus', 'payments', 'invoices_manage' ) ? $request->supportAuthor()->invoices() : NULL;}}
+			
+			{{if ( $otherRequests and $otherRequests->count() ) or ( $invoices and $invoices->count() )}}
+				<div class='ipsBox ipsSpacer_bottom'>
+					{{if ( $otherRequests and $otherRequests->count() ) and ( $invoices and $invoices->count() )}}
+						<div class="ipsTabs ipsTabs_small ipsTabs_stretch ipsClearfix" id="elRequestMeta" data-ipsTabBar data-ipsTabBar-contentArea="#elRequestMeta_content">
+							<a href="#elRequestMeta" data-action="expandTabs"><i class="fa fa-caret-down"></i></a>
+							<ul role="tablist">
+								{{if $otherRequests and count( $otherRequests )}}
+									<li>
+										<a href='#' id='elRequestHistory' class='ipsTabs_item ipsType_center' data-role='noteTab' role="tab" aria-selected="false">{lang="support_info_requests"} ({$otherRequests->count(TRUE)})</a>
+									</li>
+								{{endif}}
+								{{if $invoices and count( $invoices )}}
+									<li>
+										<a href='#' id='elInvoiceHistory' class='ipsTabs_item ipsType_center' data-role='noteTab' role="tab" aria-selected="false">{lang="support_info_invoices"} ({$invoices->count(TRUE)})</a>
+									</li>
+								{{endif}}
+							</ul>
+						</div>
+					{{endif}}
+					<div id="elRequestMeta_content" class="ipsTabs_panels ipsTabs_contained ipsClearfix">
+						{{if $otherRequests}}
+							<div id="ipsTabs_elRequestMeta_elRequestHistory_panel" class="ipsTabs_panel ipsAreaBackground_reset ipsClearfix" aria-hidden="false">
+								{{if !$invoices or !$invoices->count()}}
+									<h2 class="ipsType_sectionHead ipsType_large">{lang="support_info_requests"}</h2>
+								{{endif}}
+								<ul class='ipsDataList ipsDataList_reducedSpacing ipsList_reset'>
+									{{foreach $otherRequests as $otherRequest}}
+										<li class='ipsDataItem'>
+											<div class='ipsDataItem_main'>
+												{template="status" group="support" app="nexus" params="\IPS\nexus\Support\Status::load( $otherRequest->status->id ), 'ipsPos_right'"}
+												<a href="{$otherRequest->acpUrl()}" data-ipsDialog data-ipsDialog-title="{$otherRequest->title} (#{$otherRequest->id})" data-ipsDialog-url="{$otherRequest->acpUrl()->setQueryString( 'popup', $request->id )}" class='ipsDataItem_title'>{$otherRequest->title}</a>
+												<p class='ipsDataItem_meta ipsType_reset ipsType_small ipsType_light'>{datetime="$otherRequest->mapped('date')"}</p>
+											</div>
+										</li>
+									{{endforeach}}
+								</ul>
+								{{if $otherRequests->count( TRUE ) > 10}}
+									<div class="ipsType_center">
+										<a href="{url="app=nexus&module=support&controller=requests&member={$request->member}"}" class="ipsButton ipsButton_verySmall ipsButton_normal">{lang="see_all_support" pluralize="$otherRequests->count(TRUE)"}</a>
+									</div>
+								{{endif}}
+							</div>
+						{{endif}}
+						{{if member.hasAcpRestriction( 'nexus', 'payments', 'invoices_manage' ) and $invoices}}
+							<div id="ipsTabs_elRequestMeta_elInvoiceHistory_panel" class="ipsTabs_panel ipsAreaBackground_reset ipsClearfix" aria-hidden="false">
+								{{if !$otherRequests or !$otherRequests->count()}}
+									<h2 class="ipsType_sectionHead ipsType_large">{lang="support_info_invoices"}</h2>
+								{{endif}}
+								<ul class='ipsDataList'>
+									{{foreach $invoices as $invoice}}
+										<li class='ipsDataItem'>
+											<div class='ipsDataItem_main'>
+												<p class='ipsType_reset ipsType_normal'>
+													<a href="{$invoice->acpUrl()}"><span class='ipsType_light ipsType_medium'>#{$invoice->id}</span> {$invoice->title}</a>
+												</p>
+												<p class='ipsType_reset ipsType_medium'>
+													{template="status" group="invoices" params="$invoice->status"} &nbsp;&nbsp;<strong>{$invoice->total}</strong> &nbsp;&nbsp;<span class='ipsType_light'>{datetime="$invoice->date"}</span>
+												</p>
+											</div>
+										</li>
+									{{endforeach}}
+								</ul>
+								{{if $invoices->count(TRUE) > 10}}
+									<div class="ipsType_center">
+										<a href="{url="app=nexus&module=customers&controller=view&id={$request->member}&tab=invoices"}" class="ipsButton ipsButton_verySmall ipsButton_normal">{lang="see_all_invoices" pluralize="$invoices->count(TRUE)"}</a>
+									</div>
+								{{endif}}
+							</div>
+						{{endif}}
+					</div>
+				</div>
+			{{endif}}
+		</div>
+		
+		<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="support_related"}</h2>
+		<div class='ipsPad ipsAreaBackground ipsSpacer_bottom'>
+			{{if $customFields = $request->department->customFields()}}
+				{{$customFieldValues = $request->cfields;}}
+				<div class="ipsBox ipsPad_half">
+					<h2 class="ipsType_sectionHead ipsType_large">
+						{lang="support_additional_info"}
+					</h2>
+					&nbsp;&nbsp;<a href="{$request->acpUrl()->setQueryString( 'do', 'cfields' )}" data-ipsDialog data-ipsDialog-title="{lang="custom_support_fields"}" class="ipsType_small">({lang="edit"})</a>
+					<ul class='ipsList_reset ipsSpacer_top'>
+						{{foreach $customFields as $field}}
+							<li class='ipsSpacer_bottom ipsSpacer_half'>
+								<h4 class='ipsType_minorHeading'>{$field->_title}</h4>
+								<div class='ipsType_richText ipsType_medium ipsContained ipsType_break'>
+									{{if isset( $customFieldValues[ $field->id ] ) AND ( $customFieldValues[ $field->id ] OR $customFieldValues[ $field->id ] == '0' )}}
+										{$field->displayValue( $customFieldValues[ $field->id ] )|raw}
+									{{else}}
+										<em class="ipsType_light">{lang="no_value"}</em>
+									{{endif}}
+								</div>
+							</li>
+						{{endforeach}}
+					</ul>
+				</div>
+				<br>
+			{{endif}}
+			
+			{{if $ppiInvoice = $request->ppi_invoice}}
+				<div class="ipsBox ipsPad_half ipsSpacer_bottom">
+					<h2 class="ipsType_sectionHead ipsType_large">
+						{lang="ppi_invoice"}
+					</h2>
+					&nbsp;&nbsp;<a href="{$ppiInvoice->acpUrl()}" class="ipsType_small">({lang="view"})</a>
+					{{$summary = $ppiInvoice->summary();}}
+
+					<ul class='ipsDataList ipsDataList_reducedSpacing ipsSpacer_top ipsSpacer_half ipsPad_half'>
+						{{foreach $summary['items'] as $item}}
+							{{if !( $item instanceof \IPS\nexus\extensions\nexus\Item\CouponDiscount )}}
+								<li class='ipsDataItem'>
+									<div class='ipsDataItem_main ipsType_break ipsContained'>
+										<span class='ipsType_medium'>
+											{{if $item->quantity > 1}}<span class='ipsType_light'>{$item->quantity} x </span>{{endif}}
+											{$item->name}
+										</span>
+										{{if count( $item->details )}}
+											<br>
+											<span class="ipsType_light">
+												{{foreach $item->details as $k => $v}}
+													{lang="nexus_pfield_{$k}"}: {$v}<br>
+												{{endforeach}}
+											</span>
+										{{endif}}
+									</div>
+									<div class='ipsDataItem_generic ipsDataItem_size3 ipsType_right'>
+										<span class='cNexusPrice ipsType_normal'>{$item->linePrice()}</span>
+										{{if $item->quantity > 1}}
+											<p class='ipsType_reset ipsType_small ipsType_light'>{lang="each_short" sprintf="$item->price"}</p>
+										{{endif}}
+									</div>
+								</li>
+							{{endif}}
+						{{endforeach}}
+						{{foreach $summary['items'] as $item}}
+							{{if $item instanceof \IPS\nexus\extensions\nexus\Item\CouponDiscount}}
+								<li class='ipsDataItem cNexusCheckout_coupon'>
+									<div class='ipsDataItem_main ipsType_right'>
+										<strong>{lang="coupon"}</strong>
+									</div>
+									<div class='ipsDataItem_generic ipsDataItem_size3 ipsType_right cNexusPrice'>
+										{$item->linePrice()}
+									</div>
+								</li>
+							{{endif}}
+						{{endforeach}}	
+						<li class='ipsDataItem cNexusCheckout_subtotal'>
+							<div class='ipsDataItem_main ipsType_right'>
+								<strong>{lang="subtotal"}</strong>
+							</div>
+							<div class='ipsDataItem_generic ipsDataItem_size3 ipsType_right cNexusPrice'>
+								{$summary['subtotal']}
+							</div>
+						</li>
+						{{foreach $summary['tax'] as $tax}}
+							<li class='ipsDataItem'>
+								<div class='ipsDataItem_main ipsType_right'>
+									<strong>{$tax['name']} <span class='ipsType_light ipsType_unbold'>({expression="$tax['rate']*100"}%)</span></strong>
+								</div>
+								<div class='ipsDataItem_generic ipsDataItem_size3 ipsType_right cNexusPrice'>
+									{$tax['amount']}
+								</div>
+							</li>
+						{{endforeach}}
+						<li class='ipsDataItem ipsType_large cNexusCheckout_subtotal'>
+							<div class='ipsDataItem_main ipsType_right'>
+								<strong>{lang="total"}</strong>
+							</div>
+							<div class='ipsDataItem_generic ipsDataItem_size3 ipsType_right cNexusPrice'>
+								<strong>{$summary['total']}</strong>
+							</div>
+						</li>
+					</ul>
+				</div>
+			{{endif}}
+			
+			<div class="ipsBox ipsPad_half">
+				<h2 class="ipsType_sectionHead ipsType_large">
+					{lang="viewed_by"}
+				</h2>
+				{{foreach $request->staffViews() as $view}}
+					<div class='ipsPad_half ipsPhotoPanel ipsPhotoPanel_tiny ipsClearfix'>
+						<img src='{member="photo" id="$view['view_member']"}' class='ipsUserPhoto ipsUserPhoto_tiny ipsPos_left' alt=''>
+						<div>
+							<strong>{member="name" id="$view['view_member']"}</strong>
+
+							<ul class='ipsList_inline ipsType_small'>
+								{{if $view['view_reply']}}
+									<li><i class='fa fa-mail-reply'></i> {datetime="$view['view_reply']"}</li>
+								{{endif}}
+								<li {{if $view['view_last'] !== $view['view_first']}}data-ipsTooltip title="{lang="view_first"} {datetime="$view['view_first']" norelative="true"}"{{endif}}><i class='fa fa-eye'></i> {datetime="$view['view_last']"}</li>
+							</ul>
+						</div>
+					</div>
+				{{endforeach}}
+			</div>
+		</div>
+	</div>
+</div>

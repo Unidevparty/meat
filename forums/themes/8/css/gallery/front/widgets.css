@@ -1,0 +1,52 @@
+.cGalleryWidget {
+	margin-bottom: 5px;
+}
+
+html[dir="ltr"] .ipsWidget .cGalleryWidget .cGalleryWidgetInfo
+{
+	padding-right: 35px;
+}
+
+	.ipsWidget.ipsWidget_horizontal .cGalleryWidget .cGalleryWidgetInfo
+	{
+		max-width: 175px;
+	}
+
+	.cGalleryWidget > div:first-child {
+		margin-bottom: 5px;
+		background: #fff;
+	}
+
+	.ipsWidget.ipsWidget_vertical .cGalleryWidget .ipsImage {
+		max-height: 175px;
+	}
+
+	.ipsWidget.ipsWidget_horizontal .cGalleryWidget .ipsImage {
+		max-height: 145px;
+		margin-bottom: 5px;
+	}
+
+	.cGalleryWidget .ipsNoThumb {
+		display: block;
+	}
+
+	.cGalleryWidget_verticalThumb {
+		height: 100px;
+	}
+
+	.cGalleryWidget .ipsCommentCount {
+		margin:0;
+		margin-right: -40px;
+	}
+
+.cGalleryWidgetList > li {
+	border-bottom: 1px solid #ebebeb;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+	.cGalleryWidgetList > li:last-child {
+		padding-bottom: 0;
+		margin-bottom: 0;
+		border: 0;
+	}

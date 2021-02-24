@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<versions>
+    <version>
+        <human>1.0 Alpha 1</human>
+        <long>10000</long>
+    </version>
+    <version>
+        <human>1.0 Alpha 2</human>
+        <long>10001</long>
+    </version>
+	<version>
+        <human>1.0 Alpha 3</human>
+        <long>10002</long>
+    </version>
+    <version>
+        <human>1.0 Alpha 4</human>
+        <long>10003</long>
+    </version>
+    <version>
+        <human>1.0 Alpha 5</human>
+        <long>10004</long>
+    </version>
+    <version>
+        <human>1.0 Alpha 6</human>
+        <long>10005</long>
+    </version>
+     <version>
+        <human>1.0 Beta 1</human>
+        <long>10006</long>
+    </version>
+    <version>
+        <human>1.0 Beta 2</human>
+        <long>10007</long>
+    </version>
+    <version>
+        <human>1.0 Beta 3</human>
+        <long>10008</long>
+    </version>
+    <version>
+        <human>1.0 Beta 4</human>
+        <long>10009</long>
+    </version>
+     <version>
+        <human>1.0 Beta 5</human>
+        <long>10010</long>
+    </version>
+    <version>
+        <human>1.0 Beta 6</human>
+        <long>10011</long>
+    </version>
+    <version>
+        <human>1.0 Beta 7</human>
+        <long>10012</long>
+    </version>
+    <version>
+        <human>1.0 Beta 8</human>
+        <long>10013</long>
+    </version>
+    <version>
+        <human>1.0.0</human>
+        <long>10014</long>
+    </version>
+    <version>
+        <human>1.0.1</human>
+        <long>10015</long>
+    </version>
+    <version>
+        <human>1.0.2</human>
+        <long>10016</long>
+    </version>
+    <version>
+        <human>1.0.3</human>
+        <long>10017</long>
+    </version>
+    <version>
+        <human>1.1.0 Alpha 1</human>
+        <long>10100</long>
+    </version>
+     <version>
+        <human>1.1.0 Alpha 2</human>
+        <long>10101</long>
+    </version>
+    <version>
+        <human>1.1.0 Alpha 3</human>
+        <long>10102</long>
+    </version>
+    <version>
+        <human>1.1.0 Alpha 4</human>
+        <long>10103</long>
+    </version>
+    <version>
+        <human>1.1.0 Alpha 5</human>
+        <long>10104</long>
+    </version>
+    <version>
+        <human>1.1.0 Beta 1</human>
+        <long>10105</long>
+    </version>
+    <version>
+        <human>1.1.0</human>
+        <long>11000</long>
+    </version>
+    <version>
+        <human>1.1.1</human>
+        <long>11001</long>
+    </version>
+    <version>
+        <human>1.1.2</human>
+        <long>11002</long>
+    </version>
+    <version>
+        <human>1.1.3</human>
+        <long>11003</long>
+    </version>
+    <version>
+        <human>1.2 Alpha 1</human>
+        <long>11100</long>
+    </version>
+    <version>
+        <human>1.2 Alpha 2</human>
+        <long>11101</long>
+    </version>
+    <version>
+        <human>1.2 Alpha 3</human>
+        <long>11102</long>
+    </version>
+    <version>
+        <human>1.2 Alpha 4</human>
+        <long>11103</long>
+    </version>
+    <version>
+        <human>1.2 Beta 1</human>
+        <long>11104</long>
+    </version>
+    <version>
+        <human>1.2 Beta 2</human>
+        <long>11105</long>
+    </version>
+    <version>
+        <human>1.2 Beta 3</human>
+        <long>11106</long>
+    </version>
+    <version>
+        <human>1.2 Beta 4</human>
+        <long>11107</long>
+    </version>
+    <version>
+        <human>1.2 Beta 5</human>
+        <long>11108</long>
+    </version>
+    <version>
+        <human>1.2.0</human>
+        <long>11109</long>
+    </version>
+    <version>
+        <human>1.2.1</human>
+        <long>12001</long>
+    </version>
+    <version>
+        <human>1.2.2</human>
+        <long>12002</long>
+    </version>
+    <version>
+        <human>1.3.0 Alpha 1</human>
+        <long>12100</long>
+    </version>
+    <version>
+        <human>1.3.0</human>
+        <long>13000</long>
+    </version>
+    <version>
+        <human>1.3.0 Beta 2</human>
+        <long>13001</long>
+    </version>
+	<version>
+		<human>1.3.0</human>
+		<long>13002</long>
+	</version>
+	<version>
+		<human>1.3.1</human>
+		<long>13003</long>
+	</version>
+	<version>
+		<human>1.3.2</human>
+		<long>13004</long>
+	</version>
+	<version>
+		<human>1.4.0 Beta 1</human>
+		<long>14000</long>
+	</version>
+	<version>
+		<human>1.4.0 Beta 2</human>
+		<long>14001</long>
+	</version>
+	<version>
+		<human>1.4.0</human>
+		<long>14002</long>
+	</version>
+	<version>
+		<human>1.4.1</human>
+		<long>14003</long>
+	</version>
+	<version>
+		<human>1.4.2</human>
+		<long>14004</long>
+	</version>
+	<version>
+		<human>1.5.0 Alpha 1</human>
+		<long>15000</long>
+	</version>
+	<version>
+		<human>1.5.0 Alpha 2</human>
+		<long>15001</long>
+	</version>
+	<version>
+		<human>1.5.0 Alpha 3</human>
+		<long>15002</long>
+	</version>
+	<version>
+		<human>1.5.0 Beta 1</human>
+		<long>15003</long>
+	</version>
+	<version>
+		<human>1.5.0 Beta 2</human>
+		<long>15004</long>
+	</version>
+	<version>
+		<human>1.5.0</human>
+		<long>15005</long>
+	</version>
+	<version>
+		<human>1.5.1</human>
+		<long>15006</long>
+	</version>
+	<version>
+		<human>1.5.2</human>
+		<long>15007</long>
+	</version>
+	<version>
+		<human>1.5.3</human>
+		<long>15008</long>
+	</version>
+	<version>
+		<human>1.5.4</human>
+		<long>15009</long>
+	</version>
+	<version>
+		<human>1.5.5</human>
+		<long>15010</long>
+	</version>
+	<version>
+		<human>1.5.6</human>
+		<long>15011</long>
+	</version>
+	<version>
+		<human>1.5.7</human>
+		<long>15012</long>
+	</version>
+	<version>
+		<human>1.5.8</human>
+		<long>15013</long>
+	</version>
+	<version>
+		<human>1.5.9</human>
+		<long>15014</long>
+	</version>
+</versions>

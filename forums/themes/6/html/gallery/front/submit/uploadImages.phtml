@@ -1,0 +1,31 @@
+<ips:template parameters="$form, $category" />
+
+<div class='cGallerySubmit_uploadImages ipsPad_double' data-controller='gallery.front.submit.uploadImages'>
+	{{if $form->error}}
+		<div class="ipsMessage ipsMessage_error ipsSpacer_bottom">
+			{$form->error}
+		</div>
+	{{endif}}
+	<form accept-charset='utf-8' method="post" action="{$form->action}" id='elGallerySubmit' enctype="multipart/form-data">
+		<div class='cGallerySubmit_uploadForm ipsPad_double'>
+			<input type="hidden" name="{$form->id}_submitted" value="1">
+			{{foreach $form->hiddenValues as $k => $v}}
+				<input type="hidden" name="{$k}" value="{$v}">
+			{{endforeach}}
+
+			<div id='elGallerySubmit_imageUploader' class='ipsClear'>
+				{$form->elements['']['images']->html( $form )|raw}
+				{{if $form->elements['']['images']->error}}
+					<br>
+					<span class="ipsType_warning">{lang="$form->elements['']['images']->error"}</span>
+				{{endif}}
+				<button type='button' class='ipsButton ipsButton_veryLight ipsButton_verySmall ipsHide' data-action='uploadMore'>{lang="upload_more_images"}</button>
+			</div>
+		</div>
+
+		<div class='cGallerySubmit_bottomBar ipsAreaBackground_light ipsPad ipsClearfix ipsType_right'>
+			<span data-role='imageErrors' class='ipsHide ipsType_negative'><i class='fa fa-warning'></i> {lang="files_had_errors"}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<button type='submit' class='ipsButton ipsButton_large ipsButton_primary' data-role='submitForm'>{lang="continue"}</button>
+		</div>
+	</form>
+</div>

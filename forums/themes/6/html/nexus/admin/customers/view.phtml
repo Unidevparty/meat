@@ -1,0 +1,308 @@
+<ips:template parameters="$customer, $notes, $noteCount, $primaryBillingAddress, $cards, $cardCount, $parents, $alternativeContacts, $altContactCount, $purchases, $purchaseCount, $invoices, $invoiceCount, $history, $referredBy, $refers, $referCount, $support, $supportCount, $sparkline, $purchaseRootCount, $billingAgreements, $billingAgreementsCount, $addressCount" />
+
+<div class='ipsColumns ipsColumns_collapsePhone'>
+	<div class='ipsColumn ipsColumn_wide'>
+		<div class='ipsAreaBackground_light ipsPad'>
+			<div class='ipsType_center'>
+				{template="userPhoto" group="global" app="core" params="$customer, 'large'"}
+			</div>
+
+			<div class='ipsSpacer_top'>
+				<p class='ipsType_reset ipsType_normal ipsType_center'><strong>{$customer->email}</strong></p>
+				<p class='ipsType_reset ipsType_medium ipsType_center'>{lang="customer_since" htmlsprintf="$customer->joined->html()"}</p>
+				<p class='ipsType_reset ipsType_normal ipsType_center'>{$customer->groupName|raw}</p>
+
+				{{if $referredBy}}
+					<p class='ipsType_medium ipsType_center ipsType_light ipsType_blendLinks'>
+						{lang="referred_by"} <a href='{$referredBy->acpUrl()}' title='{$referredBy->email}'>{$referredBy->cm_name}</a>
+					</p>
+				{{endif}}
+
+				<ul class='ipsToolList ipsToolList_vertical ipsSpacer_top'>
+					{{if \IPS\Member::loggedIn()->hasAcpRestriction( 'nexus', 'payments', 'invoices_add' )}}
+						<li><a href='{url="app=nexus&module=payments&controller=invoices&do=generate&member={$customer->member_id}&_new=1"}' class='ipsButton ipsButton_primary ipsButton_fullWidth ipsButton_small'>{lang="add_invoice"}</a></li>
+					{{endif}}
+					<li><a href='{url="app=nexus&module=support&controller=requests&do=create&member={$customer->member_id}"}&_new=1' class='ipsButton ipsButton_primary ipsButton_fullWidth ipsButton_small'>{lang="customer_new_request"}</a></li>
+				</ul>
+
+				<hr class='ipsHr'>
+
+				{{foreach \IPS\nexus\Money::currencies() as $currency}}
+					<div class='ipsAreaBackground{{if isset( $customer->cm_credits[ $currency ] ) && $customer->cm_credits[ $currency ]->amount->isGreaterThanZero()}}_positive{{endif}} ipsPad_half ipsType_center ipsType_large cCustomerCredit'>
+						<h2 class='ipsType_reset ipsType_minorHeading'>{lang="client_credit"}</h2>
+						{{if isset( $customer->cm_credits[ $currency ] )}}
+							{$customer->cm_credits[ $currency ]}
+						{{else}}
+							{money="0" currency="$currency"}
+						{{endif}}
+						{{if member.hasAcpRestriction( 'nexus', 'customers', 'customers_edit_credit' )}}
+							<p class='ipsType_reset'><a href='{$customer->acpUrl()->setQueryString( 'do', 'credits' )}' data-ipsDialog data-ipsDialog-title='{lang="edit_credit"}' data-ipsDialog-size='narrow' class='ipsType_small'>{lang="edit"}</a></p>
+						{{endif}}
+					</div>
+				{{endforeach}}			
+
+				<hr class='ipsHr'>
+
+				<h2 class='ipsType_sectionHead ipsType_large'><strong>{lang="primary_address"}</strong></h2>
+				{{if $primaryBillingAddress}}
+					<p class='ipsType_reset ipsType_medium ipsSpacer_top ipsSpacer_half'>
+						{$primaryBillingAddress->toString('<br>')|raw}
+					</p>
+				{{else}}
+					<p class='ipsType_reset ipsType_medium ipsSpacer_top ipsSpacer_half ipsType_light'>
+						{lang="no_primary_address"}
+					</p>
+				{{endif}}
+				<p class='ipsType_reset'>
+					<a href='{url="app=nexus&module=customers&controller=view&view=addresses&id={$customer->member_id}"}' data-ipsDialog data-ipsDialog-title='{lang="customer_addresses"}' class='ipsType_small'>{lang="edit_addresses_count" sprintf="$addressCount"}</a>
+				</p>
+
+				{{if count( \IPS\nexus\Customer\CustomField::roots() or member.hasAcpRestriction( 'nexus', 'customers', 'customers_edit_details' ))}}
+					<hr class='ipsHr'>
+					<h2 class='ipsType_sectionHead ipsType_large ipsSpacer_bottom ipsSpacer_half'><strong>{lang="customer_information"}</strong></h2>
+					{{if member.hasAcpRestriction( 'nexus', 'customers', 'customers_edit_details' )}}
+						<p class='ipsType_reset ipsSpacer_bottom ipsSpacer_half'>
+							<a href='{$customer->acpUrl()->setQueryString( 'do', 'edit' )}' class='ipsType_small' data-ipsDialog data-ipsDialog-title='{lang="edit_customer_info"}'>{lang="edit_information"}</a>
+						</p>
+					{{endif}}					
+					{{foreach \IPS\nexus\Customer\CustomField::roots() as $field}}
+						{{$column = $field->column;}}
+						{{if $field->displayValue( $customer->$column )}}
+							<div class="ipsSpacer_bottom ipsSpacer_half">
+								<h2 class='ipsType_reset ipsType_minorHeading'>{$field->_title}</h2>
+								<p class='ipsType_reset ipsType_medium'>
+									{$field->displayValue( $customer->$column )|raw}
+								</p>
+							</div>
+						{{endif}}
+					{{endforeach}}
+				{{endif}}			
+				
+				{{if settings.security_questions_enabled and member.hasAcpRestriction( 'core', 'members', 'member_mfa' )}}
+					<hr class='ipsHr'>
+					<h2 class='ipsType_sectionHead ipsType_large ipsSpacer_bottom ipsSpacer_half'><strong>{lang="member__core_SecurityAnswers"}</strong></h2>
+					{{$answers = $customer->securityAnswers();}}
+					{{if count( $answers )}}
+						{{foreach $answers as $questionId => $answer}}
+							<div class="ipsSpacer_bottom ipsSpacer_half">
+								<h2 class='ipsType_reset ipsType_minorHeading'>{lang="security_question_{$questionId}"}</h2>
+								<p class='ipsType_reset ipsType_medium'>
+									{expression="\IPS\Text\Encrypt::fromTag( $answer )->decrypt()"}
+								</p>
+							</div>
+						{{endforeach}}
+					{{else}}
+						<p class='ipsType_reset ipsType_medium'>
+							{lang="nexus_no_security_answers"}
+						</p>
+					{{endif}}
+				{{endif}}
+			</div>
+		</div>
+	</div>
+	<div class='ipsColumn ipsColumn_fluid'>
+		{{if count( $parents )}}
+			<div class='ipsSpacer_bottom'>
+				{{foreach $parents as $parent}}
+					<div class='ipsPhotoPanel ipsPhotoPanel_mini ipsPad_half ipsClearfix' data-role='result'>
+						<a href='{$parent->acpUrl()}' class='ipsPos_left'>{template="userPhoto" app="core" group="global" params="$parent, 'mini'"}</a>
+						<div>
+							<h2 class='ipsType_large ipsType_reset'>{lang="alt_contact_for"} <a href='{$parent->acpUrl()}'>{$parent->cm_name}</a></h2>
+							<p class='ipsType_reset ipsType_normal'>{$parent->email}</p>
+						</div>
+					</div>
+				{{endforeach}}
+			</div>
+		{{endif}}	
+
+
+		<div class='ipsGrid ipsGrid_collapsePhone ipsPad ipsAreaBackground_light ipsSpacer_bottom'>
+			<div class='ipsGrid_span2'>
+				<div id='elCustomerIncome'>{$sparkline|raw}</div>
+			</div>
+			<div class='ipsGrid_span10'>
+				<div class='ipsGrid ipsGrid_collapsePhone cCustomerStanding_grid' data-controller="nexus.admin.customer.stats" data-standingUrl="{$customer->acpUrl()->setQueryString( 'do', 'standing' )}">
+					{{$first = TRUE;}}
+					{{foreach \IPS\nexus\Money::currencies() as $currency}}
+						<div class="ipsGrid_span3">
+							<h3 class='ipsType_reset ipsType_minorHeading ipsTruncate ipsTruncate_line'>{lang="total_spent_currency" sprintf="$currency"}</h3>
+							{{if $first}}
+								<img src="{resource="tiny_loading.gif" app="core"}" class="ipsSpacer_top ipsSpacer_half">
+								{{$first = FALSE;}}
+							{{endif}}
+						</div>
+						<div class="ipsGrid_span3">
+							<h3 class='ipsType_reset ipsType_minorHeading ipsTruncate ipsTruncate_line'>{lang="average_spend_currency" sprintf="$currency"}</h3>
+						</div>
+					{{endforeach}}
+					<div class="ipsGrid_span3">
+						<h3 class='ipsType_reset ipsType_minorHeading ipsTruncate ipsTruncate_line'>{lang="average_time_to_pay"}</h3>
+					</div>
+					<div class="ipsGrid_span3">
+						<h3 class='ipsType_reset ipsType_minorHeading ipsTruncate ipsTruncate_line'>{lang="average_monthly_support_requests"}</h3>
+					</div>
+				</div>	
+			</div>
+		</div>
+
+
+		<h2 class='acpBlock_title acpBlock_titleDark acpBlock_titleSmall ipsType_reset'>{lang="customer_data"}</h2>
+		<div class='ipsAreaBackground_light ipsGrid ipsGrid_collapsePhone cCustomerOther'>
+			<div class='ipsGrid_span4 ipsPad ipsType_blendLinks'>
+				<div class='ipsPhotoPanel ipsPhotoPanel_tiny'>
+					<span class='ipsPos_left ipsType_center cCustomerOther_icon {{if !$noteCount}}ipsType_light{{endif}}'>
+						<i class='fa fa-file-text-o'></i>
+					</span>
+					<div>
+						<h3 class='ipsType_sectionHead ipsType_large ipsTruncate ipsTruncate_line {{if !$noteCount}}ipsType_light{{endif}}'>{{if $noteCount}}<strong>{{endif}}{lang="num_customer_notes_uc" pluralize="$noteCount"}{{if $noteCount}}</strong>{{endif}}</h3>
+						{$notes|raw}
+						<p class='ipsType_reset ipsSpacer_top ipsSpacer_half'>
+							<a href='{url="app=nexus&module=customers&controller=view&view=notes&id={$customer->member_id}"}' data-ipsDialog data-ipsDialog-title='{lang="customer_notes"}' class='ipsButton ipsButton_light ipsButton_verySmall ipsButton_fullWidth'>
+								{lang="manage_notes"} <i class='fa fa-caret-down'></i>
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			{{if count( \IPS\nexus\Gateway::cardStorageGateways() )}}
+				<div class='ipsGrid_span4 ipsPad ipsType_blendLinks'>
+					<div class='ipsPhotoPanel ipsPhotoPanel_tiny'>
+						<span class='ipsPos_left ipsType_center cCustomerOther_icon {{if !$cardCount}}ipsType_light{{endif}}'>
+							<i class='fa fa-credit-card'></i>
+						</span>
+						<div>
+							<h3 class='ipsType_sectionHead ipsType_large ipsTruncate ipsTruncate_line {{if !$cardCount}}ipsType_light{{endif}}'>{{if $cardCount}}<strong>{{endif}}{lang="num_credit_card" pluralize="$cardCount"}{{if $cardCount}}</strong>{{endif}}</h3>
+							{$cards|raw}
+							<p class='ipsType_reset ipsSpacer_top ipsSpacer_half'>
+								<a href='{url="app=nexus&module=customers&controller=view&view=cards&id={$customer->member_id}"}' data-ipsDialog data-ipsDialog-title='Credit Cards' class='ipsButton ipsButton_light ipsButton_verySmall ipsButton_fullWidth'>
+									{lang="manage_credit_cards"} <i class='fa fa-caret-down'></i>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			{{endif}}
+			{{if count( \IPS\nexus\Gateway::billingAgreementGateways() )}}
+				<div class='ipsGrid_span4 ipsPad ipsType_blendLinks'>
+					<div class='ipsPhotoPanel ipsPhotoPanel_tiny'>
+						<span class='ipsPos_left ipsType_center cCustomerOther_icon {{if !$billingAgreementsCount}}ipsType_light{{endif}}'>
+							<i class='fa fa-paypal'></i>
+						</span>
+						<div>
+							<h3 class='ipsType_sectionHead ipsType_large ipsTruncate ipsTruncate_line {{if !$billingAgreementsCount}}ipsType_light{{endif}}'>{{if $billingAgreementsCount}}<strong>{{endif}}{lang="num_billing_agreements" pluralize="$billingAgreementsCount"}{{if $billingAgreementsCount}}</strong>{{endif}}</h3>
+							{$billingAgreements|raw}
+							<p class='ipsType_reset ipsSpacer_top ipsSpacer_half'>
+								<a href='{url="app=nexus&module=customers&controller=view&view=billingagreements&id={$customer->member_id}"}' data-ipsDialog data-ipsDialog-title='{lang="billing_agreements"}' class='ipsButton ipsButton_light ipsButton_verySmall ipsButton_fullWidth'>
+									{lang="manage_billing_agreements"} <i class='fa fa-caret-down'></i>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			{{endif}}
+			{{if count( \IPS\nexus\Gateway::cardStorageGateways() ) and count( \IPS\nexus\Gateway::billingAgreementGateways() )}}
+			</div>
+			<div class='ipsAreaBackground_light ipsGrid ipsGrid_collapsePhone cCustomerOther'>
+			{{endif}}
+			<div class='ipsGrid_span4 ipsPad ipsType_blendLinks'>
+				<div class='ipsPhotoPanel ipsPhotoPanel_tiny'>
+					<span class='ipsPos_left ipsType_center cCustomerOther_icon {{if !$altContactCount}}ipsType_light{{endif}}'>
+						<i class='fa fa-user'></i>
+					</span>
+					<div>
+						<h3 class='ipsType_sectionHead ipsType_large ipsTruncate ipsTruncate_line {{if !$altContactCount}}ipsType_light{{endif}}'>{{if $altContactCount}}<strong>{{endif}}{lang="num_alternate_contacts" pluralize="$altContactCount"}{{if $altContactCount}}</strong>{{endif}}</h3>
+						{$alternativeContacts|raw}	
+						<p class='ipsType_reset ipsSpacer_top ipsSpacer_half'>
+							<a href='{url="app=nexus&module=customers&controller=view&view=alternatives&id={$customer->member_id}"}' data-ipsDialog data-ipsDialog-title='{lang="client_alternatives"}' class='ipsButton ipsButton_light ipsButton_verySmall ipsButton_fullWidth'>
+								{lang="manage_contacts"} <i class='fa fa-caret-down'></i>
+							</a>
+						</p>					
+					</div>
+				</div>
+			</div>
+			{{if count( \IPS\nexus\Gateway::cardStorageGateways() ) xor count( \IPS\nexus\Gateway::billingAgreementGateways() )}}
+			</div>
+			<div class='ipsAreaBackground_light ipsGrid ipsGrid_collapsePhone cCustomerOther'>
+			{{endif}}
+			<div class='ipsGrid_span4 ipsPad ipsType_blendLinks'>
+				<div class='ipsPhotoPanel ipsPhotoPanel_tiny'>
+					<span class='ipsPos_left ipsType_center cCustomerOther_icon {{if !$referCount}}ipsType_light{{endif}}'>
+						<i class='fa fa-retweet'></i>
+					</span>
+					<div>
+						<h3 class='ipsType_sectionHead ipsType_large ipsTruncate ipsTruncate_line {{if !$referCount}}ipsType_light{{endif}}'>{{if $referCount}}<strong>{{endif}}{lang="num_refer_count" pluralize="$referCount"}{{if $referCount}}</strong>{{endif}}</h3>
+						{$refers|raw}
+						<p class='ipsType_reset ipsSpacer_top ipsSpacer_half'>
+							<a href='{url="app=nexus&module=customers&controller=view&view=referrals&id={$customer->member_id}"}' data-ipsDialog data-ipsDialog-title='{lang="referrals"}' class='ipsButton ipsButton_light ipsButton_verySmall ipsButton_fullWidth'>
+								{lang="manage_referrals"} <i class='fa fa-caret-down'></i>
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr class='ipsHr'>
+
+		<div class='ipsGrid ipsGrid_collapsePhone'>
+			<div class='ipsGrid_span6'>
+				<h2 class='acpBlock_title acpBlock_titleDark acpBlock_titleSmall ipsType_reset'>{lang="account_items"}</h2>
+				<div class='ipsTabs ipsTabs_stretch ipsClearfix ipsJS_show acpFormTabBar' id='tabs_customer' data-ipsTabBar data-ipsTabBar-contentArea='#ipsTabs_content_customer'>
+					<a href='#tabs_customer' data-action='expandTabs'><i class='fa fa-caret-down'></i></a>
+					<ul role='tablist'>
+						<li class='ipsType_center'>
+							<a href='{$customer->acpUrl()->setQueryString('tab', 'purchases')}' id='customer_tab_purchases' class="ipsTabs_item {{if request.tab == 'purchases'}}ipsTabs_activeItem{{endif}}" role="tab" aria-selected="true">
+								{lang="purchases"}
+								({$purchaseCount})
+							</a>
+						</li>
+						<li class='ipsType_center'>
+							<a href='{$customer->acpUrl()->setQueryString('tab', 'invoices')}' id='customer_tab_invoices' class="ipsTabs_item {{if request.tab == 'invoices'}}ipsTabs_activeItem{{endif}}" role="tab" aria-selected="false">
+								{lang="menu__nexus_payments_invoices"}
+								({$invoiceCount})
+							</a>
+						</li>
+						<li class='ipsType_center'>
+							<a href='{$customer->acpUrl()->setQueryString('tab', 'support')}' id='customer_tab_support' class="ipsTabs_item {{if request.tab == 'support'}}ipsTabs_activeItem{{endif}}" role="tab" aria-selected="false">
+								{lang="support"}
+								({$supportCount})
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div id='ipsTabs_content_customer' class='acpFormTabContent'>
+					<div id='ipsTabs_tabs_customer_customer_tab_purchases_panel' class="ipsTabs_panel" aria-labelledby="customer_tab_purchases" aria-hidden="false">
+						{$purchases|raw}
+						{{if $purchaseRootCount > $purchases->rootsPerPage}}
+							<div class="ipsType_center ipsAreaBackground_light ipsPad">
+								<a href="{url="app=nexus&module=customers&controller=view&do=purchaseList&id={$customer->member_id}"}" class="ipsButton ipsButton_verySmall ipsButton_normal">{lang="see_all_purchases" pluralize="$purchaseCount"}</a>
+							</div>
+						{{endif}}
+					</div>
+					<div id='ipsTabs_tabs_customer_customer_tab_invoices_panel' class="ipsTabs_panel" aria-labelledby="customer_tab_invoices" aria-hidden="false">
+						{$invoices|raw}
+						{{if $invoiceCount > $invoices->limit}}
+							<div class="ipsType_center ipsAreaBackground_light ipsPad">
+								<a href="{url="app=nexus&module=payments&controller=invoices&member={$customer->member_id}"}" class="ipsButton ipsButton_verySmall ipsButton_normal">{lang="see_all_invoices" pluralize="$invoiceCount"}</a>
+							</div>
+						{{endif}}
+					</div>
+					<div id='ipsTabs_tabs_customer_customer_tab_support_panel' class="ipsTabs_panel" aria-labelledby="customer_tab_support" aria-hidden="false">
+						{$support|raw}
+						{{if $supportCount > 15}}
+							<div class="ipsType_center ipsAreaBackground_light ipsPad">
+								<a href="{url="app=nexus&module=support&controller=requests&member={$customer->member_id}"}" class="ipsButton ipsButton_verySmall ipsButton_normal">{lang="see_all_support" pluralize="$supportCount"}</a>
+							</div>
+						{{endif}}
+					</div>
+				</div>
+			</div>
+			<div class='ipsGrid_span6'>
+				<h2 class='acpBlock_title acpBlock_titleDark acpBlock_titleSmall ipsType_reset'>{lang="recent_account_activity"}</h2>
+				<div class='ipsAreaBackground_light ipsPad'>
+					{$history|raw}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

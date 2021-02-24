@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Packages</grouptitle>
+		<grouplang>stock_packages</grouplang>
+		<items>
+			<item>
+				<key>packages_view</key>
+				<string>Can view packages?</string>
+			</item>
+			<item>
+				<key>packages_edit</key>
+				<string>Can edit packages and groups?</string>
+			</item>
+			<item>
+				<key>packages_add</key>
+				<string>Can add new packages and groups?</string>
+			</item>
+			<item>
+				<key>packages_delete</key>
+				<string>Can delete packages?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Custom Package Fields</grouptitle>
+		<grouplang>stock_cfields</grouplang>
+		<items>
+			<item>
+				<key>cfields_view</key>
+				<string>Can view custom package fields?</string>
+			</item>
+			<item>
+				<key>cfields_edit</key>
+				<string>Can edit custom package fields?</string>
+			</item>
+			<item>
+				<key>cfields_add</key>
+				<string>Can add new custom package fields?</string>
+			</item>
+			<item>
+				<key>cfields_delete</key>
+				<string>Can delete custom package fields?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Tax Classes</grouptitle>
+		<grouplang>stock_tax</grouplang>
+		<items>
+			<item>
+				<key>tax_view</key>
+				<string>Can view tax classes?</string>
+			</item>
+			<item>
+				<key>tax_edit</key>
+				<string>Can edit tax classes?</string>
+			</item>
+			<item>
+				<key>tax_add</key>
+				<string>Can add new tax classes?</string>
+			</item>
+			<item>
+				<key>tax_delete</key>
+				<string>Can delete tax classes?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Shipping Methods</grouptitle>
+		<grouplang>stock_shipping</grouplang>
+		<items>
+			<item>
+				<key>shipping_view</key>
+				<string>Can view shipping methods?</string>
+			</item>
+			<item>
+				<key>shipping_edit</key>
+				<string>Can edit shipping methods?</string>
+			</item>
+			<item>
+				<key>shipping_add</key>
+				<string>Can add new shipping methods?</string>
+			</item>
+			<item>
+				<key>shipping_delete</key>
+				<string>Can delete shipping methods?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Donation Goals</grouptitle>
+		<grouplang>stock_donates</grouplang>
+		<items>
+			<item>
+				<key>donates_view</key>
+				<string>Can view donation goals?</string>
+			</item>
+			<item>
+				<key>donates_edit</key>
+				<string>Can edit donation goals?</string>
+			</item>
+			<item>
+				<key>donates_add</key>
+				<string>Can add new donation goals?</string>
+			</item>
+			<item>
+				<key>donates_delete</key>
+				<string>Can delete donation goals?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Coupons</grouptitle>
+		<grouplang>stock_coupons</grouplang>
+		<items>
+			<item>
+				<key>coupons_view</key>
+				<string>Can view coupons?</string>
+			</item>
+			<item>
+				<key>coupons_edit</key>
+				<string>Can edit coupons?</string>
+			</item>
+			<item>
+				<key>coupons_add</key>
+				<string>Can add new coupons?</string>
+			</item>
+			<item>
+				<key>coupons_delete</key>
+				<string>Can delete coupons?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Payment Gateways</grouptitle>
+		<grouplang>stock_gateways</grouplang>
+		<items>
+			<item>
+				<key>gateways_view</key>
+				<string>Can view payment gateways?</string>
+			</item>
+			<item>
+				<key>gateways_edit</key>
+				<string>Can edit payment gateways?</string>
+			</item>
+			<item>
+				<key>methods_add</key>
+				<string>Can add new payment methods?</string>
+			</item>
+			<item>
+				<key>methods_edit</key>
+				<string>Can edit payment methods?</string>
+			</item>
+			<item>
+				<key>methods_delete</key>
+				<string>Can delete payment methods?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Fraud Rules</grouptitle>
+		<grouplang>stock_fraud</grouplang>
+		<items>
+			<item>
+				<key>fraud_view</key>
+				<string>Can view fraud rules?</string>
+			</item>
+			<item>
+				<key>fraud_edit</key>
+				<string>Can edit fraud rules?</string>
+			</item>
+			<item>
+				<key>fraud_add</key>
+				<string>Can add new fraud rules?</string>
+			</item>
+			<item>
+				<key>fraud_delete</key>
+				<string>Can delete fraud rules?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Settings</grouptitle>
+		<grouplang>settings</grouplang>
+		<items>
+			<item>
+				<key>settings_store</key>
+				<string>Can view Store &amp; Client Area Settings?</string>
+			</item>
+		</items>
+	</group>
+</permissions>

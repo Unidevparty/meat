@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<information>
+  <data>
+    <name>Уведомление при регистрации</name>
+    <public_name/>
+    <hide_tab>1</hide_tab>
+    <author>MDMX</author>
+    <description/>
+    <disabledatinstall>0</disabledatinstall>
+    <global_caches/>
+    <website/>
+    <update_check/>
+    <templategroups/>
+  </data>
+</information>

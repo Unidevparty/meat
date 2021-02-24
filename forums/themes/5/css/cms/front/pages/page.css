@@ -1,0 +1,18 @@
+/* ----- */
+
+.ipsWidget.ipsWidget_horizontal[data-blockid^="app_cms"]:not(.ipsBox) {
+	padding: 0px !important;
+}
+
+#rubriki
+{
+background: transparent url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/categorynav_bg.png) repeat-x;
+    margin: 0px;
+    padding: 0 10px;
+    font-size: 13px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+    position: relative;
+    line-height: 41px;
+    height: 50px;
+  display:block;
+}

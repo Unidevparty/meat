@@ -1,0 +1,60 @@
+<ips:template parameters="$request" />
+<div class="ipsSpacer_bottom ipsType_center ipsAreaBackground_light ipsType_normal ipsPad">
+	{{if $member = \IPS\Member::load( $request->request_member )}}
+		<div>{template="userPhoto" app="core" group="global" params="$member, 'medium'"}</div>
+	{{endif}}
+
+	<p class='ipsType_reset valBlock_separator'>
+		<span class='ipsType_sectionHead'>
+			<strong>{{if $member->member_id}}{$member->link()|raw}{{else}}Гость{{endif}}</strong><br>
+		</span><br>
+		<span>
+			{{if $request->firstname}}{$request->firstname}{{endif}}
+			{{if $request->middlename}} {$request->middlename}{{endif}}
+			{{if $request->lastname}} {$request->lastname}{{endif}}
+		</span>
+	</p>
+	
+	{{if $request->company}}
+		<p class='ipsType_reset valBlock_separator'>
+			{$request->company}
+		</p>
+	{{endif}}
+	
+	{{if $request->phone or $request->phone_mobile}}
+		<ul class='valContacts valBlock_separator'>
+			{{if $request->phone}}
+				<li>
+					Телефон: {$request->phone} {{if $request->phone_extra}}(доб. {$request->phone_extra}){{endif}}
+				</li>
+			{{endif}}
+
+			{{if $request->phone_mobile}}
+				<li>
+					Мобильный: {$request->phone_mobile}
+				</li>
+			{{endif}}
+		</ul>
+	{{endif}}
+	
+	<ul class='valContacts valBlock_separator'>
+		<li>
+			Email: {{if $request->email}}{$request->email}{{else}}{member="email" id="$request->member_id"}{{endif}}
+		</li>
+
+		{{if $request->skype}}
+			<li>
+				Skype: {$request->skype}
+			</li>
+		{{endif}}
+	</ul>
+	
+	{{if $request->canViewOthers()}}
+		<p class='ipsType_reset ipsType_medium valBlock_separator'>
+			{{if $others = $request->get_others()}}
+				<strong class="valOthers_found">{lang="valuation_others" sprintf="$others"}</strong><br>
+				<a href="{$request->url()->setQueryString( 'do', 'ipemailuses' )}" data-ipsdialog="" data-ipsdialog-size="medium" data-ipsdialog-title="Предыдущие использования">(просмотреть)</a>
+			{{else}}<i>Других запросов нет</i>{{endif}}
+		</p>
+	{{endif}}
+</div>

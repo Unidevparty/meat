@@ -1,0 +1,84 @@
+<ips:template parameters="$title, $message, $code, $extra, $member" />
+<section id='elError' class='ipsType_center'>
+
+   	{{if $code=='1F176/3' || $code=='2F173/H' || $code=='2F176/1'}} 
+  	<div class="ipsType_center ipsPad">
+		
+			<h2 class="ipsType_pageTitle">Создайте аккаунт или авторизуйтесь для просмотра раздела</h2>
+			<p class="ipsType_light ipsType_normal ipsType_reset">Просматривать данный раздел могут только зарегистрированные пользователи</p>
+		
+		
+		<div class="ipsGrid ipsGrid_collapsePhone ipsSpacer_top">
+			<div class="ipsGrid_span6 ipsAreaBackground_light ipsPad">
+				<h2 class="ipsType_sectionHead">Создать аккаунт</h2>
+				<p class="ipsType_normal ipsType_reset ipsType_light">Зарегистрировать новый аккаунт в нашем сообществе. Это несложно!</p>
+				<br>
+				<a href="http://meat-expert.ru/register/" class="ipsButton ipsButton_primary ipsButton_small">Зарегистрировать новый аккаунт</a>
+			</div>
+			<div class="ipsGrid_span6 ipsAreaBackground_light ipsPad">
+				<h2 class="ipsType_sectionHead">Войти</h2>
+				<p class="ipsType_normal ipsType_reset ipsType_light">Есть аккаунт? Войти.</p>
+				<br>
+				<a href="http://meat-expert.ru/login/" data-ipsdialog="" data-ipsdialog-size="medium" data-ipsdialog-title="Войти" class="ipsButton ipsButton_primary ipsButton_small">Войти</a>
+			</div>
+		</div>
+	</div>
+  	{{else}}
+
+	<div class='ipsAreaBackground_light ipsPad'>
+		<i class='fa fa-exclamation-circle ipsType_huge'></i>
+		<p class='ipsType_reset ipsType_light ipsType_large'>
+			{lang="something_went_wrong"}
+		</p>
+		<div id='elErrorMessage' class='ipsPos_center'>
+			{$message|raw}
+		</div>
+		<p class='ipsType_light ipsType_reset ipsType_normal'>
+			{lang="error_page_code"} <strong>{$code}</strong>
+		</p>     
+      
+		{{if ( \IPS\IN_DEV or $member->isAdmin() ) and $extra}}
+			<div class="ipsPad ipsType_left">
+				<h3 class="ipsType_minorHeading">{lang="error_technical_details"}</h3>
+				<textarea rows="13" style="font-family: monospace;">{$extra}</textarea>
+				<p class="ipsType_small ipsType_light">
+					{{if $member->isAdmin()}}
+						{lang="error_technical_details_desc"}
+						{{if $member->hasAcpRestriction( 'core', 'support', 'system_logs_view' )}}
+							{lang="error_technical_details_logs"}
+						{{endif}}
+					{{elseif \IPS\IN_DEV}}
+						{lang="error_technical_details_dev"}
+					{{endif}}
+				</p>
+			</div>
+		{{endif}}
+	</div>
+  	{{endif}}
+      
+  
+	{{if member.isAdmin() and member.hasAcpRestriction( 'core', 'support', 'get_support' )}}
+		<p class='ipsType_light ipsType_large'>
+			<a href='{url="app=core&module=support&controller=support" base="admin"}' title='{lang="get_support"}'>
+				<i class="fa fa-lock"></i> Лог ошибки
+			</a>
+		</p>
+	{{elseif \IPS\Member::loggedIn()->canAccessModule( \IPS\Application\Module::get( 'core', 'contact' ) ) and !( \IPS\Dispatcher::i()->application->directory == 'core' and \IPS\Dispatcher::i()->module and \IPS\Dispatcher::i()->module->key == 'contact' )}}
+		<p class='ipsType_light ipsType_large'>
+			<a href='{url="app=core&module=contact&controller=contact" seoTemplate="contact"}' title='{lang="contact_admin"}'>
+				{lang="contact_admin"}
+			</a>
+		</p>
+	{{endif}}
+  <p class='ipsType_light ipsType_large'>
+			<a href='http://meat-expert.ru/support/' title='{lang="get_support"}'>
+				<i class="fa fa-lock"></i> {lang="get_support"}
+			</a>
+		</p>
+	{{if !member.member_id}}
+		<br>
+		<a href='{url="app=core&module=system&controller=login" seoTemplate="login"}' class='ipsButton ipsButton_normal ipsButton_medium' title='{lang="sign_in"}'>
+			{lang="sign_in"}
+		</a>
+	{{endif}}
+</section>

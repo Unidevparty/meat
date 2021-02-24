@@ -1,0 +1,44 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <env:Header xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+   <env:Body xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <v5:TrackNotificationReply xmlns:v5="http://fedex.com/ws/track/v5">
+         <v5:HighestSeverity>SUCCESS</v5:HighestSeverity>
+         <v5:Notifications>
+            <v5:Severity>SUCCESS</v5:Severity>
+            <v5:Source>trck</v5:Source>
+            <v5:Code>0</v5:Code>
+            <v5:Message>Request was successfully processed.</v5:Message>
+            <v5:LocalizedMessage>Request was successfully processed.</v5:LocalizedMessage>
+         </v5:Notifications>
+         <v5:TransactionDetail>
+            <v5:CustomerTransactionId>Get Track Notification For Ground Shipment</v5:CustomerTransactionId>
+            <v5:Localization>
+               <v5:LanguageCode>EN</v5:LanguageCode>
+            </v5:Localization>
+         </v5:TransactionDetail>
+         <v5:Version>
+            <v5:ServiceId>trck</v5:ServiceId>
+            <v5:Major>5</v5:Major>
+            <v5:Intermediate>0</v5:Intermediate>
+            <v5:Minor>0</v5:Minor>
+         </v5:Version>
+         <v5:DuplicateWaybill>false</v5:DuplicateWaybill>
+         <v5:MoreDataAvailable>false</v5:MoreDataAvailable>
+         <v5:Packages>
+            <v5:TrackingNumber>484505474017274</v5:TrackingNumber>
+            <v5:TrackingNumberUniqueIdentifiers>12011~484505474017274</v5:TrackingNumberUniqueIdentifiers>
+            <v5:CarrierCode>FDXG</v5:CarrierCode>
+            <v5:ShipDate>2011-06-01</v5:ShipDate>
+            <v5:Destination>
+               <v5:City>HENDERSON</v5:City>
+               <v5:StateOrProvinceCode>NV</v5:StateOrProvinceCode>
+               <v5:CountryCode>US</v5:CountryCode>
+               <v5:Residential>false</v5:Residential>
+            </v5:Destination>
+            <v5:RecipientDetails>
+               <v5:NotificationEventsAvailable>ON_DELIVERY</v5:NotificationEventsAvailable>
+            </v5:RecipientDetails>
+         </v5:Packages>
+      </v5:TrackNotificationReply>
+   </env:Body>
+</soapenv:Envelope>

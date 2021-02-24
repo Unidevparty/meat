@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Purchases</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Purchases</subitemtitle>
+					<subsection>purchases</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>report_purchases</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>reports_purchases</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Income</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Income</subitemtitle>
+					<subsection>income</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>report_income</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>reports_income</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Markets</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Markets</subitemtitle>
+					<subsection>markets</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>report_markets</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>reports_markets</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Support Request Volume</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Support Request Volume</subitemtitle>
+					<subsection>supportrequests</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>report_supportrequests</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>reports_supportrequests</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Support Staff Replies</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Support Staff Replies</subitemtitle>
+					<subsection>supportstaff</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>report_supportstaffreplies</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>reports_supportstaff</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Support Staff Audit</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Support Staff Audit</subitemtitle>
+					<subsection>supportaudit</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>report_supportstaff</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>reports_supportaudit</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Customer Satisfaction</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Customer Satisfaction</subitemtitle>
+					<subsection>supportsatisfaction</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>report_supportsatisfaction</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>report_supportsatisfaction</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

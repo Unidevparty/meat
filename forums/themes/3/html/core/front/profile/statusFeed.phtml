@@ -1,0 +1,4 @@
+<ips:template parameters="$member, $statuses, $statusCount, $form, $single=FALSE" />
+<section data-controller='core.front.profile.toggleBlock' {{if $single}}class="ipsPad"{{endif}}>
+	{template="statuses" group="profile" app="core" params="$statuses, $statusCount, $form, $member"}
+</section>

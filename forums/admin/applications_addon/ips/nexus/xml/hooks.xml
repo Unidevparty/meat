@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hooks>
+	<hook>
+		<file>boardIndexNexusDonations.xml</file>
+		<enabled>1</enabled>
+	</hook>
+	<hook>
+		<file>nexusSupportCount.xml</file>
+		<enabled>1</enabled>
+	</hook>
+	<hook>
+		<file>nexusContactUs.xml</file>
+		<enabled>1</enabled>
+	</hook>
+</hooks>

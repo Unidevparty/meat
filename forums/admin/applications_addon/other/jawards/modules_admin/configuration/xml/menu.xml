@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Manage Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Core Settings</subitemtitle>
+					<subsection>settings</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Public Awarding Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Public Awarding Settings</subitemtitle>
+					<subsection>publicaward</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>publicaward</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Achievement Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Achievement Settings</subitemtitle>
+					<subsection>achievement</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>achievement</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Badge Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Badge Settings</subitemtitle>
+					<subsection>badge</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>badge</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Awards Post Display Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Awards Post Display Settings</subitemtitle>
+					<subsection>awardpost</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>awardpost</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Awards Signature Display Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Awards Signature Display Settings</subitemtitle>
+					<subsection>signature</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>signature</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Awards Post Naked Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Awards Post Naked Settings</subitemtitle>
+					<subsection>naked</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>naked</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

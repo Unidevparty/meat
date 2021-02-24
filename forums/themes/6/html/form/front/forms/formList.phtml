@@ -1,0 +1,14 @@
+<ips:template parameters="" />
+{{if !\IPS\Request::i()->isAjax()}}
+	<div class="ipsPageHeader ipsPad_half ipsClearfix ipsSpacer_bottom">
+		<h1 class="ipsType_pageTitle">{lang="__app_form"}</h1>
+	</div>
+	<div class='ipsBox'>
+		<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="forms"}</h2>
+{{endif}}
+		<ol class="ipsDataList ipsDataList_large">
+			{template="formRow" group="forms" params="NULL, NULL, \IPS\form\Form::roots()"}
+		</ol>
+{{if !\IPS\Request::i()->isAjax()}}	
+	</div>
+{{endif}}

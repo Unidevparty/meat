@@ -1,0 +1,42 @@
+h2.ccsTicker_title {
+	font-size: 13px;
+	font-weight: bold;
+	display: inline;
+	max-width: 110px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ccsTicker { position: relative; }
+
+.ccsTicker ul {
+	position: absolute;
+	left: 120px;
+	right: 50px;
+	top: 0;
+}
+
+	.ccsTicker li {
+		position: absolute;
+		left: 0;
+		right: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+.ccsTicker > p {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.ccsTicker_nav {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	line-height: 12px;
+	text-align: center;
+	font-size: 15px;
+}

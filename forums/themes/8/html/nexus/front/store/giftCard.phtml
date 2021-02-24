@@ -1,0 +1,7 @@
+<ips:template parameters="$form" />
+
+{template="pageHeader" group="global" app="core" params="\IPS\Member::loggedIn()->language()->get('buy_gift_voucher')"}
+
+<div class='ipsBox ipsPad' data-controller='nexus.front.store.giftCard' data-formatCurrencyUrl="{url="app=nexus&module=store&controller=gifts&do=formatCurrency"}">
+	{$form|raw}
+</div>

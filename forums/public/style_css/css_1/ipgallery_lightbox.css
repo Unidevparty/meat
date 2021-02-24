@@ -1,0 +1,247 @@
+/************************************************************************/
+/* RESET (Thanks to YUI) */
+
+#ips_lightbox {
+	z-index:10000;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	background: #444444;
+	background: rgba(34,34,34,0.9);
+	width: 100%;
+	height: 100%;
+	padding: 0 !important;
+	overflow: hidden;
+	font-family: 'Helvetica Neue', arial, verdana, tahoma, sans-serif;
+	text-align: center;
+	min-width: 950px;
+}
+
+	#ips_lightbox .lightbox_image {
+	    max-height: 75%;
+	    max-width: 75%;
+		border: 2px solid #fff;
+		margin-top: 60px;
+		
+	}
+
+	#ips_lightbox .lightbox_caption {
+		margin: 15px 0;
+		font-size:1.4em;
+		font-weight: bold;
+		color: #888;
+		
+	}
+
+	#ips_lightbox .lightbox_ps {
+		position: absolute;
+		left: 50%;
+	}
+
+#lightbox_wrap {
+	-webkit-box-shadow: 0px 0px 25px rgba(0,0,0,0.6);
+	position: absolute;
+	top: 50px; bottom: 50px;
+	left: 50px; right: 50px;
+}
+
+#imageMeta {
+	width: 400px;
+	background: #fff;
+	box-shadow: 5px 0px 5px rgba(0,0,0,0.1) inset;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+	padding: 20px;
+	border-radius: 0 5px 5px 0;
+	overflow-y: auto;
+}
+	
+	#imageMeta .desc {
+		line-height: 1.4;
+	}
+
+#imageErrorWrap {
+	background: #fff;
+	box-shadow: 5px 0px 5px rgba(0,0,0,0.1) inset;
+	-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+	padding: 20px;
+	border-radius: 5px;
+	overflow-y: auto;
+	position: absolute;
+	top: 50px; bottom: 50px;
+	left: 50px; right: 50px;
+}
+
+#imageHolder {
+	background: #161616 url(http://www.meat-expert.ru/public/style_images/master/gallery/dark_linen.png );
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 400px;
+	-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+}
+
+#theImage {
+	text-align: center;
+	-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+	min-height: 300px;
+	overflow: hidden;
+}
+
+	#theImage img {
+		background: #fff;
+		vertical-align: middle;
+		margin: auto 0;
+	}
+
+	/*#theImage .message {
+		position: absolute;
+		bottom: 20px;
+		left: 20px;
+		right: 20px;
+	}*/
+
+/* Comment styling */
+#lightbox_comments .ipsComment {
+	padding: 10px 0;
+	margin: 0;
+}
+#lightbox_comments .ipsComment_author, #lightbox_comments .ipsComment_reply_user  {
+	width: 80px !important;
+	padding: 0;
+}
+
+#lightbox_comments a[hovercard-ref] {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 11px;
+}
+
+#lightbox_comments .post_id, 
+#lightbox_comments .post_id + br,
+#lightbox_comments a[id^="warn_link"],
+#lightbox_comments .ipsComment_controls,
+#lightbox_comments .topic_controls { 
+	display: none; 
+}
+
+#lightbox_comments .ipsComment_comment {
+	margin-left: 100px !important;
+}
+
+#lightbox_comments .ipsUserPhoto {
+	width: 20px;
+	height: 20px;
+}
+
+/*#close_lightbox {
+	display: block;
+	width: 38px;
+	height: 38px;
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	background: url(http://www.meat-expert.ru/public/style_images/master/gallery/slideshow/close.png ) no-repeat;
+	text-indent: -3000em;
+}*/
+
+	/*#close_lightbox:hover {
+		background: url(http://www.meat-expert.ru/public/style_images/master/gallery/slideshow/close_hover.png ) no-repeat;
+	}*/
+
+#ips_lightbox_loading {
+	position: fixed;
+	top: 400px;
+	left: 50%;
+}
+
+#ips_lightbox_content {
+	text-align: left;
+	width: auto;
+	margin-top: 50px;
+	padding: 2px 20px;
+}
+
+.lightbox_nav {
+	width: 80px;
+	height: 80px;
+	background: rgb(58,58,58);
+	background: -moz-linear-gradient(top, rgba(58,58,58,1) 0%, rgba(0,0,0,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(58,58,58,1)), color-stop(100%,rgba(0,0,0,1)));
+	background: -webkit-linear-gradient(top, rgba(58,58,58,1) 0%,rgba(0,0,0,1) 100%);
+	background: -o-linear-gradient(top, rgba(58,58,58,1) 0%,rgba(0,0,0,1) 100%);
+	background: -ms-linear-gradient(top, rgba(58,58,58,1) 0%,rgba(0,0,0,1) 100%);
+	background: linear-gradient(to bottom, rgba(58,58,58,1) 0%,rgba(0,0,0,1) 100%);
+	border-radius: 40px;
+	text-align: center;
+	line-height: 70px;
+	vertical-align: middle;
+	position: absolute;
+	top: 50%;
+	margin-top: -40px;
+	font-size: 60px;
+	color: #fff;
+	border: 1px solid #000;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.7), 0px 1px 0px rgba(255,255,255,0.3) inset;
+	z-index: 2000;
+	-webkit-transition: all 0.2s linear;
+	opacity: 0;
+}
+
+	.lightbox_load_next {
+		right: -10px;
+	}
+
+	.lightbox_load_prev {
+		left: -10px;
+	}
+
+	#imageHolder:hover .lightbox_nav {
+		opacity: 0.6;
+	}
+
+	#imageHolder .lightbox_nav:hover {
+		opacity: 1;
+		color: #fff;
+	}
+
+#close_lightbox {
+	background: #000;
+	width: 36px;
+	height: 36px;
+	text-align: center;
+	line-height: 36px;
+	border-radius: 20px;
+	border: 2px solid #fff;
+	position: absolute;
+	right: -15px;
+	top: -15px;
+	z-index: 3000;
+	font-size: 18px;
+	color: #fff;
+}
+/*.lightbox_nav {
+	padding-top: 12.5px;
+	padding-bottom: 12.5px;
+	text-align: center;
+}
+
+	.lightbox_nav .lightbox_load_next, .lightbox_nav .lightbox_load_prev {
+		font-size: 32px;
+		padding: 10px;
+	}
+
+		.lightbox_nav .lightbox_load_next.disabled, .lightbox_nav .lightbox_load_prev.disabled {
+			cursor: default;
+			color: #A4A4A4;
+		}
+
+		.lightbox_nav .lightbox_load_next.disabled:hover, .lightbox_nav .lightbox_load_prev.disabled:hover {
+			color: #A4A4A4;
+			border-color: #dbdbdb;
+		}*/

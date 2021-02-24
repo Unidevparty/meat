@@ -1,0 +1,43 @@
+<ips:template parameters="$image, $orientation='vertical'" />
+<li class='cGalleryWidget {{if $orientation == 'horizontal'}}ipsCarousel_item{{endif}}'>
+	{{if $orientation == 'horizontal'}}
+		{{if $image->medium_file_name}}
+			<a href='{$image->url()}' title='{lang="view_this_image" sprintf="$image->caption"}' class='ipsThumb ipsThumb_bg ipsThumb_large' style='background-image: url("{file="$image->medium_file_name" extension="gallery_Images"}");'>
+				<img src='{file="$image->medium_file_name" extension="gallery_Images"}' alt=''>
+			</a>
+		{{else}}
+			<a href='{$image->url()}' title='{lang="view_this_image" sprintf="$image->caption"}' class='ipsNoThumb ipsNoThumb_video ipsThumb_bg ipsThumb_large'></a>
+		{{endif}}
+	{{else}}
+		{{if $image->medium_file_name}}
+			<a href='{$image->url()}' title='{lang="view_this_image" sprintf="$image->caption"}' class='ipsThumb ipsThumb_bg cGalleryWidget_verticalThumb' style='background-image: url("{file="$image->medium_file_name" extension="gallery_Images"}");'>
+				<img src='{file="$image->medium_file_name" extension="gallery_Images"}' alt=''>
+			</a>
+		{{else}}
+			<a href='{$image->url()}' title='{lang="view_this_image" sprintf="$image->caption"}' class='ipsNoThumb ipsNoThumb_video ipsThumb_bg cGalleryWidget_verticalThumb'></a>
+		{{endif}}
+	{{endif}}
+	<div class='ipsSpacer_top ipsSpacer_half cGalleryWidgetInfo'>
+		{{if $image->directContainer()->allow_comments}}
+			<div class="ipsCommentCount ipsPos_right {{if $image->comments === 0}}ipsFaded{{endif}}" data-ipsTooltip title='{lang="num_comments" pluralize="$image->comments"}'>
+				{$image->comments}
+			</div>
+		{{endif}}
+		{{if $image->unread()}}
+			<div class='ipsTruncate ipsTruncate_line'>
+				<a href="{$image->url()}" title='{lang="view_this_image" sprintf="$image->caption"}' class='cGalleryWidget_title ipsType_medium'>
+					<span class="ipsItemStatus ipsItemStatus_small"><i class="fa fa-circle"></i></span>
+					<strong>{$image->caption}</strong>
+				</a>
+			</div>
+		{{else}}
+			<div class='ipsTruncate ipsTruncate_line'>
+				<a href="{$image->url()}" title='{lang="view_this_image" sprintf="$image->caption"}' class='cGalleryWidget_title ipsType_medium'>
+					{$image->caption}
+				</a>
+			</div>
+		{{endif}}
+		<span class='ipsType_medium ipsType_blendLinks'>{lang="byline_nodate" htmlsprintf="$image->author()->link()"}</span><br>
+		<span class='ipsType_light ipsType_medium'>{datetime="$image->mapped('date')"}</span>
+	</div>
+</li>

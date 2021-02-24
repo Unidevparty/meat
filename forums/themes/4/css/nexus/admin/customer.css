@@ -1,0 +1,317 @@
+#elCustomerIncome {
+	width: 100%;
+	height: 55px;
+	background: rgba(0,0,0,0.03);
+	text-align: center;
+	font-size: 18px;
+	color: rgba(0,0,0,0.3);
+}
+
+/* Customer standing box */
+.cCustomerStanding_value {
+	font-size: 22px;
+	font-weight: 500;
+	line-height: 1.5;
+}
+
+.cCustomerStanding_grid .ipsGrid_span3 {
+	min-height: 55px;
+	padding-top: 7px;
+}
+
+.cCustomerStanding_arrow {
+	width: 18px;
+	height: 18px;
+	line-height: 18px;
+	display: inline-block;
+	font-size: 9px;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 14px;
+	color: #fff;
+	margin-top: -5px;
+}
+
+	.cCustomerStanding_positive {
+		background: #68a72f;
+	}
+
+	.cCustomerStanding_negative {
+		background: #a72f35;
+	}
+
+/* Customer standing popup */
+.cCustomerStanding_progressIndicator {
+	position: relative;
+}
+
+.cCustomerStanding_progress {
+	background: #af1c1c;
+	background: -moz-linear-gradient(left, #af1c1c 0%, #b59e1c 50%, #3f931d 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#af1c1c), color-stop(50%,#b59e1c), color-stop(100%,#3f931d));
+	background: -webkit-linear-gradient(left, #af1c1c 0%,#b59e1c 50%,#3f931d 100%);
+	background: -o-linear-gradient(left, #af1c1c 0%,#b59e1c 50%,#3f931d 100%);
+	background: -ms-linear-gradient(left, #af1c1c 0%,#b59e1c 50%,#3f931d 100%);
+	background: linear-gradient(to right, #af1c1c 0%,#b59e1c 50%,#3f931d 100%);
+	height: 16px;
+	border: 1px solid #333;
+	width: 100%;
+	border-radius: 3px;
+}
+
+.cCustomerStanding_markers {
+	margin: -5px -5px 0;
+	height: 18px;
+}
+
+.cCustomerStanding_markers > span {
+	font-size: 18px;
+	color: #000;
+	position: absolute;
+	width: 30px;
+	margin-left: -15px;
+	text-align: center;
+}
+	
+	.cCustomerStanding_markers span.cCustomerStanding_markerAvg {
+		color: #919191;
+	}
+
+	.cCustomerStanding_markers > span span {
+		font-size: 10px;
+		margin-top: 8px;
+		position: relative;
+		top: -10px;
+	}
+
+/* Account credit */
+.cCustomerCredit.ipsAreaBackground_positive .ipsType_minorHeading {
+	color: rgba(255,255,255,0.6);
+}
+
+.cCustomerCredit.ipsAreaBackground_positive a {
+	color: #fff;
+}
+
+/* Other info box */
+.cCustomerOther {
+	/*height: 180px;*/
+	overflow: hidden;
+}
+
+.cCustomerOther .cCustomerOther_icon {
+	font-size: 20px;
+	line-height: 1.2;
+}
+
+.cCustomerOther .ipsPhotoPanel.ipsPhotoPanel_tiny > div {
+	margin-left: 30px !important;
+}
+
+.cCustomerOther .cCustomerOther_list {
+	height: 90px;
+	margin-top: 5px;
+}
+
+	.cCustomerOther li {
+		margin-top: 5px;
+		position: relative;
+	}
+
+		.cCustomerOther li:first-child {
+			margin-top: 0;
+		}
+
+		.cCustomerOther ul li:nth-child(2):after {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			content: '';
+			display: block;
+			background: -moz-linear-gradient(top, rgba(250,250,250,0) 0%, rgba(250,250,250,1) 100%);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(250,250,250,0)), color-stop(100%,rgba(250,250,250,1)));
+			background: -webkit-linear-gradient(top, rgba(250,250,250,0) 0%,rgba(250,250,250,1) 100%);
+			background: -o-linear-gradient(top, rgba(250,250,250,0) 0%,rgba(250,250,250,1) 100%);
+			background: -ms-linear-gradient(top, rgba(250,250,250,0) 0%,rgba(250,250,250,1) 100%);
+			background: linear-gradient(to bottom, rgba(250,250,250,0) 0%,rgba(250,250,250,1) 100%);
+		}
+
+.ipsApp .cCustomerOther .ipsGrid > .ipsGrid_span3 {
+	display: block;
+	height: 100%;
+	margin-left: 0 !important;
+	width: 25%;
+	/*border-right: 1px solid rgba(0,0,0,0.1);*/
+}
+
+.ipsApp .cCustomerOther .ipsButton {
+	line-height: 26px;
+}
+
+/* Customer history panel */
+.cCustomerHistory {
+	border-left: 5px solid #e0e0e0;
+	margin-left: 25px;
+}
+
+.cCustomerHistory li {
+	margin: 0 0 20px -28px;
+}
+
+.cCustomerHistory_icon {
+	width: 50px;
+	height: 50px;
+	line-height: 45px;
+	text-align: center;
+	font-size: 20px;
+	background: #fff;
+	border-radius: 40px;
+	border: 2px solid #e0e0e0;
+}
+
+.cCustomerHistory_date {
+	background: #e0e0e0;
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	color: #222;
+	width: 100%;
+	margin-left: 0px !important;
+	margin-bottom: 10px !important;
+	padding: 3px 15px 3px 7px;
+	border-radius: 0 20px 20px 0;
+}
+
+.cCustomerHistory_info {
+	margin-left: 65px;
+	padding-top: 3px;
+}
+
+/* Customer addresses */
+.cCustomerAddresses .ipsControlStrip {
+	float: none;
+	margin-top: 10px;
+}
+
+/* Payment cards */
+.cNexusCards li {
+	width: 250px;
+	height: 155px;
+	border-radius: 8px;
+	margin-bottom: 15px;
+	background: #617178;
+	background: -moz-linear-gradient(-45deg, #617178 0%, #859ca5 100%);
+	background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#617178), color-stop(100%,#859ca5));
+	background: -webkit-linear-gradient(-45deg, #617178 0%,#859ca5 100%);
+	background: -o-linear-gradient(-45deg, #617178 0%,#859ca5 100%);
+	background: -ms-linear-gradient(-45deg, #617178 0%,#859ca5 100%);
+	background: linear-gradient(135deg, #617178 0%,#859ca5 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#617178', endColorstr='#859ca5',GradientType=1 );
+	position: relative;
+}
+
+	.cNexusCards .cNexusCards_type.cPayment {
+		position: absolute;
+		bottom: 10px;
+		right: 10px;
+		width: 60px;
+		height: 36px;
+		background-size: 62px 38px;
+	}
+
+	.cNexusCards .cNexusCards_number,
+	.cNexusCards .cNexusCards_exp {
+		position: absolute;
+		left: 20px;
+		color: #f7f7f7;
+		font-weight: bold;
+		font-family: 'courier new', monospace;
+		text-shadow: 0px 1px 0px rgba(0,0,0,0.8);
+	}
+
+	.cNexusCards .cNexusCards_number {
+		bottom: 55px;
+		font-size: 18px;
+	}
+
+	.cNexusCards .cNexusCards_expTitle {
+		font-size: 9px;
+		color: #000;
+		text-transform: uppercase;
+		position: absolute;
+		bottom: 30px;
+		left: 20px;
+	}
+
+	.cNexusCards .cNexusCards_exp {
+		bottom: 15px;
+	}
+
+	.cNexusCards .cNexusCards_delete {
+		position: absolute;
+		right: -5px;
+		top: -5px;
+		background: #333;
+		color: #fff;
+		width: 30px;
+		height: 30px;
+		border-radius: 30px;
+		font-size: 20px;
+		line-height: 26px;
+		text-align: center;
+	}
+
+.cPayment {
+	display: inline-block;
+	width: 66px;
+	height: 42px;
+	border: 1px solid rgba(0,0,0,0.1);
+	line-height: 40px;
+	white-space: nowrap;
+	font-size: 9px;
+	font-weight: bold;
+	padding: 0 5px;
+	text-align: center;
+	text-transform: uppercase;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	background-color: #f8f8f8;
+}
+
+html[dir="ltr"] .cPayment_cardTypeList {
+	margin-left: 345px;
+}
+html[dir="rtl"] .cPayment_cardTypeList {
+	margin-right: 345px;
+}
+
+.cPayment_visa,
+.cPayment_mastercard,
+.cPayment_american_express,
+.cPayment_discover,
+.cPayment_diners_club,
+.cPayment_jcb {
+	text-indent: 100%;
+	padding: 0;
+	background-size: 64px 40px;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+.cPayment_visa { background-image: url( "{resource="cards/visa.png" app="nexus" location="front"}" ); }
+.cPayment_mastercard { background-image: url( "{resource="cards/mastercard.png" app="nexus" location="front"}" ); }
+.cPayment_american_express { background-image: url( "{resource="cards/amex.png" app="nexus" location="front"}" ); }
+.cPayment_discover { background-image: url( "{resource="cards/discover.png" app="nexus" location="front"}" ); }
+.cPayment_diners_club {	background-image: url( "{resource="cards/dinersclub.png" app="nexus" location="front"}" ); }
+.cPayment_jcb {	background-image: url( "{resource="cards/jcb.png" app="nexus" location="front"}" ); }
+
+@media screen and (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) { 
+	.cPayment_visa { background-image: url( "{resource="cards/visa@2x.png" app="nexus" location="front"}" ); }
+	.cPayment_mastercard { background-image: url( "{resource="cards/mastercard@2x.png" app="nexus" location="front"}" ); }
+	.cPayment_american_express { background-image: url( "{resource="cards/amex@2x.png" app="nexus" location="front"}" ); }
+	.cPayment_discover { background-image: url( "{resource="cards/discover@2x.png" app="nexus" location="front"}" ); }
+	.cPayment_diners_club {	background-image: url( "{resource="cards/dinersclub@2x.png" app="nexus" location="front"}" ); }
+	.cPayment_jcb {	background-image: url( "{resource="cards/jcb@2x.png" app="nexus" location="front"}" ); }
+}

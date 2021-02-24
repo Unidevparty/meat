@@ -1,0 +1,37 @@
+<ips:template parameters="$category, $table" />
+<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{$category->_title}</h1>
+	<div class='ipsPos_right ipsResponsive_noFloat ipsResponsive_hidePhone'>
+		{template="follow" app="core" group="global" params="'downloads', 'category', $category->_id, \IPS\downloads\File::containerFollowers( $category )->count( TRUE )"}
+	</div>
+	{{if $category->hasChildren()}}
+		<br>
+		<a href='#elDownloadsCategories_menu' data-ipsMenu id='elDownloadsCategories' class='ipsButton ipsButton_fullWidth ipsButton_light ipsButton_small ipsResponsive_block ipsResponsive_hideDesktop'>{lang="subcategory"} &nbsp;<i class='fa fa-caret-down'></i></a>
+	{{endif}}
+	{{if $category->description}}
+		<div class='ipsPageHeader_info ipsType_normal'>
+			{$category->description|raw}
+		</div>
+	{{endif}}
+</div>
+{template="categoryMenu" group="browse" params="$category->children()"}
+
+{{if \IPS\downloads\Category::canOnAny('add') AND ( !$category OR $category->can('add') ) }}
+<ul class="ipsToolList ipsToolList_horizontal ipsResponsive_hidePhone ipsClearfix ipsSpacer_both">
+	{template="categoryButtons" group="browse" params="\IPS\downloads\Category::canOnAny('add'), $category"}
+</ul>
+{{endif}}
+
+<div class='ipsBox cDownloadsCategoryTable'>
+{$table|raw}
+</div>
+
+{{if \IPS\downloads\Category::canOnAny('add') AND ( !$category OR $category->can('add') ) }}
+<ul class="ipsToolList ipsToolList_horizontal ipsResponsive_showPhone ipsResponsive_block ipsClearfix ipsSpacer_top">
+	{template="categoryButtons" group="browse" params="\IPS\downloads\Category::canOnAny('add'), $category"}
+</ul>
+{{endif}}
+
+<div class='ipsResponsive_showPhone ipsResponsive_block ipsSpacer_top'>
+	{template="follow" app="core" group="global" params="'downloads', 'category', $category->_id, \IPS\downloads\File::containerFollowers( $category )->count( TRUE )"}
+</div>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+	<group>
+		<grouptitle>Tools</grouptitle>
+		<grouplang>Tools</grouplang>
+		<items>
+			<item>
+				<key>mod_tools</key>
+				<string>Can use tools?</string>
+			</item>
+		</items>
+	</group>	
+</permissions>

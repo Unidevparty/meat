@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates application="trackmembers" templategroups="a:1:{s:17:&quot;skin_trackmembers&quot;;s:5:&quot;exact&quot;;}">
+  <templategroup group="skin_trackmembers">
+    <template>
+      <template_group>skin_trackmembers</template_group>
+      <template_content><![CDATA[<li><a href='{parse url="app=trackmembers&module=core&section=trackmembers&mid={$mid}" base="public"}' title='{$this->lang->words['track_view_logs']}'>{parse replacement="track_members"}</a></li>]]></template_content>
+      <template_name>profileCardButton</template_name>
+      <template_data>$mid</template_data>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_trackmembers</template_group>
+      <template_content><![CDATA[<if test="$data['member_tracked']">
+	  <li><a href='{parse url="app=trackmembers&module=core&section=trackmembers&mid={$data['member_id']}" base="public"}' class='ipsButton_secondary' title='{$this->lang->words['track_view_logs']}'>{parse replacement="track_members"}</a></li>
+</if>]]></template_content>
+      <template_name>memberList</template_name>
+      <template_data>$data</template_data>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_trackmembers</template_group>
+      <template_content><![CDATA[<div class='general_box clearfix'>
+	<h3>{$this->lang->words['track_members']}</h3>
+	<ul class='ipsPad'>	
+		<if test="$member['member_tracked'] == 0">
+			<li><a id='showSetupPopup' href='{parse url="app=trackmembers&amp;module=core&amp;section=trackmembers&amp;do=track&amp;mid={$member['member_id']}" seotitle="{$member['members_seo_name']}" template="false" base="public"}'><img src="{$this->settings['public_dir']}style_extra/trackmembers/track.png"> {$this->lang->words['track_this_member']}</a></li>
+		<else />
+			<li><a href='{parse url="app=trackmembers&amp;module=core&amp;section=trackmembers&amp;mid={$member['member_id']}" seotitle="{$member['members_seo_name']}" template="false" base="public"}'><img src="{$this->settings['public_dir']}style_extra/trackmembers/logs.png"> {$this->lang->words['track_view_logs']}</a></li>
+			<li><a id='showSetupPopup' href='#'><img src="{$this->settings['public_dir']}style_extra/trackmembers/settings.png"> {$this->lang->words['track_change_settings']}</a></li>
+			<li><a data-confirmaction="true" href='{parse url="app=trackmembers&amp;module=core&amp;section=trackmembers&amp;do=untrack&amp;mid={$member['member_id']}" seotitle="{$member['members_seo_name']}" template="false" base="public"}'><img src="{$this->settings['public_dir']}style_extra/trackmembers/stoptrack.png"> {$this->lang->words['track_stop_tracking']}</a></li>											
+		</if>
+	</ul>
+</div>
+<script type='text/javascript'>
+	var trackmemberpopup = null;
+	$( 'showSetupPopup' ).observe( 'click', function( e )
+	{
+		Event.stop( e );
+		var _url = ipb.vars['base_url'] + 'app=trackmembers&module=ajax&section=setup&mid={$member['member_id']}&secure_key=' + ipb.vars['secure_hash'];
+		
+		trackmemberpopup = new ipb.Popup( 'trackMemberSetup', 
+		{ 
+			type: 'modal',
+			ajaxURL: _url,
+			hideAtStart: false,
+			w: '800px',
+			h: 410 
+		},
+		{
+			afterShow: function()
+			{
+				$$( '#trackmembers_tabs li' ).each( function( tab )
+				{
+					tab.observe( 'click', function( e )
+					{
+						var elem = Event.findElement( e, 'li' );
+						$$( '#trackmembers_tabs li' ).invoke( 'removeClassName', 'active' );
+						elem.addClassName( 'active' );
+						
+						$$( '#trackmembers_content div' ).invoke( 'hide' );
+						$( elem.id + '_content' ).show();
+					});
+				});
+			}
+		});
+	});
+</script>]]></template_content>
+      <template_name>showProfileStuff</template_name>
+      <template_data>$member</template_data>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_trackmembers</template_group>
+      <template_content><![CDATA[<php>$formTabs = array_keys( $formElements ); $this->defaultTab = $formTabs[0];</php>
+<h3>{$this->lang->words['tracking_setup_for']} '{$memberData['members_display_name']}'</h3>
+<div class='fixed_inner ipsBox'>
+	<if test="isLargeTouch:|:$this->registry->output->isLargeTouchDevice()">
+		<div class='message' style='margin-bottom: 5px;'>{$this->lang->words['scroll_tip']}</div>
+	</if>
+	<php>//debug( $formElements );</php>
+	<form action="{parse url="app=trackmembers&module=ajax&section=setup&mid={$memberData['member_id']}&do=save" base="public"}" method='post' id='trackMembersSetupForm'>
+		<input type='hidden' name='secure_key' value='{$this->member->form_hash}' />
+		<div class='ipsVerticalTabbed ipsLayout ipsLayout_withleft ipsLayout_smallleft clearfix'>
+			<div class='ipsVerticalTabbed_tabs ipsLayout_left'>
+				<ul id='trackmembers_tabs'>
+					<foreach loop="array_keys( $formElements ) as $tab">
+						<li id='{$tab}'<if test="$tab == $this->defaultTab"> class='active'</if>><a href='#'>{$this->lang->words[ $tab ]}</a></li>
+					</foreach>
+				</ul>
+			</div>
+			<div class='ipsVerticalTabbed_content ipsLayout_content ipsBox_container' style='position: relative'>
+				<div id='mymedia_toolbar' class='ipsType_small' style='line-height: 20px'>
+					<input id='mymedia_finish' type='submit' value='{$this->lang->words['save']}' class='input_submit' accesskey='s' />
+					{$this->lang->words['track']} {$memberData['members_display_name']} {$this->lang->words['track_for']}
+					<input type='number' name='trackForDays' id='sharedmedia_search' size='1' min='-1' value='{$trackForDays}' placeholder='&infin;' style='width: 3em' class='input_text' />
+					{$this->lang->words['track_days']}<br />
+					<span class='ipsType_smaller'>{$this->lang->words['track_infinitively']}</span>
+				</div>
+				<div id="trackmembers_content" class='ipsPad' style='height:339px; overflow: auto;'>
+					<foreach loop="$formElements as $tab => $data">
+						<div id='{$tab}_content' <if test="$tab != $this->defaultTab"> style='display:none'</if>>
+							<ul class='ipsPad'>
+								<foreach loop="$data as $key => $lang">
+									<li class='field checkbox'>
+										<input class='input_check' type='checkbox' name='{$key}' id='{$key}' value='1' <if test="$formData[ $key ]">checked='checked'</if> <label for="{$key}">{$this->lang->words[ $lang ]}</label>
+									</li>
+								</foreach>
+							</ul>
+						</div>
+					</foreach>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<script type='text/javascript'>
+	$( 'trackMembersSetupForm' ).observe( 'submit', function( e )
+	{
+		$( 'trackMembersSetupForm' ).request(
+		{
+			onSuccess: function(t)
+			{
+				<if test="$memberData['member_tracked'] == 1">
+					ipb.global.showInlineNotification( 'Tracking settings successfully saved...' );
+				<else />
+					window.location.reload();
+				</if>
+			}
+		});
+		Event.stop( e );
+		trackmemberpopup.hide();
+		trackmemberpopup.kill();
+		
+	});
+</script>]]></template_content>
+      <template_name>showSetupPopup</template_name>
+      <template_data><![CDATA[$memberData, $formElements, $formData, $trackForDays='']]></template_data>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_trackmembers</template_group>
+      <template_content><![CDATA[<style>
+.track_member{margin-top: 10px;}
+#user_info_cell {
+    display: table-cell;
+    white-space: nowrap;
+    padding-right: 15px;
+}
+#user_status_cell {
+    display: table-cell;
+    width: 100%;
+    vertical-align: top;
+}
+#user_latest_status {
+    background: url({style_images_url}/stems/profile_status_stem.png) no-repeat scroll 0px 50% transparent;
+    padding-left: 11px;
+}
+#user_latest_status > div {
+    padding: 10px 15px;
+    background-color: rgb(235, 236, 229);
+    color: rgb(52, 52, 52);
+    font-size: 14px;
+    border-radius: 6px 6px 6px 6px;
+    min-height: 45px;
+    word-wrap: break-word;
+}
+#user_latest_status > div > span {
+    display: block;
+}
+</style>
+{parse js_module="status"}
+<ul class='topic_buttons'>
+	<li><a href='{parse url="showuser={$member['member_id']}" base="public" template="showuser" seotitle="{$member['members_seo_name']}"}'>{$this->lang->words['back_to_profile']}</a></li>
+	<if test="canEditUser:|:($this->memberData['member_id'] && $member['member_id'] == $this->memberData['member_id']) || $this->memberData['g_is_supmod'] == 1 || ($this->memberData['member_id'] && $member['member_id'] != $this->memberData['member_id'])">
+		<li><a href='{parse url="app=core&amp;module=modcp&amp;do=editmember&amp;auth_key={$this->member->form_hash}&amp;mid={$member['member_id']}&amp;pf={$member['member_id']}" base="public"}'>{$this->lang->words['supmod_edit_member']}</a></li>
+	</if>
+</ul>
+<div class='ipsBox clear vcard' id='profile_background'>
+	<div class='ipsLayoutclearfix'>
+		<div class='ipsBox_container' id='profile_content' style='width: 100%; display: table;'>
+			<div class='ipsPad'>
+				<div id='profile_content_main'>
+					<if test="hasVariable:|:$this->settings['member_topic_avatar_max']">	
+						<img itemprop="image" src='{$member['pp_main_photo']}' class='ipsUserPhoto ipsUserPhoto_variable' style='float: left; position: relative; max-width: 120px; margin: 0px 8px 8px 0px' />
+					<else />
+						<img itemprop="image" src='{$member['pp_thumb_photo']}' class='ipsUserPhoto ipsUserPhoto_large' style='float: left; position: relative; max-width: 120px; margin: 0px 8px 8px 0px' />
+					</if>
+					<div id='user_info_cell' style='padding-left: 10px;'>
+						<h1 class='ipsType_pagetitle'>
+							<span class='fn nickname'>{$member['members_display_name']}</span>
+						</h1>
+						{$this->lang->words['m_member_since']} {parse date="$member['joined']" format="DATE"}<br />
+						<if test="hasWarns:|:!empty( $warns )">
+							<foreach loop="warnsLoop:array( 'ban', 'suspend', 'rpa', 'mq' ) as $k">
+								<if test="warnIsSet:|:isset( $warns[ $k ] )">
+									<span class='ipsBadge ipsBadge_red<if test="warnClickable:|:$warns[ $k ]"> clickable</if>' <if test="warnPopup:|:$warns[ $k ]">onclick='warningPopup( this, {$warns[ $k ]} )'</if>>{$this->lang->words[ 'warnings_profile_badge_' . $k ]}</span>
+								</if>
+							</foreach>
+						</if>
+						<if test="$member['_online']">
+							<span class='ipsBadge ipsBadge_green reset_cursor' data-tooltip="{parse expression="strip_tags($member['online_extra'])"}">{$this->lang->words['online_online']}</span>
+						<else />
+							<span class='ipsBadge ipsBadge_lightgrey reset_cursor'>{$this->lang->words['online_offline']}</span>
+						</if>
+						<span class='desc lighter'>{$this->lang->words['m_last_active']} {$member['_last_active']}</span> 
+					</div>
+					<if test="userStatus:|:$status['status_id'] && $this->settings['su_enabled']">
+					<div id='user_status_cell'>
+						<div id='user_latest_status'>
+							<div>
+								{parse expression="IPSText::truncate( strip_tags( $status['status_content'] ), 180 )"}
+								<span class='ipsType_smaller desc lighter blend_links'><a href='{parse url="app=members&amp;module=profile&amp;section=status&amp;type=single&amp;status_id={$status['status_id']}" seotitle="array($status['member_id'], $status['members_seo_name'])" template="members_status_single" base="public"}'>{$this->lang->words['ps_updated']} {parse date="$status['status_date']" format="manual{%d %b}" relative="true"} &middot; {parse expression="intval($status['status_replies'])"} {$this->lang->words['ps_comments']}</a></span>
+							</div>
+						</div>
+					</div>
+					</if>
+					<ul class="ipsList_inline" id="user_utility_links" style='float: right; margin: 10px 0px;'>
+						<if test="$member['member_tracked']">
+							<li class="ipsButton_secondary">
+								<a id='showSetupPopup' href='#'> {$this->lang->words['track_change_settings']}</a>
+							</li>
+							<li class="ipsButton_secondary important">
+								<a data-confirmaction="true" href='{parse url="app=trackmembers&amp;module=core&amp;section=trackmembers&amp;do=untrack&amp;mid={$member['member_id']}" seotitle="{$member['members_seo_name']}" template="false" base="public"}'> {$this->lang->words['track_stop_tracking_short']}</a>
+							</li>
+						</if>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class='ipsBox_container track_member' id='logs'>
+			<div class='topic_controls clear ipsPad'>
+				<if test="$pages">
+					{$pages}
+				</if>
+				<ul class='topic_buttons'>
+					<if test="count( $logs )">
+						<li><a href='{parse url="app=trackmembers&amp;module=core&amp;section=trackmembers&amp;do=export&amp;mid={$member['member_id']}" seotitle="{$member['members_seo_name']}" template="false" base="public"}'>{$this->lang->words['export_to_pdf']}</a></li>
+					<else />
+						<li class='disabled'><span>{$this->lang->words['export_to_pdf']}</span></li>
+					</if>
+				</ul>
+			</div>
+			</if>
+			<div class='ipsPad'>
+				<div class='ipsFilterbar maintitle'>				
+					<ul class='ipsList_inline ipsType_small'>
+						<li <if test="( $this->request['sort_key'] == 'date' and $this->request['sort_by'] == 'Z-A' ) OR ! isset( $this->request['sort_by'] )">class='active'</if>><a href='{parse url="app=trackmembers&module=core&section=trackmembers&mid={$member['member_id']}&amp;sort_key=date&amp;sort_by=Z-A" base="public"}' rel='nofollow'>{$this->lang->words['filter_date']}</a></li>
+						<li <if test="$this->request['sort_key'] == 'app' and $this->request['sort_by'] == 'A-Z'">class='active'</if>><a href='{parse url="app=trackmembers&module=core&section=trackmembers&mid={$member['member_id']}&amp;sort_key=app&amp;sort_by=A-Z" base="public"}' rel='nofollow'>{$this->lang->words['filter_action']}</a></li>
+						<li><a href='#log_filter_menucontent' id='log_filter'>{$this->lang->words['filter_custom']} <img src="{$this->settings['img_url']}/useropts_arrow.png" /></a></li>
+					</ul>
+				</div>
+				<div id='log_filter_menucontent' class='ipbmenu_content ipsPad' style='display: none'>
+					<form id='filter_form' action="{parse url="app=trackmembers&module=core&section=trackmembers&mid={$member['member_id']}&amp;changefilters=1" base="public"}" method="post">
+						<strong>{$this->lang->words['show_log_type']}</strong><br />
+						<select name="logfilter" id='log_filter' class='input_select'>{$footer_filter['topic_filter']}</select>
+						<br /><br />
+						
+						<strong>{$this->lang->words['filter_sort']}</strong><br />
+						<select name="sort_key" id='sort_by' class='input_select'>{$footer_filter['sort_by']}</select>
+						<br /><br />
+						
+						<strong>{$this->lang->words['filter_direction']}</strong><br />
+						<select name="sort_order" id='direction' class='input_select'>{$footer_filter['sort_order']}</select>
+						<br /><br />
+						
+						<input type="submit" value="{$this->lang->words['sort_submit']}" class="input_submit" />
+					</form>
+				</div>
+				<script type='text/javascript'>
+					new ipb.Menu( $('log_filter'), $('log_filter_menucontent'), { stopClose: true } );
+				</script>
+				<table class='ipb_table'>
+					<tr class='header'>
+						<th scope='col' style='width: 20%'>{$this->lang->words['filter_date']}</th>
+						<th scope='col' style='width: 40%'>{$this->lang->words['filter_description']}</th>
+						<th scope='col' style='width: 20%'>{$this->lang->words['filter_action']}</th>
+						<th scope='col' style='width: 20%'>{$this->lang->words['ip_address']}</th>
+					</tr>
+					<if test="logs:|:is_array( $logs ) AND count( $logs )">
+						{parse striping="logs" classes="row1,row2 altrow"}
+						<foreach loop="logs:$logs as $mid => $r">
+							<tr class='{parse striping="logs"}'>
+								<td>{parse date="$r['date']" format="SHORT"}</td>
+								<td>{$r['description']}</td>
+								<td>{$r['app']}</td>
+								<td align='center'><if test="$r['ip_address']"><a href='{parse url="app=core&amp;module=modcp&amp;tab=iplookup&amp;fromapp=members&amp;_do=submit&amp;ip={$r['ip_address']}&amp;iptool=resolve" base="public"}' title='{$this->lang->words['ip_lookup']} {$r['ip_address']}'>{$r['ip_address']}</a><else />---</if></td>
+							</tr>
+						</foreach>
+					<else />
+						<tr>
+							<td colspan="6"><em>{$this->lang->words['track_nologs']}</em></td>
+						</tr>
+					</if>
+				</table>
+			</div>
+			<if test="$pages">
+				<div class='topic_controls clear ipsPad'>
+					{$pages}
+				</div>
+			</if>
+		</div>
+	</div>
+</div>
+<script type='text/javascript'>
+	var trackmemberpopup = null;
+	$( 'showSetupPopup' ).observe( 'click', function( e )
+	{
+		Event.stop( e );
+		var _url = ipb.vars['base_url'] + 'app=trackmembers&module=ajax&section=setup&mid={$member['member_id']}&secure_key=' + ipb.vars['secure_hash'];
+		
+		trackmemberpopup = new ipb.Popup( 'trackMemberSetup', 
+		{ 
+			type: 'modal',
+			ajaxURL: _url,
+			hideAtStart: false,
+			w: '800px',
+			h: 410 
+		},
+		{
+			afterShow: function()
+			{
+				$$( '#trackmembers_tabs li' ).each( function( tab )
+				{
+					tab.observe( 'click', function( e )
+					{
+						var elem = Event.findElement( e, 'li' );
+						$$( '#trackmembers_tabs li' ).invoke( 'removeClassName', 'active' );
+						elem.addClassName( 'active' );
+						
+						$$( '#trackmembers_content div' ).invoke( 'hide' );
+						$( elem.id + '_content' ).show();
+					});
+				});
+			}
+		});
+	});
+</script>]]></template_content>
+      <template_name>trackMemberLogs</template_name>
+      <template_data>$logs, $member, $status, $pages, $footer_filter</template_data>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>root</template_master_key>
+    </template>
+  </templategroup>
+</templates>

@@ -1,0 +1,70 @@
+.ccsSlideshow {
+	position: relative;
+	overflow: hidden;
+	height: 400px;
+}
+
+.ccsSlideshow_images {
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	overflow: hidden;
+}
+
+	.ccsSlideshow_images > img {
+		position: absolute;
+	}
+
+.ccsSlideshow_move {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	background: rgba(0,0,0,0.6) url( {block_dir}/scroller.png );
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	top: 50%;
+	margin-top: -20px;
+	z-index: 10000;
+	opacity: 0.2;
+	-webkit-transition: all 0.4s linear;
+	-moz-transition: all 0.4s linear;
+}
+	
+	.ccsSlideshow_moveLeft {
+		left: 10px;
+		background-position: left center;
+	}
+
+	.ccsSlideshow_moveRight {
+		right: 10px;
+		background-position: right center;
+	}
+
+	.ccsSlideshow:hover .ccsSlideshow_move {
+		opacity: 0.9;
+	}
+
+h2.ccsSlideshow_title {
+	margin-bottom: 5px;
+}
+
+.ccsSlideshow_imageinfo > div {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	right: 10px;
+	padding: 10px;
+	background: rgba(0,0,0,0.7);
+	color: #fff;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.ccsSlideshow_info {
+	width: 80%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 13px;
+}

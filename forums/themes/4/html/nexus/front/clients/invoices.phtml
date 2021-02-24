@@ -1,0 +1,17 @@
+<ips:template parameters="$invoices, $pagination" />
+
+{template="pageHeader" group="global" app="core" params="\IPS\Member::loggedIn()->language()->get('orders_title')"}
+
+{{if count( $invoices )}}
+	{$pagination|raw}
+	<ul class='ipsDataList ipsDataList_large cNexusOrderList'>
+		{{foreach $invoices as $invoice}}
+			{template="invoiceList" group="clients" params="$invoice"}
+		{{endforeach}}
+	</ul>
+	{$pagination|raw}
+{{else}}
+	<div class='ipsBox ipsPad ipsType_large ipsType_light ipsType_center'>
+		{lang="orders_none"}
+	</div>
+{{endif}}

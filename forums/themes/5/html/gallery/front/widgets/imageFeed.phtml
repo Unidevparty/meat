@@ -1,0 +1,27 @@
+<ips:template parameters="$images, $title, $orientation='vertical'" />
+{{if !empty( $images ) }}
+	<h3 class='ipsType_reset ipsWidget_title'>{$title}</h3>
+	<div class='ipsWidget_inner'>
+		{{if $orientation == 'vertical'}}
+			<div class='ipsPad_half'>
+				<ul class='ipsList_reset cGalleryWidgetList'>
+					{{foreach $images as $image}}
+						{template="imageRow" group="widgets" app="gallery" params="$image, $orientation"}
+					{{endforeach}}
+				</ul>
+			</div>
+		{{else}}
+        <div class='ipsCarousel ipsClearfix' data-ipsCarousel data-ipsCarousel-showDots>
+			<ul class='cGalleryCarousel ipsGrid ipsGrid_collapsePhone' data-role="carouselItems">
+				{{foreach $images as $idx => $image}}
+					{template="imageRow" group="widgets" app="gallery" params="$image, $orientation"}
+				{{endforeach}}
+			</ul>
+            <span class='ipsCarousel_shadow ipsCarousel_shadowLeft'></span>
+            <span class='ipsCarousel_shadow ipsCarousel_shadowRight'></span>
+            <a href='#' class='ipsCarousel_nav ipsHide' data-action='prev'><i class='fa fa-chevron-left'></i></a>
+            <a href='#' class='ipsCarousel_nav ipsHide' data-action='next'><i class='fa fa-chevron-right'></i></a>
+        </div>
+		{{endif}}
+	</div>
+{{endif}}

@@ -1,0 +1,36 @@
+<ips:template parameters="$purchase, $advertisement" />
+{{if $advertisement->active == -1}}
+	<p class="ipsMessage ipsMessage_info">{lang="advertisement_pending_approval"}</p>
+{{elseif $advertisement->active == 1}}
+	<p class="ipsMessage ipsMessage_success">{lang="advertisement_active"}</p>
+{{else}}
+	<p class="ipsMessage ipsMessage_info">{lang="advertisement_expired"}</p>
+{{endif}}
+
+<div class="ipsAdvertisement">
+	<ul class="ipsType_center ipsList_reset">
+		{{foreach json_decode( $advertisement->images, TRUE ) as $image}}
+			{{if $image}}
+				<li>
+					<div class='ipsAdvertisement_large ipsAreaBackground_light ipsPad_half'>
+						<div class='ipsAreaBackground_reset ipsPad_half'>
+							<a href="{$advertisement->link}" target='_blank'><img src="{file="$image" extension="core_Advertisements"}" class='ipsImage ipsContained'></a>
+						</div>
+						<div class="ipsGrid ipsPad_half">
+							<div class="ipsGrid_span6">
+								<span class="ipsType_veryLarge">{$advertisement->impressions}{{if $advertisement->maximum_unit == 'i' and $advertisement->maximum_value != -1}} / {$advertisement->maximum_value}{{endif}}</span>
+								<br>
+								{lang="impressions"}
+							</div>
+							<div class="ipsGrid_span6">
+								<span class="ipsType_veryLarge">{$advertisement->clicks}{{if $advertisement->maximum_unit == 'c' and $advertisement->maximum_value != -1}} / {$advertisement->maximum_value}{{endif}}</span>
+								<br>
+								{lang="clicks"}
+							</div>
+						</div>
+					</div>
+				</li>
+			{{endif}}
+		{{endforeach}}
+	</ul>
+</div>

@@ -1,0 +1,7 @@
+<ips:template parameters="$file" />
+{{if $file->container()->can( 'download' )}}
+	<a href='{{if settings.idm_antileech}}{$file->url('download')->csrf()}{{else}}{$file->url('download')}{{endif}}' class='ipsButton ipsButton_medium ipsButton_primary' {{if $file->container()->message('disclaimer') or count( $file->files() ) > 1 or member.group['idm_wait_period']}}data-ipsDialog{{endif}}>{lang="download_now"}</a>
+{{endif}}
+{{if $file->container()->can( 'view' )}}
+	<a href='{$file->url()}' class='ipsButton ipsButton_medium ipsButton_alternate'>{lang="file_view_details"}</a>
+{{endif}}

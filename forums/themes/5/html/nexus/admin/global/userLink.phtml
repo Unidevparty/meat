@@ -1,0 +1,6 @@
+<ips:template parameters="$member" />
+{{if $member->member_id}}
+	<a href="{url="app=nexus&module=customers&controller=view&id={$member->member_id}"}">{$member->name}</a>
+{{else}}
+	{lang="guest"}
+{{endif}}

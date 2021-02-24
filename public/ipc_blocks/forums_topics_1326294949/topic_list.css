@@ -1,0 +1,11 @@
+.ccsTopicRow_date {
+	min-width: 120px;
+	text-align: center;
+	display: inline-block;
+}
+
+.ccsTopicRow_snippet, .ccsTopicRow {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}

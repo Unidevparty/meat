@@ -1,0 +1,800 @@
+/***************************************************************/
+/* IP.Board 3 CSS                                              */
+/* ___________________________________________________________ */
+/* By Rikki Tissier                                            */
+/* (c)2008 Invision Power Services                             */
+/***************************************************************/
+/* ipb_gallery.css - Gallery styles							   */
+/***************************************************************/
+/* NOTE: This CSS is currently *unoptimized*				   */
+
+/* Image styles */
+.gallery_box {
+	text-align: center;
+	z-index: 1;
+	position: relative;
+}
+
+	.ipsBox.gallery_box {
+		padding: 20px 15px;
+		box-shadow: 0px 5px 25px rgba(0,0,0,0.1) inset;
+		border-radius: 0 0 6px 6px;
+	}
+
+.gallery_image {
+	display: inline-block;
+	margin: 8px !important;
+	padding: 4px 6px !important;
+	box-shadow: 0px 3px 4px rgba(0,0,0,0.1);
+	background: #fff;
+	min-width: 108px;
+	-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+	position: relative;
+}
+
+	.gallery_image.moderated {
+		background: #ecd4db;
+		border: 1px solid #e8c3cd;
+		padding: 3px 5px !important;
+	}
+
+	.gallery_image img.galattach {
+		box-shadow: 0px 0px 5px rgba(0,0,0,0.4) inset;
+		border-radius: 2px;
+		padding: 0;
+	}
+
+	.gallery_image .gallery_item_info {
+		margin-top: 5px;
+	}
+
+	.large_image {
+		min-width: 300px;
+	}
+
+	.gallery_image a {
+		display: inline-block;
+		position: relative;
+		-webkit-transition: all 0.4s linear;
+		-moz-transition: all 0.4s linear;
+	}
+
+	/*.gallery_image a:before {
+		content: " ";
+		width: 39px;
+		height: 39px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -20px 0 0 -20px;
+		background: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/icon_zoom.png ) center center no-repeat;
+		z-index: 1000;
+		display: block;
+		opacity: 0;
+	}
+
+		.gallery_image a:hover:before {
+			opacity: 1;
+		}*/
+
+.gallery_category {
+	position: relative;
+	display: inline-block;
+	margin: 15px;
+	-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+	width: 275px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+}
+
+	.gallery_category > div, .gallery_category::before, .gallery_category::after {
+		padding: 8px;
+		background: rgb(255,255,255);
+		box-shadow: 0px 3px 5px rgba(0,0,0,0.3);
+		border-radius: 3px;
+	}
+		
+		/* Sets up the stack effect */
+		.gallery_category::before, .gallery_category::after {
+			content: " ";
+			display: inline-block;
+			width: 275px;
+			height: 298px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+			z-index: -1;
+			-webkit-transform: rotate(-3deg);
+			-moz-transform: rotate(-3deg);
+			box-shadow: 0px 3px 10px rgba(0,0,0,0.2);
+		}
+		
+			.gallery_category:after {
+				-webkit-transform: rotate(3deg);
+				-moz-transform: rotate(3deg);
+			}
+
+		.gallery_category h2 {
+			position: absolute;
+			top: 8px;
+			left: 8px;
+			right: 8px;
+			background: rgba(0,0,0,0.7);
+			color: #fff;
+			font-size: 15px;
+			padding: 12px 12px;
+			text-align: left;
+		}
+
+			.gallery_category a {
+				color: #fff;
+			}
+
+		.gallery_category .gallery_item_info {
+			margin-top: 10px;
+		}
+
+.gallery_category_image {
+	background-color: #494949;
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 250px;
+	box-shadow: 0px 0px 5px rgba(0,0,0,0.4) inset;
+	border-radius: 2px;
+}
+
+.gallery_item_info {
+	text-align: right;
+	line-height: 22px;
+	font-size: 11px;
+	color: #7b7b7b;
+	font-weight: bold;
+}
+	
+	.gallery_item_info li.faded { opacity: 0.3; }
+	.gallery_item_info img { vertical-align: middle; margin: -2px 2px 0 0;}
+
+.gallery_image_info {
+	padding: 20px;
+	text-align: left;
+}
+
+	.gallery_image_info .desc { 
+		line-height: 1.6;
+	}
+
+#featured_images {
+	height: 600px;
+	position: relative;
+}
+
+	.featured_image {
+		box-shadow: 0px 3px 4px rgba(0,0,0,0.1);
+		background: #fff;
+	}
+
+	.featured_image > div {
+		position: absolute;
+		top: 4px;
+		left: 4px;
+		right: 4px;
+		bottom: 4px;
+	}
+
+.gallery_album {
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+	position: relative;
+	border-bottom: 1px solid #dbe4ef;
+}
+
+	.gallery_box .gallery_album:last-child {
+		border-bottom: 0;
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+
+.gallery_album_info {
+	width: 350px;
+	height: 235px;
+	text-align: left;
+	-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
+	padding: 0 20px;
+}
+	
+	.gallery_album_info .desc {
+		margin-top: 10px;
+		line-height: 1.5;
+	}
+
+.gallery_album_previews {
+	position: absolute;
+	left: 365px;
+	top: 0;
+	right: 0;
+	text-align: left;
+}
+
+	.gallery_album_previews .gallery_image { 
+		margin: 0 5px 11px 0 !important;
+	}
+
+.gallery_preview_strip {
+	position: absolute;
+	left: 240px;
+	right: 0;
+	top: 0px;
+	overflow: hidden;
+}
+
+
+
+.galattach { padding: 3px; position: relative; }
+
+.galattach.cover_img_50 {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/50x50.png ) no-repeat 4px 4px;
+	padding: 13px;
+}
+
+.galattach.cover_img_75 {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/75x75.png ) no-repeat 0px 0px;
+	padding: 13px;
+}
+
+/* Gallery view image */
+
+.image_view_wrap {
+	padding: 1px;
+	border: 1px solid #d5d5d5;
+	background: #fff;
+	-webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 2px rgba(0,0,0,0.2);
+	margin:0px auto;
+	clear: both;
+}
+
+.image_info li { padding: 5px 0px 5px 2px; }
+
+	.image_info li STRONG {
+		width: 30% !important;
+		display: block;
+		float: left;
+	}
+
+#theImage {
+	z-index: 999;
+	width: 100%;
+}
+	#theImage .image_view_wrap {
+		cursor: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/zoom.png), pointer;
+		max-width: 100% !important;
+		height: auto !important;
+	}
+		#theImage .image_view_wrap img { max-width: 100% !important; height: auto !important; }
+
+
+/* Others... */
+em.inline-moderated {
+	display: inline;
+	clear: none;
+	margin-left: 5px;
+	vertical-align: middle;
+}
+
+/***********************************************/
+/* Image notes */
+
+
+.note_wrap {
+	position: absolute;
+	font-size: 12px;
+}
+
+.note_box {
+	border: 1px solid #000;
+	position: relative;
+	cursor: pointer;
+	opacity: 0.7;
+}
+	
+	.note_box .internal {
+		width: 100%;
+		height: 100%;
+		border: 1px solid #cacaca;
+	}
+	
+	.note_wrap .note_box:hover { opacity: 1; }
+	
+.note_wrap.editable.selected .note_box {
+	border: 1px dashed #000;
+	cursor: move;
+}
+	
+	.note_wrap.editable.selected .note_box .internal { border: 1px dashed #fff; }
+
+.note_wrap.editable .handle {
+	width: 11px;
+	height: 11px;
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/drag_handle.png ) no-repeat;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	cursor: se-resize;
+}
+	
+.note_text, .note_form {
+	background: #e3eff3;
+	border: 1px solid #789098;
+	font-size: 11px;
+	margin-top: 4px;
+	text-align: left;
+	display: inline-block;
+}
+
+.note_form textarea { margin-bottom: 5px; }
+
+
+/*DD*/
+.albumdd.ipbmenu_content {
+	background-color: #fff;
+	padding:0px;
+}
+
+/* Upload page */
+#uploadBoxWrap { margin-bottom: 10px; }
+
+#attachments { margin-top: 10px !important; }
+
+#attachments li {
+	margin-right: 5px;
+	margin-left: 5px;
+	min-height: 50px;
+	padding-left: 62px;
+	display: inline-block;
+	width: 190px;
+	overflow: hidden;
+}
+	#attachments li .thumb_img {
+		width: 50px;
+		height: 50px;
+	}
+	
+	#attachments li.error .links,
+	#attachments li.complete .links {
+		top: 40px !important;
+		left: 63px !important ;
+	}
+	
+	#attachments li h4
+	{
+		overflow: hidden !important;
+		white-space: nowrap !important;
+	}
+	
+	#attachments li .progress_bar
+	{
+		top: 43px !important;
+		left: 60px !important;
+		width: 185px !important;
+	}
+	
+	#attachments li p.info { width: 180px !important; }
+
+
+/* Photostrip */
+#photostripwrap {
+	display: block;
+	width: 100%;
+	z-index: 1000;
+	margin-top: 30px;
+	text-align: center;
+	height: 120px;
+}
+
+#photostrip {
+	overflow: hidden;
+	display: block;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+ul#strip
+{
+	margin: 0px;
+	position: relative;
+	display: block;
+	padding: 3px 0px 0px 0px;
+	height: 120px;
+	width: 100%;
+	list-style-type: none;
+	text-align: center;
+}
+
+ul#strip li
+{
+	display: inline-block;
+	list-style: none;
+	margin-right: 1px;
+	padding: 6px;
+	width: 15%;
+}
+
+ul#strip img
+{
+	max-width: 100px;
+	max-height: 100px;
+	vertical-align: middle;
+}
+
+	ul#strip img.emptyBox {
+		width: 100px;
+		height: 100px;
+	}
+
+	ul#strip img.photostripActive {
+		border: 2px solid #D5D5D5;
+		box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+	}
+
+.photoStipNav {
+	width: 30px;
+	z-index: 10000;
+	margin-top: 30px;
+	position: relative;
+	height: 55px;
+}
+
+.photoStipNav.nleft {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/slider/slideLeft.png) no-repeat;
+}
+
+.photoStipNav.nright {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/slider/slideRight.png) no-repeat;
+}
+
+.photoStipNav.nleft:hover,
+.photoStipNav.nright:hover {
+	background-color: #fafbfc;
+	cursor: pointer;
+}
+
+@media (min-width: 768px) and (max-width: 1150px) {
+	ul#strip {
+		height: 87px;
+	}
+
+	ul#strip li {
+		height: 87px;
+	}
+
+	ul#strip img
+	{
+		max-width: 75px;
+		max-height: 75px;
+	}
+
+	ul#strip img.emptyBox
+	{
+		width: 75px;
+		height: 75px;
+	}
+
+	.photoStipNav {
+		margin-top: 10px;
+	}
+}
+
+/* Image view */
+
+img.galmedium {
+	clear: both;
+}
+
+/* Photo sizes */
+#photo_sizes ul
+{
+	margin: 20px 2px;
+	float: none;
+	display: block;
+	width: 100%;
+}
+	#photo_sizes ul li
+	{
+		display: inline-block;
+		width: 22%;
+		color: #333;
+	}
+	
+	#photo_sizes ul li span
+	{
+		font-size: 0.8em;
+		color: #555;
+	}
+	
+	#photo_sizes ul li a
+	{
+		font-weight: bold;
+		font-size: 1.1em;
+		text-transform: smallcaps;
+	}
+
+.image_is_new_box, 
+.image_is_hidden_box {
+	position: absolute !important;
+	display: inline-block !important;
+	z-index:5;
+	margin: 0px !important;
+	width: auto !important;
+	height: 18px !important;
+	line-height: 18px;
+	color: #fff !important;
+	font-weight:bold !important;
+	font-size:0.8em !important;
+	text-decoration: none !important;
+	padding:0px 4px 0px 4px !important;
+	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.4) !important;
+	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.4) !important;
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.4) !important;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+
+.image_is_new_box {
+	background: #c34836 !important;
+}
+
+.image_is_hidden_box {
+	background: #777777 !important;
+}
+
+input[type="checkbox"].albumModBox {
+	position: absolute !important;
+	z-index:9999;
+	top: 12px;
+	left: 10px;
+}
+
+
+/* ALBUMS + MISC */
+.imageDescription {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/trans_bg2.png );
+	color: #e2e2e2;
+	position: absolute;
+	padding: 10px 0px 10px 10px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+
+ul.wrap li {
+	width: 100px;
+	min-height: 140px;
+	vertical-align: top;
+}
+	ul.wrap li .small
+	{
+		position: absolute;
+		background-color: #528f6c;
+		margin-left:90px;
+		width: 18px;
+		font-size: 0.8em;
+		color: #fff;
+		font-weight: bold;
+		padding: 1px 0px;
+		text-align: center;
+		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+	}
+
+	ul.wrap li .small.pin
+	{
+		background-color: transparent;
+		background: url(http://www.meat-expert.ru/public/style_images/meat_expert/gallery/pin.png ) no-repeat;
+	}
+
+#imageOptions_menucontent { width: 145px; }
+
+/* Next/previous links in image view */
+
+div.next, div.previous {
+	padding: 0px 0px 0px 5px;
+	display: inline-block;
+	margin: 0px 15px;
+}
+
+	
+.next.off, .previous.off {
+	color: #a4a4a4;
+}
+
+	div.next a:hover, div.previous a:hover {
+		color: #000000;
+	}
+
+#slide_left { z-index: 9999; }
+#slide_right { z-index: 9999; }
+
+/* Album selection */
+.albumSelected {
+	padding: 4px 10px;
+	border: 1px solid #d5d5d5;
+	background: #fff;
+	-webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+	-moz-box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+	box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
+	display: inline-block;
+	border-radius: 3px;
+	margin: 0 3px;
+	cursor: default;
+}
+
+
+.carousel_nav {
+	background: #fff;
+	color: #444444;
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	line-height: 36px;
+	top: 50%; 
+	margin-top: -25px; 
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	text-align: center;
+	-webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+	-moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+	box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+	font-size: 32px;
+	font-weight: bold;
+	display: block;
+	z-index: 10;
+}
+	
+	.carousel_nav:hover {
+		background: #FF7530;
+		color: #fff;
+	}
+
+.carousel_left { left: -5px; }
+.carousel_right { right: -5px; }
+
+.galleryCarousel
+{
+	width: 100%;
+	height: 500px;
+	position: relative;
+}
+
+	.galleryCarousel .carousel_img 
+	{
+		position: absolute;
+		width: 100%;
+		padding: 0px;
+		height: 500px;
+		box-shadow: 0px 5px 5px rgba(0,0,0,0.2);
+		background-color: #282828;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: contain;
+		overflow: hidden;
+	}
+
+	.galleryCarousel .carousel_img_link
+	{
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.galleryCarousel .imageDescription
+	{
+		position: absolute;
+		padding-right: 20px;
+		bottom: 0;
+		background-color: #000;
+		background-image: none;
+		opacity: 0.8;
+		border-top: 1px solid #282828;
+	}
+
+
+.ipsGallery_h1image_image {
+	width: 75px;
+	height: 75px;
+}
+
+.ipsGallery_h1image {
+	margin-left: 95px;
+}
+
+.ipsGallery_subcategory {
+	margin-left: 10px;
+}
+
+.filterBarPrefix {
+	float: left;
+	margin-right: 8px;
+	font-size: 11px;
+}
+
+	.filterBarPrefix.second {
+		margin-left: 30px;
+	}
+
+
+.memAlbumOptions {
+	border-top: 1px solid #EDF1F5;
+	margin-bottom: 20px;
+	width: 200px;
+}
+
+.memAlbumOptions li {
+	font-size: 12px;
+	border-bottom: 1px solid #EDF1F5;
+}
+
+.memAlbumOptions li a {
+	padding: 5px 10px 5px 25px;
+	display: block;
+}
+
+.memAlbumOptions li.active a {
+	background: #af286d url(http://www.meat-expert.ru/public/style_images/meat_expert/icon_check_white.png ) no-repeat 6px 8px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.album_meta {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.list_content.recent_albums {
+	margin-left: 80px !important;
+}
+
+.ipgallery_h1image_title {
+	margin-left: 90px !important;
+}
+
+.galmemberwrapper {
+	background-color: #000;
+	text-align: center;
+	width: 75px;
+	height: 75px;
+	line-height: 74px;
+	padding: 0px;
+}
+
+	.galmemberwrapper img {
+		vertical-align: middle;
+	}
+
+.ipb_table.gallery_members {
+	table-layout: auto;
+}
+
+.previousSession span {
+	font-size: 18px;
+	line-height: 120%;
+	font-weight: normal;
+}
+
+	.previousSession .previousSessionOptions {
+		margin-top: 20px;
+		margin-bottom: 10px;
+		text-align: center;
+	}
+
+		.previousSession .previousSessionOptions a {
+			margin-left: 10px;
+			margin-right: 10px;
+			font-size: 14px;
+		}

@@ -1,0 +1,44 @@
+.ipsPrint {
+    color: #000 !important;
+}
+.ipsPrint thead {
+    border: 2px solid #000;
+}
+.ipsPrint thead th {
+    text-align: center;
+}
+.ipsPrint tbody {
+    border: 2px solid #000;
+}
+.ipsPrint tbody td.center {
+    text-align: center;
+}
+.ipsPrint .row-bank {
+    border-bottom: 2px solid #000;
+}
+.ipsPrint tbody td {
+    padding: 5px;
+    border: 1px solid #000;
+}
+.ipsPrint th {
+    border: 1px solid #000;
+    background: #FFF;
+    color: #000;
+}
+.ipsPrint h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+    font-weight: 300;
+}
+.ipsPrint hr {
+    border: 0;
+    border-top: 1px #000 solid;
+}
+.ipsPrint .signatureWho {
+	float: left;
+	line-height: 150px;
+}
+.ipsPrint .signatureCEO {
+	float: right;
+	line-height: 150px;
+}

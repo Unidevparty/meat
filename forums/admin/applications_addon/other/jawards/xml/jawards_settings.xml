@@ -1,0 +1,1272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settingexport>
+  <settinggroup>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_title_title> Core Settings</conf_title_title>
+      <conf_title_desc>Manage the settings for [HQ] Awards.</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enable Awards System</conf_title>
+      <conf_description>Enable/Disable all public areas for this awards applications.</conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jacore_enable</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>0</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Global Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>awards,listings</conf_keywords>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title><![CDATA[Custom &quot;Application Disabled&quot; Message]]></conf_title>
+      <conf_description>You may choose to have a special message shown to users when they visit the listings page if the awards application is disabled. (Not Required, default is an error message)</conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>textarea</conf_type>
+      <conf_key>jacore_disabled_msg</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>0</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>awards,listings,error, message</conf_keywords>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Can You Award Yourself?</conf_title>
+      <conf_description>Do you want to allow admins to add their own awards? (ROOT Admin is exempt)</conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jacore_self_awarding</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>0</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group>Other Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description><![CDATA[This is the user id which will be entered as who gave the award. Used if the hook doesn't have this setting.
+]]></conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jacore_autouser</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show Awards in Profile</conf_title>
+      <conf_description><![CDATA[Do you want your user's awards to be shown in their profile?]]></conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jacore_show_profile</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group>Profile Display Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show short description</conf_title>
+      <conf_description>Do you want to show the Awards descrition in profile view?</conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jacore_show_profile_desc</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show long description</conf_title>
+      <conf_description>Do you want to show the Awards descrition in profile view?</conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jacore_show_profile_longdesc</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show given by</conf_title>
+      <conf_description><![CDATA[Show the 'Given by' information]]></conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jacore_show_profile_given</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show Notes</conf_title>
+      <conf_description><![CDATA[Show the awards 'Notes' content?]]></conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jacore_show_profile_notes</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>9</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show missing Awards</conf_title>
+      <conf_description>Turn on to show Awards that the user has not yet earned)</conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jacore_showmissing</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>10</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Styling to use for dim</conf_title>
+      <conf_description>The style commands to use to dim an award not received</conf_description>
+      <conf_group>49</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jacore_profiledim</conf_key>
+      <conf_default>filter: alpha(opacity=40); opacity: 0.4;</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>11</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jacore</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jaabb</conf_title_keyword>
+      <conf_title_title>(JAABB) AutoAward by Blog entry</conf_title_title>
+      <conf_title_desc>Reward users for blogging</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Activate auto-awarding for blogging</conf_description>
+      <conf_group>50</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaabb_enabled</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabb</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description>This is the user id which will be entered as who gave the award.</conf_description>
+      <conf_group>50</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jaabb_autouser</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabb</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jaabg</conf_title_keyword>
+      <conf_title_title>(JAABG) AutoAward by Gallery Upload</conf_title_title>
+      <conf_title_desc>Reward users for images</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Activate auto-awarding for uploading an image</conf_description>
+      <conf_group>51</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaabg_enabled</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabg</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description>This is the user id which will be entered as who gave the award.</conf_description>
+      <conf_group>51</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jaabg_autouser</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabg</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jaabp</conf_title_keyword>
+      <conf_title_title>(JAABP) AutoAward By Post</conf_title_title>
+      <conf_title_desc>Main settings for the Award By Post hook</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Activate auto-awarding by the number of posts a user has made.</conf_description>
+      <conf_group>52</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaabp_enabled</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Highest only</conf_title>
+      <conf_description>Only have the highest award current for the user, will remove previous awards before new one issued.</conf_description>
+      <conf_group>52</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaabp_highonly</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description>This is the user id which will be entered as who gave the award.</conf_description>
+      <conf_group>52</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jaabp_autouser</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jaafu</conf_title_keyword>
+      <conf_title_title>(JAAFU) AutoAward by Upload</conf_title_title>
+      <conf_title_desc>Reward users for uploads</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Activate auto-awarding for uploading a file</conf_description>
+      <conf_group>53</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaafu_enabled</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaafu</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description>This is the user id which will be entered as who gave the award.</conf_description>
+      <conf_group>53</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jaafu_autouser</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaafu</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jaanp</conf_title_keyword>
+      <conf_title_title>(JAANP) AutoAward on Nexus Payment</conf_title_title>
+      <conf_title_desc>Main settings for the Award on Nexus Payment</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Activate auto-awarding when a Nexus payment is made.</conf_description>
+      <conf_group>54</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaanp_enabled</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaanp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description>This is the user id which will be entered as who gave the award.</conf_description>
+      <conf_group>54</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jaanp_autouser</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaanp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jaasp</conf_title_keyword>
+      <conf_title_title>(JAASP) AutoAward on Subscription Payment</conf_title_title>
+      <conf_title_desc>Awards AutoAwarding by Subscription Payments</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Activate auto-awarding by subscription payments.</conf_description>
+      <conf_group>55</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaasp_enabled</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaasp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description>This is the user id which will be entered as who gave the award.</conf_description>
+      <conf_group>55</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jaasp_autouser</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaasp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_title_title>(JAPA) Public Awarding </conf_title_title>
+      <conf_title_desc/>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Disable Public Awarding</conf_title>
+      <conf_description>This allows you to completely disable awarding on the public end. This will override all permissions, and it will not affect the Admin end for this application.</conf_description>
+      <conf_group>56</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japa_public_awarding</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Enable/Disable Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Restrict Public Award Removal</conf_title>
+      <conf_description><![CDATA[Should users on the public end only be able to remove awards they have given?<br />
+<br />
+THIS EXCLUDES ADMINISTRATORS]]></conf_description>
+      <conf_group>56</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japa_restricted_removing</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group>Permission Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Allow Self Awarding</conf_title>
+      <conf_description>Can users award themselves?</conf_description>
+      <conf_group>56</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japa_self_awarding</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Award Same Group Only</conf_title>
+      <conf_description><![CDATA[Can users award any member, or only those in their group?<br />
+<br />
+You may choose to include subgroups below.]]></conf_description>
+      <conf_group>56</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japa_same_group</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Include Subgroups</conf_title>
+      <conf_description>Do you want to include members in their subgroups, if they can only award members in their same group?</conf_description>
+      <conf_group>56</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japa_sub_groups</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Approve Public Awards</conf_title>
+      <conf_description>Do you want to approve, via the ACP all awards given publicly?</conf_description>
+      <conf_group>56</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japa_approve_new</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Approve Public Awards Removals</conf_title>
+      <conf_description>Do you want to approve any award removals?</conf_description>
+      <conf_group>56</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japa_approve_removals</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Admin Approval Exempt</conf_title>
+      <conf_description><![CDATA[Which groups do not require admin approval? Admin groups are always exempt.<br />
+<br />
+These groups will count towards both settings above.]]></conf_description>
+      <conf_group>56</conf_group>
+      <conf_type>multi</conf_type>
+      <conf_key>japa_approval_exempt</conf_key>
+      <conf_default/>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if($save == 1)
+{
+    if(is_array($_POST['japa_approval_exempt']) )
+	{
+		$_POST['japa_approval_exempt'] = implode(",",$_POST['japa_approval_exempt']);
+	}
+	else
+	{
+		$_POST['japa_approval_exempt'] = "";
+	}
+
+	$key = 'japa_approval_exempt';
+}
+if ( $show == 1 )
+{
+    $key='japa_approval_exempt[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japa</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>japab</conf_title_keyword>
+      <conf_title_title>(JAPAB) Acheivement Badge Display</conf_title_title>
+      <conf_title_desc>Settings for achievment awards displayed in the users Profile in posts</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Display achievment awards, hook needs to be enable as well.</conf_description>
+      <conf_group>57</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japab_show</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>award achievment</conf_keywords>
+      <conf_title_keyword>japab</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Styling to use for dim</conf_title>
+      <conf_description>The style commands to use to dim an award not received</conf_description>
+      <conf_group>57</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>japab_dim</conf_key>
+      <conf_default>filter: alpha(opacity=40); opacity: 0.4;</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japab</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Resize Awards Icons</conf_title>
+      <conf_description><![CDATA[Do you want the system to resize the award icons in the topic-post view?<br />
+<br />
+<strong style="color:#FF0000;">THIS REQUIRES THE PHP GD LIBRARY TO BE INSTALLED!!!</strong><br />
+<br />
+Disable this if you do not have the GD library installed.]]></conf_description>
+      <conf_group>57</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japab_resize</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japab</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Maximum Resized Award Icon Dimensions</conf_title>
+      <conf_description><![CDATA[This will be the maximum icon size for award icons displayed in posts. If an image exceeds this, it will be resized to this maximum size, but only if the setting above is enabled.<br />
+<br />
+Required Format: WIDTHxHEIGHT]]></conf_description>
+      <conf_group>57</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>japab_resize_size</conf_key>
+      <conf_default>25x25</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japab</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Awards Tool Tip Text</conf_title>
+      <conf_description><![CDATA[Please enter the text you want displayed in the tool tip for awards displayed in the topics.<br />
+<br />
+<strong>Special Codes:</strong><br />
+{name} = The name of the award<br />
+{desc} = The description of the award<br />
+{notes} = Notes given when awarded<br />
+{date} = Date the award was given]]></conf_description>
+      <conf_group>57</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>japab_tool_tip</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japab</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Multiple Awards</conf_title>
+      <conf_description>How to handle multiple Awards for the same user</conf_description>
+      <conf_group>57</conf_group>
+      <conf_type>dropdown</conf_type>
+      <conf_key>japab_multiawards</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra>0=Hide&#13;
+1=Counter</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japab</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Padding</conf_title>
+      <conf_description>Padding to add between award images</conf_description>
+      <conf_group>57</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>japab_padding</conf_key>
+      <conf_default><![CDATA[&nbsp; ]]></conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[if( $show == 1 && $value )
+{
+  $value = htmlspecialchars( $value );
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japab</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>japbd</conf_title_keyword>
+      <conf_title_title>(JAPBD) Post Badge Display</conf_title_title>
+      <conf_title_desc>Post badge display, only ever one possible</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Display badges, hook needs to be enable as well.</conf_description>
+      <conf_group>58</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japbd_show</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>award profile</conf_keywords>
+      <conf_title_keyword>japbd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jappd</conf_title_keyword>
+      <conf_title_title>(JAPPD) Post Profile Display</conf_title_title>
+      <conf_title_desc>Settings for awards displayed in the users Profile in posts</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Display profile awards, hook needs to be enable as well.</conf_description>
+      <conf_group>59</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jappd_show</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>award profile</conf_keywords>
+      <conf_title_keyword>jappd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number to show</conf_title>
+      <conf_description>Select the number of Awards to show in the Profile display</conf_description>
+      <conf_group>59</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jappd_count</conf_key>
+      <conf_default>5</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>award profile count</conf_keywords>
+      <conf_title_keyword>jappd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Resize Awards Icons</conf_title>
+      <conf_description><![CDATA[Do you want the system to resize the award icons in the topic-post view?<br />
+<br />
+<strong style="color:#FF0000;">THIS REQUIRES THE PHP GD LIBRARY TO BE INSTALLED!!!</strong><br />
+<br />
+Disable this if you do not have the GD library installed.]]></conf_description>
+      <conf_group>59</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jappd_resize</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Maximum Resized Award Icon Dimensions</conf_title>
+      <conf_description><![CDATA[This will be the maximum icon size for award icons displayed in posts. If an image exceeds this, it will be resized to this maximum size, but only if the setting above is enabled.<br />
+<br />
+Required Format: WIDTHxHEIGHT]]></conf_description>
+      <conf_group>59</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jappd_resize_size</conf_key>
+      <conf_default>25x25</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Awards Tool Tip Text</conf_title>
+      <conf_description><![CDATA[Please enter the text you want displayed in the tool tip for awards displayed in the topics.<br />
+<br />
+<strong>Special Codes:</strong><br />
+{name} = The name of the award<br />
+{desc} = The description of the award<br />
+{notes} = Notes given when awarded<br />
+{date} = Date the award was given]]></conf_description>
+      <conf_group>59</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jappd_tool_tip</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Multiple Awards</conf_title>
+      <conf_description>How to handle multiple Awards for the same user</conf_description>
+      <conf_group>59</conf_group>
+      <conf_type>dropdown</conf_type>
+      <conf_key>jappd_multiawards</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra>0=Hide&#13;
+1=Show&#13;
+2=Counter&#13;
+3=Latest/Counter</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Padding</conf_title>
+      <conf_description>Padding to add between award images</conf_description>
+      <conf_group>59</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jappd_padding</conf_key>
+      <conf_default><![CDATA[&nbsp; ]]></conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[if( $show == 1 && $value )
+{
+  $value = htmlspecialchars( $value );
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>jappn</conf_title_keyword>
+      <conf_title_title>(JAPPN) Post Profile Naked Display</conf_title_title>
+      <conf_title_desc>Settings for inage only awards displayed in the users Profile in posts</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Display naked profile awards, hook needs to be enable as well.</conf_description>
+      <conf_group>60</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jappn_show</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>award profile</conf_keywords>
+      <conf_title_keyword>jappn</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number to show</conf_title>
+      <conf_description>Select the number of Awards to show in the Profile display</conf_description>
+      <conf_group>60</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jappn_count</conf_key>
+      <conf_default>5</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>award profile count</conf_keywords>
+      <conf_title_keyword>jappn</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Resize Awards Icons</conf_title>
+      <conf_description><![CDATA[Do you want the system to resize the award icons in the topic-post view?<br />
+<br />
+<strong style="color:#FF0000;">THIS REQUIRES THE PHP GD LIBRARY TO BE INSTALLED!!!</strong><br />
+<br />
+Disable this if you do not have the GD library installed.]]></conf_description>
+      <conf_group>60</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jappn_resize</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappn</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Maximum Resized Award Icon Dimensions</conf_title>
+      <conf_description><![CDATA[This will be the maximum icon size for award icons displayed in posts. If an image exceeds this, it will be resized to this maximum size, but only if the setting above is enabled.<br />
+<br />
+Required Format: WIDTHxHEIGHT]]></conf_description>
+      <conf_group>60</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jappn_resize_size</conf_key>
+      <conf_default>25x25</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappn</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Awards Tool Tip Text</conf_title>
+      <conf_description><![CDATA[Please enter the text you want displayed in the tool tip for awards displayed in the topics.<br />
+<br />
+<strong>Special Codes:</strong><br />
+{name} = The name of the award<br />
+{desc} = The description of the award<br />
+{notes} = Notes given when awarded<br />
+{date} = Date the award was given]]></conf_description>
+      <conf_group>60</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jappn_tool_tip</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappn</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Multiple Awards</conf_title>
+      <conf_description>How to handle multiple Awards for the same user</conf_description>
+      <conf_group>60</conf_group>
+      <conf_type>dropdown</conf_type>
+      <conf_key>jappn_multiawards</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra>0=Hide&#13;
+1=Show</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappn</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Padding</conf_title>
+      <conf_description>Padding to add between award images</conf_description>
+      <conf_group>60</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>jappn_padding</conf_key>
+      <conf_default><![CDATA[<br />]]></conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[if( $show == 1 && $value )
+{
+  $value = htmlspecialchars( $value );
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jappn</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_title_title>(JAPSD) Post Signature Display</conf_title_title>
+      <conf_title_desc>Settings for awards displayed in the users Signature in posts</conf_title_desc>
+      <conf_title_tab>JAwards</conf_title_tab>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Display profile awards, hook needs to be enable as well.</conf_description>
+      <conf_group>61</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japsd_show</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>award profile</conf_keywords>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number to show</conf_title>
+      <conf_description>Select the number of Awards to show in the Profile display</conf_description>
+      <conf_group>61</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>japsd_count</conf_key>
+      <conf_default>5</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>award profile count</conf_keywords>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Resize Awards Icons</conf_title>
+      <conf_description><![CDATA[Do you want the system to resize the award icons in the topic-post view?<br />
+<br />
+<strong style="color:#FF0000;">THIS REQUIRES THE PHP GD LIBRARY TO BE INSTALLED!!!</strong><br />
+<br />
+Disable this if you do not have the GD library installed.]]></conf_description>
+      <conf_group>61</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>japsd_resize</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Maximum Resized Award Icon Dimensions</conf_title>
+      <conf_description><![CDATA[This will be the maximum icon size for award icons displayed in posts. If an image exceeds this, it will be resized to this maximum size, but only if the setting above is enabled.<br />
+<br />
+Required Format: WIDTHxHEIGHT]]></conf_description>
+      <conf_group>61</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>japsd_resize_size</conf_key>
+      <conf_default>25x25</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Awards Tool Tip Text</conf_title>
+      <conf_description><![CDATA[Please enter the text you want displayed in the tool tip for awards displayed in the topics.<br />
+<br />
+<strong>Special Codes:</strong><br />
+{name} = The name of the award<br />
+{desc} = The description of the award<br />
+{notes} = Notes given when awarded<br />
+{date} = Date the award was given]]></conf_description>
+      <conf_group>61</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>japsd_tool_tip</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Multiple Awards</conf_title>
+      <conf_description>How to handle multiple Awards for the same user</conf_description>
+      <conf_group>61</conf_group>
+      <conf_type>dropdown</conf_type>
+      <conf_key>japsd_multiawards</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra>0=Hide&#13;
+1=Show&#13;
+2=Counter&#13;
+3=Latest/Counter</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Padding</conf_title>
+      <conf_description>Padding between Award images</conf_description>
+      <conf_group>61</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>japsd_padding</conf_key>
+      <conf_default><![CDATA[&nbsp; ]]></conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[if( $save == 1 && $value )
+{
+}
+if( $show == 1 && $value )
+{
+  $value = htmlspecialchars( $value );
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Display Position</conf_title>
+      <conf_description>Where do you want the signature view box to appear?</conf_description>
+      <conf_group>61</conf_group>
+      <conf_type>dropdown</conf_type>
+      <conf_key>japsd_position</conf_key>
+      <conf_default/>
+      <conf_extra>left=Left&#13;
+center=Center&#13;
+right=Right</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>japsd</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </settinggroup>
+</settingexport>

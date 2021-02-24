@@ -1,0 +1,140 @@
+.valHeader {
+	border-bottom: 1px solid rgba(0,0,0,0.075);
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+
+.valSteps {
+	border-bottom: 1px solid rgba(0,0,0,0.075);
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+
+.valAgreement {
+	margin-bottom: 15px;
+	padding-bottom: 15px;
+}
+
+ul.ipsType_normal {
+	margin: 0;
+	-webkit-padding-start: 0;
+	list-style-type:none;
+}
+
+ul.ipsType_normal li:not(:last-child) {
+	margin-bottom: 10px;
+}
+
+.valSubmit {
+	border-bottom: 1px solid rgba(0,0,0,0.075);
+	padding-bottom: 15px;
+}
+
+.valStep {
+    border-radius: 4px;
+}
+
+.valStep_number {
+	border-bottom: 1px solid rgba(0,0,0,0.075);
+	margin: 0;
+}
+
+.valStep_number span {
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Roboto', sans-serif;
+	padding-bottom: 25px;
+	font-weight: 300;
+	font-size: 28px;
+	margin: 0 0 15px 0;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	line-height: 50px;
+	display: inline-block;
+	text-align: center;
+	background: #a91217;
+	color: #fff;
+}
+
+.valAgreement {
+	width: 65%;
+	margin: 0 auto;
+}
+
+.valAgreementWindow {
+	border: 1px solid rgba(0,0,0,0.075);
+	height: 175px;
+	overflow: auto;
+	margin-bottom: 10px;
+}
+
+.valAgreementWindow p:first-child {
+	margin-top: 0;
+}
+
+.valAgreementWindow p:last-child {
+	margin-bottom: 0;
+}
+
+.valAgreement ul {
+	-webkit-padding-start: 0;
+	margin: 6px 0 0 0;
+}
+
+.valFromAgree {
+	display: none;
+}
+
+.valPlans {
+	width: 95%;
+	margin: 0 auto;
+}
+
+.valPlans thead th {
+	text-align: center;
+	background-color: #a31514;
+	font-size: 20px;
+	color: #fff;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0;
+}
+.valBorder { border: 1px solid rgba(0,0,0,0.075); }
+.valPlans tfoot tr {
+	text-align: center;
+	background-color: #f9f9f9;
+	font-size: 20px;
+	color: #fff;
+	line-height: 24px;
+	font-weight: 400;
+	margin: 0;
+}
+
+.valPlans thead th span {
+	display: block;
+	font-size: 14px;
+}
+
+.valPlans thead th:nth-child(1) {
+	width: 25%;
+}
+
+.valPlans thead th:nth-child(2) {
+	width: 25%;
+}
+
+.valPlans thead th:nth-child(3) {
+	width: 25%;
+}
+
+.valPlans thead th:nth-child(4) {
+	width: 25%;
+}
+
+.valPlans thead th {
+	border-right: 1px solid rgba(0,0,0,0.075);
+}
+
+.valPlans tbody td {
+	border-right: 1px solid rgba(0,0,0,0.075);
+}

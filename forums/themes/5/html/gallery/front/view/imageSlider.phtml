@@ -1,0 +1,23 @@
+<ips:template parameters="$image, $slider, $next=NULL, $prev=NULL, $hasNext=TRUE, $hasPrev=TRUE" />
+
+<li class='ipsJS_show'><a href='#' data-action='prev' {{if !$hasPrev}}data-disabled='true'{{endif}}><i class='fa fa-angle-left'></i></a></li>
+<li class='cGalleryAlbumSlider_wrapper'>
+	<ol class='ipsList_reset cGalleryAlbumSlider' data-role='collection'>
+
+{{for $i=0, $j=count($slider['previous']); $i<3-$j; $i++}}
+	{template="imageThumbnail" group="view" params="FALSE"}
+{{endfor}}
+{{foreach array_reverse( $slider['previous'] ) as $idx => $previous}}
+	{template="imageThumbnail" group="view" params="$previous"}
+{{endforeach}}
+	{template="imageThumbnail" group="view" params="$image, true"}
+{{foreach $slider['next'] as $next}}
+	{template="imageThumbnail" group="view" params="$next"}
+{{endforeach}}
+{{for $i=0, $j=count($slider['next']); $i<3-$j; $i++}}
+	{template="imageThumbnail" group="view" params="FALSE"}
+{{endfor}}
+
+	</ol>
+</li>
+<li class='ipsJS_show'><a href='#' data-action='next' {{if !$hasNext}}data-disabled='true'{{endif}}><i class='fa fa-angle-right'></i></a></li>

@@ -1,0 +1,8 @@
+<ips:template parameters="$container" />
+
+<div class='ipsType_center'>
+	<p class='ipsType_large'>{lang="no_entries"}</p>
+	{{if $container->can('add')}}
+		<a href='{url="app=blog&module=blogs&controller=submit&id={$container->_id}" seoTemplate="blog_submit"}' class='ipsButton ipsButton_primary ipsButton_medium'>{lang="submit_entry"}</a>
+	{{endif}}
+</div>

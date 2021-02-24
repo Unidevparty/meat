@@ -1,0 +1,35 @@
+<ips:template parameters="$package, $grid=TRUE, $carousel=FALSE, $mini=FALSE" />
+
+<li class='{{if $grid}}ipsGrid_span3{{endif}} {{if $carousel}}ipsCarousel_item{{endif}} cNexusProduct {{if $mini}}cNexusProduct_mini{{endif}} ipsPad_half ipsClearfix' itemprop="itemListElement" itemscope="" itemtype="http://schema.org/Product">
+	<a href='{$package->url()}' class='cNexusProduct_image'>
+		{{if $package->image}}
+			<img src="{$package->image}" class='ipsImage' itemprop="image">
+		{{else}}
+			<div class='ipsNoThumb ipsNoThumb_product'>&nbsp;</div>
+		{{endif}}
+	</a>
+	<div>
+		<h2 class='cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks'>
+			<a href="{$package->url()}" data-role='productLink' class='{{if $carousel}}ipsTruncate ipsTruncate_line{{endif}}' itemprop="name">{$package->_title}</a>
+		</h2>
+		<p class='ipsType_reset'>
+			<span data-role="price">{$package->priceToDisplay()|raw}</span>
+		</p>
+		{{if $package->physical}}
+			{{if $package->stock !== 0}}
+				<span class='ipsType_small cNexusStock cNexusStock_inStock'>{{if settings.nexus_show_stock && $package->stock !== -1 && $package->stock !== -2}}{lang="x_in_stock" pluralize="$package->stock"}{{else}}{lang="in_stock"}{{endif}}</span>
+				<link itemprop="availability" content='in_stock' href="http://schema.org/InStock">
+			{{else}}
+				<span class='ipsType_small cNexusStock cNexusStock_notInStock ipsType_warning'>{lang="out_of_stock"}</span>
+				<link itemprop="availability" content='out_of_stock' href="http://schema.org/OutOfStock">
+			{{endif}}
+		{{endif}}
+		{{if $package->reviewable}}
+			<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+				{template="rating" group="global" app="core" params="'medium', $package->item()->averageReviewRating(), \IPS\Settings::i()->reviews_rating_out_of, $package->item()->memberReviewRating()"} {{if !$mini}}<span class='ipsType_small'>({$package->item()->reviews})</span>{{endif}}
+				<meta itemprop="ratingValue" content="{$package->item()->averageReviewRating()}">
+				<meta itemprop="reviewCount" content="{$package->item()->reviews}">
+			</div>
+		{{endif}}
+	</div>
+</li>

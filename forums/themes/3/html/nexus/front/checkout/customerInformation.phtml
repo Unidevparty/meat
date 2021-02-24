@@ -1,0 +1,57 @@
+<ips:template parameters="$informationForm, $loginForms, $loginError, $invoice" />
+{{if $loginForms !== NULL}}
+	<section data-controller='nexus.front.checkout.register' {{if isset( \IPS\Request::i()->customer_submitted )}}data-regform="true"{{endif}}>
+		{{if settings.allow_reg}}
+			<div class='ipsGrid ipsGrid_collapsePhone ipsSpacer_top' data-role="memberChoice">
+				<div class='ipsGrid_span6 ipsPad cNexusCheckout_returning'>
+					<h2 class="ipsType_sectionHead ipsSpacer_bottom">{lang="returning_member"}</h2>
+					<div>
+						{{if $loginError !== NULL}}
+							{template="message" group="global" location="global" app="core" params="$loginError, 'error'"}
+							<br>
+						{{endif}}
+						{{foreach $loginForms as $k => $form}}
+							{$form|raw}
+							<br>
+						{{endforeach}}
+					</div>
+				</div>
+				<div class='ipsGrid_span6 ipsPad'>
+					<h2 class="ipsType_sectionHead">{lang="new_customers"}</h2>
+					<p class='ipsType_normal'>
+						{lang="new_customer_blurb"}
+					</p>
+					<button data-action='newMember' class='ipsButton ipsButton_primary ipsButton_medium'>{lang="continue_as_new_member"}</button>
+				</div>
+			</div>
+			<div class="ipsPad ipsJS_hide" data-role='newCustomerForm'>
+				<h2 class='ipsType_sectionHead ipsSpacer_top'>{lang="create_new_account"}</h2>
+				{$informationForm|raw}
+			</div>
+		{{else}}
+			<div class="ipsPad">
+				<h2 class="ipsType_sectionHead ipsSpacer_bottom">{lang="sign_in"}</h2>
+				<div>
+					{{if $loginError !== NULL}}
+						{template="message" group="global" location="global" app="core" params="$loginError, 'error'"}
+						<br>
+					{{endif}}
+					{{foreach $loginForms as $k => $form}}
+						{$form|raw}
+						<br>
+					{{endforeach}}
+				</div>
+			</div>
+		{{endif}}
+	</section>
+{{else}}
+	<div class='ipsColumns ipsColumns_collapsePhone ipsSpacer_top ipsSpacer_double'>
+		<div class='ipsColumn ipsColumn_fluid'>
+			<h2 class='ipsType_sectionHead ipsSpacer_bottom'>{lang="billing_information"}</h2>
+			{$informationForm|raw}
+		</div>
+		<div class='ipsColumn ipsColumn_wide'>
+			{template="checkoutOrderSummary" group="checkout" app="nexus" params="$invoice->summary()"}
+		</div>
+	</div>	
+{{endif}}

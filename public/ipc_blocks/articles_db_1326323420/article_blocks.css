@@ -1,0 +1,18 @@
+.ccsArticles_block {
+	display: inline-block;
+	overflow: hidden;
+	float: left;
+	margin-bottom: 10px;
+}
+
+.ccsArticles_img {
+	overflow: hidden;
+}
+
+.ccsArticles_img > img {
+	position: relative;
+}
+
+.ccsArticles_block h2 {
+	margin-top: 10px;
+}

@@ -1,0 +1,52 @@
+/* PHONES */
+@media screen and (max-width: 767px) {
+	.ipsApp .cGalleryAlbums_recent {
+		padding: 0;
+	}
+
+	.cGalleryAlbums_recent > ul {
+		height: 134px;
+	}
+	html[dir="ltr"] .cGalleryAlbums_recent > ul {
+		padding-left: 138px;
+	}
+	html[dir="rtl"] .cGalleryAlbums_recent > ul {
+		padding-right: 138px;
+	}
+
+	.cGalleryAlbums_recent > ul > li:first-child,
+	.cGalleryAlbums_recent > ul > li:first-child a {
+		width: 134px;
+		height: 134px;
+	}
+
+	.cGalleryAlbums_recent > ul > li,
+	.cGalleryAlbums_recent > ul > li a {
+		width: 65px;
+		height: 65px;
+	}
+
+	/* IMAGE VIEW */
+	#elGalleryHeader {
+		margin: -10px -10px 0 -10px;
+	}
+
+	.cGalleryAlbumSlider_wrapper {
+		width: 265px;
+	}
+
+	.cGalleryAlbumSlider li {
+		width: 38px;
+		height: 38px;
+	}
+
+	#elGalleryNav a[data-action] {
+		font-size: 30px;
+		position: relative;
+		top: -5px;
+	}
+
+	body[data-pageapp="gallery"][data-pagecontroller="view"] .cWidgetContainer:not( .ipsHide ) + div #elGalleryHeader {
+		margin-top: 10px;
+	}
+}

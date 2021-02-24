@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Departments</grouptitle>
+		<grouplang>support_departments</grouplang>
+		<items>
+			<item>
+				<key>departments_view</key>
+				<string>Can view support departments?</string>
+			</item>
+			<item>
+				<key>departments_edit</key>
+				<string>Can edit support departments?</string>
+			</item>
+			<item>
+				<key>departments_add</key>
+				<string>Can add new support departments?</string>
+			</item>
+			<item>
+				<key>departments_delete</key>
+				<string>Can delete support departments?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Custom Support Fields</grouptitle>
+		<grouplang>support_cfields</grouplang>
+		<items>
+			<item>
+				<key>scfields_view</key>
+				<string>Can view custom support fields?</string>
+			</item>
+			<item>
+				<key>scfields_edit</key>
+				<string>Can edit custom support fields?</string>
+			</item>
+			<item>
+				<key>scfields_add</key>
+				<string>Can add new custom support fields?</string>
+			</item>
+			<item>
+				<key>scfields_delete</key>
+				<string>Can delete custom support fields?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Staff</grouptitle>
+		<grouplang>support_staff</grouplang>
+		<items>
+			<item>
+				<key>staff_view</key>
+				<string>Can view staff members?</string>
+			</item>
+			<item>
+				<key>staff_edit</key>
+				<string>Can edit staff members?</string>
+			</item>
+			<item>
+				<key>staff_add</key>
+				<string>Can add new staff members?</string>
+			</item>
+			<item>
+				<key>staff_delete</key>
+				<string>Can delete staff members?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Statuses</grouptitle>
+		<grouplang>support_statuses</grouplang>
+		<items>
+			<item>
+				<key>statuses_view</key>
+				<string>Can view statuses?</string>
+			</item>
+			<item>
+				<key>statuses_edit</key>
+				<string>Can edit statuses?</string>
+			</item>
+			<item>
+				<key>statuses_add</key>
+				<string>Can add new statuses?</string>
+			</item>
+			<item>
+				<key>statuses_delete</key>
+				<string>Can delete statuses?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Severities</grouptitle>
+		<grouplang>support_severities</grouplang>
+		<items>
+			<item>
+				<key>severities_view</key>
+				<string>Can view severities?</string>
+			</item>
+			<item>
+				<key>severities_edit</key>
+				<string>Can edit severities?</string>
+			</item>
+			<item>
+				<key>severities_add</key>
+				<string>Can add new severities?</string>
+			</item>
+			<item>
+				<key>severities_delete</key>
+				<string>Can delete severities?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Stock Actions</grouptitle>
+		<grouplang>support_stockactions</grouplang>
+		<items>
+			<item>
+				<key>stockactions_view</key>
+				<string>Can view stock actions?</string>
+			</item>
+			<item>
+				<key>stockactions_edit</key>
+				<string>Can edit stock actions?</string>
+			</item>
+			<item>
+				<key>stockactions_add</key>
+				<string>Can add new stock actions?</string>
+			</item>
+			<item>
+				<key>stockactions_delete</key>
+				<string>Can delete stock actions?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Settings</grouptitle>
+		<grouplang>settings</grouplang>
+		<items>
+			<item>
+				<key>settings_support</key>
+				<string>Can view Support Settings?</string>
+			</item>
+		</items>
+	</group>
+</permissions>

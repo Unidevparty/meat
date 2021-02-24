@@ -1,0 +1,4 @@
+.cRolesTable tr td:first-child {
+	width: 65px;
+	text-align: center;
+}

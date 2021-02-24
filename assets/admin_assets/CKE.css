@@ -1,0 +1,48 @@
+.qa-q {
+	padding-left: 20px;
+	font-weight: bold;
+}
+.qa-q::before {
+	content: '-';
+}
+.qa-a {
+	padding-left: 40px;
+}
+.qa-a::before {
+	content: '-';
+}
+blockquote {
+	margin-left: 30px;
+	padding-left: 15px;
+	border-left: 3px solid #eee;
+}
+.blockquote {
+	margin-left: 30px;
+	padding: 10px 20px;
+	border-left: 5px solid #f00;
+	background: #f5f5f5;
+}
+.marked-list {
+	color: #f00;
+}
+
+.marked-list,
+.marked-list li {
+	list-style-type: none;
+	position: relative;
+	margin-left: 0;
+}
+.marked-list li {
+	padding-left: 30px;
+}
+.marked-list li:before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #a1181b;
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    margin-right: -3px;
+}

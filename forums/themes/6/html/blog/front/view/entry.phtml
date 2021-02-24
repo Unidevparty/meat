@@ -1,0 +1,171 @@
+<ips:template parameters="$entry, $previous, $next" />
+
+<header>
+	{template="blogHeader" group="view" app="blog" params="$entry->container()"}
+</header>
+
+<article class='ipsBox ipsPad ipsSpacer_top ipsType_break'>
+	<header>
+		<h1 class='ipsType_pageTitle ipsType_largeTitle ipsContained_container'>
+			{{if $entry->isFutureDate() || $entry->mapped('pinned') || $entry->mapped('featured') || $entry->hidden() === -1 || $entry->hidden() === 1 || $entry->status === 'draft'}}
+				{{if $entry->isFutureDate() and $entry->status !== 'draft'}}
+					<span><span class="ipsBadge ipsBadge_icon ipsBadge_warning" data-ipsTooltip title='{$entry->futureDateBlurb()}'><i class='fa fa-clock-o'></i></span></span>
+				{{elseif $entry->hidden() === -1}}
+					<span><span class="ipsBadge ipsBadge_icon ipsBadge_warning" data-ipsTooltip title='{$entry->hiddenBlurb()}'><i class='fa fa-eye-slash'></i></span></span>
+				{{elseif $entry->hidden() === 1}}
+					<span><span class="ipsBadge ipsBadge_icon ipsBadge_warning" data-ipsTooltip title='{lang="pending_approval"}'><i class='fa fa-warning'></i></span></span>
+				{{endif}}
+				{{if $entry->status === 'draft'}}
+					<span><span class="ipsBadge ipsBadge_icon ipsBadge_warning" data-ipsTooltip title='{lang="unpublished"}'><i class='fa fa-pencil-square-o'></i></span></span>
+				{{endif}}
+				{{if $entry->mapped('pinned')}}
+					<span><span class="ipsBadge ipsBadge_icon ipsBadge_positive" data-ipsTooltip title='{lang="pinned"}'><i class='fa fa-thumb-tack'></i></span></span>
+				{{endif}}
+				{{if $entry->mapped('featured')}}
+					<span><span class="ipsBadge ipsBadge_icon ipsBadge_positive" data-ipsTooltip title='{lang="featured"}'><i class='fa fa-star'></i></span></span>
+				{{endif}}
+			{{endif}}
+			
+			{{if $entry->prefix() OR ( $entry->canEdit() AND $entry::canTag() AND $entry::canPrefix() )}}
+				<span {{if !$entry->prefix()}}class='ipsHide'{{endif}} {{if ( $entry->canEdit() AND $entry::canTag() AND $entry::canPrefix() )}}data-editablePrefix{{endif}}>
+					{template="prefix" group="global" app="core" params="$entry->prefix( TRUE ), $entry->prefix()"}
+				</span>
+			{{endif}}
+			{{if $entry->canEdit()}}
+				<div class='ipsType_break ipsContained' data-controller="core.front.core.moderation">
+					{{if $entry->locked()}}<i class='fa fa-lock'></i> {{endif}}<span data-role="editableTitle" title='{lang="click_hold_edit"}'>{$entry->name}</span>
+				</div>
+			{{else}}
+				<div class='ipsType_break ipsContained'>{{if $entry->locked()}}<i class='fa fa-lock'></i> {{endif}}{$entry->name}</div>
+			{{endif}}
+		</h1>
+		
+		<div class='ipsPhotoPanel ipsPhotoPanel_tiny ipsSpacer_top'>
+			<div class='ipsPos_right ipsResponsive_noFloat ipsResponsive_hidePhone'>
+				{template="follow" app="core" group="global" params="'blog', 'entry', $entry->id, $entry->followers()->count( TRUE )"}
+			</div>
+			{template="userPhoto" app="core" params="$entry->author(), 'tiny'" group="global"}
+			<div>
+				<p class='ipsType_light ipsType_reset ipsType_blendLinks'>{{if $entry->date > time()}}{lang="entry_future_posted" htmlsprintf="$entry->author()->link()"}{{else}}{lang="entry_posted" htmlsprintf="$entry->author()->link()"}{{endif}} &middot; {datetime="$entry->date"}</p>
+				<p class='ipsType_light ipsType_reset'>{lang="num_views_with_number" pluralize="$entry->views"}</p>
+				{{if \IPS\Settings::i()->blog_enable_rating}}
+					{$entry->rating()|raw}
+				{{endif}}
+				{{if count( $entry->tags() ) OR ( $entry->canEdit() AND $entry::canTag() )}}		
+					{template="tags" group="global" app="core" params="$entry->tags(), FALSE, FALSE, ( $entry->canEdit() AND $entry::canTag() ) ? $entry->url() : NULL"}
+				{{endif}}
+			</div>
+		</div>
+	</header>
+	
+	<section class='ipsType_normal ipsSpacer_top ipsSpacer_double' data-controller='core.front.core.lightboxedImages'>
+		<div class='ipsType_richText ipsType_break ipsContained'>
+			{{if $poll = $entry->getPoll()}}
+				{$poll|raw}
+			{{endif}}
+
+			{$entry->content()|raw}
+		</div>
+		
+		{{if $entry->_album}}
+			<br>
+			<div class='ipsAreaBackground_light ipsPad_half'>
+				<h3 class='ipsType_normal ipsType_reset ipsSpacer_bottom ipsSpacer_half'>{lang="entry_images"}</h3>
+				{$entry->_album|raw}
+			</div>
+		{{endif}}
+
+		<hr class='ipsHr ipsClear'>
+		{{if $entry instanceof \IPS\Content\Reputation and settings.reputation_enabled}}
+			<div class='ipsPos_right ipsResponsive_noFloat'>
+				{template="reputation" app="core" group="global" params="$entry"}
+			</div>
+		{{endif}}
+		{{if ( $entry->isFutureDate() and $entry::canFuturePublish( NULL, $entry->container() ) ) or $entry->status === 'draft' or $entry->canEdit() or $entry->canPin() or $entry->canUnpin() or $entry->canFeature() or $entry->canUnfeature() or $entry->canHide() or $entry->canUnhide() or $entry->canMove() or $entry->canLock() or $entry->canUnlock() or $entry->canDelete()}}
+			<a href='#elentryActions_menu' id='elentryActions' class='ipsButton ipsButton_light ipsButton_verySmall' data-ipsMenu>{lang="entry_actions"} <i class='fa fa-caret-down'></i></a>
+			<ul id='elentryActions_menu' class='ipsMenu ipsMenu_auto ipsHide'>
+				{{if $entry->status === 'draft' or ( $entry->isFutureDate() and $entry::canFuturePublish( NULL, $entry->container() ) )}}
+					<li class='ipsMenu_item'><a href='{$entry->url('moderate')->csrf()->setQueryString( array( 'action' => 'publish' ) )}' data-confirm title='{lang="publish_now"}'>{lang="publish"}</a></li>
+				{{endif}}
+				{{if $entry->canEdit()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'edit' ) )}' title='{lang="edit_title_blog"}'>{lang="edit"}</a></li>
+				{{endif}}
+				{{if $entry->canFeature()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'feature' ) )}' title='{lang="feature_title_blog"}'>{lang="feature"}</a></li>
+				{{endif}}
+				{{if $entry->canUnfeature()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unfeature' ) )}' title='{lang="unfeature_title_blog"}'>{lang="unfeature"}</a></li>
+				{{endif}}
+				{{if $entry->canPin()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'pin' ) )}' title='{lang="pin_title_blog"}'>{lang="pin"}</a></li>
+				{{endif}}
+				{{if $entry->canUnpin()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unpin' ) )}' title='{lang="unpin_title_blog"}'>{lang="unpin"}</a></li>
+				{{endif}}
+				{{if $entry->canHide()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'hide' ) )}' title='{lang="hide_title_blog"}' data-ipsDialog data-ipsDialog-title="{lang="hide"}">{lang="hide"}</a></li>
+				{{endif}}
+				{{if $entry->canUnhide()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unhide' ) )}' title='{{if $entry->hidden() === 1}}{lang="approve_title_blog"}{{else}}{lang="unhide_title_blog"}{{endif}}'>{{if $entry->hidden() === 1}}{lang="approve"}{{else}}{lang="unhide"}{{endif}}</a></li>
+				{{endif}}
+				{{if $entry->canLock()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'lock' ) )}' title='{lang="blog_lock_title"}'>{lang="lock"}</a></li>
+				{{endif}}
+				{{if $entry->canUnlock()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'unlock' ) )}' title='{lang="blog_unlock_title"}'>{lang="unlock"}</a></li>
+				{{endif}}
+				{{if $entry->canMove()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'move' ) )}' data-ipsDialog data-ipsDialog-size='narrow' data-ipsDialog-title="{lang="move"}"  title='{lang="blog_move_title"}'>{lang="move"}</a></li>
+				{{endif}}
+				{{if $entry->canDelete()}}				
+					<li class='ipsMenu_item'><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'moderate', 'action' => 'delete' ) )}' data-confirm  title='{lang="blog_delete_title"}'>{lang="delete"}</a></li>
+				{{endif}}
+				{{if \IPS\Member::loggedIn()->modPermission('can_view_moderation_log')}}
+						<li class='ipsMenu_sep'><hr></li>
+						<li class="ipsMenu_item"><a href='{$entry->url()->csrf()->setQueryString( array( 'do' => 'modLog' ) )}' data-ipsDialog data-ipsDialog-title='{lang="moderation_history"}'>{lang="moderation_history"}</a></li>
+				{{endif}}
+			</ul>
+		{{endif}}
+		{{if ! $entry->container()->social_group and !\IPS\Member::loggedIn()->group['gbw_no_report'] }}
+			&nbsp;&nbsp;<a href='{$entry->url('report')}' data-ipsDialog data-ipsDialog-size='medium' data-ipsDialog-title="{lang="report_entry"}" data-ipsDialog-remoteSubmit data-ipsDialog-flashMessage="{lang="report_submit_success"}" title="{lang="report_entry"}">{lang="report_entry"}</a>
+		{{endif}}
+
+		<div class='ipsResponsive_showPhone ipsResponsive_block ipsSpacer_top'>
+			{template="follow" app="core" group="global" params="'blog', 'entry', $entry->id, $entry->followers()->count( TRUE )"}
+		</div>
+	</section>
+</article>
+
+
+{{if $previous or $next}}
+<nav class="ipsPager ipsGrid ipsClearFix ipsList_inline">
+	{{if $previous}}
+		<div class="ipsGrid_span6 ipsPager_prev">
+			<a href="{$previous->url()}" title="{lang="prev_entry"}">
+				<span class="ipsPager_type">{lang="prev_entry"}</span>
+				<span class="ipsPager_title ipsTruncate ipsTruncate_line">{$previous->name}</span>
+			</a>
+		</div>
+	{{endif}}
+	{{if $next}}
+		<div class="ipsGrid_span6 ipsType_right ipsPager_next">
+			<a href="{$next->url()}" title="{lang="next_entry"}">
+				<span class="ipsPager_type">{lang="next_entry"}</span>
+				<span class="ipsPager_title ipsTruncate ipsTruncate_line">{$next->name}</span>
+			</a>
+		</div>
+	{{endif}}
+</nav>
+<hr class='ipsHr'>
+{{else}}
+	<br>
+{{endif}}
+
+{{if count( $entry->shareLinks() )}}
+	{template="sharelinks" app="core" group="global" params="$entry"}
+{{endif}}
+
+{{if count( $entry->comments() ) or $entry->commentForm()}}
+	<br>
+	{template="comments" app="blog" group="view" params="$entry"}
+{{endif}}

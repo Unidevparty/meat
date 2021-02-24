@@ -1,0 +1,17 @@
+<ips:template parameters=" " />
+{{if \IPS\Theme::i()->logo['front']['url'] !== null }}
+{{$logo = \IPS\File::get( 'core_Theme', \IPS\Theme::i()->logo['front']['url'] )->url;}}
+<div class="logo">
+  <ul class="ipsList_inline ipsType_center ipsList_reset">
+    <li class="ipsResponsive_inlineBlock ipsPadhalf" style="margin: 0px;">
+		<a href='{setting="base_url"}' id='elLogo' accesskey='1'>
+          {advertisement="ad_global_header_logo"}</a>
+	</li>
+    <li class="ipsResponsive_inlineBlock" style="margin: 0px;">
+		{advertisement="ad_global_header_abs"}
+	</li>
+  </ul>
+</div>
+{{else}}
+<a href='{setting="base_url"}' id='elSiteTitle' accesskey='1'>{setting="board_name"}</a>
+{{endif}}

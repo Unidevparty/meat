@@ -1,0 +1,50 @@
+<ips:template parameters="$activity, $type='activity'" />
+
+{{if $activity instanceof \IPS\downloads\File\Comment or $activity instanceof \IPS\downloads\File\Review}}
+	{{$item = $activity->item();}}
+{{else}}
+	{{$item = $activity;}}
+{{endif}}
+
+<div class='cSearchActivity_info ipsContained'>
+	<div class='ipsColumns'>
+		<div class='ipsColumn ipsColumn_narrow'>
+			{template="thumbImage" group="global" app="core" params="$item->primary_screenshot_thumb, $item->name, '', 'cSearchActivity_image', 'view_this', $item->url()"}
+		</div>
+		<div class='ipsColumn ipsColumn_fluid'>
+			{{if $activity instanceof \IPS\downloads\File\Comment or $activity instanceof \IPS\downloads\File\Review}}
+				{{if $activity instanceof \IPS\downloads\File\Review}}
+					{template="rating" group="global" location="front" app="core" params="'large', $item->rating, \IPS\Settings::i()->reviews_rating_out_of"}
+				{{endif}}
+				<div class='ipsType_medium ipsType_richText ipsContained {{if $activity instanceof \IPS\downloads\File\Review}}ipsSpacer_both{{else}}ipsSpacer_bottom{{endif}} ipsSpacer_half' data-ipsTruncate data-ipsTruncate-size='3 lines' data-ipsTruncate-type='remove'>
+					{$activity->truncated()|raw}
+				</div>
+				<ul class='ipsList_inline ipsType_light'>
+					{{if $activity instanceof \IPS\downloads\File\Review}}
+						<li>{lang="x_members_found_helpful" sprintf="$activity->mapped('votes_helpful'), \IPS\Member::loggedIn()->language()->pluralize( \IPS\Member::loggedIn()->language()->get( 'x_members' ), array( $activity->mapped('votes_total') ) )"}</li>
+					{{endif}}
+					{{if $type != 'search' and $activity instanceof \IPS\Content\Reputation and settings.reputation_enabled}}
+						<li>{template="reputationMini" group="global" app="core" params="$activity, '', NULL, TRUE"}</li>
+					{{endif}}
+				</ul>
+			{{else}}
+				{{if $type != 'search'}}<a href='{$item->url()}' class='ipsType_normal ipsType_break'>{$item->mapped('title')} <span class='ipsType_light ipsType_small'>v{$item->version}</span></a>{{endif}}
+				<div class='ipsType_medium ipsType_richText ipsContained ipsSpacer_both ipsSpacer_half' data-ipsTruncate data-ipsTruncate-size='3 lines' data-ipsTruncate-type='remove'>
+					{$item->truncated()|raw}
+				</div>
+				<ul class='ipsList_inline ipsType_light'>
+					<li>{lang="num_downloads" pluralize="$item->downloads"}</li>
+					{{if $item->container()->bitoptions['comments']}}
+						<li>{lang="num_comments" pluralize="$item->comments"}</li>
+					{{endif}}
+					{{if $item->container()->bitoptions['reviews']}}
+						<li>{lang="num_reviews" pluralize="$item->reviews"} {{if $item->reviews > 0}}&nbsp;&nbsp;{template="rating" group="global" location="front" app="core" params="'tiny', $item->rating, \IPS\Settings::i()->reviews_rating_out_of"}{{endif}}</li>
+					{{endif}}
+					{{if $type != 'search' and $item instanceof \IPS\Content\Reputation and settings.reputation_enabled}}
+						<li>{template="reputationMini" group="global" app="core" params="$item, '', NULL, TRUE"}</li>
+					{{endif}}
+				</ul>
+			{{endif}}
+		</div>
+	</div>
+</div>

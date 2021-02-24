@@ -1,0 +1,71 @@
+<ips:template parameters="$activity, $type='activity'" />
+
+{{if $activity instanceof \IPS\gallery\Image\Comment}}
+	{{$item = $activity->item();}}
+{{else}}
+	{{$item = $activity;}}
+{{endif}}
+
+<div class='cSearchActivity_info ipsContained'>
+	<div class='ipsColumns'>
+		<div class='ipsColumn ipsColumn_narrow'>
+			{{if $item->medium_file_name}}
+				<a href='{$item->url()}'>
+					<div class='ipsThumb_bg cSearchActivity_image' style='background-image: url( {file="$item->medium_file_name" extension="gallery_Images"} );'>
+						<img src='{file="$item->medium_file_name" extension="gallery_Images"}' alt=''>
+					</div>
+				</a>
+			{{else}}
+				<a href='{$item->url()}'>
+					<div class='ipsNoThumb ipsNoThumb_video cSearchActivity_image'></div>
+				</a>
+			{{endif}}
+		</div>
+		<div class='ipsColumn ipsColumn_fluid'>
+			{{if $activity instanceof \IPS\gallery\Image\Comment}}
+				<div class='ipsType_medium ipsType_richText ipsContained ipsSpacer_bottom ipsSpacer_half' data-ipsTruncate data-ipsTruncate-size='5 lines' data-ipsTruncate-type='remove'>
+					{$item->truncated()|raw}
+				</div>
+				{{if $type != 'search' and $item instanceof \IPS\Content\Reputation and settings.reputation_enabled}}
+					<ul class='ipsList_inline ipsType_light'>
+						<li>{template="reputationMini" group="global" app="core" params="$item, '', NULL, TRUE"}</li>
+					</ul>
+				{{endif}}
+			{{else}}
+				{{if $type != 'search'}}<a href='{$item->url()}' class='ipsType_normal ipsType_break'>{$item->mapped('title')}</a>{{endif}}
+				{{if $item->directContainer() instanceof \IPS\gallery\Album}}
+					<div class='ipsAreaBackground_light ipsPad_half {{if $type != 'search'}}ipsSpacer_top ipsSpacer_half{{endif}}'>
+						<div class='ipsColumns'>
+							<div class='ipsColumn ipsColumn_veryNarrow'>
+								<a href='{$item->directContainer()->url()}'>
+									{{if $item->directContainer()->coverPhoto('small')}}
+										<div class='ipsThumb_bg ipsThumb_tiny ipsPos_center' style='background-image: url( {expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), $item->directContainer()->coverPhoto('small') )"} )'>
+											<img src='{$item->directContainer()->coverPhoto('small')}' alt=''>
+										</div>
+									{{else}}
+										<div class='ipsNoThumb ipsThumb_tiny ipsPos_center'></div>
+									{{endif}}
+								</a>
+							</div>
+							<div class='ipsColumn ipsColumn_fluid ipsPos_top'>
+								<h3 class='ipsType_medium ipsType_reset ipsType_unbold'>{lang="in_album"} <a href='{$item->directContainer()->url()}'>{$item->directContainer()->_title}</a></h3>
+								<span class='ipsType_light'>{lang="num_images_in_album" pluralize="$item->directContainer()->count_imgs"}</span>
+							</div>
+						</div>
+					</div>
+				{{endif}}
+				<div class='ipsType_medium ipsType_richText ipsContained ipsSpacer_both ipsSpacer_half' data-ipsTruncate data-ipsTruncate-size='4 lines' data-ipsTruncate-type='remove'>
+					{$item->truncated()|raw}
+				</div>
+				<ul class='ipsList_inline ipsType_light'>
+					{{if $item->directContainer()->allow_comments}}
+						<li>{lang="num_comments" pluralize="$item->comments"}</li>
+					{{endif}}
+					{{if $type != 'search' and $item instanceof \IPS\Content\Reputation and settings.reputation_enabled}}
+						<li>{template="reputationMini" group="global" app="core" params="$item, '', NULL, TRUE"}</li>
+					{{endif}}
+				</ul>
+			{{endif}}
+		</div>
+	</div>
+</div>

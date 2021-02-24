@@ -1,0 +1,4 @@
+<ips:template parameters="$form" />
+
+{template="pageHeader" if="!\IPS\Request::i()->isAjax()" group="global" app="core" params="\IPS\Member::loggedIn()->language()->addToStack( 'create_blog_entry' )"}
+{$form|raw}

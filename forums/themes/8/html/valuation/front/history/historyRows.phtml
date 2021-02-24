@@ -1,0 +1,8 @@
+<ips:template parameters="$table, $headers, $rows" />
+{{foreach $rows as $row}}
+	<tr>
+		<td>{$row['log_date']->relative()|raw}</td>
+		<td>{$row['log_data']|raw}</td>
+		{{if isset( $row['compare'] ) and $compare = $row['compare']}}<td>http://localhost/valuation/requests/1/compare/{$compare['before']}/{$compare['after']}/</td>{{endif}}
+	</tr>
+{{endforeach}}

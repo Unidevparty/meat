@@ -1,0 +1,91 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v5="http://fedex.com/ws/track/v5">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v5:SignatureProofOfDeliveryFaxRequest>
+         <v5:WebAuthenticationDetail>
+            <v5:UserCredential>
+               <v5:Key></v5:Key>
+               <v5:Password></v5:Password>
+            </v5:UserCredential>
+         </v5:WebAuthenticationDetail>
+         <v5:ClientDetail>
+            <v5:AccountNumber></v5:AccountNumber>
+            <v5:MeterNumber></v5:MeterNumber>   
+            <v5:IntegratorId>12345</v5:IntegratorId>   
+            <v5:Localization>
+               <v5:LanguageCode>EN</v5:LanguageCode>      
+            </v5:Localization>
+         </v5:ClientDetail>
+         <v5:TransactionDetail>   
+            <v5:CustomerTransactionId>Send Signature Proof of Delivery - FAX</v5:CustomerTransactionId>   
+            <v5:Localization>
+               <v5:LanguageCode>EN</v5:LanguageCode>      
+            </v5:Localization>
+         </v5:TransactionDetail>
+         <v5:Version>
+            <v5:ServiceId>trck</v5:ServiceId>
+            <v5:Major>5</v5:Major>
+            <v5:Intermediate>0</v5:Intermediate>
+            <v5:Minor>0</v5:Minor>
+         </v5:Version>
+         <v5:QualifiedTrackingNumber>
+            <v5:TrackingNumber>484505474017274</v5:TrackingNumber>
+            <v5:ShipDate>2010-09-08</v5:ShipDate>
+            <v5:Carrier>FDXG</v5:Carrier>
+            <v5:Destination>
+               <v5:City>TEXAS</v5:City>
+               <v5:StateOrProvinceCode>TX</v5:StateOrProvinceCode>
+               <v5:PostalCode>73301</v5:PostalCode>
+               <v5:UrbanizationCode>TX</v5:UrbanizationCode>
+               <v5:CountryCode>US</v5:CountryCode>
+               <v5:Residential>0</v5:Residential>
+            </v5:Destination>
+         </v5:QualifiedTrackingNumber>
+         <v5:AdditionalComments>AdditionalComments</v5:AdditionalComments>
+         <v5:FaxSender>
+            <v5:Contact>
+               <v5:PersonName>DEOYANEE BHADANE</v5:PersonName>
+               <v5:Title>Ms.</v5:Title>
+               <v5:CompanyName>DEOYAROHIT0705</v5:CompanyName>
+               <v5:PhoneNumber>9762308621</v5:PhoneNumber>
+               <v5:PhoneExtension>02033469</v5:PhoneExtension>
+               <v5:PagerNumber>9762308621</v5:PagerNumber>
+               <v5:FaxNumber>9762308621</v5:FaxNumber>
+               <v5:EMailAddress>Deoyanee*Bhadane@DeoyaRohit.com</v5:EMailAddress>
+            </v5:Contact>
+            <v5:Address>
+               <v5:StreetLines>DENVER ADDRESS LINE 1</v5:StreetLines>
+               <v5:StreetLines>DENVER ADDRESS LINE 2</v5:StreetLines>
+               <v5:City>DENVER</v5:City>
+               <v5:StateOrProvinceCode>CO</v5:StateOrProvinceCode>
+               <v5:PostalCode>80204</v5:PostalCode>
+               <v5:UrbanizationCode>CO</v5:UrbanizationCode>
+               <v5:CountryCode>US</v5:CountryCode>
+               <v5:Residential>0</v5:Residential>
+            </v5:Address>
+         </v5:FaxSender>
+         <v5:FaxRecipient>
+            <v5:Contact>
+               <v5:PersonName>ROHIT BORSE</v5:PersonName>
+               <v5:Title>Mr.</v5:Title>
+               <v5:CompanyName>DEOYAROHIT0705</v5:CompanyName>
+               <v5:PhoneNumber>9762308621</v5:PhoneNumber>
+               <v5:PhoneExtension>02033469</v5:PhoneExtension>
+               <v5:PagerNumber>9762308621</v5:PagerNumber>
+               <v5:FaxNumber>9762308621</v5:FaxNumber>
+               <v5:EMailAddress>Rohit_Borse@syntelinc.com</v5:EMailAddress>
+            </v5:Contact>
+            <v5:Address>
+               <v5:StreetLines>COLORADO ADDRESS LINE 1</v5:StreetLines>
+               <v5:StreetLines>COLORADO ADDRESS LINE 2</v5:StreetLines>
+               <v5:City>COLORADO SPRINGS</v5:City>
+               <v5:StateOrProvinceCode>CO</v5:StateOrProvinceCode>
+               <v5:PostalCode>80915</v5:PostalCode>
+               <v5:UrbanizationCode>CO</v5:UrbanizationCode>
+               <v5:CountryCode>US</v5:CountryCode>
+               <v5:Residential>0</v5:Residential>
+            </v5:Address>
+         </v5:FaxRecipient>
+      </v5:SignatureProofOfDeliveryFaxRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

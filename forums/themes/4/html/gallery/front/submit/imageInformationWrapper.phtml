@@ -1,0 +1,7 @@
+<ips:template parameters="$form, $itemCount, $currentIndex" />
+
+<div data-controller='gallery.front.submit.imageInfo' data-index='{$currentIndex}'>
+	<h3 class='ipsType_pageTitle ipsSpacer_bottom' data-ipsSticky>{lang="editing_image"} <span class='ipsType_light'>({lang="x_of_y" sprintf="$currentIndex + 1, $itemCount"})</span></h3>
+	<hr class='ipsHr'>
+	{expression="$form->customTemplate( array( call_user_func_array( array( \IPS\Theme::i(), 'getTemplate' ), array( 'submit', 'gallery' ) ), 'imageInformationForm' ) )" raw="true"}
+</div>

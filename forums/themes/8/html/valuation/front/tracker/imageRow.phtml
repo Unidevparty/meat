@@ -1,0 +1,10 @@
+<ips:template parameters="$image" />
+<li class='cGalleryWidget ipsCarousel_item'>
+	<a href='{file="$image->original_file_name" extension="gallery_Images"}' title='{lang="view_this_image" sprintf="$image->caption"}' class='ipsThumb ipsThumb_bg ipsThumb_large' style='background-image: url("{file="$image->original_file_name" extension="gallery_Images"}");' data-ipslightbox="" data-ipslightbox-group="g91924">
+		<img src='{file="$image->original_file_name" extension="gallery_Images"}' alt=''>
+	</a>
+	<div class='ipsSpacer_top ipsSpacer_half cGalleryWidgetInfo'>
+		<span class='ipsType_medium ipsType_blendLinks'>{lang="byline_nodate" htmlsprintf="$image->author()->link()"}</span><br>
+		<span class='ipsType_light ipsType_medium'>{datetime="$image->mapped('date')"}</span>
+	</div>
+</li>

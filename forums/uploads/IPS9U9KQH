@@ -1,0 +1,10 @@
+member_id,name,email,primary_group_name,secondary_group_names,member_posts,joined,skin_name,language_name
+5,"Главный технолог",technologist@meat-expert.ru,Администратор,"Администратор,Оценка: Администратор",6117,"2005-10-27 19:35","Meat Expert New","Русский (RU)"
+525,Admin,admin@meat-expert.ru,Администратор,Администратор,546,"2006-12-14 17:20","Meat Expert New","Русский (RU)"
+5339,"Служба новостей",dammit86@list.ru,Администратор,Администратор,23400,"2009-04-04 15:19","Meat Expert New","Русский (RU)"
+8862,IPSadmin,news@meat-expert.ru,Администратор,,0,"2013-03-04 16:09","Meat Expert New",
+9221,Редактор,editor@meat-expert.ru,Администратор,Администратор,108,"2013-12-18 19:11","Meat Expert New","Русский (RU)"
+9531,IPSNetwork,respected@li.ru,Администратор,Администратор,0,"2014-08-12 07:34","Meat Expert New","Русский (RU)"
+10208,"Admin IBR",denis@ibresource.ru,Администратор,,61,"2015-06-22 09:28","Meat Expert New","Русский (RU)"
+11142,"Stok М",denismelnikweb@gmail.com,Администратор,Администратор,0,"2016-07-21 12:48","Meat Expert New",
+11283,Developer,ilya.hoilik@ipshelp.ru,Администратор,"Администратор,Оценка: Администратор",8,"2016-10-01 21:51","Meat Expert New","Русский (RU)"

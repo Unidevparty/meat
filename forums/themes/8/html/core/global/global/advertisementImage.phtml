@@ -1,0 +1,41 @@
+<ips:template parameters="$advertisement, $acpLink=NULL" />
+{{if count( $advertisement->_images )}}
+<div class='ipsAdvertisement'>
+	<ul class='ipsList_inline ipsType_center ipsList_reset'>
+		<li class='ipsAdvertisement_large ipsResponsive_showDesktop ipsResponsive_inlineBlock ipsContained'>
+			{{if $advertisement->link}}
+				<a href='{{if $acpLink}}{$acpLink->makeSafeForAcp()}{{else}}{url="app=core&module=system&controller=redirect&do=advertisement&ad=$advertisement->id" base="front" csrf="true"}{{endif}}' target='_blank' rel='nofollow'>
+			{{endif}}
+				<img src='{file="$advertisement->_images['large']" extension="$advertisement->storageExtension()"}' alt="{lang="advertisement_alt"}" class='ipsImage ipsContained'>
+			{{if $advertisement->link}}
+				</a>
+			{{endif}}
+		</li>
+		{{if !empty( $advertisement->_images['medium'] )}}
+			<li class='ipsAdvertisement_medium ipsResponsive_showTablet ipsResponsive_inlineBlock ipsContained'>
+				{{if $advertisement->link}}
+					<a href='{{if $acpLink}}{$acpLink->makeSafeForAcp()}{{else}}{url="app=core&module=system&controller=redirect&do=advertisement&ad=$advertisement->id" base="front" csrf="true"}{{endif}}' target='_blank' rel='nofollow'>
+				{{endif}}
+					<img src='{file="$advertisement->_images['medium']" extension="$advertisement->storageExtension()"}' alt="{lang="advertisement_alt"}" class='ipsImage ipsContained'>
+				{{if $advertisement->link}}
+					</a>
+				{{endif}}
+			</li>
+		{{endif}}
+		{{if !empty( $advertisement->_images['small'] )}}
+			<li class='ipsAdvertisement_small ipsResponsive_showPhone ipsResponsive_inlineBlock ipsContained'>
+				{{if $advertisement->link}}
+					<a href='{{if $acpLink}}{$acpLink->makeSafeForAcp()}{{else}}{url="app=core&module=system&controller=redirect&do=advertisement&ad=$advertisement->id" base="front" csrf="true"}{{endif}}' target='_blank' rel='nofollow'>
+				{{endif}}
+					<img src='{file="$advertisement->_images['small']" extension="$advertisement->storageExtension()"}' alt="{lang="advertisement_alt"}" class='ipsImage ipsContained'>
+				{{if $advertisement->link}}
+					</a>
+				{{endif}}
+			</li>
+		{{endif}}
+	</ul>
+	{{if $acpLink}}
+		<div class="ipsType_center ipsType_small"><a href="{$acpLink->makeSafeForAcp()}">{$acpLink}</a></div>
+	{{endif}}
+</div>
+{{endif}}

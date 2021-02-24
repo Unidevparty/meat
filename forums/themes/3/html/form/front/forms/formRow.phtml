@@ -1,0 +1,27 @@
+<ips:template parameters="$table, $headers, $forms" />
+{{foreach $forms as $form}}
+	{{if $form->can('view')}}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto ipsClearfix">
+			<div class="ipsDataItem_main">
+				<h4 class="ipsDataItem_title ipsType_large">
+					<a href="{$form->url()}">{$form->_title}</a>
+				</h4>
+				{{if $form->_description}}
+        			<div class='ipsType_medium ipsType_richText ipsType_break' data-ipsTruncate data-ipsTruncate-type='remove' data-ipsTruncate-size='2 lines'>
+        				{$form->_description|raw}
+        			</div>                
+				{{endif}}
+			</div>
+			<dl class="ipsDataItem_stats ">
+				{{$count = \IPS\form\Log::contentCount( $form );}}
+				<dt class="ipsDataItem_stats_number">{number="$count"}</dt>
+				<dd class="ipsDataItem_stats_type ipsType_light">{lang="logs"}</dd>
+			</dl>
+		{{if method_exists( $table, 'canModerate' ) AND $table->canModerate()}}
+			<div class='ipsDataItem_modCheck'>
+				<input type='checkbox' data-role='moderation' name="moderate[{$form->_id}]" data-actions="{expression="implode( ' ', $table->multimodActions( $form ) )"}" data-state=''>
+			</div>
+		{{endif}}
+		</li>
+	{{endif}}
+{{endforeach}}

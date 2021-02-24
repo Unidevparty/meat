@@ -1,0 +1,25 @@
+<ips:template parameters="$blog" />
+{{if ( $blog->owner() instanceof \IPS\Member ) && \IPS\Request::i()->module == 'view'}}
+	<div class='ipsPhotoPanel ipsPhotoPanel_mini'>
+		{template="userPhoto" group="global" app="core" params="$blog->owner(), 'mini'"}
+		<div>
+{{endif}}
+	<a href='{$blog->url()}' title='{lang="go_to_blog" sprintf="$blog->_title"}' class='ipsType_blendLinks'>	
+		<h1 class='ipsType_pageTitle ipsType_break ipsTruncate ipsTruncate_line'>
+			{{if $blog->pinned}}
+				<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_positive" data-ipsTooltip title='{lang="pinned"}'><i class='fa fa-thumb-tack'></i></span>
+			{{endif}}
+			{$blog->_title}
+		</h1>
+	</a>
+	<p class='ipsType_normal ipsType_reset ipsType_blendLinks'>
+		{{if $blog->owner() instanceof \IPS\Member}}
+			{lang="blog_by" htmlsprintf="$blog->owner()->link()"}
+		{{else}}
+			<i class='fa fa-users'></i> {lang="group_blog_by" sprintf="\IPS\Member::loggedIn()->language()->addToStack( 'blogs_groupblog_name_' . $blog->id )"}
+		{{endif}}
+	</p>
+{{if ( $blog->owner() instanceof \IPS\Member ) && \IPS\Request::i()->module == 'view'}}
+		</div>
+	</div>
+{{endif}}

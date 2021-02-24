@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates application="jawards" templategroups="a:1:{s:12:&quot;skin_jawards&quot;;s:5:&quot;exact&quot;;}">
+  <templategroup group="skin_jawards">
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[</table>]]></template_content>
+      <template_name>category_row_end</template_name>
+      <template_data><![CDATA[$data=""]]></template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<div class='maintitle'>{$data['title']}</div>
+    <table class="ipb_table">
+<tr class='header'>
+	<td align='center' class="jawards_head jawards_hdrawards">Award</td>
+	<td class="jawards_head jawards_hdrdesc">Description</td>
+	<td class="jawards_head jawards_hdrstats">Statistics</td>
+</tr>]]></template_content>
+      <template_name>category_row_start</template_name>
+      <template_data><![CDATA[$data=""]]></template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<form name="giveAward_public" method="post" action="{$this->settings['base_url']}app=jawards&do=award&mid={$member['member_id']}&submit=true">
+<h2 class="maintitle">{$this->lang->words['give_award_title']} {$member['members_display_name']}</h2>
+<div class="ipsBox">
+{$this->lang->words['give_award_msg']}
+<div class="ipsBox">
+  <div class="ipsBox_container">
+    <table class="ipb_table">
+      <tr>
+   	    <td width='35%'>
+      	  <strong>{$this->lang->words['choose_award']}</strong>
+    	</td>
+   	 	<td>
+          <select name='award'>
+          <if test="count($options)">
+            <foreach loop="$options as $id => $label">
+              <option value='{$id}'>{$label}</option>
+            </foreach>
+          </select>
+          </if>
+        </td>
+ 	  </tr>
+  	  <tr>
+    	<td><strong>{$this->lang->words['enter_award_notes']}</strong></td>
+    	<td>
+          <textarea name='notes' style='width:400px' rows='5'></textarea>
+        </td>
+  	  </tr>
+	</table>
+    <fieldset class="submit">
+      <input type="submit" value="{$this->lang->words['give_award_continue']}" class="input_submit" />
+    </fieldset>
+  </div>
+</div>
+</div>
+</form>]]></template_content>
+      <template_name>giveAward_form</template_name>
+      <template_data>$member, $options</template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<div style='min-height:200px; height:auto !important; height:200px; '>
+	<h2 class="maintitle">{$this->lang->words['awarded']}</h2>
+	<div style='text-align: center'>
+	<if test="anyThere:|:count($list)">
+		<ul class='JLogicaAwardTable'>
+		<foreach loop="UserList:$list as $l">
+			<li><b>{$l}</b></li>
+		</foreach>
+		</ul>
+	</div>
+	<else />
+		<div style="text-align:center;">
+			<br /><br />
+			<h2 class='ipsType_subtitle'>{$this->lang->words['no_awards']}</h2>
+		</div>
+	</if>
+</div>]]></template_content>
+      <template_name>hoverCard</template_name>
+      <template_data>$list</template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<h2 class="maintitle">{$this->lang->words['title']}</h2>
+<div class="ipsBox">
+  <div class="ipsBox_container">
+      {$rows}
+  </div>
+</div>
+<script type="text/javascript">
+var ajaxUrl = "{parse url="app=jawards&module=ajax&section=awards&do=getAwarded&md5check={$form_hash}" base="public"}"
+ipb.hoverCardRegister.initialize( 'showawarded', { 'w' : '400px', 'delay': 750, 'position' : 'auto' , 'ajaxUrl' : ajaxUrl, 'getId': true, 'setIdParam': 'id' } );
+</script>]]></template_content>
+      <template_name>listings_container</template_name>
+      <template_data><![CDATA[$rows="", $form_hash]]></template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<tr class="{$award['class']}">
+  <td width="15%" align="center" class="altrow">
+    <input type="hidden" id="awrd_id_{$award['id']}" value="{$award['id']}" />
+    <img src="{$upload_url}/jawards/{$award['icon']}" />
+  </td>
+  <td>
+    <h3>{$award['name']}</h3>
+    <div class="desc">
+    <if test="awardDesc:|:$award['longdesc']">
+    	{$award['longdesc']}
+    <else />
+    	{$award['desc']}
+    </if>
+    </div>
+  </td>
+  <td width="25%" class="altrow" style="font-weight:bold;">
+  	Times Awarded:
+    <if test="awardCount:|:$award['award_count']">
+  		<a href="#" class="_hovertrigger" hovercard-ref="showawarded" hovercard-id="{$award['id']}">{$award['award_count']} ({$this->lang->words['view_awarded']})</a>
+  	<else />
+		{$this->lang->words['no_awards']}
+  	</if>
+  	<br />
+  	Last Awarded:  {parse date="$award['last_awarded']" format="long" relative="true"}
+  	</td>
+</tr>]]></template_content>
+      <template_name>listings_row</template_name>
+      <template_data><![CDATA[$cat='', $award="", $upload_url=""]]></template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<div class='general_box clearfix'>
+        <h3>
+        {$data['name']}
+        <if test="showDesc:|:$this->settings['jacore_show_profile_desc']">
+           :: {$data['award_desc']}
+        </if>
+        </h3>
+<table>
+  <tr class="row2">
+    <td width='10%' class='altrow' align='center'><img src='{$uploadURL}/jawards/{$data['icon']}' border='0' /></td>
+    <td>
+      <if test="canRemove:|:$data['remove_option']">
+        <div class='right'>
+          {$data['remove_option']}
+        </div>
+      </if>
+        <if test="showNotes:|:$this->settings['jacore_show_profile_notes']">
+		      {$data['notes']}
+		</if>
+        <if test="showLongDesc:|:$this->settings['jacore_show_profile_longdesc']">
+  		    {$data['longdesc']}
+  		</if>
+      <strong>{$this->lang->words['award_given_on']}</strong> {$data['date']} <strong>{$this->lang->words['award_given_by']}</strong> {$data['given_by']}
+      <if test="noGivenBy:|:!$data['given_by']">
+        <em>{$this->lang->words['given_by_unknown']}</em>
+      </if>
+    </td>
+  </tr>
+</table>
+</div>]]></template_content>
+      <template_name>profile_award_row</template_name>
+      <template_data><![CDATA[$data=array(), $uploadURL=""]]></template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<h2 class='maintitle'>{$this->lang->words['awards_profile_view_title']}</h3>
+<div class="ipsBox">
+  <div class="ipsBox_container">
+    {$rows}
+  </div>
+</div>]]></template_content>
+      <template_name>profile_awards_block</template_name>
+      <template_data><![CDATA[$rows=""]]></template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<!--no data in this master skin-->]]></template_content>
+      <template_name>profile_noawards</template_name>
+      <template_data/>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<!--no data in this master skin-->]]></template_content>
+      <template_name>profile_unawarded</template_name>
+      <template_data><![CDATA[$rows=array(), $uploadURL='']]></template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<div style="margin-top:10px;">
+  <h3><a href='{parse url="showuser={$member['member_id']}&amp;tab=jawards" seotitle="{$member['members_seo_name']}" template="showuser" base="public"}'>{$this->lang->words['awards_achievement_post']}</a></h3>
+  <div class="row2" style="padding:7px;">
+    <foreach loop="profileawards:$awards as $a">
+          <if test="count:|:$a['count'] == 0">
+              <span style='{$a['dim']}'>
+          </if>
+          <img src='{$this->settings['upload_url']}/jawards/{$a['icon']}'
+          <if test="size:|:$a['width']">
+              width='{$a['width']}' height='{$a['height']}'
+          </if>
+          <if test="toolTip:|:$a['toolTip']">
+              title='{$a['toolTip']}'
+          </if>
+          />
+         <if test="awardCount:|:$a['count'] > 1">
+             <span class='JLogicaAwardsCount'>{$a['count']}</span>
+         </if>
+          <if test="$a['count'] == 0">
+              </span>
+          </if>
+         {$a['hook']['settings']['padding']}
+    </foreach>
+  </div>
+</div>]]></template_content>
+      <template_name>topicPost_japab</template_name>
+      <template_data>$awards, $member</template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<!--no data in this master skin-->]]></template_content>
+      <template_name>topicPost_japbd</template_name>
+      <template_data>$img</template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<foreach loop="profileawards:$awards as $a">
+  <img src='{$this->settings['upload_url']}/jawards/{$a['icon']}' />
+     {$a['hook']['settings']['padding']}
+</foreach>]]></template_content>
+      <template_name>topicPost_jappn</template_name>
+      <template_data>$awards, $member</template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<div style="margin-top:10px;">
+  <h3><a href='{parse url="showuser={$member['member_id']}&amp;tab=jawards" seotitle="{$member['members_seo_name']}" template="showuser" base="public"}'>{$this->lang->words['awards_title_post']}</a></h3>
+  <div class="row2" style="padding:7px;">
+    <foreach loop="profileawards:$awards as $a">
+          <img src='{$this->settings['upload_url']}/jawards/{$a['icon']}'
+          <if test="size:|:$a['width']">
+              width='{$a['width']}' height='{$a['height']}'
+          </if>
+          <if test="toolTip:|:$a['toolTip']">
+              title='{$a['toolTip']}'
+          </if>
+          />
+         <if test="awardCount:|:$a['count'] > 1">
+             <span class='JLogicaAwardsCount'>{$a['count']}</span>
+         </if>
+         {$a['hook']['settings']['padding']}
+    </foreach>
+  </div>
+</div>]]></template_content>
+      <template_name>topicPost_View</template_name>
+      <template_data>$awards, $member</template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+    <template>
+      <template_group>skin_jawards</template_group>
+      <template_content><![CDATA[<if test="!$member['signature']">
+<div class="signature" align="{$awards[0]['hook']['settings']['position']}">
+<else />
+<div align="{$awards[0]['hook']['settings']['position']}">
+</if>
+<div class="_sharedMediaBbcode">
+  <div class="bbcode_mediaWrap" style="text-align:left;">
+    <div class="details" style="float:none; margin:0; margin-bottom:10px; padding:0;"><h5><a href='{parse url="showuser={$member['member_id']}&amp;tab=jawards" seotitle="{$member['members_seo_name']}" template="showuser" base="public"}'>{$this->lang->words['awards_signature_post']}</a></h5></div><br />
+    <foreach loop="profileawards:$awards as $a">
+      <img src='{$this->settings['upload_url']}/jawards/{$a['icon']}'
+      <if test="size:|:$a['width']">
+       width='{$a['width']}' height='{$a['height']}'
+      </if>
+      <if test="toolTip:|:$a['toolTip']">
+        title='{$a['toolTip']}'
+      </if>
+      />
+         <if test="awardCount:|:$a['count'] > 1">
+             <span class='JLogicaAwardsCount'>{$a['count']}</span>
+         </if>
+     {$a['hook']['settings']['padding']}
+    </foreach>  </div>
+</div>
+</div><br />
+<br />]]></template_content>
+      <template_name>topicSig_View</template_name>
+      <template_data>$awards, $member</template_data>
+      <template_updated>1346102103</template_updated>
+      <template_removable>0</template_removable>
+      <template_user_added>0</template_user_added>
+      <template_user_edited>0</template_user_edited>
+      <template_master_key>mobile</template_master_key>
+    </template>
+  </templategroup>
+</templates>

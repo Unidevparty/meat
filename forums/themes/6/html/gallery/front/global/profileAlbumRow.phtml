@@ -1,0 +1,11 @@
+<ips:template parameters="$table, $headers, $albums" />
+{{foreach $albums as $album}}
+	<li class='ipsGrid_span4 cProfileAlbum'  data-grid-ratio='100'>
+		<div>
+			<a href='{$album->url()}' class='cProfileAlbum_image'>
+				<h3 class='ipsType_sectionHead'>{$album->_title}</h3>
+				<img src='{$album->coverPhoto('medium')}' alt='' class='ipsImage'>
+			</a>
+		</div>
+	</li>
+{{endforeach}}

@@ -1,0 +1,34 @@
+<ips:template parameters="$invoice" />
+{{if ( $consequences = $invoice->unpaidConsequences() and count( $consequences ) )}}
+	<div class="ipsSpacer_top ipsMessage ipsMessage_general">
+		{lang="invoice_unpaid_consequences"}
+		<ul class="cInvoiceUnpaidConsequences">
+			{{foreach $consequences as $k => $v}}
+				<li>
+					{{if is_array( $v )}}
+						{{if isset( $v['message'] )}}
+							{$v['message']}
+							<span class="cInvoiceUnpaidConsequences_warning">{$v['warning']}</span>
+						{{else}}
+							{lang="invoice_unpaid_$k"}
+							<ul>
+								{{foreach $v as $v2}}
+									<li>
+										{{if is_array( $v2 )}}
+											{$v2['message']|raw}
+											<span class="cInvoiceUnpaidConsequences_warning">{$v2['warning']}</span>
+										{{else}}
+											{$v2|raw}
+										{{endif}}
+									</li>
+								{{endforeach}}
+							</ul>
+						{{endif}}
+					{{else}}
+						{$v}
+					{{endif}}
+				</li>
+			{{endforeach}}
+		</ul>
+	</div>
+{{endif}}

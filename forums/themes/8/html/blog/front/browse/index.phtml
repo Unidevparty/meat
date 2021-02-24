@@ -1,0 +1,64 @@
+<ips:template parameters="$table, $featured, $blogs=array()" />
+<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{lang="blogs"}</h1>
+</div>
+{{if count( $featured )}}
+	{template="featuredEntries" group="browse" params="$featured"}
+{{endif}}
+
+{{if count( $blogs ) || \IPS\blog\Blog::canCreate()}}
+	<ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsSpacer_bottom">
+		{{if count( $blogs )}}
+			<li class='ipsToolList_primaryAction'>
+				{{if count( $blogs ) > 1}}
+					<a class="ipsButton ipsButton_medium ipsButton_important ipsButton_fullWidth" href="#elCreateEntry_menu" data-ipsMenu id='elCreateEntry'>
+						{lang="add_entry"} &nbsp;<i class='fa fa-caret-down'></i>
+					</a>
+					<ul class='ipsMenu ipsMenu_normal ipsHide' id='elCreateEntry_menu'>
+						<li class='ipsMenu_title'>{lang="add_entry_to"}</li>
+						{{foreach $blogs as $blog}}
+							{{if $blog->disabled != 1}}
+								<li class='ipsMenu_item'>
+									<a href='{url="app=blog&module=blogs&controller=submit&id={$blog->id}" seoTemplate="blog_submit"}' class='ipsTruncate ipsTruncate_line'>{$blog->_title}</a>
+								</li>
+							{{endif}}
+						{{endforeach}}
+					</ul>
+				{{else}}
+					{{foreach $blogs as $blog}}
+						{{if $blog->disabled != 1}}
+							<a class="ipsButton ipsButton_medium ipsButton_important ipsButton_fullWidth" href="{url="app=blog&module=blogs&controller=submit&id={$blog->id}" seoTemplate="blog_submit"}">
+								{lang="add_entry"}
+							</a>
+						{{endif}}
+					{{endforeach}}
+				{{endif}}
+			</li>
+			{{if count( $blogs ) > 1}}
+				<li class='ipsType_center'>
+					<a href='{url="app=blog&module=blogs&controller=browse&page=1&filter=my_blogs&sortby=blog_last_edate" seoTemplate="blogs"}' data-ipsMenu id='elMyBlogs' class='ipsButton ipsButton_medium ipsButton_fullWidth ipsButton_link'>{lang="my_blogs"} <i class='fa fa-caret-down'></i></a>
+					<ul class='ipsMenu ipsMenu_normal ipsHide' id='elMyBlogs_menu'>
+						{{foreach $blogs as $blog}}
+							<li class='ipsMenu_item'>
+								<a href='{$blog->url()}' class='ipsTruncate ipsTruncate_line'>{$blog->_title}</a>
+							</li>
+						{{endforeach}}
+					</ul>
+				</li>
+			{{endif}}
+			{{if \IPS\blog\Blog::canCreate()}}
+				<li class='ipsType_center'>
+					<a href='{url="app=blog&module=blogs&controller=create" seoTemplate="blog_create"}' data-ipsDialog data-ipsDialog-title='{lang="create_blog"}' class='ipsButton ipsButton_medium ipsButton_fullWidth ipsButton_link'>{lang="create_new_blog"}</a>
+				</li>
+			{{endif}}
+		{{elseif \IPS\blog\Blog::canCreate()}}
+			<li class='ipsToolList_primaryAction'>
+				<a class="ipsButton ipsButton_large ipsButton_important ipsButton_fullWidth" href="{url="app=blog&module=blogs&controller=create" seoTemplate="blog_create"}">{lang="create_blog"}</a>
+			</li>
+		{{endif}}
+	</ul>
+{{endif}}
+
+<div class='ipsBox'>
+	{$table|raw}
+</div>

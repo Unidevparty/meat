@@ -1,0 +1,110 @@
+<ips:template parameters="$image, $slider, $next=NULL, $prev=NULL" />
+
+<div id='elGalleryImage' data-role="imageFrame" {{if $image->data}}data-imageSizes='{$image->data}'{{endif}}>
+	{{if $image->media }}
+		<div class='cGallery_videoContainer'>
+			{{if in_array( $image->file_type, array( 'video/ogg', 'video/webm', 'video/mp4', 'video/x-flv', 'video/3gpp' ) )}}
+				<video id="elGalleryVideo" data-role="video" class="ipsPos_center video-js vjs-default-skin" controls preload="auto" width="100%" height="100%"{{if $image->medium_file_name }} poster="{file="$image->medium_file_name" extension="gallery_Images"}"{{endif}} data-setup='{"techOrder": ["html5","flash"]}'>
+					<source src="{file="$image->original_file_name" extension="gallery_Images"}" type='{$image->file_type}' />
+				</video>
+			{{else}}
+				<!-- Old fashioned...supports things like wmv though-->
+				<embed wmode="opaque" autoplay="true" showcontrols="true" showstatusbar="true" showtracker="true" src="{file="$image->original_file_name" extension="gallery_Images"}" width="480" height="360" type='{$image->file_type}' />
+			{{endif}}
+		</div>
+	{{else}}
+		<div class='cGalleryViewImage' data-role='notesWrapper' data-controller='gallery.front.view.notes' data-imageID='{$image->id}' {{if $image->canEdit()}}data-editable{{endif}} data-notesData='{$image->_notes_json}'>
+			
+			<img src='{file="$image->masked_file_name" extension="gallery_Images"}' alt='{$image->caption}' title='{$image->caption}' data-role='theImage' class='ipsHide'>
+			<noscript>
+				<img src='{file="$image->masked_file_name" extension="gallery_Images"}' alt='{$image->caption}' title='{$image->caption}' data-role='theImage'>
+			</noscript>
+			{{if count( $image->_notes )}}
+				<noscript>
+					{{foreach $image->_notes as $note}}
+						<div class='cGalleryNote' style='left: {$note['LEFT']}%; top: {$note['TOP']}%; width: {$note['WIDTH']}%; height: {$note['HEIGHT']}%'>
+							<div class='cGalleryNote_border'></div>
+							<div class='cGalleryNote_note'>{$note['NOTE']}</div>
+						</div>
+					{{endforeach}}
+				</noscript>
+			{{endif}}
+		</div>
+			
+		<ul class='ipsButton_split cGalleryViewImage_controls'>
+			{{if $image->canEdit()}}
+				<li><a href='#' class='ipsButton ipsButton_overlaid ipsButton_verySmall ipsJS_show' title='{lang="add_image_note"}' data-action='addNote'>{lang="add_image_note"}</a></li>
+				<li>
+					<a href='#' class='ipsButton ipsButton_overlaid ipsButton_verySmall' title='{lang="rotate_image"}' id='elImage_rotate' data-ipsMenu data-ipsMenu-appendTo='#elGalleryImage'>
+						{lang="rotate_image"} <i class='fa fa-caret-down'></i>
+					</a>
+					<ul class='ipsMenu ipsMenu_auto ipsHide' id='elImage_rotate_menu'>
+						<li class='ipsMenu_item'>
+							<a href='{$image->url( 'rotate' )->csrf()->setQueryString( 'direction', 'right' )}' title='{lang="rotate_right"}'>
+								<i class='fa fa-rotate-right'></i> &nbsp;{lang="rotate_right"}
+							</a>
+						</li>
+						<li class='ipsMenu_item'>
+							<a href='{$image->url( 'rotate' )->csrf()->setQueryString( 'direction', 'left' )}' title="{lang="rotate_left"}">
+								<i class='fa fa-rotate-left'></i> &nbsp;{lang="rotate_left"}
+							</a>
+						</li>
+					</ul>
+				</li>
+			{{endif}}
+			{{if count( $image->sizes() ) > 1}}
+				<li>
+					<a href='#' class='ipsButton ipsButton_overlaid ipsButton_verySmall' title='{lang="view_all_sizes"}' id='elImageSize' data-ipsMenu data-ipsMenu-appendTo='#elGalleryImage'>
+						{lang="view_all_sizes"} <i class='fa fa-caret-down'></i>
+					</a>
+					<ul class='ipsMenu ipsMenu_medium ipsHide' id='elImageSize_menu'>
+						{{foreach $image->sizes() as $k => $dims}}
+							<li class='ipsMenu_item'><a href='{$image->url()->setQueryString( 'imageSize', $k )}'>{$dims[0]}x{$dims[1]}</a></li>
+						{{endforeach}}
+					</ul>
+				</li>
+			{{endif}}
+			{{if ( $image->album_id AND $image->canEdit() ) OR \IPS\gallery\Image::modPermission( 'edit', NULL, $image->container() ) || \IPS\Member::loggedIn()->member_id}}
+				<li>
+					{{if ( $image->album_id AND $image->canEdit() ) OR \IPS\gallery\Image::modPermission( 'edit', NULL, $image->container() )}}
+						<a href='#' class='ipsButton ipsButton_overlaid ipsButton_verySmall' title='{lang="set_image_as"}' id='elImageSetAs' data-ipsMenu data-ipsMenu-appendTo='#elGalleryImage'>
+							{lang="set_image_as"} <i class='fa fa-caret-down'></i>
+						</a>
+						<ul class='ipsMenu ipsMenu_auto ipsHide' id='elImageSetAs_menu'>
+							{{if \IPS\gallery\Image::modPermission( 'edit', NULL, $image->container() ) AND ( $image->album_id AND $image->canEdit() )}}
+								<li class='ipsMenu_item'><a data-action='setAsCover' href='{$image->url()->setQueryString( 'do', 'cover' )->setQueryString( 'set', 'category')->csrf()}'>{lang="cover_category_only"}</a></li>
+								<li class='ipsMenu_item'><a data-action='setAsCover' href='{$image->url()->setQueryString( 'do', 'cover' )->setQueryString( 'set', 'album')->csrf()}'>{lang="cover_album_only"}</a></li>
+								<li class='ipsMenu_item'><a data-action='setAsCover' href='{$image->url()->setQueryString( 'do', 'cover' )->setQueryString( 'set', 'both')->csrf()}'>{lang="cover_both"}</a></li>
+							{{elseif \IPS\gallery\Image::modPermission( 'edit', NULL, $image->container() )}}
+								<li class='ipsMenu_item'><a data-action='setAsCover' href='{$image->url()->setQueryString( 'do', 'cover' )->setQueryString( 'set', 'category')->csrf()}'>{lang="cover_category"}</a></li>
+							{{elseif $image->album_id AND $image->canEdit()}}
+								<li class='ipsMenu_item'><a data-action='setAsCover' href='{$image->url()->setQueryString( 'do', 'cover' )->setQueryString( 'set', 'album')->csrf()}'>{lang="cover_album"}</a></li>
+							{{endif}}
+							{{if \IPS\Member::loggedIn()->member_id}}
+								<li class='ipsMenu_sep'><hr></li>
+								<li class='ipsMenu_item'>
+									<a href='{$image->url('setAsPhoto')->csrf()}' data-action='setAsProfile' title="{lang="set_gallery_image_photo"}">{lang="set_gallery_image_photo"}</a>
+								</li>
+							{{endif}}
+						</ul>
+					{{elseif \IPS\Member::loggedIn()->member_id}}
+						<a href='{$image->url('setAsPhoto')->csrf()}' class='ipsButton ipsButton_overlaid ipsButton_verySmall' title='{lang="set_gallery_image_photo"}'>
+							{lang="set_gallery_image_photo"}
+						</a>
+					{{endif}}
+				</li>
+			{{endif}}
+			<li>
+				<a href='{file="$image->masked_file_name" extension="gallery_Images"}' class='ipsButton ipsButton_overlaid ipsButton_verySmall' title='{lang="view_in_lightbox"}' data-ipsTooltip data-ipsLightbox><i class='fa fa-expand'></i></a>
+			</li>
+		</ul>
+	{{endif}}
+	<span id='elGalleryImageNav'>
+		{{if $prev}}
+			<a href='{$prev->url()->setQueryString( 'browse', 1 )}' id='elGalleryImageNav_prev' data-action='prevImage' data-imageID='{$prev->id}' title='{$prev->caption}'><i class='fa fa-angle-left'></i></a>
+		{{endif}}
+		{{if $next}}
+			<a href='{$next->url()->setQueryString( 'browse', 1 )}' id='elGalleryImageNav_next' data-action='nextImage' data-imageID='{$next->id}' title='{$next->caption}'><i class='fa fa-angle-right'></i></a>
+		{{endif}}
+	</span>
+</div>

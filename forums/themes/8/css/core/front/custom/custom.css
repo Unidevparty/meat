@@ -1,0 +1,715 @@
+/**
+ * This file is for your custom CSS.
+ * This file is not modified or overwritten during upgrades
+ */
+
+/* Theme editing */
+
+.ipsApp .ipsButtonBar .ipsPagination .ipsPagination_page a, 
+.ipsApp .ipsButtonBar .ipsPagination .ipsPagination_next a, 
+.ipsApp .ipsButtonBar .ipsPagination .ipsPagination_prev a, 
+.ipsApp .ipsButtonBar .ipsPagination .ipsPagination_first a, 
+.ipsApp .ipsButtonBar .ipsPagination .ipsPagination_last a {
+  background: #505f6f;
+}
+.ipsButtonBar .ipsPagination .ipsPagination_page.ipsPagination_active a {
+    background: #fff;
+}
+.ipsButtonBar .ipsButtonRow li > a, 
+.ipsButtonBar .ipsButtonRow li > button, 
+.ipsButtonBar .ipsButtonRow li > span {
+    background: #505f6f;
+}
+.ipsButtonBar .ipsPagination .ipsPagination_pageJump a {
+    color: #3D4E5F;
+}
+.ipsButtonBar {
+    background: #ebebeb;
+}
+.ipsAdvertisement ul li {
+  margin-right: 0px !important;
+}
+.ipsContained.ipsImage {
+    display: block !important;
+}
+.customRowPrefix { margin-bottom: 8px; display: block; }
+.ipsUserPhoto_tiny img { margin-right: 5px; }
+a.ipsTag_prefix { display: inline-block; background: #a72f35; }
+html[dir="ltr"] .ipsTag_prefix:before { border-color: transparent #a72f35 transparent transparent; }
+.ipsModerated { background: #fef1f5; }
+.ipsModerated a { color: #a72f35; }
+a.ipsType_blendLinks, .ipsType_blendLinks a { color: inherit; }
+.ipsBadge_warning, .ipsBadge_style3 { background: #a72f35; }
+.ipsApp .ipsNotificationCount { background: #a72f35; }
+
+.ipsNavBar_primary > ul > li.ipsNavBar_active > a {
+    background: url({resource="rightTab.png" app="core" location="front"}) top right;
+}
+.ipsNavBar_primary > ul > li.ipsNavBar_active {
+    background: url({resource="leftTab.png" app="forums" location="front"}) no-repeat top left;
+}
+
+.ipsLayout_minimal .ipsLayout_container {
+    max-width: 100%;
+}
+
+html[dir="ltr"] .ipsNavBar_primary > ul > li > a {
+    padding-left: 3px;
+}
+.ipsNavBar_primary > ul > li > a {
+    padding: 9px 18px;
+}
+
+.loginForm {
+    margin: auto;
+    width: 400px;
+}
+
+@media screen and (max-width: 1000px) { .me-vb3, .me-vb7 { clear: both; } #me-verify-block { width: 42% !important; } }
+@media screen and (max-width: 600px) { #me-verify-block { clear: both; width: auto !important; } }
+  
+/* устраняем мигание при загрузке */
+.mainBody {
+    background: #FFF;
+    max-width: 84%;
+    margin: 0 auto;
+    min-height: 1080px;
+}
+@media screen and (max-width: 979px) { .mainBody { max-width: 100%; } }
+.ipsLayout_container {
+    max-width: 100%;
+    margin: 0 0;
+}
+/*убираем пустую строку в анонсах новостей*/
+.is-truncated br { display: none !important; } /*:nth-child(even)*/
+
+
+/* Footer Banners */
+@media screen and (max-width: 1100px) { #me-adaptive { width: auto !important; } .me-v-a {margin-bottom: 16% !important; } }
+@media screen and (max-width: 767px) { #me-adaptive { width: auto !important; } #me-adaptive { max-width: 100% !important; }}
+
+
+#foundationWrapper {
+  position: absolute;  
+    top: 0;  
+    left: 0;  
+    display: block;  
+    width: 100%;  
+    height: 100%;  
+    text-decoration: none;  
+    z-index: 1;  
+}
+
+#me-adaptive { max-width: 49%; }
+.max755 img { max-width: 755px; }
+
+html[dir="ltr"] .ipsPhotoPanel.ipsPhotoPanel_tiny > div { margin-left: 0px !important; }
+a[href="https://meat-expert.ru/forms/?_new=1"] { display: none; }
+.redMessage {background: #a31514;}
+/* Alfa-Bank */
+[data-blockid="app_cms_Wysiwyg_ss74foqtr"] .ipsWidget_inner { padding: 20px; }
+.ipsWidget_inner p img { border: 0px; }
+[data-unique="1ccwtd2af"] { width: 250px; }
+a[data-ipsmenuvalue="content_db_lang_su_3"],
+a[data-ipsmenuvalue="form_logs"] { display: none; }
+#elCmsPageWrap .ipsType_pageTitle { margin-bottom: 10px; }
+.owl-carousel { overflow: hidden; }
+.me__verifyhead { margin-left: 20px; }
+header.ipsLayout_container .ipsAdvertisement_large a img { display: none; }
+#elSearchToggle_cms_records3,
+#elSearchToggle_form_log,
+#elSearchToggle_cms_records4,
+[data-ipsmenuvalue="cms_records3"],
+[data-ipsmenuvalue="cms_records4"],
+[data-ipsmenuvalue="form_log"] { display: none; } 
+html[dir="ltr"] .ipsList_inline > li { position: relative;z-index: 2; }
+#veilonCopyright {
+    display: inline-block;
+    position: absolute;
+    text-align: right;
+    right: 15px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+}
+/* --- Popup --- */
+.meat-expert div.owl-item {
+	width: 1024px;
+    height: 640px;
+}
+.me-popup-image {
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    margin: 0px auto;
+    text-align: center;
+    border-radius: 50%;
+}
+.owl-carousel .owl-item img {
+    max-height: 350px;
+}
+.me-popup-slogan {
+  	font-size: 30px;
+	position: absolute;
+	top: 58%;
+	bottom: 0px;
+	right: 0px;
+	left: 0px;
+  	text-align: center;
+}
+.me-popup-desc { 
+	position: absolute;
+    top: 65%;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.2em;
+    padding: 0 2em;
+ }
+
+.imghover {
+	max-width: 100%;
+}
+
+.wa_desc_row {     overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    height: 50px;
+    font-size: 14px;
+} 
+.cCmsRecord_row .ipsDataItem_title { font-size: 18px !important; }
+.ipsDataItem_main p { color: {theme='text_color'}; }
+.ipsDataItem_size5 a img { max-width: 150px; max-height: 100px; }
+#ipsLayout_sidebar { min-width: 270px; max-width: 270px; }
+.ipsLayout_container { padding: 0px; }
+.wa_rotate_image { background: url({resource="bg-miaso.png" app="core" location="admin"}) repeat-x;text-align: center; }
+
+.customButtonBar { background: transparent !important; margin-top: -35px !important; }
+
+/*.3rdimages img {
+  min-width: 1040px;
+  max-width: 1600px;
+  height: 280px; 
+}*/
+
+/* News Page
+-------------------------------------------------------- */
+
+/* .ipsColumns,
+.ipsDataItem_meta {
+    float: left;
+    padding: 6px 0 10px 0;
+}*/
+#ipsLayout_mainArea {
+    padding: 0px 9px;
+}
+.wa_theme_desc {
+    width: calc(100% - 170px);
+    float: right;
+}
+.wa_theme_desc,
+.wa_theme_desc a {
+    color: #5a5a5a;
+}
+.wa_news_comments a {
+    color: #9c9c9c;
+}
+.cCmsCategoryFeaturedEntry {
+    padding: 10px 0 10px 0;
+    border-bottom: 1px solid #D9D9D9;
+}
+.cCmsCategoryFeaturedEntry .cCmsRecord_image img {
+    max-width: 150px;
+    max-height: 100px;
+}
+.wa_theme_desc h2 {
+    font-size: 16px;
+}
+.wa_theme_desc h2 a {
+    color: #314a6d;
+}
+.ipsTruncate_more {
+    display: none !important;
+}
+.cCmsCategoryFeaturedEntry .cCmsRecord_image {
+    border: 0px;
+}
+.wa_theme_image {
+	display: inline;
+}
+.wa_theme_image .ipsColumn_medium {
+	max-width: 125px;
+}
+.wa_theme_image .ipsColumn {
+    padding: 0px;
+}
+.wa_theme_image .cCmsCategoryFeaturedEntry .cCmsRecord_image {
+    margin-right: 0px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+#footer_blocks {
+    background: #4f565d;
+    position: relative;
+    height: 200px;
+    padding: 0 20px;
+  z-index: 2;
+}
+.footer_blocks_content {
+    font-size: 13px;
+    color: #fff;
+    text-shadow: 0 1px 0 #2D3135;
+}
+.footer_blocks_content a {
+    color: #fff;
+    font-size: 12px !important
+}
+.footer_blocks_content h3 {
+    font-size: 18px !important;
+    font-weight: normal;
+    text-align: left
+}
+.footer_blocks_content ul {
+    padding-top: 6px;
+    text-align: left;
+    padding: 0px !important;
+}
+.footer_blocks_content ul li {
+    padding-bottom: 2px;
+    list-style: none;
+}
+#footer_block1,
+#footer_block2 {
+    width: 28%;
+    float: left;
+    display: inline
+}
+#footer_block3 {
+    width: 44%;
+    float: left;
+    display: inline;
+    padding-top: 20px;
+}
+#footer_block3 h1,
+#footer_block3 h2,
+#footer_block3 h3,
+#footer_block3 ul {
+    margin: 0px !important;
+}
+#footer_block3 h3 {
+    font-size: 14px !important;
+}
+#soclinks {
+    margin-top: 20px;
+    text-shadow: 0 0px 0 #2D3135
+}
+.rssLink {
+    background: url({url="public/style_images/meat_expert/custom/rss.png" base="none" noprotocol="false"}) no-repeat left top;
+    width: 23px;
+    height: 27px
+}
+.rssLink:hover {
+    background-position: left bottom
+}
+.vkLink {
+    background: url({url="public/style_images/meat_expert/custom/vk.png" base="none" noprotocol="false"}) no-repeat left top;
+    width: 31px;
+    height: 27px
+}
+.vkLink:hover {
+    background-position: left bottom
+}
+.fbLink {
+    background: url({url="public/style_images/meat_expert/custom/fb.png" base="none" noprotocol="false"}) no-repeat left top;
+    width: 23px;
+    height: 27px
+}
+.fbLink:hover {
+    background-position: left bottom
+}
+.meat_bottom {
+    background: url({url="public/style_images/meat_expert/custom/meat.png" base="none" noprotocol="false"}) no-repeat;
+    width: 163px;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 1
+}
+.right { float: right; }
+#soclinks a i { font-size: 25px; color: #B1B3B6;}
+#soclinks a i:hover { color: #FFF; }
+#soclinks li { margin-top: 35px; margin-right: 15px; }
+[data-blockid="app_cms_Blocks_0wx6r7r0x"],
+[data-blockid="app_cms_Blocks_57tgq9c38"] { padding: 0px !important; margin: 0px !important; }
+[data-blockid="app_cms_Blocks_y45yexct3"],
+[data-blockid="app_cms_Blocks_htk6ew0c5"] { padding: 0px 21px !important; }
+#ipsLayout_mainArea {
+	width: 100%;
+	min-height: 350px;
+	padding: 0px 20px;
+}
+.ipsLayout_minimal #ipsLayout_mainArea { padding: 0px 0px; }
+.m_info { display: none; }
+@media screen and (max-width: 979px) {
+  .cCmsCategoryFeaturedEntry { padding: 10px 0 0 0; }
+  .m_info { display: block; }
+  #me-adaptive { width: 49%; }
+  .ipsLayout_container { max-width: 1310px !important; }
+  #espopup_2, .b-modal { display: none !important; }
+  #footer_blocks { 
+    background: #4C5C6D;
+  	height: 100%;
+    padding: 0px;
+  }
+  #footer_blocks div { padding: 0 20px; }
+  #footer_block1,
+  #footer_block2,
+  #footer_block3 {
+    text-align: center;
+    width: 100%;
+  }
+  #footer_block3 {
+  	float: none;
+  }
+  .footer_blocks_content ul,
+  .footer_blocks_content h3{ text-align: center; }
+  
+  #footer_block3 .right { float: none; }
+}
+[data-controller="core.global.core.table,core.front.core.moderation"] { border-width: 0px; }
+.ipsDataList.ipsDataList_zebra .ipsDataItem:nth-child(2n):not(.ipsDataItem_selected):not(.ipsModerated):not(.ipsDataItem_new):not(.ipsDataItem_success):not(.ipsDataItem_warning):not(.ipsDataItem_error):not(.ipsDataItem_info):not(.ipsDataItem_status) {
+	background: none;
+}
+.cCmsRecord_row .ipsList_inline { font-size: 14px; margin-top: 10px; }
+.ipsForm .ipsAreaBackground { background: #FFF; }
+
+.cCmsRecord_image img {
+    max-width: 150px;
+    max-height: 100px;
+}
+
+
+.me-verify-clearfix { margin: 0 auto; }
+#me-verify-block .desc a { 
+  	font-size: 12px;
+	font-weight: 400;
+	color: #000;
+}
+#me-verify-block .desc a b { 
+	color: #1155cc;
+}
+.me-verify-info {
+  padding: 0.5em 10px;
+  background: rgb(247, 247, 247) none repeat scroll 0% 0%;
+  margin: 1.5em 10px;
+  border: 1px solid rgb(187, 187, 187);
+}
+.me-verify-image .image img { width: 62px; height: 66px; }
+#me-verify-block {
+	background: #fff;
+	width: 20%;
+	float: left;
+	border: 1px solid #dddddd;
+	box-shadow: 0px 0px 4px 0px rgb(200, 200, 200);
+	margin: 20px;
+}
+#me-verify-block:hover {
+	box-shadow: 0px 0px 17px rgba(0, 0, 0, 0.2);
+	-webkit-transition: box-shadow 0.2s;
+	transition: box-shadow 0.2s;
+	-webkit-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+}
+.me-verify-title {
+	background: #eeeeee;
+	padding: 10px;
+}
+.me-verify-icons {
+	float: right;
+}
+.me-verify-icons i {
+	color: #5bc0dc;
+}
+.me-verify-icons a {
+	font-size: 14px;
+	color: #000;
+	text-decoration: none;	
+}
+.me-verify-title h2 {
+	font-size: 16px;
+	font-weight: 500;
+	position: relative;
+	display: inline;
+}
+.me-verify-info-icons {
+	float: left;
+	font-size: 16px;
+	color: rgb(98, 186, 224);
+	margin-right: 5px;
+}
+.desc {
+	font-size: 13px;
+	font-weight: bold;
+	padding: 10px 15px;
+	background: #EEE;
+}
+.me-verify-down-desc {
+	font-size: 12px;
+	background: #eeeeee;
+	padding: 5px 15px;
+}
+.me-verify-down-title p { 
+	font-size: 12px;
+	margin-left: 15px;
+}
+.me-verify-image {
+	padding: 5px 15px;
+	text-align: left;
+}
+.image-desc {
+  font-size: 13px;
+  margin: 5px 0px 0px 8px;
+  vertical-align: top;
+  display: inline-block;
+  line-height: 1.2em;
+}
+.green { color: green; }
+.orange { color: orange; }
+.red { color: red; }
+.cWidgetContainer > ul > li:first-child { overflow: hidden; }
+.wa_theme_desc .ipsDataItem_meta { margin-top: 7px; }
+.mobile-me-n { display: none; }
+.wa_theme_desc .wa_theme_image { display: none; }
+.wa_theme_desc .ipsList_inline > li { margin-right: 3px !important; }
+/* POPUPS RESPONSIVE */
+@media screen and (max-width: 767px) {
+  .ipsColumns.ipsColumns_collapseTablet > .ipsColumn:not(.ipsHide), 
+  .ipsColumns.ipsColumns_collapsePhone > .ipsColumn:not(.ipsHide) {
+  	margin: 0;
+  }
+  #ipsLayout_header {
+    margin-bottom: -15px;
+}
+  #elCmsPageWrap .ipsType_pageTitle,
+  ul.ipsList_inline > li.ipsResponsive_halfwide_exmobile {
+    margin: 0 !important;
+	}
+  .ipsGrid_span2 img,
+  .ipsGrid_span3 img{
+      max-width: 100%;
+  }
+  .wa_theme_desc { width: auto; float: auto;}
+  .cCmsCategoryFeaturedEntry .cCmsRecord_image img { width: 110px; }
+  .wa_theme_desc .wa_theme_image { display: inline-block; float: left; }
+  .wa_theme_image { display: none; }
+  ul.ipsList_inline > li.ipsResponsive_halfwide_exmobile {
+    margin-bottom: 8px;
+}
+  .cWidgetContainer[data-widgetArea="header"] { margin-top: -10px; }
+  .wa_rotate_image { min-height: 102px !important; padding-bottom: 15px; }
+
+  #elLogo img { width: 90px !important; height: 60px !important; }
+  .me-np, .ipsRating_small { display: none !important; }
+  #veilonCopyright {
+    position: relative !important;
+    display: block !important;
+    text-align: center !important;
+}
+  html[dir] .ipsContained_container > span { display: inline !important; }
+	#espopup2 { display: none; top: 0px !important }
+	.me-popup-image { width: 300px !important; margin: 0 !important }
+	.me-popup-slogan {
+		font-size: 24px;
+		position: absolute;
+		top: 50%;
+		bottom: 0px;
+		right: 0px;
+		left: 1em;
+      	max-width: 310px;
+		line-height: 1em;
+	}
+	.me-popup-desc {
+		position: absolute;
+		top: 60%;
+		bottom: 0px;
+		right: 0px;
+		left: 0px;
+		text-align: center;
+		font-size: 17px;
+		line-height: 1.5em;
+		padding: 0 15px;
+		max-width: 310px;
+	}
+	
+}
+
+/*
+* 	Owl Carousel Owl Demo Theme 
+*	v1.15
+*/
+
+.owl-theme .owl-controlls{
+    margin-top: 10px;
+	text-align: center;
+}
+
+/* Styling Next and Prev buttons */
+
+.owl-theme .owl-controlls .owl-buttons div{
+	color: #FFF;
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+	margin: 5px;
+	padding: 3px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	background: #869791;
+	opacity: 0.5;
+}
+/* Clickable class fix problem with hover on touch devices */
+/* Use it for non-touch hover action */
+.owl-theme .owl-controlls.clickable .owl-buttons div:hover{
+	opacity: 1;
+	text-decoration: none;
+}
+
+/* Styling Pagination*/
+
+.owl-theme .owl-controlls .owl-page{
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+}
+.owl-theme .owl-controlls .owl-page span{
+	display: block;
+	width: 10px;
+	height: 10px;
+	margin: 0px 4px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	background-color: #7D7D7D;
+    cursor: pointer;
+}
+
+
+.owl-theme .owl-controlls .owl-page.active span,
+.owl-theme .owl-controlls.clickable .owl-page:hover span{
+    background: #FFF;
+}
+
+/* If PaginationNumbers is true */
+
+.owl-theme .owl-controlls .owl-page span.owl-numbers{
+	height: auto;
+	width: auto;
+	color: #FFF;
+	padding: 2px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+}
+
+.owl-theme .owl-controlls .owl-buttons div { font-size: 4em; background: none; cursor: pointer; }
+
+.owl-theme .owl-controlls .owl-buttons .owl-next { 
+	float: right;
+}
+.owl-theme .owl-controlls .owl-buttons .owl-prev { 
+	float: left;
+}
+.owl-theme .owl-controlls .owl-buttons .owl-next:before {
+  font-family: "FontAwesome";
+  content: "\f105";
+}
+.owl-theme .owl-controlls .owl-buttons .owl-prev:before {
+  font-family: "FontAwesome";
+  content: "\f104";
+}
+div.easypopup { background: none; }
+
+
+.owl-theme .owl-controlls {
+    text-align: center;
+    position: relative;
+    top: -85px;
+}
+.m_info_slide { display: none }
+#elLogo img { width: 164px; height: 108px; }
+@media screen and (max-width: 1080px) {
+  .me-np a img { display: none !important; }
+#footer_block1, #footer_block2 { font-size: 12px; }
+}
+@media screen and (max-width: 767px) {
+  .cCmsCategoryFeaturedEntry {
+  	padding: 5px 0 0 0;
+  }
+  .hide { display: none !important; }
+  .slideContent .main_img img { opacity: 0.6; }
+  .slides_container .slides { background: #000; }
+  .info_slide { display: none; }
+  .m_info_slide {
+    display: block !important;
+    top: 10px;
+    position: absolute;
+}
+  .m_info_slide h2, .m_info_slide .oldh2 { color: #FFF !important; text-shadow: black 0.1em 0.1em 0.2em !important; }
+}
+
+.ipsType_pageTitleMeat {
+  background: #ebebeb;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 22px;
+  text-align: center;
+  padding: 12px;
+  color: #a31514;
+}
+.ipsItemStatus:not(.ipsItemStatus_large), .ipsItemStatus.ipsItemStatus_tiny, .ipsItemStatus.ipsItemStatus_small {
+    font-size: 10px;
+    vertical-align: middle;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  	cursor: default
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}

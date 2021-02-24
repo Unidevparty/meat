@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settingexport>
+  <settinggroup>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>ccs_articles</conf_title_keyword>
+      <conf_title_title>Cтатьи IP.Content</conf_title_title>
+      <conf_title_desc></conf_title_desc>
+      <conf_title_tab>IPS Apps</conf_title_tab>
+      <conf_title_app>ccs</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title><![CDATA[Включить сервис]]></conf_title>
+      <conf_description><![CDATA[Под каждым сообщении форума появится кнопка 'Создать статью'.]]></conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>ccs_promote</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Создание статьи из сообщения форума</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs_articles</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Могут копировать сообщение в статью</conf_title>
+      <conf_description>Выберите группы, которые смогут создавать статьи из сообщения копированием.</conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>ccs_promote_g_copy</conf_key>
+      <conf_default/>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1)
+{
+	if ( is_array($_POST['ccs_promote_g_copy']) )
+	{
+		$_POST['ccs_promote_g_copy'] = implode(",",$_POST['ccs_promote_g_copy']);
+	}
+	else
+	{
+		$_POST['ccs_promote_g_copy'] = "";
+	}
+	
+	$key = 'ccs_promote_g_copy';
+}
+if ( $show == 1 )
+{
+    $key='ccs_promote_g_copy[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs_articles</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Могут перемещать сообщение в статью</conf_title>
+      <conf_description><![CDATA[Выберите группы, которые смогут создавать статьи из сообщений перемещением. <strong>Перемещение удалит оригинальное сообщение  после создания статьи.</strong>]]></conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>ccs_promote_g_move</conf_key>
+      <conf_default/>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1)
+{
+	if ( is_array($_POST['ccs_promote_g_move']) )
+	{
+		$_POST['ccs_promote_g_move'] = implode(",",$_POST['ccs_promote_g_move']);
+	}
+	else
+	{
+		$_POST['ccs_promote_g_move'] = "";
+	}
+	
+	$key = 'ccs_promote_g_move';
+}
+if ( $show == 1 )
+{
+    $key='ccs_promote_g_move[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs_articles</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Разрешить привязать тему к статье</conf_title>
+      <conf_description>Может ли пользователь, создающий статью из сообщения, назначить тему форума для публикации комментариев к статье.</conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>ccs_promote_associate</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra>0=Не привязывать&#13;
+1=Позволить выбирать&#13;
+2=Привязывать автоматически</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>comments,topics,associate,link</conf_keywords>
+      <conf_title_keyword>ccs_articles</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Вставлять ссылку на статью</conf_title>
+      <conf_description>При копировании сообщения в статью ссылка на эту статью будет добавлена в начало сообщения. При перемещении - сообщение будет заменено ссылкой.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>ccs_promote_link</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs_articles</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Позволить отменить ссылку</conf_title>
+      <conf_description>Если вы выбрали вставлять ссылку на статью, включение этой опции позволит пользователю, создающему статью из сообщения, отменить вставку ссылки.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>ccs_promote_nolink</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs_articles</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_title_title>Общие настройки IP.Content</conf_title_title>
+      <conf_title_desc>Основные настройки для IP.Content.</conf_title_desc>
+      <conf_title_tab>IPS Apps</conf_title_tab>
+      <conf_title_app>ccs</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Система включена</conf_title>
+      <conf_description>Должны ли страницы IP.Content быть доступны пользователям?</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>ccs_online</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Система включена</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>ccs, online, offline</conf_keywords>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Сообщение</conf_title>
+      <conf_description>Введите сообщение для пользователей, если приложение отключено.</conf_description>
+      <conf_type>editor</conf_type>
+      <conf_key>ccs_offline_message</conf_key>
+      <conf_default>В настоящее время приложение отключено. Приносим извинения за причиненные неудобства.</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>offline, message, ccs</conf_keywords>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Доступ к отключенному приложению</conf_title>
+      <conf_description>Выберите группы, которые будут иметь доступ к страницам IP.Content (согласно разрешениям), когда приложение отключено.</conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>ccs_offline_groups</conf_key>
+      <conf_default/>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1)
+{
+	if ( is_array($_POST['ccs_offline_groups']) )
+	{
+		$_POST['ccs_offline_groups'] = implode(",",$_POST['ccs_offline_groups']);
+	}
+	else
+	{
+		$_POST['ccs_offline_groups'] = "";
+	}
+	
+	$key = 'ccs_offline_groups';
+}
+if ( $show == 1 )
+{
+    $key='ccs_offline_groups[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>offline, groups, access</conf_keywords>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title><![CDATA[Установка по умолчанию 'Использовать IPB Wrapper']]></conf_title>
+      <conf_description>Вы можете включить или отключить IPB Wrapper для каждой отдельной страницы. Эта настройка определяет, будет ли использоваться IPB Wrapper по умолчанию при создании или изменении записей.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>ccs_use_ipb_wrapper</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group>Настройки внешнего вида</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Отображать строку навигации страниц</conf_title>
+      <conf_description>Отображать строку навигации при использовании IPB Wrapper?</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>ccs_pages_navbar</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Домашняя страница по умолчанию</conf_title>
+      <conf_description>Если страница не задана, какая страница должна быть показана?</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>ccs_default_page</conf_key>
+      <conf_default>index.html</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group>Страницы по умолчанию</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>index, default, home</conf_keywords>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Страница ошибки 404</conf_title>
+      <conf_description>Какая страница должна отображаться, если запрашиваемая страница не найдена?</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>ccs_default_errorpage</conf_key>
+      <conf_default>404.html</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Страница ошибок</conf_title>
+      <conf_description>Стандартная страница ошибки IP.Board.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>ccs_default_error</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Редактир шаблонов</conf_title>
+      <conf_description><![CDATA[Выберите редактор, который будет использоваться для редактирования шаблонов. TinyMCE и CKEditor являются <a href="http://ru.wikipedia.org/wiki/WYSIWYG">WYSIWYG редакторами</a>, а EditArea является редактором с подсветкой кода. WYSIWYG редакторы не всегда подходят для работы с кодом.]]></conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>ccs_template_type</conf_key>
+      <conf_default>none</conf_default>
+      <conf_extra>none=Без редактора (текстовое поле формы)&#13;
+tinymce=TinyMCE&#13;
+ckeditor=CKEditor&#13;
+editarea=EditArea</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>9</conf_position>
+      <conf_start_group>Работа с записями</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>wysiwyg,editor,templates,templating,template</conf_keywords>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Область поиска</conf_title>
+      <conf_description>Выберите область поиска по умолчанию для глобальной системы поиска IP.Board.</conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>ccs_default_search</conf_key>
+      <conf_default>pages</conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[if( $show == 1 )
+{
+	$r['conf_extra']	= "pages=Страницы";
+	
+	$this->DB->build( array( 'select' => 'd.database_id,d.database_name,d.database_forum_comments', 'from' => array( 'ccs_databases' => 'd' ), 'where' => 'd.database_search=1',
+		'add_join' => array( array( 'select' => 'i.perm_5', 'from' => array( 'permission_index' => 'i' ), 'where' => "app='ccs' AND perm_type='databases' AND perm_type_id=d.database_id", 'type' => 'left' ) ) ) );
+	$this->DB->execute();
+	
+	while( $get = $this->DB->fetch() )
+	{
+		$r['conf_extra']	.= "&#092;ndatabase_{$get['database_id']}={$get['database_name']}";
+		
+		if( trim( $get['perm_5'], ' ,' ) AND !$get['database_forum_comments'] )
+		{
+			$r['conf_extra']	.= "&#092;ndatabase_{$get['database_id']}_comments={$get['database_name']} - комментарии";
+		}
+	}
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>10</conf_position>
+      <conf_start_group>Настройка поиска</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>ccs_advanced</conf_title_keyword>
+      <conf_title_title>Расширенные настройки IP.Content</conf_title_title>
+      <conf_title_desc>Расширенные настройки приложения IP.Content.</conf_title_desc>
+      <conf_title_tab>IPS Apps</conf_title_tab>
+      <conf_title_app>ccs</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>URL к index.php</conf_title>
+      <conf_description><![CDATA[Введите URL ведущий к индексной странице (обычно index.php), который вы используете. Не включайте "index.php" в URL. По одному URL на строку.]]></conf_description>
+      <conf_type>textarea</conf_type>
+      <conf_key>ccs_root_url</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs_advanced</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Имя индексного файла</conf_title>
+      <conf_description>Если вы переименуете index.php, введите новое название этого файла. Примите во внимание, что при изменении имени индексного файла, может потребоваться настройка серверного окружения.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>ccs_root_filename</conf_key>
+      <conf_default>index.php</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs_advanced</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Использовать mod_rewrite в .htaccess</conf_title>
+      <conf_description><![CDATA[При включении функции можно будет скачать файл .htaccess, нажав на кнопку "Скачать файл .htaccess" в верхней части страницы. Вам нужно будет скопировать полученный файл в папку, где находится индексный файл. Кнопка будет доступна, если заполнены все настройки на этой странице.]]></conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>ccs_mod_rewrite</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>ccs_advanced</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </settinggroup>
+</settingexport>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Tools</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Tools</subitemtitle>
+					<subsection>tools</subsection>
+					<subitemurl>do=tools</subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

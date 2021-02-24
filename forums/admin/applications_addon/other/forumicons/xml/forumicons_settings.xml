@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settingexport>
+  <settinggroup>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>dp3_fi</conf_title_keyword>
+      <conf_title_title>(DP33) Forum Icons</conf_title_title>
+      <conf_title_desc>Settings for an application Forum Icons</conf_title_desc>
+      <conf_title_tab>(DP3X) Mods</conf_title_tab>
+      <conf_title_app>forumicons</conf_title_app>
+      <conf_title_noshow>1</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Enable Mod?</conf_title>
+      <conf_description/>
+      <conf_group>79</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>dp3_fi_enable</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Main Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>dp3_fi</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Display Mode</conf_title>
+      <conf_description><![CDATA[Where you want to display the icons?<br /><br />
+Next to the forum name<br />
+Replace the indicator icon]]></conf_description>
+      <conf_group>79</conf_group>
+      <conf_type>dropdown</conf_type>
+      <conf_key>dp3_fi_mode</conf_key>
+      <conf_default>nextto</conf_default>
+      <conf_extra>nextto=Next to the forum name&#13;
+replace=Replace the indicator icon</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>dp3_fi</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Allowed Extensions</conf_title>
+      <conf_description/>
+      <conf_group>79</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>dp3_fi_allowed_ext</conf_key>
+      <conf_default>jpg,jpeg,png,gif</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group>Icons Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>dp3_fi</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Max. Filesize</conf_title>
+      <conf_description>In kB.</conf_description>
+      <conf_group>79</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>dp3_fi_max_filesize</conf_key>
+      <conf_default>50</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>dp3_fi</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Max. Dimensions</conf_title>
+      <conf_description>Set maximum dimensions for the forum icons. (width x height).</conf_description>
+      <conf_group>79</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>dp3_fi_max_dims</conf_key>
+      <conf_default>35x35</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>dp3_fi</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Store Directory</conf_title>
+      <conf_description>Where you want to store the forum images (inside the uploads/)?</conf_description>
+      <conf_group>79</conf_group>
+      <conf_type>input</conf_type>
+      <conf_key>dp3_fi_dir</conf_key>
+      <conf_default>forumicons/</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>dp3_fi</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </settinggroup>
+</settingexport>

@@ -1,0 +1,38 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v5="http://fedex.com/ws/track/v5">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v5:TrackRequest>
+         <v5:WebAuthenticationDetail>
+            <v5:UserCredential>
+               <v5:Key></v5:Key>
+               <v5:Password></v5:Password>
+            </v5:UserCredential>
+         </v5:WebAuthenticationDetail>
+         <v5:ClientDetail>
+            <v5:AccountNumber></v5:AccountNumber>
+            <v5:MeterNumber></v5:MeterNumber>   
+            <v5:IntegratorId>12345</v5:IntegratorId>   
+            <v5:Localization>
+               <v5:LanguageCode>EN</v5:LanguageCode>      
+            </v5:Localization>
+         </v5:ClientDetail>
+         <v5:TransactionDetail>   
+            <v5:CustomerTransactionId>Track Ground Shipment By Tracking Number</v5:CustomerTransactionId>   
+            <v5:Localization>
+               <v5:LanguageCode>EN</v5:LanguageCode>      
+            </v5:Localization>
+         </v5:TransactionDetail>
+         <v5:Version>
+            <v5:ServiceId>trck</v5:ServiceId>
+            <v5:Major>5</v5:Major>
+            <v5:Intermediate>0</v5:Intermediate>
+            <v5:Minor>0</v5:Minor>
+         </v5:Version>
+         <v5:CarrierCode>FDXG</v5:CarrierCode>
+         <v5:PackageIdentifier>
+            <v5:Value>484505474017274</v5:Value>
+            <v5:Type>TRACKING_NUMBER_OR_DOORTAG</v5:Type>
+         </v5:PackageIdentifier>
+      </v5:TrackRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

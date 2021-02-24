@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+	<group>
+		<grouptitle>Management</grouptitle>
+		<grouplang>Management</grouplang>
+		<items>
+			<item>
+				<key>mod_management</key>
+				<string>Can manage logs?</string>
+			</item>
+		</items>
+	</group>	
+</permissions>

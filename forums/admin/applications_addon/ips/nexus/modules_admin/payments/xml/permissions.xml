@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Invoices</grouptitle>
+		<grouplang>payments_invoices</grouplang>
+		<items>
+			<item>
+				<key>invoices_manage</key>
+				<string>Can view/search invoices?</string>
+			</item>
+			<item>
+				<key>invoices_add</key>
+				<string>Can generate invoices?</string>
+			</item>
+			<item>
+				<key>invoices_edit</key>
+				<string>Can edit invoice statuses?</string>
+			</item>
+			<item>
+				<key>invoices_resend</key>
+				<string>Can resend invoices?</string>
+			</item>
+			<item>
+				<key>invoices_delete</key>
+				<string>Can delete invoices?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Transactions</grouptitle>
+		<grouplang>payments_transactions</grouplang>
+		<items>
+			<item>
+				<key>transactions_manage</key>
+				<string>Can view/search transactions?</string>
+			</item>
+			<item>
+				<key>transactions_edit</key>
+				<string>Can edit transaction statuses?</string>
+			</item>
+			<item>
+				<key>transactions_delete</key>
+				<string>Can delete transactions?</string>
+			</item>
+			<item>
+				<key>chargetocard</key>
+				<string>Can make a charge to a card on file?</string>
+			</item>
+			<item>
+				<key>transactions_refund</key>
+				<string>Can make refunds?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Shipping Orders</grouptitle>
+		<grouplang>payments_shiporders</grouplang>
+		<items>
+			<item>
+				<key>shiporders_manage</key>
+				<string>Can view/search shipping orders?</string>
+			</item>
+			<item>
+				<key>shiporders_edit</key>
+				<string>Can edit shipping orders statuses?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Purchases</grouptitle>
+		<grouplang>payments_purchases</grouplang>
+		<items>
+			<item>
+				<key>purchases_view</key>
+				<string>Can view purchases?</string>
+			</item>
+			<item>
+				<key>purchases_edit</key>
+				<string>Can edit purchases?</string>
+			</item>
+			<item>
+				<key>purchases_transfer</key>
+				<string>Can transfer purchases?</string>
+			</item>
+			<item>
+				<key>purchases_associate</key>
+				<string>Can edit purchase associations?</string>
+			</item>
+			<item>
+				<key>purchases_cancel</key>
+				<string>Can cancel/reactivate purchases?</string>
+			</item>
+			<item>
+				<key>purchases_delete</key>
+				<string>Can delete purchases?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>License Keys</grouptitle>
+		<grouplang>payments_lkeys</grouplang>
+		<items>
+			<item>
+				<key>lkey_view</key>
+				<string>Can view license keys?</string>
+			</item>
+			<item>
+				<key>lkey_reset</key>
+				<string>Can reset license keys?</string>
+			</item>
+			<item>
+				<key>lkey_cancel</key>
+				<string>Can cancel and reactivate license keys?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Payout Requests</grouptitle>
+		<grouplang>payments_payouts</grouplang>
+		<items>
+			<item>
+				<key>payout_manage</key>
+				<string>Can view payout requests?</string>
+			</item>
+			<item>
+				<key>payout_pay</key>
+				<string>Can pay/dismiss payout requests?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Settings</grouptitle>
+		<grouplang>settings</grouplang>
+		<items>
+			<item>
+				<key>settings_payments</key>
+				<string>Can view Payments &amp; Invoice Settings?</string>
+			</item>
+		</items>
+	</group>
+</permissions>

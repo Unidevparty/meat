@@ -1,0 +1,34 @@
+html[dir="ltr"] .cNexusCheckout_returning,
+html[dir="ltr"] .cNexusCheckout_review > .ipsColumn:first-child {
+	border-right: 1px solid rgba(0,0,0,0.075);
+}
+html[dir="rtl"] .cNexusCheckout_returning,
+html[dir="rtl"] .cNexusCheckout_review > .ipsColumn:first-child {
+	border-left: 1px solid rgba(0,0,0,0.075);
+}
+
+.cNexusCheckout_review > .ipsColumn {
+	padding: 0 15px;
+}
+
+.cNexusCheckout_subtotal {
+	border-top: 1px solid #b3b3b3;
+}
+
+#elCheckoutContent .ipsSocial {
+	max-width: 200px;
+}
+
+.cNexusCheckout_addresses { }
+	
+	.cNexusCheckout_addresses .ipsGrid_span6 {
+		margin-bottom: 15px;
+	}
+
+		.cNexusCheckout_addresses .ipsGrid_span6 input[type="radio"] {
+			margin-top: 4px;
+		}
+
+	.cNexusCheckout_addresses .ipsField_fieldList {
+		padding-top: 0;
+	}

@@ -1,0 +1,29 @@
+<ips:template parameters="$table, $headers, $rows, $quickSearch" />
+<div class="ipsPad">
+	{{if count( $rows )}}
+		<table class='ipsTable ipsTable_responsive ipsTable_zebra {{foreach $table->classes as $class}}{$class} {{endforeach}}' id='elTable_{$table->uniqueId}' data-role="tableRows">
+			<thead>
+				<tr class='ipsAreaBackground'>
+					<th>Дата</th>
+					<th>Подробности</th>
+				</tr>
+			</thead>
+			<tbody data-role="tableRows">
+				{template="$table->rowsTemplate[1]" params="$table, $headers, $rows" object="$table->rowsTemplate[0]"}
+			</tbody>
+		</table>
+	{{endif}}
+	<div class='ipsClearfix ipsSpacer_top'>
+		{{if $table->pages > 1}}
+			{{if request.isAjax()}}
+				<div class="ipsType_center ipsAreaBackground_light ipsPad">
+					<a href="{$table->baseUrl}" class="ipsButton ipsButton_verySmall ipsButton_normal">{lang="see_all_history"}</a>
+				</div>
+			{{else}}
+				<div data-role="tablePagination">
+					{template="pagination" group="global" app="core" location="global" params="$table->baseUrl, $table->pages, $table->page, $table->limit"}
+				</div>
+			{{endif}}
+		{{endif}}
+	</div>
+</div>

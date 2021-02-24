@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Advertisements</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Advertisements</subitemtitle>
+					<subsection>advertisements</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>advertisements_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>promotion_advertisements</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Referral Banners</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Referral Banners</subitemtitle>
+					<subsection>referrals</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>referrals_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>promotion_referrals</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Commission Rules</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Commission Rules</subitemtitle>
+					<subsection>refrules</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>refrules_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>promotion_refrules</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Promotion Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Promotion Settings</subitemtitle>
+					<subsection>settings</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>settings_promotion</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>settings_promotion</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

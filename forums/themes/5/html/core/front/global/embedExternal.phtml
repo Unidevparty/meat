@@ -1,0 +1,107 @@
+<ips:template parameters="$output, $js" />
+<!DOCTYPE html>
+<html lang="{expression="\IPS\Member::loggedIn()->language()->bcp47()"}" dir="{{if member.language()->isrtl}}rtl{{else}}ltr{{endif}}">
+	<head>
+		<script type='text/javascript'>
+			var ipsDebug = {{if ( \IPS\IN_DEV and \IPS\DEV_DEBUG_JS ) or \IPS\DEBUG_JS}}true{{else}}false{{endif}};
+		</script>
+
+		{{if is_array( $js )}}
+			{{foreach $js as $jsInclude}}
+				<script type='text/javascript' src='{$jsInclude}'></script>
+			{{endforeach}}
+		{{endif}}
+
+		<style type='text/css' rel='stylesheet'>
+			body {
+				padding: 0;
+				margin: 0;
+			}
+			body #ipsEmbedLoading {
+				display: none;
+			}
+			body.unloaded #ipsEmbedLoading {
+				display: block;
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				border: 1px solid rgba(0,0,0,0.05);
+				background: #fff;
+			}
+
+			@-webkit-keyframes dummy_anim {
+			  0% { background-color: #f8f8f8; }
+			  50% { background-color: #f2f2f2; }
+			  99% { background-color: #f8f8f8; }
+			}
+			@-moz-keyframes dummy_anim {
+			  0% { background-color: #f8f8f8; }
+			  50% { background-color: #f2f2f2; }
+			  99% { background-color: #f8f8f8; }
+			}
+			@-ms-keyframes dummy_anim {
+			  0% { background-color: #f8f8f8; }
+			  50% { background-color: #f2f2f2; }
+			  99% { background-color: #f8f8f8; }
+			}
+			@-o-keyframes dummy_anim {
+			  0% { background-color: #f8f8f8; }
+			  50% { background-color: #f2f2f2; }
+			  99% { background-color: #f8f8f8; }
+			}
+			@keyframes dummy_anim {
+			  0% { background-color: #f8f8f8; }
+			  50% { background-color: #f2f2f2; }
+			  99% { background-color: #f8f8f8; }
+			}
+			#ipsEmbedLoading:before,
+			#ipsEmbedLoading:after,
+			#ipsEmbedLoading span:before,
+			#ipsEmbedLoading span:after {
+				display: block;
+				content: '';
+				position: absolute;
+				{prefix="animation" value="dummy_anim 1s infinite"}
+			}
+			#ipsEmbedLoading:before {
+				width: 50px;
+				height: 50px;
+				top: 15px;
+				left: 15px;
+			}
+			#ipsEmbedLoading:after {
+				width: 300px;
+				height: 17px;
+				top: 15px;
+				left: 80px;
+			}
+			#ipsEmbedLoading span:before {
+				width: 200px;
+				height: 12px;
+				top: 40px;
+				left: 80px;
+			}
+			#ipsEmbedLoading span:after {
+				width: 90%;
+				opacity: 0.5;
+				left: 15px;
+				top: 80px;
+				bottom: 15px;
+			}
+
+			.ipsJS_has#ipsEmbed {
+				opacity: 0.0001;
+			}
+		</style>
+	</head>
+	<body class='unloaded {{if isset( \IPS\Request::i()->cookie['hasJS'] )}}ipsJS_has{{else}}ipsJS_none{{endif}}'>
+		<div id='ipsEmbed'>
+			{$output|raw}
+		</div>
+		<div id='ipsEmbedLoading'>
+			<span></span>
+		</div>
+	</body>
+</html>

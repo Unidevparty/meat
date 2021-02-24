@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Customers</grouptitle>
+		<grouplang>customers_customers</grouplang>
+		<items>
+			<item>
+				<key>details_edit</key>
+				<string>Can edit customer details?</string>
+			</item>
+			<item>
+				<key>customer_standing</key>
+				<string>Can view customer standing?</string>
+			</item>
+			<item>
+				<key>notes_view</key>
+				<string>Can view customer notes?</string>
+			</item>
+			<item>
+				<key>notes_add</key>
+				<string>Can add customer notes?</string>
+			</item>
+			<item>
+				<key>notes_edit</key>
+				<string>Can edit customer notes?</string>
+			</item>
+			<item>
+				<key>notes_delete</key>
+				<string>Can delete customer notes?</string>
+			</item>
+			<item>
+				<key>altcontacts</key>
+				<string>Can add/edit alternate contacts?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Customer Fields</grouptitle>
+		<grouplang>customers_fields</grouplang>
+		<items>
+			<item>
+				<key>fields_view</key>
+				<string>Can view fields?</string>
+			</item>
+			<item>
+				<key>fields_edit</key>
+				<string>Can edit fields?</string>
+			</item>
+			<item>
+				<key>fields_add</key>
+				<string>Can add new fields?</string>
+			</item>
+			<item>
+				<key>fields_delete</key>
+				<string>Can delete fields?</string>
+			</item>
+		</items>
+	</group>
+</permissions>

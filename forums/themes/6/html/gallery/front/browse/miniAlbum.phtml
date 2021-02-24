@@ -1,0 +1,16 @@
+<ips:template parameters="$album" />
+
+<ol class='ipsGrid ipsList_reset cGalleryMiniAlbum ipsClearfix' data-ipsGrid data-ipsGrid-minItemSize='60' data-ipsGrid-maxItemSize='100'>
+	{{foreach $album->_latestImages as $image}}
+		{{if $image->medium_file_name}}
+			<li style='background-image: url( "{expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), \IPS\File::get( 'gallery_Images', $image->small_file_name )->url )"}" );' class='ipsGrid_span3 cGalleryTrimmedImage' data-grid-ratio='100' data-imageID='{$image->id}'>
+				<a href='{$image->url()->setQueryString( 'browse', 1 )}' title='{$image->caption}'>
+					<img src='{file="$image->small_file_name" extension="gallery_Images"}' alt='{$image->caption}'>
+				</a>
+			</li>
+		{{else}}
+			<li class='ipsGrid_span3 ipsNoThumb ipsNoThumb_video'>&nbsp;</li>
+		{{endif}}
+	{{endforeach}}
+</ol>
+<a href='{$album->url()}' class='ipsType_small'>{lang="view_entire_album" sprintf="$album->name"}</a>

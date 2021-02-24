@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settingexport>
+  <settinggroup>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>mdmx_regnotifications</conf_title_keyword>
+      <conf_title_title>Уведомления при регистрации</conf_title_title>
+      <conf_title_desc/>
+      <conf_title_tab/>
+      <conf_title_app>regnotifications</conf_title_app>
+      <conf_title_noshow>1</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Включить</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>mdmx_regnotifications_on</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>mdmx_regnotifications</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Группы</conf_title>
+      <conf_description/>
+      <conf_type>textarea</conf_type>
+      <conf_key>mdmx_regnotifications_groups</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>mdmx_regnotifications</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Пользователи</conf_title>
+      <conf_description/>
+      <conf_type>textarea</conf_type>
+      <conf_key>mdmx_regnotifications_members</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>mdmx_regnotifications</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Шаблон</conf_title>
+      <conf_description/>
+      <conf_type>textarea</conf_type>
+      <conf_key>mdmx_regnotifications_template</conf_key>
+      <conf_default><![CDATA[Здравствуйте.
+
+Вы получили это письмо потому, что на форуме зарегистрировался новый пользователь!
+
+------------------------------------------------
+Имя пользователя: <#NAME#>
+Отображаемое имя: <#DISPLAYNAME#>
+Email: <#EMAIL#>
+IP-адрес: <#IP#>
+Дата регистрации: <#DATE#>
+
+Ссылка на профиль: <#PROFILE_LINK#>
+------------------------------------------------
+
+(вы можете отключить подобные уведомления в АдминЦентре)]]></conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>mdmx_regnotifications</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </settinggroup>
+</settingexport>

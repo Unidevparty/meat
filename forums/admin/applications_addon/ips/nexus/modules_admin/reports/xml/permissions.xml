@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Reports</grouptitle>
+		<grouplang>reports_reports</grouplang>
+		<items>
+			<item>
+				<key>report_purchases</key>
+				<string>Can view purchase reports?</string>
+			</item>
+			<item>
+				<key>report_income</key>
+				<string>Can view income reports?</string>
+			</item>
+			<item>
+				<key>report_markets</key>
+				<string>Can view market reports?</string>
+			</item>
+			<item>
+				<key>report_supportrequests</key>
+				<string>Can view support request volume reports?</string>
+			</item>
+			<item>
+				<key>report_supportstaffreplies</key>
+				<string>Can view support staff replies report?</string>
+			</item>
+			<item>
+				<key>report_supportstaff</key>
+				<string>Can view self support staff reports? (Allows user to run staff reports on themself)</string>
+			</item>
+			<item>
+				<key>report_supportstaffself</key>
+				<string>Can view ALL staff report? (Allows user to run staff reports on all staff; previous permission must also be enabled)</string>
+			</item>
+			<item>
+				<key>report_supportsatisfaction</key>
+				<string>Can view support satisfaction reports?</string>
+			</item>
+		</items>
+	</group>
+</permissions>

@@ -1,0 +1,15 @@
+<ips:template parameters="$purchase, $account" />
+<ul class="ipsList_reset ipsSpacer_bottom ipsSpacer_half">
+	<li>
+		<a href="{expression="\IPS\Http\Url::external( 'http://' . $account->domain )->makeSafeForAcp()"}" target="_blank">{$account->domain}</a>
+	</li>
+	<li>
+		{$account->server->hostname}
+	</li>
+	<li>
+		<span class="ipsType_monospace">{$account->username}</span> / <span class="ipsType_monospace">{$account->password}</span>
+	</li>
+	<li>
+		<a href="{$account->ftpLink()}">{lang="account_ftp"}</a> / <a href="{$account->controlPanelLink()}" target="_blank">{lang="account_{$account->server->type}_control_panel"}</a>
+	</li>
+</ul>

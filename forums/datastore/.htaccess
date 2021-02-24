@@ -1,0 +1,6 @@
+#<ipb-protection>
+<Files ~ "^.*\.(php|cgi|pl|php3|php4|php5|php6|phtml|shtml|([a-z0-9]{32}))$">
+    Order allow,deny
+    Deny from all
+</Files>
+#</ipb-protection>

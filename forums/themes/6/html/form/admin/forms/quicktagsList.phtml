@@ -1,0 +1,18 @@
+<ips:template parameters="" />
+<table class="ipsTable ipsTable_zebra ipsPad_half">
+	<thead>
+		<tr>
+			<th>{lang="tag_name"}</th>
+			<th>{lang="tag_value"}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{foreach \IPS\form\Form::getTags() as $tag => $name}}
+			<tr>
+				<td>{$name}</td>
+				<td>{$tag}</td>                
+			</tr>
+		{{endforeach}}
+	</tbody>
+</table>
+<br>

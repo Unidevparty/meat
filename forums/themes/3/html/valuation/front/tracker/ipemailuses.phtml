@@ -1,0 +1,98 @@
+<ips:template parameters="$requests" />
+
+<div class="ipsGrid">
+	<div class="ipsGrid_span6">
+		<div class="ipsPad">
+			<h1 class="ipsType_pageTitle ipsType_center">Email-адрес</h1><br>
+			<table class='ipsTable ipsTable_responsive ipsTable_zebra'>
+				<thead>
+					<tr class='ipsAreaBackground'>
+						<th>Информация об использовании</th>
+						<th><span class="ipsPos_right">Всего {expression="count( $requests['email'] )"} раз</span></th>
+					</tr>
+				</thead>
+				<tbody data-role="tableRows">
+					{{foreach $requests['email'] as $request}}
+						<tr>
+							<td><a href="{$request->url()}">{$request->get_name()}</a></td>
+							<td>{datetime="$request->request_created"}</td>
+						</tr>
+					{{endforeach}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="ipsGrid_span6">
+		<div class="ipsPad">
+			<h1 class="ipsType_pageTitle ipsType_center">IP-адрес</h1><br>
+			<table class='ipsTable ipsTable_responsive ipsTable_zebra'>
+				<thead>
+					<tr class='ipsAreaBackground'>
+						<th>Информация об использовании</th>
+						<th><span class="ipsPos_right">Всего {expression="count( $requests['ip'] )"} раз</span></th>
+					</tr>
+				</thead>
+				<tbody data-role="tableRows">
+					{{foreach $requests['ip'] as $request}}
+						<tr>
+							<td><a href="{$request->url()}">{$request->get_name()}</a></td>
+							<td>{datetime="$request->request_created"}</td>
+						</tr>
+					{{endforeach}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- <div class='ipsTabs ipsTabs_stretch ipsType_center ipsClearfix ipsJS_show' id='tabs_uses' data-ipsTabBar data-ipsTabBar-contentArea='#ipsTabs_content_uses'>
+	<a href='#tabs_uses' data-action='expandTabs'><i class='fa fa-caret-down'></i></a>
+	<ul role='tablist'>
+		<li>
+			<a href='#ipsTabs_tabs_uses_uses_tab_email_panel' id='uses_tab_email' class="ipsTabs_item" role="tab">
+				Email-адрес
+			</a>
+		</li>
+		<li>
+			<a href='#ipsTabs_tabs_uses_uses_tab_ip_panel' id='uses_tab_ip' class="ipsTabs_item" role="tab">
+				IP-адрес
+			</a>
+		</li>
+	</ul>
+</div>
+<div id='ipsTabs_content_uses' class='ipsTabs_panels'>
+	<div id='ipsTabs_tabs_uses_uses_tab_email_panel' class="ipsTabs_panel ipsPad" aria-labelledby="uses_tab_email" aria-hidden="false">
+		<ul class='ipsForm ipsForm_vertical'>
+			<table class='ipsTable ipsTable_responsive ipsTable_zebra'>
+				<thead>
+					<tr class='ipsAreaBackground'>
+						<th>Дата использования</th>
+					</tr>
+				</thead>
+				<tbody data-role="tableRows">
+					{{foreach $requests['email'] as $request}}
+						<td>{datetime="$requests->request_created"}</td>
+					{{endforeach}}
+				</tbody>
+			</table>
+		</ul>
+	</div>
+	<div id='ipsTabs_tabs_uses_uses_tab_ip_panel' class="ipsTabs_panel ipsPad" aria-labelledby="uses_tab_ip" aria-hidden="false">
+		<ul class='ipsForm ipsForm_vertical'>
+			<table class='ipsTable ipsTable_responsive ipsTable_zebra'>
+				<thead>
+					<tr class='ipsAreaBackground'>
+						<th>Дата использования</th>
+					</tr>
+				</thead>
+				<tbody data-role="tableRows">
+					{{foreach $requests['ip'] as $request}}
+						<td>{datetime="$requests->request_created"}</td>
+					{{endforeach}}
+				</tbody>
+			</table>
+		</ul>
+	</div>
+</div>	 -->

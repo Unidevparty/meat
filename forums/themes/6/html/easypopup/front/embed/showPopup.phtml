@@ -1,0 +1,16 @@
+<ips:template parameters="$popup, $content" />
+<div id="espopup_{$popup->id}">
+	<div class='easypopup' style="background: {$popup->bg};">
+		{{if $popup->closebutton == 1}}
+      		<span class="esbutton b-close"><a href='#'><i class="fa fa-times"></i></a></span>
+		{{endif}}
+		<div id="popupcontent_{$popup->id}">
+
+		</div>
+		{{if $popup->autoclose > 0}}
+			<div class="ipsPad_half ipsType_small autoCloseMSG">
+				<span>{lang="espp_autoclosemsg"} <span id="esppclose_{$popup->id}">{expression="intval( $popup->autoclose / 1000 )"}</span> {lang="seconds"}...</span>
+			</div>
+		{{endif}}
+	</div>
+</div>

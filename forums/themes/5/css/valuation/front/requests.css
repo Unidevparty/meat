@@ -1,0 +1,63 @@
+.ipsTable_zebra tbody tr.ipsDataItem_selected:nth-child( even ):not(.ipsTable_highlight) {
+    background: #ebf4f9;
+}
+
+.valBlock_separator {
+	border-bottom: 1px solid rgba(0,0,0,0.075);
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+
+.valBlock_separator:first-child {
+	padding-top: 0;
+}
+
+.valBlock_separator:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+.valRequest_editedBy {
+	margin-bottom: 0;
+}
+
+.valBlock_priced {
+	margin-bottom: 5px;
+}
+
+.valContacts {
+	-webkit-padding-start: 0;
+	list-style-type: none;
+	margin: 0;
+}
+
+.valOthers_found {
+	color: #d22852;
+}
+
+.valInfoWindow p:first-child {
+	margin-top: 0;
+}
+
+.valInfoWindow p:last-child {
+	margin-bottom: 0;
+}
+
+.valGallery_total {
+	font-size: 14px;
+}
+
+.valLegalStatus_true {
+	font-weight: bold;
+	color: #004e00;
+}
+
+.valLegalStatus_false {
+	font-weight: bold;
+	color: #AD8D43;
+}
+
+.valLegalStatus_null {
+	font-weight: bold;
+	color: #d22852;
+}

@@ -1,0 +1,29 @@
+<ips:template parameters="$files, $title, $orientation='vertical'" />
+<h3 class='ipsType_reset ipsWidget_title'>{$title}</h3>
+<div class='ipsWidget_inner'>
+	{{if $orientation == 'vertical'}}
+		<div class='ipsPad_half'>
+			{{if count( $files )}}
+				<ul class='ipsDataList ipsDataList_reducedSpacing'>
+					{{foreach $files as $file}}
+						{template="fileRow" group="widgets" app="downloads" params="$file, $orientation"}
+					{{endforeach}}
+				</ul>
+			{{else}}
+				<p class='ipsType_reset'>{lang="no_new_files"}</p>
+			{{endif}}
+		</div>
+	{{else}}
+		{{if count( $files )}}
+			<ul class='ipsGrid ipsGrid_collapsePhone ipsWidget_columns'>
+				{{foreach $files as $idx => $file}}
+					{{if $idx < 4}}
+						{template="fileRow" group="widgets" app="downloads" params="$file, $orientation"}
+					{{endif}}
+				{{endforeach}}
+			</ul>
+		{{else}}
+			<p class='ipsType_reset'>{lang="no_new_files"}</p>
+		{{endif}}
+	{{endif}}
+</div>

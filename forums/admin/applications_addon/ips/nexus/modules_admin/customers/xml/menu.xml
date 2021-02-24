@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Search Customers</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Search Customers</subitemtitle>
+					<subsection>search</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>customers_search</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Customer Fields</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Customer Fields</subitemtitle>
+					<subsection>fields</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>fields_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>customers_fields</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

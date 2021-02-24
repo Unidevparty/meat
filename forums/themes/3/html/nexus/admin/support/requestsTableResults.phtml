@@ -1,0 +1,176 @@
+<ips:template parameters="$results, $pagination, $groupByDepartment, $tracked, $participatedIn, $full=TRUE" />
+
+{{$multimod = implode( ' ', array_merge( array_map( function( $department ) { return "department_{$department->id}"; }, \IPS\nexus\Support\Department::roots() ), array_map( function( $severity ) { return "severity_{$severity->id}"; }, \IPS\nexus\Support\Severity::roots() ), array_map( function( $status ) { return "status_{$status->id}"; }, \IPS\nexus\Support\Status::roots() ), array_map( function( $id ) { return "staff_{$id}"; }, array_keys( \IPS\nexus\Support\Request::staff() ) ), array( 'staff_0', 'delete' ) ) );}}
+
+<table class="ipsTable ipsTable_zebra cNexusSupportTable {{if !$full}}cNexusSupportTable_condensed{{endif}}" data-role="resultsTable">
+	{{if $full}}
+		<thead>
+			<tr>
+				<th>&nbsp;</th>
+				<th>{lang="request"}</th>
+				<th>{lang="r_status"}</th>
+				<th>{lang="r_staff"}</th>
+				<th>{lang="request_started_by"}</th>
+				<th>{lang="r_last_reply_by"}</th>
+				<th>&nbsp;</th>
+				<th>&nbsp;</th>
+			</tr>
+		</thead>
+	{{endif}}
+	<tbody>
+		{{$lastDepartment = NULL;}}
+		{{if count( $results )}}
+			{{foreach $results as $request}}
+				{{if $groupByDepartment and $request->department->id != $lastDepartment}}
+					<tr>
+						<td colspan="8" class="ipsAreaBackground">
+							<strong>{$request->department->_title}</strong>
+						</td>
+					</tr>
+					{{$lastDepartment = $request->department->id;}}
+				{{endif}}
+				<tr class="ipsClearfix cNexusSupportTable_row">
+					<td class="ipsType_center cNexusSupportTable_icon {{if !$groupByDepartment}}ipsPos_top{{endif}}">
+						{{if $request->unread()}}
+							<a href="{$request->acpUrl()->setQueryString( 'do', 'getNewComment' )}" title="{lang="support_go_to_unread"}" data-ipsTooltip>
+								<span class='ipsItemStatus'>
+									<i class="fa {{if array_key_exists( $request->id, $tracked )}}fa-bookmark{{elseif in_array( $request->id, $participatedIn )}}fa-star{{else}}fa-circle{{endif}}"></i>
+								</span>
+							</a>
+						{{else}}
+							{{if array_key_exists( $request->id, $tracked )}}
+								<span class='ipsItemStatus ipsItemStatus_read ipsItemStatus_posted'>
+									<i class="fa fa-bookmark"></i>
+								</span>
+							{{elseif in_array( $request->id, $participatedIn )}}
+								<span class='ipsItemStatus ipsItemStatus_read ipsItemStatus_posted'>
+									<i class="fa fa-star"></i>
+								</span>
+							{{else}}
+								&nbsp;
+							{{endif}}
+						{{endif}}
+					</td>
+					<td class="cNexusSupportTable_body {{if !$groupByDepartment}}ipsPos_top{{endif}}">
+						{{if $request->severity and $request->severity->color != '000'}}
+							<span class='cNexusSupportBadge' style="background-color: #{$request->severity->color}">{$request->severity->_title}</span>
+						{{endif}}
+						<span class='ipsType_large'>
+							{template="link" group="support" params="$request, TRUE"}
+						</span>
+						{{if !$groupByDepartment and $full}}
+							<p class='ipsType_medium ipsType_reset ipsResponsive_hidePhone'>
+								<span class="ipsType_light">{lang="in_department" sprintf="$request->department->_title"}</span>
+							</p>
+						{{endif}}
+						<div class="{{if $full}}ipsResponsive_showPhone ipsResponsive_hideDesktop ipsResponsive_hideTablet{{endif}}">
+							<p class="ipsType_medium ipsType_reset">
+								{{if !$groupByDepartment}}
+									{lang="in_department" sprintf="$request->department->_title"}
+								{{endif}}
+								{{if $request->staff}}
+									{{if !$groupByDepartment}}
+									&nbsp;
+									{{endif}}
+									<strong class="ipsType_success">
+										{lang="assigned_to_x" sprintf="$request->staff->name"}
+									</strong>
+								{{endif}}
+							</p>
+							<p class="ipsType_medium ipsType_reset ipsType_light ipsType_blendLinks">
+								{lang="request_last_by"} {template="userLink" group="global" params="\IPS\Member::load( $request->last_reply_by )"} {datetime="$request->last_reply"}
+							</p>
+						</div>
+					</td>
+					<td class="cNexusSupportTable_status">
+						{template="status" group="support" params="$request->status"}
+					</td>
+					<td class="cNexusSupportTable_assignedTo">
+						{{if $request->staff}}
+							<strong class="ipsType_success">
+								{$request->staff->name}
+							</strong>
+						{{endif}}
+					</td>
+					<td class="cNexusSupportTable_customer ipsType_blendLinks">
+						<strong>
+							{{if $request->author()->member_id}}
+								{template="userLink" group="global" params="$request->author()"}
+							{{else}}
+								{$request->email}
+							{{endif}}
+						</strong>
+						<p class='ipsType_reset ipsType_medium'>{datetime="$request->started"}</p>
+					</td>
+					<td class="cNexusSupportTable_customer ipsType_blendLinks">
+						<strong>
+							{template="userLink" group="global" params="\IPS\Member::load( $request->last_reply_by )"}
+						</strong>
+						<p class='ipsType_reset ipsType_medium'>{datetime="$request->last_reply"}</p>
+					</td>
+					<td class='cNexusSupportTable_replies'>
+						<span class='ipsCommentCount'>{number="$request->replies - 1"}</span>
+					</td>
+					{{if $full}}
+						<td class='cNexusSupportTable_multimod'>
+							<input type="checkbox" name="multimod[{$request->id}]" value="1" data-role="moderation" data-actions="{$multimod} {{if array_key_exists( $request->id, $tracked )}}{{if $tracked[ $request->id ]}}track_on{{else}}track_notify{{endif}} track_off{{else}}track_on track_notify{{endif}}" data-state="{{if $request->unread()}}unread{{else}}read{{endif}} {{if array_key_exists( $request->id, $tracked )}}tracking{{else}}not_tracking{{endif}} status_{$request->status->id}">
+						</td>
+					{{endif}}
+				</tr>
+			{{endforeach}}
+		{{else}}
+			<tr>
+				<td colspan="8">
+					<div class='ipsPad_double ipsType_light'>
+						{lang="no_results"}
+					</div>
+				</td>
+			</tr>
+		{{endif}}
+	</tbody>
+	{{if $full}}
+		<tfoot class="ipsClearfix ipsAreaBackground" data-role="pageActionOptions">
+			<tr>
+				<td colspan="8">
+					<div class="ipsPos_right">
+						<select name="modaction" data-role="moderationAction">
+							<optgroup label="{lang="action_status"}" data-icon='tag' data-action='status'>
+								{{foreach \IPS\nexus\Support\Status::roots() as $status}}
+									<option value='status_{$status->id}'>{$status->_title}</option>
+								{{endforeach}}
+							</optgroup>
+							{{if count( \IPS\nexus\Support\Severity::roots() ) > 1}}
+								<optgroup label="{lang="action_severity"}" data-icon='exclamation' data-action='severity'>
+									{{foreach \IPS\nexus\Support\Severity::roots() as $severity}}
+										<option value='severity_{$severity->id}'>{$severity->_title}</option>
+									{{endforeach}}
+								</optgroup>
+							{{endif}}
+							<optgroup label="{lang="action_department"}" data-icon='folder' data-action='department'>
+								{{foreach \IPS\nexus\Support\Department::roots() as $department}}
+									<option value='department_{$department->id}'>{$department->_title}</option>
+								{{endforeach}}
+							</optgroup>
+							<optgroup label="{lang="action_staff"}" data-icon='user' data-action='staff'>
+								{{foreach \IPS\nexus\Support\Request::staff() as $id => $name}}
+									<option value='staff_{$id}'>{$name}</option>
+								{{endforeach}}
+								<option value='staff_0'>{lang="unassigned"}</option>
+							</optgroup>
+							<optgroup label="{lang="tracking"}" data-icon='bookmark' data-action='tracking'>
+								<option value='track_off'>{lang="not_tracking"}</option>
+								<option value='track_on'>{lang="tracking_no_notify"}</option>
+								<option value='track_notify'>{lang="tracking_notify"}</option>
+							</optgroup>
+							{{if \IPS\Member::loggedIn()->hasAcpRestriction( 'nexus', 'support', 'requests_delete' )}}
+								<option value="delete" data-icon="trash">{lang="delete"}</option>
+							{{endif}}
+						</select>
+						<button type="submit" class="ipsButton ipsButton_alternate ipsButton_verySmall">{lang="submit"}</button>
+					</div>
+				</td>
+			</tr>
+		</tfoot>
+	{{endif}}
+</table>
+{$pagination|raw}

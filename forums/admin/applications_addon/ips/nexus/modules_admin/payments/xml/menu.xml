@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Transactions</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Transactions</subitemtitle>
+					<subsection>transactions</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>transactions_manage</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>payments_transactions</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Invoices</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Invoices</subitemtitle>
+					<subsection>invoices</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>invoices_manage</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>payments_invoices</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Shipping Orders</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Shipping Orders</subitemtitle>
+					<subsection>shiporders</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>shiporders_manage</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>payments_shiporders</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+		<item>
+			<title>Payout Requests</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Payout Requests</subitemtitle>
+					<subsection>payouts</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>payout_manage</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>payments_payouts</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+		<item>
+			<title>Payment &amp; Invoice Settings</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Payment &amp; Invoice Settings</subitemtitle>
+					<subsection>settings</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>settings_payments</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>settings_payments</subitemlang>
+				</subitem>				
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

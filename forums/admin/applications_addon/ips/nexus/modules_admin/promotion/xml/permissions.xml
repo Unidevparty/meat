@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Advertisements</grouptitle>
+		<grouplang>promotion_advertisements</grouplang>
+		<items>
+			<item>
+				<key>advertisements_view</key>
+				<string>Can view advertisements?</string>
+			</item>
+			<item>
+				<key>advertisements_edit</key>
+				<string>Can edit advertisements?</string>
+			</item>
+			<item>
+				<key>advertisements_add</key>
+				<string>Can add new advertisements?</string>
+			</item>
+			<item>
+				<key>advertisements_delete</key>
+				<string>Can delete advertisements?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Referral Banners</grouptitle>
+		<grouplang>promotion_referrals</grouplang>
+		<items>
+			<item>
+				<key>referrals_view</key>
+				<string>Can view referral banners?</string>
+			</item>
+			<item>
+				<key>referrals_edit</key>
+				<string>Can edit referral banners?</string>
+			</item>
+			<item>
+				<key>referrals_add</key>
+				<string>Can add new referral banners?</string>
+			</item>
+			<item>
+				<key>referrals_delete</key>
+				<string>Can delete referral banners?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Commission Rules</grouptitle>
+		<grouplang>promotion_refrules</grouplang>
+		<items>
+			<item>
+				<key>refrules_view</key>
+				<string>Can view commission rules?</string>
+			</item>
+			<item>
+				<key>refrules_edit</key>
+				<string>Can edit commission rules?</string>
+			</item>
+			<item>
+				<key>refrules_add</key>
+				<string>Can add new commission rules?</string>
+			</item>
+			<item>
+				<key>refrules_delete</key>
+				<string>Can delete commission rules?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Settings</grouptitle>
+		<grouplang>settings</grouplang>
+		<items>
+			<item>
+				<key>settings_promotion</key>
+				<string>Can view Promotion Settings?</string>
+			</item>
+		</items>
+	</group>
+</permissions>

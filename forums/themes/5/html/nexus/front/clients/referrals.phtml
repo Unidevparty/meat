@@ -1,0 +1,96 @@
+<ips:template parameters="$url, $rules" />
+
+<h1 class='ipsType_pageTitle'>{lang="referrals"}</h1>
+
+{{if settings.nexus_com_rules}}
+	<h2 class='ipsType_sectionHead'>{lang="referrals_title"}</h2>
+
+	{{if count( $rules ) > 1}}
+		<p class='ipsType_reset ipsType_normal'>
+			{lang="referrals_desc"}
+		</p>
+	{{endif}}
+
+	<ul class='ipsDataList'>
+		{{foreach $rules as $rule}}
+			<li class='ipsDataItem'>
+				<div class='ipsDataItem_generic ipsDataItem_size2 ipsType_center'>
+					<span class='cReferralBadge'>{$rule->commission}%</span>
+				</div>
+				<div class='ipsDataItem_main'>
+					<strong class='ipsType_normal'>{$rule->description()}</strong>
+					{{$limit = $rule->commissionLimit();}}
+					{{if $rule->purchase_packages or $limit != ''}}<p class='ipsType_reset ipsType_medium ipsType_light'>({{endif}}
+					{{if $rule->purchase_packages}}
+						{{if $rule->purchase_package_limit}}
+							{lang="ref_comm_limit_yes"}
+						{{else}}
+							{lang="ref_comm_limit_no"}
+						{{endif}}
+					{{endif}}
+					{{if $rule->commission_limit}}
+						{$rule->commissionLimit()}
+					{{endif}}
+					{{if $rule->purchase_packages or $limit != ''}})</p>{{endif}}
+				</div>
+			</li>
+		{{endforeach}}
+	</ul>
+{{else}}
+	<p class='ipsType_reset ipsType_normal'>{lang="nexus_com_rules_val"}</p>
+{{endif}}
+
+<div class='ipsBox ipsSpacer_top' data-controller='nexus.front.clients.referrals'>
+	<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="referral_link"}</h2>
+	<div class='ipsPad_half ipsAreaBackground_light'>
+		<ul class='ipsDataList'>
+			<li class='ipsDataItem'>
+				<div class='ipsDataItem_main'>
+					<h3 class='ipsType_minorHeading'>{lang="referral_directlink"}</h3>
+					<input type='text' class='ipsField_fullWidth' value="{$url}">
+				</div>
+			</li>
+			<li class='ipsDataItem'>
+				<div class='ipsDataItem_main'>
+					<h3 class='ipsType_minorHeading'>{lang="referral_html"}</h3>
+					<input type='text' class='ipsField_fullWidth' value="&lt;a href='{$url}'&gt;{setting="board_name"}&lt;/a&gt;">
+				</div>
+			</li>
+			<li class='ipsDataItem'>
+				<div class='ipsDataItem_main'>
+					<h3 class='ipsType_minorHeading'>{lang="referral_bbcode"}</h3>
+					<input type='text' class='ipsField_fullWidth' value="[url='{$url}']{setting="board_name"}[/url]">
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+{{if count( \IPS\nexus\ReferralBanner::roots() )}}
+	<div class='ipsBox ipsSpacer_top' data-controller='nexus.front.clients.referrals'>
+		<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="referral_banners"}</h2>
+		<div class='ipsPad_half ipsAreaBackground_light'>
+			<ul class='ipsDataList'>
+				{{foreach \IPS\nexus\ReferralBanner::roots() as $banner}}
+					<li class='ipsDataItem'>
+						<div class='ipsDataItem_main'>
+							<div class='ipsPad_half ipsType_center ipsSpacer_bottom ipsSpacer_half'>
+								{$banner->_title|raw}
+							</div>
+							<div class='ipsGrid'>
+								<div class='ipsGrid_span6'>
+									<h3 class='ipsType_minorHeading'>{lang="referral_html"}</h3>
+									<input type='text' class='ipsField_fullWidth' value="&lt;a href='{$url}'&gt;&lt;img src='{$banner->url}' alt='{setting="board_name"}'&gt;&lt;/a&gt;">
+								</div>
+								<div class='ipsGrid_span6'>
+									<h3 class='ipsType_minorHeading'>{lang="referral_bbcode"}</h3>
+									<input type='text' class='ipsField_fullWidth' value="[url='{$url}'][img]{$banner->url}[/img][/url]">
+								</div>
+							</div>
+						</div>
+					</li>
+				{{endforeach}}
+			</ul>
+		</div>
+	</div>
+{{endif}}

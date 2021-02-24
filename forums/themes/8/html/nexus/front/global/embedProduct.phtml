@@ -1,0 +1,26 @@
+<ips:template parameters="$item, $url, $image=NULL" />
+<div class='ipsEmbedded {{if $image}}ipsEmbedded_withImage{{endif}}'>
+	<div class='ipsEmbedded_headerArea'>
+		<h4 class='ipsType_reset ipsType_normal ipsTruncate ipsTruncate_line'><i class='fa fa-{$item::$icon}' data-ipsTooltip title='{lang="$item::$title"}'></i> &nbsp;<a href='{$url}' target='_top'>{$item->mapped('title')}</a></h4>
+	</div>
+	<div class='ipsEmbedded_content'>
+		<div>
+			<div data-ipsTruncate data-ipsTruncate-size='1 lines' data-ipsTruncate-type='remove'>
+				{$item->truncated( TRUE )|raw}
+			</div>
+			<ul class='ipsList_inline ipsType_small ipsEmbedded_stats'>
+				<li>{expression="\IPS\nexus\Package::load( $item->id )->priceToDisplay()" raw="true"}</li>
+				{{if $item->reviewable and $rating = $item->averageReviewRating()}}
+					<li>{template="rating" app="core" params="'small', $rating, \IPS\Settings::i()->reviews_rating_out_of, $item->memberReviewRating()" group="global"}</li>
+				{{endif}}
+			</ul>
+		</div>
+	</div>
+	{{if $image}}
+		<div style='background-image: url( "{expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), $image->url )"}" );' class='ipsEmbedded_image'>
+			<a href='{$url}' target='_top'>
+				<img src='{$image->url}'>
+			</a>
+		</div>
+	{{endif}}
+</div>

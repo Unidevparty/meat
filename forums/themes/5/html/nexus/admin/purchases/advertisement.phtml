@@ -1,0 +1,26 @@
+<ips:template parameters="$purchase, $advertisement" />
+<div class="ipsAdvertisement">
+	<ul class="ipsType_center ipsList_reset">
+		{{foreach json_decode( $advertisement->images, TRUE ) as $image}}
+			<li>
+				<div class="ipsAdvertisement_large ipsAreaBackground_light ipsPad_half">
+					<div class='ipsAreaBackground_reset ipsPad_half'>
+						<a href="{$advertisement->link}"><img src="{$image}" class="ipsImage ipsContained"></a>
+					</div>
+					<div class="ipsGrid ipsPad_half">
+						<div class="ipsGrid_span6">
+							<span class="ipsType_veryLarge">{$advertisement->impressions}{{if $advertisement->maximum_unit == 'i' and $advertisement->maximum_value != -1}} / {$advertisement->maximum_value}{{endif}}</span>
+							<br>
+							{lang="impressions"}
+						</div>
+						<div class="ipsGrid_span6">
+							<span class="ipsType_veryLarge">{$advertisement->clicks}{{if $advertisement->maximum_unit == 'c' and $advertisement->maximum_value != -1}} / {$advertisement->maximum_value}{{endif}}</span>
+							<br>
+							{lang="clicks"}
+						</div>
+					</div>
+				</div>
+			</li>
+		{{endforeach}}
+	</ul>
+</div>

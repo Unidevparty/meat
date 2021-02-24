@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<export>
+  <group>
+    <row>
+      <task_id>43</task_id>
+      <task_title>Cancel Old Transactions</task_title>
+      <task_file>cancelTrans.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>18</task_hour>
+      <task_minute>0</task_minute>
+      <task_cronkey>5f3075420fa7e59d403da9d7b1c8655c</task_cronkey>
+      <task_log>1</task_log>
+      <task_description>Marks transactions as failed which were started more than a day ago and never completed</task_description>
+      <task_enabled>1</task_enabled>
+      <task_key>cancelTrans</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>44</task_id>
+      <task_title>Expected Output Monitoring</task_title>
+      <task_file>expectedOutputMonitoring.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>-1</task_hour>
+      <task_minute>30</task_minute>
+      <task_cronkey>5a7bc0753200a05148da4d11ff9cf30e</task_cronkey>
+      <task_log>0</task_log>
+      <task_description/>
+      <task_enabled>1</task_enabled>
+      <task_key>expectedOutputMonitoring</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>45</task_id>
+      <task_title>Expire Old Invoices</task_title>
+      <task_file>expireInvoices.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>-1</task_hour>
+      <task_minute>0</task_minute>
+      <task_cronkey>85a68fffa9507ef21051b8d965fa1410</task_cronkey>
+      <task_log>1</task_log>
+      <task_description><![CDATA[Purely for organisation, marks invoices which haven&#39;t been paid in 10 days as expired]]></task_description>
+      <task_enabled>1</task_enabled>
+      <task_key>expireInvoices</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>46</task_id>
+      <task_title>Mark Expired Purchases Expired</task_title>
+      <task_file>expirePackages.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>-1</task_hour>
+      <task_minute>0</task_minute>
+      <task_cronkey>73faaca7a5b2827c279b17ba6a46c8f9</task_cronkey>
+      <task_log>1</task_log>
+      <task_description/>
+      <task_enabled>1</task_enabled>
+      <task_key>expirePackages.php</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>47</task_id>
+      <task_title>Generate Renewal Invoices</task_title>
+      <task_file>generateRenewalInvoices.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>-1</task_hour>
+      <task_minute>30</task_minute>
+      <task_cronkey>edb4dae64b768e75201268274b6fc692</task_cronkey>
+      <task_log>1</task_log>
+      <task_description>10 days before items expire, generate a renewal invoice</task_description>
+      <task_enabled>1</task_enabled>
+      <task_key>generateRenewalInvoices</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>48</task_id>
+      <task_title>Hosting Monitoring</task_title>
+      <task_file>monitoring.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>-1</task_hour>
+      <task_minute>5</task_minute>
+      <task_cronkey>2b879b19cf9ad31a30674ca7e784a5ba</task_cronkey>
+      <task_log>0</task_log>
+      <task_description/>
+      <task_enabled>1</task_enabled>
+      <task_key>monitoring</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>62</task_id>
+      <task_title>Nexus Cleanup</task_title>
+      <task_file>dailyCleanup.php</task_file>
+      <task_next_run>1368082800</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>7</task_hour>
+      <task_minute>0</task_minute>
+      <task_cronkey>fcdb25a97a629df7de70bf64c39aeda6</task_cronkey>
+      <task_log>1</task_log>
+      <task_description>Cleans up temporary images and other miscellaneous items</task_description>
+      <task_enabled>1</task_enabled>
+      <task_key>nexus_cleanup</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>49</task_id>
+      <task_title>Send Invoice Warning Emails</task_title>
+      <task_file>sendInvoiceWarnings.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>-1</task_hour>
+      <task_minute>0</task_minute>
+      <task_cronkey>25906efcd0bd82a486ae040775e38a02</task_cronkey>
+      <task_log>0</task_log>
+      <task_description/>
+      <task_enabled>1</task_enabled>
+      <task_key>sendInvoiceWarnings</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>50</task_id>
+      <task_title>Autoresolve Support Requests</task_title>
+      <task_file>supportAutoresolve.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>15</task_hour>
+      <task_minute>0</task_minute>
+      <task_cronkey>b562650d1b527eeee7fb00c5d18e2b29</task_cronkey>
+      <task_log>1</task_log>
+      <task_description/>
+      <task_enabled>1</task_enabled>
+      <task_key>supportAutoresolve</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>51</task_id>
+      <task_title>Terminate Hosting Accounts</task_title>
+      <task_file>terminateHosting.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>3</task_hour>
+      <task_minute>0</task_minute>
+      <task_cronkey>f814aea6e6f932264741b23335bfc2da</task_cronkey>
+      <task_log>0</task_log>
+      <task_description/>
+      <task_enabled>1</task_enabled>
+      <task_key>terminateHosting</task_key>
+      <task_safemode>1</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+    <row>
+      <task_id>52</task_id>
+      <task_title>Support Request Reminder</task_title>
+      <task_file>ticketReminder.php</task_file>
+      <task_next_run>1368037330</task_next_run>
+      <task_week_day>-1</task_week_day>
+      <task_month_day>-1</task_month_day>
+      <task_hour>8</task_hour>
+      <task_minute>30</task_minute>
+      <task_cronkey>902fc011070e77a7f150b7eabcb0ff04</task_cronkey>
+      <task_log>0</task_log>
+      <task_description>Sends staff members an email once a day to let them know about any support requests assigned to them.</task_description>
+      <task_enabled>1</task_enabled>
+      <task_key>ticketReminder</task_key>
+      <task_safemode>0</task_safemode>
+      <task_locked>0</task_locked>
+      <task_application>nexus</task_application>
+    </row>
+  </group>
+</export>

@@ -1,0 +1,10 @@
+<ips:pages page_seo_name="biznesplani.html" page_ipb_wrapper="1" page_title="Бизнес-планы" />
+include_once("/home/meatexpert5917/data/www/meat-expert.ru/partner/lib/mode.php");
+
+$b2b = new b2bcontext("/home/meatexpert5917/data/www/meat-expert.ru/partner/bponly.php",1);
+
+$this->registry->getClass('output')->setTitle( $b2b->b2bcontext_title );
+$this->registry->getClass('output')->addMetaTag('description', $b2b->b2bcontext_description);
+$this->registry->getClass('output')->addMetaTag('keywords', $b2b->b2bcontext_keywords);
+$this->registry->getClass('output')->addToDocumentHead( 'raw', $b2b->b2bcontext_head );
+$this->registry->getClass('output')->addContent($b2b->b2bcontext_content);

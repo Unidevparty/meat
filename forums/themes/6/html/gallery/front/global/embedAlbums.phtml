@@ -1,0 +1,36 @@
+<ips:template parameters="$album, $url" />
+
+<div class='ipsEmbedded ipsEmbedded_withImage'>
+	<div class='ipsEmbedded_headerArea'>
+		<h4 class='ipsType_reset ipsType_normal ipsTruncate ipsTruncate_line'><i class='fa fa-camera' data-ipsTooltip title='{lang="embed_gallery_album"}'></i> &nbsp;<a href='{$url}' title='{lang="view_this_album" sprintf="$album->_title"}' target='_top'>{$album->_title}</a></h4>
+	</div>
+	<div class='ipsEmbedded_content'>
+		<span class='ipsType_medium'>{lang="byline_nodate" htmlsprintf="$album->owner()->link()"}</span><br>
+		{{if count( $album->_latestImages )}}
+			<ul class='ipsList_inline cGallery_albumImages'>
+				{{foreach $album->_latestImages as $idx => $image }}
+					{{if $idx < 5}}
+						<li style='background-image: url( "{expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), \IPS\File::get( 'gallery_Images', $image->thumb_file_name )->url )"}" );' class='cGallery_albumImage cGalleryTrimmedImage'>
+							<a href='{$image->url()}' target='_top'>
+								<img src='{file="$image->thumb_file_name" extension="gallery_Images"}'>
+							</a>
+						</li>
+					{{endif}}
+				{{endforeach}}
+			</ul>
+		{{endif}}
+	</div>
+	<div style='{{if $album->coverPhoto( 'small' )}}background-image: url( "{expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), $album->coverPhoto( 'small' ) )"}" );{{endif}}' class='{{if !$album->coverPhoto( 'small' )}}ipsNoThumb{{endif}} ipsEmbedded_image cGalleryTrimmedImage'>
+		<a href='{$album->url()}' title='{lang="view_this_album" sprintf="$album->_title"}' target='_top'>
+			<ul class='ipsList_inline cGallery_albumStats ipsType_small'>
+				<li><i class='fa fa-camera'></i> {$album->count_imgs}</li>
+				{{if $album->allow_comments}}
+					<li><i class='fa fa-comment'></i> {$album->count_comments}</li>
+				{{endif}}
+			</ul>
+			{{if $album->coverPhoto( 'small' )}}
+				<img src='{$album->coverPhoto( 'small' )}' alt='{$album->_title}'>
+			{{endif}}
+		</a>
+	</div>
+</div>

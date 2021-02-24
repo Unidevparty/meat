@@ -1,0 +1,15 @@
+<ips:template parameters="" />
+{{if !\IPS\Request::i()->isAjax()}}
+	<div class="ipsPageHeader ipsPad_half ipsClearfix ipsSpacer_bottom" id='elDownloadersHeader' data-ipsSticky data-ipsSticky-disableIn='phone'>
+		<h1 class="ipsType_pageTitle">{lang="__app_downloads"} &nbsp;&nbsp;<a href='#elDownloadsCategories_menu' data-ipsMenu data-ipsMenu-appendTo='#elDownloadersHeader' id='elDownloadsCategories' class='ipsButton ipsButton_light ipsButton_small'><span class='ipsType_light'>{lang="downloads_category_select"}&nbsp;&nbsp;</span> {lang="all"} <i class='fa fa-caret-down'></i></a></h1>
+		{template="categoryMenu" group="browse" params="\IPS\downloads\Category::roots()"}
+	</div>
+	<div class='ipsBox'>
+		<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="categories"}</h2>
+{{endif}}
+		<ol class="ipsDataList ipsDataList_large">
+			{template="categoryRow" group="browse" params="NULL, NULL, \IPS\downloads\Category::roots()"}
+		</ol>
+{{if !\IPS\Request::i()->isAjax()}}	
+	</div>
+{{endif}}

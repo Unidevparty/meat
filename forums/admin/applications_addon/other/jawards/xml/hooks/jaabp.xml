@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hookexport>
+  <hookdata>
+    <config>
+      <hook_name>(JAABP) [HQ] AutoAward By Post/Reply</hook_name>
+      <hook_desc>Make awards based on the number of posts made by the user</hook_desc>
+      <hook_author>InvisionHQ</hook_author>
+      <hook_email>reficul@lamoneta.it</hook_email>
+      <hook_website>http://bbcode.it</hook_website>
+      <hook_update_check>https://jlogica.com/resource_updates.php?resource=jaabp</hook_update_check>
+      <hook_requirements><![CDATA[a:3:{s:21:"required_applications";a:0:{}s:20:"hook_php_version_min";s:0:"";s:20:"hook_php_version_max";s:0:"";}]]></hook_requirements>
+      <hook_version_human>1.0.2 (Build 375)</hook_version_human>
+      <hook_version_long>2</hook_version_long>
+      <hook_extra_data><![CDATA[a:3:{s:7:"display";a:1:{s:8:"settings";s:41:"Setting groups: (JAABP) AutoAward By Post";}s:8:"database";a:0:{}s:13:"settingGroups";a:1:{s:0:"";s:5:"jaabp";}}]]></hook_extra_data>
+      <hook_key>jaabp</hook_key>
+      <hook_global_caches/>
+    </config>
+  </hookdata>
+  <hookfiles>
+    <file>
+      <hook_file_real>jaabp</hook_file_real>
+      <hook_type>dataHooks</hook_type>
+      <hook_classname>jaabp</hook_classname>
+      <hook_data><![CDATA[a:8:{s:12:"dataLocation";s:23:"incrementUsersPostCount";s:14:"libApplication";s:0:"";s:15:"classToOverload";s:0:"";s:9:"skinGroup";N;s:12:"skinFunction";N;s:4:"type";N;s:2:"id";N;s:8:"position";N;}]]></hook_data>
+      <hooks_source><![CDATA[<?php
+class jaabp
+{
+	public $registry;
+	public $settings;
+
+	public function __construct()
+	{
+		$this->registry   =  ipsRegistry::instance();
+		require_once(IPSLib::getAppDir('jawards') ."/app_class_jawards.php");
+		if( ! $this->registry->isClassLoaded( 'jawards_core' ) )
+		{
+			$this->awards = new app_class_jawards( ipsRegistry::instance() );
+		}
+	}
+
+	public function handleData($data)
+	{
+		IPSDebug::fireBug( 'info', array( "jaabp()", "Loaded Hook" ) ) ;
+		IPSDebug::fireBug( 'info', array( $data, "Data" ) ) ;
+		$this->registry->getClass('class_jawards')->autoAward( 'byPosts', $data['author_data']['member_id'], $data );
+	}
+}
+]]></hooks_source>
+    </file>
+  </hookfiles>
+  <hookextras_settings>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_title>(JAABP) AutoAward By Post</conf_title_title>
+      <conf_title_desc>Main settings for the Award By Post hook</conf_title_desc>
+      <conf_title_noshow>0</conf_title_noshow>
+      <conf_title_keyword>jaabp</conf_title_keyword>
+      <conf_title_app>jawards</conf_title_app>
+      <conf_title_tab>JAwards</conf_title_tab>
+    </setting>
+    <setting>
+      <conf_id>559</conf_id>
+      <conf_title>Auto-Awarded User Name</conf_title>
+      <conf_description>This is the user id which will be entered as who gave the award.</conf_description>
+      <conf_group>51</conf_group>
+      <conf_type>name_autocomplete</conf_type>
+      <conf_key>jaabp_autouser</conf_key>
+      <conf_value/>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_id>532</conf_id>
+      <conf_title>Enabled</conf_title>
+      <conf_description>Activate auto-awarding by the number of posts a user has made.</conf_description>
+      <conf_group>51</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaabp_enabled</conf_key>
+      <conf_value/>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_id>533</conf_id>
+      <conf_title>Highest only</conf_title>
+      <conf_description>Only have the highest award current for the user, will remove previous awards before new one issued.</conf_description>
+      <conf_group>51</conf_group>
+      <conf_type>yes_no</conf_type>
+      <conf_key>jaabp_highonly</conf_key>
+      <conf_value/>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>jaabp</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </hookextras_settings>
+  <hookextras_language/>
+  <hookextras_modules/>
+  <hookextras_help/>
+  <hookextras_templates/>
+  <hookextras_css/>
+  <hookextras_replacements/>
+  <hookextras_tasks/>
+  <hookextras_database_create/>
+  <hookextras_database_alter/>
+  <hookextras_database_update/>
+  <hookextras_database_insert/>
+</hookexport>

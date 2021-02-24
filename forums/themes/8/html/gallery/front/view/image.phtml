@@ -1,0 +1,33 @@
+<ips:template parameters="$image, $slider, $next=NULL, $prev=NULL, $hasNext=TRUE, $hasPrev=TRUE, $commentsAndReviews=FALSE" />
+
+<div data-controller='gallery.front.view.image'>
+	<div id='elGalleryHeader'>
+		{template="imageFrame" group="view" app="gallery" params="$image, $slider, $next, $prev"}
+		<div id='elGalleryNav' data-role='collectionNav'>
+			<ul class='ipsList_inline ipsClearfix'>
+				{template="imageSlider" group="view" app="gallery" params="$image, $slider, $next, $prev, $hasNext, $hasPrev"}
+			</ul>
+			<p class='ipsType_reset ipsType_center'>
+				<div class='ipsContained ipsType_break'>
+					{lang="slider_text" sprintf="$image->directContainer()->_title"}
+				</div>
+			</p>
+		</div>
+	</div>
+
+	<section data-role='imageInfo'>
+		{template="imageInfo" group="view" params="$image, $slider, $next, $prev"}	
+	</section>
+
+	<div data-role='imageComments'>
+	{{if $commentsAndReviews}}
+		<br>
+		{{if ( $image->directContainer()->allow_reviews && $image->container()->allow_reviews ) && ( $image->directContainer()->allow_comments && $image->container()->allow_comments ) }}
+			<a id="replies"></a>
+			<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="user_feedback"}</h2>
+		{{endif}}
+		{$commentsAndReviews|raw}
+	{{endif}}
+	</div>
+
+</div> 

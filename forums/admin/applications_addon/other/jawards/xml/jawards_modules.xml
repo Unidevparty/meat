@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<moduleexport>
+  <modulegroup>
+    <module>
+      <sys_module_title>Awards</sys_module_title>
+      <sys_module_application>jawards</sys_module_application>
+      <sys_module_key>awards</sys_module_key>
+      <sys_module_description>Awards System</sys_module_description>
+      <sys_module_version>1.0.0</sys_module_version>
+      <sys_module_protected>1</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>20</sys_module_position>
+      <sys_module_admin>0</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>System</sys_module_title>
+      <sys_module_application>jawards</sys_module_application>
+      <sys_module_key>system</sys_module_key>
+      <sys_module_description/>
+      <sys_module_version>1.0.0</sys_module_version>
+      <sys_module_protected>0</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>1</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Awards</sys_module_title>
+      <sys_module_application>jawards</sys_module_application>
+      <sys_module_key>awards</sys_module_key>
+      <sys_module_description/>
+      <sys_module_version>3.0.1</sys_module_version>
+      <sys_module_protected>0</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>18</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>Configuration</sys_module_title>
+      <sys_module_application>jawards</sys_module_application>
+      <sys_module_key>configuration</sys_module_key>
+      <sys_module_description/>
+      <sys_module_version>3.0.1</sys_module_version>
+      <sys_module_protected>0</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>19</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+    <module>
+      <sys_module_title>AutoAward Configuration</sys_module_title>
+      <sys_module_application>jawards</sys_module_application>
+      <sys_module_key>autoconfiguration</sys_module_key>
+      <sys_module_description/>
+      <sys_module_version>3.0.1</sys_module_version>
+      <sys_module_protected>0</sys_module_protected>
+      <sys_module_visible>1</sys_module_visible>
+      <sys_module_position>20</sys_module_position>
+      <sys_module_admin>1</sys_module_admin>
+    </module>
+  </modulegroup>
+</moduleexport>

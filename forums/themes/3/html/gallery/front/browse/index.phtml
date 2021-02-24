@@ -1,0 +1,52 @@
+<ips:template parameters="$featured, $new" />
+<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{lang="gallery_title"}</h1>
+</div>
+
+{{if \IPS\gallery\Category::canOnAny('add')}}
+	<ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsResponsive_hidePhone ipsSpacer_bottom">
+		{template="categoryButtons" group="browse" params="\IPS\gallery\Category::canOnAny('add'), NULL, NULL"}
+	</ul>
+{{endif}}
+
+{{if count( \IPS\gallery\Category::roots() )}}
+	<div class="ipsAreaBackground_light ipsPad ipsSpacer_bottom">
+		{template="categoryGrid" group="browse" app="gallery" params="\IPS\gallery\Category::roots()"}
+	</div>
+{{endif}}
+
+{{if !empty( $featured )}}
+<div class='ipsBox ipsSpacer_bottom'>
+	<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="featured_images"}</h2>
+	<div data-ipsPhotoLayout data-ipsPhotoLayout-itemTemplate='gallery.patchwork.indexItem' data-ipsPhotoLayout-maxRows='3' class='ipsPad_half ipsClearfix cGalleryPatchwork_index'>
+		<ul class='ipsList_inline'>
+			{{foreach $featured as $image}}
+				<li data-role='patchworkImage' data-json='{$image->json()|raw}'>
+					<a href='{$image->url()}'><img src='{file="$image->small_file_name" extension="gallery_Images"}' alt='' class='ipsJS_hide'></a>
+				</li>
+			{{endforeach}}
+		</ul>
+	</div>
+</div>
+{{endif}}
+
+{{if !empty( $new )}}
+<div class='ipsBox'>
+	<h2 class='ipsType_sectionTitle ipsType_reset'>{lang="new_images"}</h2>
+	<div data-ipsPhotoLayout data-ipsPhotoLayout-itemTemplate='gallery.patchwork.indexItem' data-ipsPhotoLayout-maxRows='3' class='ipsPad ipsAreaBackground_light ipsClearfix cGalleryPatchwork_index'>
+		<ul class='ipsList_inline'>
+			{{foreach $new as $image}}
+				<li data-role='patchworkImage' data-json='{$image->json()|raw}'>
+					<a href='{$image->url()}'><img src='{file="$image->small_file_name" extension="gallery_Images"}' alt='' class='ipsJS_hide'></a>
+				</li>
+			{{endforeach}}
+		</ul>
+	</div>
+</div>
+{{endif}}
+
+{{if \IPS\gallery\Category::canOnAny('add')}}
+	<ul class="ipsToolList ipsToolList_horizontal ipsResponsive_showPhone ipsResponsive_block ipsClearfix ipsSpacer_top">
+		{template="categoryButtons" group="browse" params="\IPS\gallery\Category::canOnAny('add')"}
+	</ul>
+{{endif}}

@@ -1,0 +1,176 @@
+/* Content layout */
+
+#content_wrapper { 
+	margin-top: 0px; 
+	margin-bottom: 0px; 
+	position: relative;
+	z-index: 10;
+}
+
+#content { line-height: 120%; }
+
+.content_layout {
+	background: #fff;
+	margin: 0 8px;
+
+}
+
+.content_layout_right {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/content_layout/content_layout_right.png) repeat-y right;
+	padding-right: 0px;
+	margin-right: -8px;
+}
+
+.content_layout_left {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/content_layout/content_layout_left.png) repeat-y left;
+	padding-left: 0px;
+	margin-left: -8px;
+}
+
+.content_layout_bottom_left {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/content_layout/content_layout_bottom_left.png) 0 0 no-repeat;
+	padding: 0;
+	margin-left: -8px;
+	height: 49px;
+}
+
+.content_layout_bottom_right {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/content_layout/content_layout_bottom_right.png) 100% 0 no-repeat;
+	padding: 0;
+	margin-right: -8px;
+	height: 49px;
+}
+
+.content_layout_bottom {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/content_layout/content_layout_bottom.png) repeat-x;
+	padding: 0;
+	margin: 0px 18px;
+	height: 49px;
+}
+
+
+/* Footer blocks */
+
+#footer_blocks { 
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/footer_blocks.png) repeat-x;
+	position: relative;
+	height: 150px;
+	overflow-y: hidden;
+}
+
+.footer_blocks_content {
+	padding: 20px;  
+	font-size: 12px;
+	color: #fff;
+	text-shadow: 0 1px 0 #2D3135;
+}
+
+.footer_blocks_content a { color: #fff; font-size: 12px !important; }
+
+.footer_blocks_content h3 { font-size: 16px !important; font-weight: normal; text-align: left; }
+
+.footer_blocks_content ul { padding-top: 6px; text-align: left;  }
+.footer_blocks_content ul li { padding-bottom: 2px;  }
+
+#footer_block1, #footer_block2 {
+	width: 30%;
+	float: left;
+	display: inline;
+}
+
+#footer_block3 {
+	width: 40%;
+	float: left;
+	display: inline;
+}
+
+#footer_block3 h3 { font-size: 14px !important; }
+
+/* Social links */
+
+#soclinks {
+	margin-top: 20px; 
+	text-shadow: 0 0px 0 #2D3135;
+}
+
+.rssLink {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/rss.png) no-repeat left top;
+	width: 23px;
+	height: 27px;
+}
+
+.rssLink:hover {
+	background-position: left bottom;
+}
+
+.vkLink {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/vk.png) no-repeat left top;
+	width: 31px;
+	height: 27px;
+}
+
+.vkLink:hover {
+	background-position: left bottom;
+}
+
+.fbLink {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/fb.png) no-repeat left top;
+	width: 23px;
+	height: 27px;
+}
+
+.fbLink:hover {
+	background-position: left bottom;
+}
+
+/* Meat bottom */
+
+.meat_bottom {
+	background: url(http://www.meat-expert.ru/public/style_images/meat_expert/custom/meat.png) no-repeat;
+	width: 163px;
+	height: 100px;
+	position: absolute;
+	right: 0; bottom: 0;
+	z-index: 1;
+}
+
+ul.topic_modmenu { width: 150px !important; }
+
+/* Partners page */
+
+.partner_page {
+	padding: 20px;
+}
+
+.partner_page a { color: #5a5a5a; }
+
+.partner_page h2 {
+	font-size: 17px;
+	font-weight: bold;
+}
+
+ul.partner_two_columns {
+	width: 840px;
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+}
+
+.partner_two_columns li {
+	padding: 10px;
+	width: 400px;
+	height: 230px;
+	float: left;
+	display: block;
+	text-align: center;
+}
+
+.partner_two_columns li a.partner_link {
+	height: 110px;
+	display: block;
+}
+
+.partner_page_contact {
+	margin-top: 50px;
+	font-size: 13px;
+}

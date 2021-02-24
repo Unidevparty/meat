@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Management</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Tracked Members</subitemtitle>
+					<subsection>manage</subsection>
+					<subitemurl>do=manage</subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

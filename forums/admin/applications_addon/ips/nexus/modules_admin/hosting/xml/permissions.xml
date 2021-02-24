@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<permissions>
+	<group>
+		<grouptitle>Queues</grouptitle>
+		<grouplang>hosting_queues</grouplang>
+		<items>
+			<item>
+				<key>queues_view</key>
+				<string>Can view hosting server queues?</string>
+			</item>
+			<item>
+				<key>queues_edit</key>
+				<string>Can edit hosting server queues?</string>
+			</item>
+			<item>
+				<key>queues_add</key>
+				<string>Can add new hosting server queues?</string>
+			</item>
+			<item>
+				<key>queues_delete</key>
+				<string>Can delete hosting server queues?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Servers</grouptitle>
+		<grouplang>hosting_servers</grouplang>
+		<items>
+			<item>
+				<key>servers_view</key>
+				<string>Can view hosting servers?</string>
+			</item>
+			<item>
+				<key>servers_edit</key>
+				<string>Can edit hosting servers?</string>
+			</item>
+			<item>
+				<key>servers_add</key>
+				<string>Can add new hosting servers?</string>
+			</item>
+			<item>
+				<key>servers_delete</key>
+				<string>Can delete hosting servers?</string>
+			</item>
+			<item>
+				<key>servers_reboot</key>
+				<string>Can reboot hosting servers?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Error Log</grouptitle>
+		<grouplang>hosting_errors</grouplang>
+		<items>
+			<item>
+				<key>errors_view</key>
+				<string>Can view error log?</string>
+			</item>
+			<item>
+				<key>errors_resend</key>
+				<string>Can resend failed calls?</string>
+			</item>
+			<item>
+				<key>errors_delete</key>
+				<string>Can delete error logs?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Settings</grouptitle>
+		<grouplang>settings</grouplang>
+		<items>
+			<item>
+				<key>settings_hosting</key>
+				<string>Can view Hosting Settings?</string>
+			</item>
+		</items>
+	</group>
+	<group>
+		<grouptitle>Expected Output Monitoring</grouptitle>
+		<grouplang>hosting_eom</grouplang>
+		<items>
+			<item>
+				<key>eom_view</key>
+				<string>Can view Expected Output Monitoring rules?</string>
+			</item>
+			<item>
+				<key>eom_edit</key>
+				<string>Can edit Expected Output Monitoring rules?</string>
+			</item>
+			<item>
+				<key>eom_add</key>
+				<string>Can add new Expected Output Monitoring rules?</string>
+			</item>
+			<item>
+				<key>eom_delete</key>
+				<string>Can delete Expected Output Monitoring rules?</string>
+			</item>
+		</items>
+	</group>
+</permissions>

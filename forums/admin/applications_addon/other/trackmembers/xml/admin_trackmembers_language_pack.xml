@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<languageexport>
+  <languagegroup>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_menulang</word_pack>
+      <word_key>r__manage_settings</word_key>
+      <word_default>Can edit settings?</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_menulang</word_pack>
+      <word_key>r__mod_management</word_key>
+      <word_default>Can manage logs?</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_menulang</word_pack>
+      <word_key>r__mod_tools</word_key>
+      <word_default>Can use tools?</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>upgrade_history</word_key>
+      <word_default>Update History</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>upgrade_date</word_key>
+      <word_default>Date</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>task_logprune</word_key>
+      <word_default>Tracking log table pruned</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>stats_visible</word_key>
+      <word_default>Tracked Members</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>stats_value</word_key>
+      <word_default>Value</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>stats_stats</word_key>
+      <word_default>Stats</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>stats_invisible</word_key>
+      <word_default>Tracked Actions</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>site</word_key>
+      <word_default>Site</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>quick_stats</word_key>
+      <word_default>Quick Stats</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>overview_title</word_key>
+      <word_default>Overview</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>mod</word_key>
+      <word_default>About</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>autor</word_key>
+      <word_default>Author</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>app_general_title</word_key>
+      <word_default>Track Members</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>upgrade_version</word_key>
+      <word_default>Version</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>versao</word_key>
+      <word_default>Version</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>visao_geral</word_key>
+      <word_default>Overview</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>prune_logs</word_key>
+      <word_default>Prune Logs</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>prune_logs_desc</word_key>
+      <word_default><![CDATA[This will delete all logs of all tracked members. This should not be used if you wish to retain your tracking member's logs.<br /><strong>THERE IS NO UNDO!</strong>]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>track_all_members_title</word_key>
+      <word_default>Track All Members</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>track_all_members</word_key>
+      <word_default>Track All Members from</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>track_all_members_for</word_key>
+      <word_default>for</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>track_all_members_days</word_key>
+      <word_default>days</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>track_all_members_groups</word_key>
+      <word_default>group</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>track_all_members_desc</word_key>
+      <word_default><![CDATA[This will make that members from ALL GROUPS or selected groups are tracked for the number of days you chose.<br /><strong>Maximum number of days allowed: 30</strong>]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>stop_track_all_members</word_key>
+      <word_default>Stop Tracking All Members</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>stop_track_all_members_desc</word_key>
+      <word_default><![CDATA[This will stop the tracking of all your members.<br /><strong>THERE IS NO UNDO!</strong>]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>tools_logs_pruned</word_key>
+      <word_default>Removed tracking member log entries</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>tools_membres_untracked</word_key>
+      <word_default>All members are untracked from now on</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>all_groups</word_key>
+      <word_default><![CDATA[ALL GROUPS]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>tools_membres_tracked_all</word_key>
+      <word_default>All members are being tracked from now on</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>tools_membres_track_all_generic</word_key>
+      <word_default><![CDATA[You also can't track all members from all or selected groups indefinitely, so you must inform a number of days]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>tools_membres_track_all_notallowed_group</word_key>
+      <word_default><![CDATA[The %s group is not on the setting list of groups that can be tracked. Please, add this group on proper setting and try again]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>tools_membres_track_all_overamonth</word_key>
+      <word_default><![CDATA[You can't track ALL members from all or selected groups for more than 30 days. Please, try again]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>tools_membres_track_all_done</word_key>
+      <word_default><![CDATA[All members from %s are being tracked from now on till %s]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>confirm_form</word_key>
+      <word_default>Are you sure you want to submit this form?</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>tools_membres_track_all_appdisabled</word_key>
+      <word_default><![CDATA[Tracker Members application is currently disabled. You can't tracker members now.]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>prune_orphaned_logs</word_key>
+      <word_default>Prune Orphaned Logs</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_noorphaned</word_key>
+      <word_default>There are no orphaned log entries to prune</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>prune_orphaned_logs_desc</word_key>
+      <word_default><![CDATA[This will delete all logs of all members that aren't being currently tracked. This should not be used if you wish to retain your tracking member's logs.<br /><strong>THERE IS NO UNDO!</strong>]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>prune_orphaned_logs_done</word_key>
+      <word_default>Removed tracking member log orphaned entries</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_name</word_key>
+      <word_default>Name</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_group</word_key>
+      <word_default>Group</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_entries</word_key>
+      <word_default>Log entries</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_managedeadline</word_key>
+      <word_default>Tracked until</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_joined</word_key>
+      <word_default>Joined</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_notracked</word_key>
+      <word_default>No member is being tracked currently</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_nomid</word_key>
+      <word_default><![CDATA[ERROR: We couldn't find a member with that Member ID]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_action</word_key>
+      <word_default>Action</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>ip_address</word_key>
+      <word_default>IP Address</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_description</word_key>
+      <word_default>Description</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_logsof</word_key>
+      <word_default>log entries</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_logentries</word_key>
+      <word_default>Log Entries</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_stoptracking</word_key>
+      <word_default>Stop Tracking</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_stoptracking_done</word_key>
+      <word_default>This member will not be tracked from now on</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_nologentry</word_key>
+      <word_default><![CDATA[We couldn't find any log entry for this member]]></word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_untrack_confirm</word_key>
+      <word_default>Are you sure you want to stop tracking this member?</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>manage_prune_confirm</word_key>
+      <word_default>This will prune all logs of this user. Are you sure you want to continue?</word_default>
+    </lang>
+    <lang>
+      <word_app>trackmembers</word_app>
+      <word_pack>admin_trackmembers</word_pack>
+      <word_key>indefinitely</word_key>
+      <word_default>Indefinitely</word_default>
+    </lang>
+  </languagegroup>
+</languageexport>

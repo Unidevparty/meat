@@ -1,0 +1,8 @@
+/**
+ * IPS specific rules
+ */
+
+.cke_top
+{
+	background: transparent !important;
+}

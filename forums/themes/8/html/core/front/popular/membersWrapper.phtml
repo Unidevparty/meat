@@ -1,0 +1,14 @@
+<ips:template parameters="$members, $contentLabel='members_member_posts', $contentCount='member_posts'" />
+{{if count( $members)}}
+<div class="ipsPad ipsAreaBackground_light">
+	<ol class="ipsStream ipsList_reset cStream_members ipsGrid ipsGrid_collapsePhone">
+	{{foreach $members as $member}}
+		{template="memberRow" group="popular" app="core" params="$member, NULL, 0, $contentLabel, $contentCount"}
+	{{endforeach}}
+	</ol>
+</div>
+{{else}}
+<p class='ipsAreaBackground_light ipsType_center ipsPad ipsType_reset ipsType_light ipsType_normal'>
+	{lang="popular_no_member_results"}
+</p>
+{{endif}}

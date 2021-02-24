@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Awards Management</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Manage Awards</subitemtitle>
+					<subsection>manage</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+
+		<item>
+		    <title>Manage User's Awards</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Give Awards</subitemtitle>
+					<subsection>award</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+
+		<item>
+		    <title>Bulk Award</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Bulk Award</subitemtitle>
+					<subsection>bulkaward</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+
+		<item>
+		    <title>Public Awarding Permissions</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Public Awarding Permissions</subitemtitle>
+					<subsection>perms</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+
+		<item>
+		    <title>Manage Auto Awarding</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Manage Auto Awarding</subitemtitle>
+					<subsection>auto</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey></subitemrolekey>
+					<subisredirect>0</subisredirect>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

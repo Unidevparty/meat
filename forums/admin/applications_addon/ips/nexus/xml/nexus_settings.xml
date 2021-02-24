@@ -1,0 +1,1780 @@
+<?xml version="1.0" encoding="utf-8"?>
+<settingexport>
+  <settinggroup>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_title_title>Fedex Settings</conf_title_title>
+      <conf_title_desc/>
+      <conf_title_tab>Nexus</conf_title_tab>
+      <conf_title_app>nexus</conf_title_app>
+      <conf_title_noshow>1</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Owner Details</conf_title>
+      <conf_description/>
+      <conf_type>textarea</conf_type>
+      <conf_key>fedex_owner</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Key</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>fedex_key</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Password</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>fedex_password</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Account Number</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>fedex_account_number</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Meter Number</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>fedex_meter_number</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Services</conf_title>
+      <conf_description/>
+      <conf_type>textarea</conf_type>
+      <conf_key>fedex_services</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Price Adjustment</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>fedex_price_adjust</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Transit Time Adjustment</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>fedex_shiptime_adjust</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Tax Class</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>fedex_tax</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>9</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_fedex</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_title_title>Hosting</conf_title_title>
+      <conf_title_desc/>
+      <conf_title_tab>Nexus</conf_title_tab>
+      <conf_title_app>nexus</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>eNom Username</conf_title>
+      <conf_description>If provided, users will be able to purchase domain names using eNom integration.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_enom_un</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group>eNom Integration</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>eNom Password</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_enom_pw</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Domain Prices</conf_title>
+      <conf_description><![CDATA[Enter as TLD=Cost. One per line.<br />
+<br />
+For example:<br />
+com=10<br />
+net=8]]></conf_description>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_domain_prices</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Domain Tax Class</conf_title>
+      <conf_description>This is the tax class that will be used for domain purchases.</conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_domain_tax</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[if ( $show )
+{
+	$dropdown[] = array( 0, '--' );
+	ipsRegistry::DB()->build( array( 'select' => '*', 'from' => 'nexus_tax', 'order' => 't_order' ) );
+	ipsRegistry::DB()->execute();
+	while ( $row = ipsRegistry::DB()->fetch() )
+	{
+		$dropdown[] = array( $row['t_id'], $row['t_name'] );
+	}
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Nameservers</conf_title>
+      <conf_description><![CDATA[Enter the nameservers (one per line) that users should be instructed to point their domains to if using their own domain.<br />
+Leave blank if you would prefer users to not be able to choose their own domain name.<br />
+You can override this setting per server.]]></conf_description>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_hosting_nameservers</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>51</conf_position>
+      <conf_start_group>Server Configuration</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Subdomain Options</conf_title>
+      <conf_description><![CDATA[Enter the domains (one per line) that users should be able to use for a subdomain.<br />
+Leave blank to require users to provide their own domain.]]></conf_description>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_hosting_subdomains</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>52</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Email Addresses to Notify on Error</conf_title>
+      <conf_description>Enter the Email addresses, separated by commas, that you want to be notified in the event of an error interacting with the hosting server.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_hosting_error_emails</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>53</conf_position>
+      <conf_start_group>Error Handling</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number of days before terminating accounts</conf_title>
+      <conf_description><![CDATA[If a customer does not renew their hosting package, it will be suspended. After how many days would you like to terminate the account?<br />
+Enter 0 to terminate immediately or -1 to never terminate.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_hosting_terminate</conf_key>
+      <conf_default>60</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>54</conf_position>
+      <conf_start_group>Account Management</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Bandwidth Options</conf_title>
+      <conf_description><![CDATA[If you wish to allow customers to purchase additional bandwidth, enter the options in the format:<br />
+amount=price<br />
+The amount should be in MB and the price should be the price without the currency symbol. For example:<br />
+5000=10<br /><br />
+Enter one option per line]]></conf_description>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_hosting_bandwidth</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>55</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Include HTTP authentication in Control Panel links?</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_hosting_cp_httpauth</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>56</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Monitoring Script URL</conf_title>
+      <conf_description>Enter the URL to the monitoring script. You can obtain the monitoring script from the Tools directory in the IP.Nexus package.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>monitoring_script</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>57</conf_position>
+      <conf_start_group>Monitoring</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Backup Monitoring Script</conf_title>
+      <conf_description>You can specify an additional copy of the monitoring script which will be checked if a server reports a fail to prevent false negatives.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>monitoring_backup</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>58</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Allowed Fails</conf_title>
+      <conf_description>You can specify the number of times that a server can fail before alerts are sent. This allows the server time to ensure it is not a temporary issue.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>monitoring_allowed_fails</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>59</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Notify Email Addresses</conf_title>
+      <conf_description>Enter the email addresses that you want to be contacted, separated by a comma, when a server has failed to respond more that the specified fail times.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>monitoring_alert</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>60</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Fails before repeat</conf_title>
+      <conf_description>If a server fails to respond this number of time and not been acknowledged, an additional email will be sent to the emails above.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>monitoring_panic</conf_key>
+      <conf_default>6</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>61</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Send emails from</conf_title>
+      <conf_description><![CDATA[Specify the email address that notifications about monitoring should be sent from.<br />
+If you have configured this incoming email for this address, replies to monitoring messages will be sent to all the specified notification emails.<br />
+This <strong>MUST</strong> be a different address to your main outgoing address.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>monitoring_from</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>62</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Enable Network Status Page</conf_title>
+      <conf_description>If enabled, customers will be able to see an overview any servers reported as offline by the monitoring scripts.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>network_status</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>63</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Network Status Text</conf_title>
+      <conf_description>Enter any additional info you would like to show on the network status page.</conf_description>
+      <conf_type>editor</conf_type>
+      <conf_key>network_status_text</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>64</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_hosting</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_title_title><![CDATA[Payments &amp; Invoices]]></conf_title_title>
+      <conf_title_desc/>
+      <conf_title_tab>Nexus</conf_title_tab>
+      <conf_title_app>nexus</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Manually Approve all Payments?</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_approve_all</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Global</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Allow split payments over amount</conf_title>
+      <conf_description><![CDATA[When a customer makes a purchase over the amount specified, they will be able to split the payment across multiple payment methods.<br />
+Enter 0 for no restriction, or -1 to not allow split payments at all.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_split_payments</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Under Review Stock Action</conf_title>
+      <conf_description><![CDATA[When marking a transaction as "Under Review" - Nexus will prompt you to create a support request for the customer so you can explain the delay. This setting allows you to use one of your Stock Actions as the default when creating these support requests.]]></conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_revw_sa</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[if ( $show )
+{
+	$dropdown[] = array( -1, '-Do not create a support request at all-' );
+	$dropdown[] = array( 0, '-Do not automatically select any stock action-' );
+	ipsRegistry::DB()->build( array( 'select' => '*', 'from' => 'nexus_support_stock_actions', 'order' => 'action_position' ) );
+	ipsRegistry::DB()->execute();
+	while ( $row = ipsRegistry::DB()->fetch() )
+	{
+		$dropdown[] = array( $row['action_id'], $row['action_name'] );
+	}
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number of days before item expires that invoice is generated</conf_title>
+      <conf_description>This should be the number of days before a purchase expires that a renewal invoice should be generated.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>cm_invoice_generate</conf_key>
+      <conf_default>10</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group>Invoice handling</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number of days before invoice generating to send warning</conf_title>
+      <conf_description>If a customer has a credit card on file, payment is taken automatically when the invoice is generated.&#13;
+This setting can be used to send customers an Email before payment is taken to let them know that will happen.&#13;
+&#13;
+This only applies to customers with credit cards on file.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>cm_invoice_warning</conf_key>
+      <conf_default>3</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number of days before invoice expires</conf_title>
+      <conf_description>This should be the number of days after an invoice has been generated that the user has to pay before it is marked as expired.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>cm_invoice_expireafter</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Invoice Header</conf_title>
+      <conf_description/>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_invoice_header</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Invoice Footer</conf_title>
+      <conf_description/>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_invoice_footer</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Users must be logged in to make donations?</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_donate_loggedin</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>9</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>MaxMind Key</conf_title>
+      <conf_description><![CDATA[To use MaxMind integration, you must <a href='http://www.maxmind.com/app/ccv_buynow?rId=invisionpower'>purchase a service with MaxMind</a> and provide your API key here.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>maxmind_key</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>10</conf_position>
+      <conf_start_group>MaxMind</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Action to perform on error</conf_title>
+      <conf_description>If there is an error communicating with the anti-fraud service, how should the transaction be handled?</conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>maxmind_error</conf_key>
+      <conf_default>okay</conf_default>
+      <conf_extra>okay=Continue with transaction&#13;
+hold=Hold for manual approval</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>11</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Notification Types</conf_title>
+      <conf_description>When one of the selected notifications is sent, a copy will be sent to the address specified below.</conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>nexus_notify_copy_types</conf_key>
+      <conf_default/>
+      <conf_extra>new_invoice=Invoice Generated&#13;
+payment_received=Payment Received&#13;
+payment_held=Payment Held For Review&#13;
+payment_failed=Payment Failed&#13;
+payment_waiting=Payment Instructions (e.g. check)&#13;
+autopay=Automatic Payment Taken (card on file)&#13;
+commission_earned=Commission Earned (e.g. referral purchase)</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1)
+{
+	if ( is_array($_POST['nexus_notify_copy_types']) )
+	{
+		$_POST['nexus_notify_copy_types'] = ','.implode(",",$_POST['nexus_notify_copy_types']).',';
+	}
+	else
+	{
+		$_POST['nexus_notify_copy_types'] = "";
+	}
+	
+	$key = 'nexus_notify_copy_types';
+}
+if ( $show == 1 )
+{
+$key = 'nexus_notify_copy_types[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>12</conf_position>
+      <conf_start_group>Notification Copies</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Notification Email</conf_title>
+      <conf_description>The address to send copies of the above notifications to</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_notify_copy_email</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>13</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title><![CDATA[Billing &quot;From&quot; Email]]></conf_title>
+      <conf_description><![CDATA[Specify the email address that billing notifications should be sent from. <br /> If left blank the default community outgoing email address will be used.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>billing_email_out</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>14</conf_position>
+      <conf_start_group>Outgoing Email</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_payments</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_title_title>Promotion</conf_title_title>
+      <conf_title_desc>Controls settings for advertisements, referrals and commission</conf_title_desc>
+      <conf_title_tab>Nexus</conf_title_tab>
+      <conf_title_app>nexus</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Circulation Mode</conf_title>
+      <conf_description>This determines how IP.Nexus will determine which advertisement to display when there is more than one advertisement active for a location.</conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_ads_circmode</conf_key>
+      <conf_default>rand</conf_default>
+      <conf_extra>rand=Select at random&#13;
+last=Always display most recent</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Advertisement Settings</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Advertisement Alignment</conf_title>
+      <conf_description/>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_ads_align</conf_key>
+      <conf_default>center</conf_default>
+      <conf_extra>left=Left&#13;
+center=Center&#13;
+right=Right</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Enable Referrals</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>cm_ref_on</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group>Referrals</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Allow users to view commission rules?</conf_title>
+      <conf_description>Users will only be able to see the commission rules that apply to them.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_com_rules</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Alternative Commission Rules Text</conf_title>
+      <conf_description><![CDATA[If the above setting is no, you can enter alternate text that you'd like users to be able to see instead which should explain the commission they'll receive for referrals.]]></conf_description>
+      <conf_type>editor</conf_type>
+      <conf_key>nexus_com_rules_alt</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Allow credit withdrawals?</conf_title>
+      <conf_description>If yes and a user has credit on their account, they will be able to request their credit to be paid out.&#13;
+This setting is recommended in conjunction with IP.Downloads integration.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_payout</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group>Commission</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Minimum Payout Request</conf_title>
+      <conf_description>If the above setting is yes, you can specify a minimum payout amount.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_payout_min</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>No Commission Groups</conf_title>
+      <conf_description>The groups specified will not receive any commission from referrals or IP.Downloads integration.&#13;
+This overrides all other commission-related settings.</conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>nexus_no_commission</conf_key>
+      <conf_default/>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1)
+{
+	if ( is_array($_POST['nexus_no_commission']) )
+	{
+		$_POST['nexus_no_commission'] = ','.implode(",",$_POST['nexus_no_commission']).',';
+	}
+	else
+	{
+		$_POST['nexus_no_commission'] = "";
+	}
+	
+	$key = 'nexus_no_commission';
+}
+if ( $show == 1 )
+{
+$key = 'nexus_no_commission[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_promotion</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_title_title><![CDATA[Store &amp; Client Area]]></conf_title_title>
+      <conf_title_desc>Control settings for the store, the client area and handling orders</conf_title_desc>
+      <conf_title_tab>Nexus</conf_title_tab>
+      <conf_title_app>nexus</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Currency Code</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_currency</conf_key>
+      <conf_default>USD</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Global</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Override locale</conf_title>
+      <conf_description><![CDATA[If you are using multiple languages with different locales, you should set this to the locale to use for formatting currencies.<br />
+<strong>Most users can leave this setting blank.</strong>]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_currency_locale</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Protected Groups</conf_title>
+      <conf_description><![CDATA[You can configure packages to automatically move users into a new group when they purchase a package.<br />
+Select here the groups which should not be moved out of their group. You will usually want to select any administrator or moderator groups so that they do not lose their power.<br />
+This only applies to primary group changes. Secondary groups or additional permission masks will still be added.<br />
+Note that regardless of this setting, an administrator will never be moved into a group without Admin CP privileges.]]></conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>cm_protected</conf_key>
+      <conf_default>4</conf_default>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1)
+{
+	if ( is_array($_POST['cm_protected']) )
+	{
+		$_POST['cm_protected'] = ','.implode(",",$_POST['cm_protected']).',';
+	}
+	else
+	{
+		$_POST['cm_protected'] = "";
+	}
+	
+	$key = 'cm_protected';
+}
+if ( $show == 1 )
+{
+$key = 'cm_protected[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Use https for sensitive information?</conf_title>
+      <conf_description><![CDATA[This setting forces the checkout process, support requests and the personal information section of the client area to be served over https.<br />
+You MUST first ensure SSL works for your domain (contact your host if unsure).<br />
+<br />
+<strong>This setting is required for some payment gateways</strong>]]></conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_https</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Store Online?</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_store_online</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group>Store</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Store Offline Message</conf_title>
+      <conf_description/>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_store_off_message</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Can Access Store</conf_title>
+      <conf_description>Select the groups that can access the store. Leave blank to allow all groups.</conf_description>
+      <conf_type>multi</conf_type>
+      <conf_key>nexus_store_access</conf_key>
+      <conf_default/>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp><![CDATA[if ( $save == 1)
+{
+	if ( is_array($_POST['nexus_store_access']) )
+	{
+		$_POST['nexus_store_access'] = ','.implode(",",$_POST['nexus_store_access']).',';
+	}
+	else
+	{
+		$_POST['nexus_store_access'] = "";
+	}
+	
+	$key = 'nexus_store_access';
+}
+if ( $show == 1 )
+{
+$key = 'nexus_store_access[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Default View</conf_title>
+      <conf_description/>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_store_view</conf_key>
+      <conf_default>grid</conf_default>
+      <conf_extra>list=List&#13;
+grid=Grid</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Allow other view?</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_store_viewswitch</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>9</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Number of products to show per page</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_store_pagination</conf_key>
+      <conf_default>10</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>10</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Package Thumbnail Dimensions</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_thumb_dims</conf_key>
+      <conf_default>100x100</conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[ipsRegistry::DB()->update( 'nexus_packages', array( 'p_rebuild_thumb' => 1 ) );
+ipsRegistry::cache()->rebuildCache( 'packages', 'nexus' );]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>11</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show Stock Levels</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_show_stock</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>12</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Minimum Order Amount</conf_title>
+      <conf_description><![CDATA[If specified, users will not be able to make an order until the total amount is equal to above this value.<br/ >
+Leave blank to not require a minimum order amount.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_minimum_order</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>13</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Terms and Conditions</conf_title>
+      <conf_description/>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_tac</conf_key>
+      <conf_default>none</conf_default>
+      <conf_extra><![CDATA[none=Do not display
+button=Display "By clicking the confirm button, you agree to the terms and conditions"
+checkbox=Force users to check a checkbox agreeing to the terms and conditions]]></conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>14</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Terms and Conditions URL</conf_title>
+      <conf_description>If the above setting is enabled, enter the URL to where your Terms and Conditions are.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_tac_link</conf_key>
+      <conf_default>http://</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>15</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Client Area Text</conf_title>
+      <conf_description>Displays on the home page for the client area</conf_description>
+      <conf_type>editor</conf_type>
+      <conf_key>nexus_ca_home</conf_key>
+      <conf_default><![CDATA[Through this area of the site, you can manage the products and services you've bought from us, view and update your billing details, get support and download your software.
+]]></conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>16</conf_position>
+      <conf_start_group>Client Area</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Gift Vouchers</conf_title>
+      <conf_description><![CDATA[Enter the available gift voucher amounts, one per line.<br />
+Enter * to allow the user to enter their own amount.]]></conf_description>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_gift_vouchers</conf_key>
+      <conf_default>5&#13;
+10&#13;
+20&#13;
+50&#13;
+*</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>17</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Hide personal information page?</conf_title>
+      <conf_description>If yes, users will not see the page in the client area to enter their address.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_hide_info</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>18</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>nexus,address,personal,info,information</conf_keywords>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Minimum Topup Amount</conf_title>
+      <conf_description><![CDATA[If enabled, customers will be able to add credit to their accounts.<br />
+Enter the minimum amount you want users to be able to topup with.<br />
+Enter -1 for no limit (users can topup by any amount) or 0 to not allow topups.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_min_topup</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>19</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Maximum Credit Amount</conf_title>
+      <conf_description><![CDATA[Enter the maximum amount a customer is able to increase their total credit to.<br />
+Enter 0 for no limit.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_max_credit</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>20</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show registration packages when registering?</conf_title>
+      <conf_description>You can control which packages show in the package settings.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_reg_show</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>20</conf_position>
+      <conf_start_group>Registration</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Force users to purchase a package when registering?</conf_title>
+      <conf_description>The above setting must be yes for this to have any effect.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_reg_force</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>21</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Member group to use after registration but before package purchase?</conf_title>
+      <conf_description>If you require that every member purchases a package, choose a group to move the member into once they have validated their registration prior to purchasing a package.</conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_reg_group</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra>#show_groups#</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>22</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Ask users for username when registering at checkout?</conf_title>
+      <conf_description>If no, their full name (first and last) will be used</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_checkreg_usernames</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>23</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title><![CDATA[Use captcha and Q&amp;A challenge when registering at checkout?]]></conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_checkreg_captcha</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>24</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Tracking URLs</conf_title>
+      <conf_description>Enter as service~url, one per line. Use {NUMBER} where tracking number will be.</conf_description>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_track_urls</conf_key>
+      <conf_default>Fedex~http://www.fedex.com/Tracking?tracknumber_list={NUMBER}&#13;
+UPS~http://wwwapps.ups.com/WebTracking/track?trackNums={NUMBER}&#13;
+USPS~https://tools.usps.com/go/TrackConfirmAction.action?tLabels={NUMBER}&#13;
+Royal Mail~http://www.royalmail.com/portal/rm/track?trackNumber={NUMBER}</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>25</conf_position>
+      <conf_start_group>Shipping</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Weight Units</conf_title>
+      <conf_description>The units that you will provide weights for products in.</conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_weight_units</conf_key>
+      <conf_default>kg</conf_default>
+      <conf_extra>kg=Kilograms&#13;
+lbs=Pounds</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>26</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Show Tax In Store</conf_title>
+      <conf_description><![CDATA[If enabled, when viewing a product which has an applicable tax rate either for the location the user is in, or if this is not known, a tax rate is set for "All Locations", the tax will be included in the price shown.]]></conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_show_tax</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>27</conf_position>
+      <conf_start_group>Tax</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Tax Description</conf_title>
+      <conf_description><![CDATA[The value entered here will be shown next to prices and can be used to explain if the price includes tax or not. For example, you might enter "incl. vat".]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_tax_explain</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>28</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_store</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_is_title>1</conf_is_title>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_title_title>Support</conf_title_title>
+      <conf_title_desc/>
+      <conf_title_tab>Nexus</conf_title_tab>
+      <conf_title_app>nexus</conf_title_app>
+      <conf_title_noshow>0</conf_title_noshow>
+    </setting>
+    <setting>
+      <conf_title>Highlight requests older than</conf_title>
+      <conf_description>Enter the number of minutes after which support requests that have been waiting this long should be highlighted.&#13;
+Leave blank to not highlight old tickets.&#13;
+720 minutes = 12 hours.&#13;
+1440 minutes = 24 hours.&#13;
+2880 minutes = 48 hours.</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>support_old_number</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>1</conf_position>
+      <conf_start_group>Support Requests</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Base above setting on</conf_title>
+      <conf_description/>
+      <conf_type>dropdown</conf_type>
+      <conf_key>support_old_stat</conf_key>
+      <conf_default>last_new_reply</conf_default>
+      <conf_extra>r_started=Date created&#13;
+r_last_new_reply=Date reopened&#13;
+r_last_reply=Last reply</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>2</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Users can view and edit severity of support requests?</conf_title>
+      <conf_description>If no, users will still be able to set severity when creating a support request where allowed.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_severities</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>3</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Severity Text</conf_title>
+      <conf_description>The message you enter here will display below the severity selection box to users creating a support request.&#13;
+You can use this to explain when to select certain severities.</conf_description>
+      <conf_type>textarea</conf_type>
+      <conf_key>nexus_severity_blurb</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>4</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Pay-Per-Incident Tax Class</conf_title>
+      <conf_description>This is the tax class which will be used on Pay-Per-Incident support payments.</conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_ppi_tax</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[if ( $show )
+{
+	$dropdown[] = array( 0, '--' );
+	ipsRegistry::DB()->build( array( 'select' => '*', 'from' => 'nexus_tax', 'order' => 't_order' ) );
+	ipsRegistry::DB()->execute();
+	while ( $row = ipsRegistry::DB()->fetch() )
+	{
+		$dropdown[] = array( $row['t_id'], $row['t_name'] );
+	}
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>5</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Enable Customer Feedback</conf_title>
+      <conf_description>If enabled, customers will be able to rate staff responses and leave notes.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>nexus_support_satisfaction</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>6</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Auto-resolve support requests older than x days</conf_title>
+      <conf_description>Enter 0 to not auto-resolve support requests</conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_autoresolve_days</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>7</conf_position>
+      <conf_start_group>Auto-resolve Support Requests</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Notify x hours before resolving</conf_title>
+      <conf_description><![CDATA[Users will be sent an Email this number of hours before their support request is automatically resolved.<br />Enter 0 to not send notification.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>nexus_autoresolve_notify</conf_key>
+      <conf_default>24</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>8</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Statuses to auto-resolve</conf_title>
+      <conf_description/>
+      <conf_type>multi</conf_type>
+      <conf_key>nexus_autoresolve_applicable</conf_key>
+      <conf_default>3</conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[$dropdown = array();
+$statuses = ipsRegistry::cache()->getCache('support_statuses');
+foreach ( $statuses['statuses'] as $s )
+{
+	$dropdown[] = array( $s['status_id'], $s['status_name'] );
+}
+
+if ( $save == 1)
+{
+	if ( is_array($_POST['nexus_autoresolve_applicable']) )
+	{
+		$_POST['nexus_autoresolve_applicable'] = ','.implode(",",$_POST['nexus_autoresolve_applicable']).',';
+	}
+	else
+	{
+		$_POST['nexus_autoresolve_applicable'] = "";
+	}
+	
+	$key = 'nexus_autoresolve_applicable';
+}
+if ( $show == 1 )
+{
+	$key = 'nexus_autoresolve_applicable[]';
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>9</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Resolved status</conf_title>
+      <conf_description/>
+      <conf_type>dropdown</conf_type>
+      <conf_key>nexus_autoresolve_status</conf_key>
+      <conf_default>5</conf_default>
+      <conf_extra/>
+      <conf_evalphp><![CDATA[$dropdown = array();
+$statuses = ipsRegistry::cache()->getCache('support_statuses');
+foreach ( $statuses['statuses'] as $s )
+{
+	$dropdown[] = array( $s['status_id'], $s['status_name'] );
+}]]></conf_evalphp>
+      <conf_protected>1</conf_protected>
+      <conf_position>10</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Preferred Email Format</conf_title>
+      <conf_description><![CDATA[Email providers often send emails in both HTML and plaintext format. You can choose which format you'd prefer to use by default here.<br />
+HTML is cleaned to not pose a security threat.]]></conf_description>
+      <conf_type>dropdown</conf_type>
+      <conf_key>incoming_emails_textpref</conf_key>
+      <conf_default>html</conf_default>
+      <conf_extra>html=HTML&#13;
+plain=Plaintext</conf_extra>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>11</conf_position>
+      <conf_start_group>Incoming Email</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Attempt to ignore auto responder replies?</conf_title>
+      <conf_description>When processing incoming mail, by default, successive emails within 60 seconds by the same sender are ignored to prevent auto responder loops. Disabling this setting will cause all incoming mail to be processed including those from auto responders.</conf_description>
+      <conf_type>yes_no</conf_type>
+      <conf_key>sixty_second_rule</conf_key>
+      <conf_default>1</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>12</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords>incoming mail autoresponder</conf_keywords>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>POP 3 server host name</conf_title>
+      <conf_description><![CDATA[You only need to configure this (and other settings below) if you are using POP3 as you're incoming Email method.
+<a href='http://community.invisionpower.com/resources/documentation/index.html?record=389'>More information</a>]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>pop3_server</conf_key>
+      <conf_default>localhost</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>12</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>POP 3 server host port</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>pop3_port</conf_key>
+      <conf_default>110</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>13</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Authentication user name</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>pop3_user</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>14</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Authentication password</conf_title>
+      <conf_description/>
+      <conf_type>input</conf_type>
+      <conf_key>pop3_password</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>15</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title>Establish secure connections using TLS</conf_title>
+      <conf_description/>
+      <conf_type>yes_no</conf_type>
+      <conf_key>pop3_tls</conf_key>
+      <conf_default>0</conf_default>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>16</conf_position>
+      <conf_start_group/>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+    <setting>
+      <conf_title><![CDATA[Support &quot;From&quot; Email]]></conf_title>
+      <conf_description><![CDATA[Specify the email address that support notifications should be sent from. <br /> If left blank the default community outgoing email address will be used.]]></conf_description>
+      <conf_type>input</conf_type>
+      <conf_key>support_email_out</conf_key>
+      <conf_default/>
+      <conf_extra/>
+      <conf_evalphp/>
+      <conf_protected>1</conf_protected>
+      <conf_position>17</conf_position>
+      <conf_start_group>Outgoing Email</conf_start_group>
+      <conf_add_cache>1</conf_add_cache>
+      <conf_keywords/>
+      <conf_title_keyword>nexus_support</conf_title_keyword>
+      <conf_is_title>0</conf_is_title>
+    </setting>
+  </settinggroup>
+</settingexport>

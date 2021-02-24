@@ -1,0 +1,16 @@
+<ips:template parameters="$image, $highlight=FALSE, $json=FALSE" />
+{{if $image}}
+	{{if $image->medium_file_name}}
+		<li style='background-image: url( "{expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), \IPS\File::get( 'gallery_Images', $image->thumb_file_name )->url )"}" );' class='cGalleryTrimmedImage {{if $highlight}}cGalleryAlbumSlider_active{{endif}}' data-imageID='{$image->id}'>
+			<a href='{$image->url()->setQueryString( 'browse', 1 )}' title='{$image->caption}'>
+				<img src='{file="$image->thumb_file_name" extension="gallery_Images"}' alt='{$image->caption}'>
+			</a>
+		</li>
+	{{else}}
+		<li class='ipsNoThumb ipsNoThumb_video ipsCursor_pointer' data-imageID='{$image->id}'>
+			<a href='{$image->url()->setQueryString( 'browse', 1 )}' title='{$image->caption}'></a>
+		</li>
+	{{endif}}
+{{else}}
+	<li class='ipsAreaBackground'>&nbsp;</li>
+{{endif}}

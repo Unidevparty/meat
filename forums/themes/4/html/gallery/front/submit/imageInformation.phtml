@@ -1,0 +1,39 @@
+<ips:template parameters="$images, $currentlyEditing, $currentImagePane, $allImagesForm" />
+
+<a id='elImageInfo'></a>
+<div data-controller='gallery.front.submit.main'>
+	<div class='cGallerySubmit_infoPanel'>
+		<div class='cGallerySubmit_strip ipsPad_double ipsAreaBackground_light ipsScrollbar ipsScrollbar_light' data-role='imageSlider'>
+			<ul class='ipsList_reset'>
+				{{foreach $images as $idx => $image}}
+					<li class="{{if $currentlyEditing == $idx}}cGallerySubmit_current{{elseif $image->done}}cGallerySubmit_done{{endif}}" data-index='{$idx}'  data-role='imageThumb'>
+						{{if $image->movie}}
+							<div {{if $image->attachmentThumbnailUrl}}style="background-image: url( {expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), $image->attachmentThumbnailUrl )"} );"{{endif}} class="cGalleryTrimmedImage cGalleryMovieThumb ipsNoThumb ipsNoThumb_video">
+								<a href="{url="app=gallery&module=gallery&controller=submit&type=images&edit={$idx}&_step=image_information" seoTemplate="gallery_submit"}">
+									{{if $image->attachmentThumbnailUrl}}
+										<img src="{$image->attachmentThumbnailUrl}" alt=''>
+									{{else}}
+										&nbsp;
+									{{endif}}
+								</a>
+							</div>
+						{{else}}
+							<div style="background-image: url( {expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), $image->url )"} );" class="cGalleryTrimmedImage">
+								<a href="{url="app=gallery&module=gallery&controller=submit&type=images&edit={$idx}&_step=image_information" seoTemplate="gallery_submit"}">
+									<img src="{$image->url}" alt=''>
+								</a>
+							</div>
+						{{endif}}
+					</li>
+				{{endforeach}}
+			</ul>
+		</div>
+		<div class='cGallerySubmit_infoForm ipsPad_double ipsScrollbar' data-role="infoPanel">
+			<section data-role='editForm'>
+				{$currentImagePane|raw}
+			</section>
+		</div>
+	</div>
+
+	{$allImagesForm|raw}
+</div>

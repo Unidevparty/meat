@@ -1,0 +1,2 @@
+<ips:template parameters="$status, $classes=''" />
+<span class='cNexusSupportBadge {{if $classes}}{$classes}{{endif}}' {{if $status->color}}style="background-color: #{$status->color}"{{endif}}>{$status->_title}</span>

@@ -1,0 +1,16 @@
+<ips:template parameters="$record, $database, $id" original_group="category_2_column_image_feature" key="database_category_2_column_image_feature_entry" />
+<div class='ipsGrid_span6'>
+	<article class='cCmsCategoryFeaturedEntry {{if $record->hidden()}}ipsModerated{{endif}} cms2ColImageFeature'>
+		{{if $record->record_image}}
+			<div class="cCmsRecord_image">
+				<a href="{$record->url()}" title="{lang="read_more_about" sprintf="$record->_title"}"><img class="ipsImage" src="{file="$record->record_image" extension="cms_Records"}"></a>
+			</div>
+		{{endif}}
+		{{if $record->prefix()}}
+			{template="prefix" group="global" app="core" params="$record->prefix( TRUE ), $record->prefix()"}
+		{{endif}}
+		<h2 class='ipsType_pageTitle'><a href="{$record->url()}" title="{lang="read_more_about" sprintf="$record->_title"}">
+			{wordbreak="$record->_title"}
+		</a></h2>
+	</article>
+</div>

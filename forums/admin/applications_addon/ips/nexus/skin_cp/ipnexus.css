@@ -1,0 +1,149 @@
+.section_filter {
+	padding: 8px 8px 8px 0;
+	font-size: 12px;
+	margin-bottom: 10px;
+	color: #898989;
+	text-align: left;
+}
+
+	.section_filter a {
+		background: #f1f4f7;
+		padding: 5px 8px;
+		margin: 0 0px 0 5px;
+		display: inline-block;
+		border-radius: 4px;
+		-moz-border-radius: 4px;
+		-webkit-border-radius: 4px;
+		text-decoration: none;
+	}
+	
+		.section_filter a.active {
+			background: #648b6e;
+			color: #fff;
+			font-weight: bold;
+		}
+		
+#nexus_search_box {
+	margin: 0 0px 0px 0px;
+	padding: 8px 10px 10px 10px;
+	background: #d5dde9;
+}
+	
+	#nexus_search {
+		width: 165px;
+		margin-bottom: 4px;
+		margin-top: 4px;
+	}
+	
+	#nexus_searchby {
+		width: 135px;
+	}
+	
+	#nexus_search_box input.button {
+		padding: 1px 3px;
+		font-size: 11px;
+		width: 30px;
+	}
+
+/* TICKETS */
+#ticket_replies {
+	padding: 15px 0;
+}
+
+#ticket_replies .bar {
+	background: #4b6e92;
+	font-size: 1.1em;
+	padding: 5px 8px 5px 8px;
+	color: #fff;
+}
+	
+	#ticket_replies .bar a {
+		text-decoration: none;
+		color: #fff;
+	}
+	
+#ticket_replies .post_block {
+	background: #fafbfc;
+	margin: 0 15px 10px;
+	border: 1px solid #d8dce2;
+	padding: 1px;
+	clear: both;
+}
+
+#ticket_replies .post_body {
+	margin-left: 80px;
+	line-height: 100%;
+	min-height: 80px;
+}
+
+	#ticket_replies .post_block.no_sidebar .post_body {
+		margin-left: 0px;
+	}
+
+	#ticket_replies .post_body .post {
+		margin-top: 3px;
+		padding: 10px;
+		line-height: 150%;
+	}
+
+#ticket_replies p.posted_info {
+	padding: 10px 5px 7px 10px;
+	margin-bottom: -10px;
+	background: transparent !important;
+}
+
+#ticket_replies .author_info {
+	text-align: left;	
+	font-size: 0.9em;
+	margin: 15px -5px 10px 0px;
+	width: 90px;
+	float: left;
+}
+
+	#ticket_replies .author_info .photo {
+		margin-left: 15px;
+		border: 1px solid #d8d8d8;
+	}
+	
+#ticket_replies .type {
+	font-size: 11px;
+	font-weight: normal;
+}
+
+/* staff reply */
+
+#ticket_replies .type_s .bar {
+	background: #3c753b;
+}
+
+	#ticket_replies .type_s .bar a {
+		color: #fff;
+	}
+	
+#ticket_replies .type_s.post_block {
+	background: #f8fbf8;
+}
+
+/* hidden reply */
+#ticket_replies .type_h .bar {
+	background: #753b3b;
+}
+
+#ticket_replies .type_h.post_block {
+	background: #f1dcdc;
+}
+
+.package_info_table tr td {
+	padding: 2px 5px !important;
+}
+
+#info_table .title {
+	padding: 12px !important;
+	font-weight: bold;
+	text-align: right;
+}
+
+.tree_row_right {
+	float:right;
+	margin-right: 10px;
+}

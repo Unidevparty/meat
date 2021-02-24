@@ -1,0 +1,34 @@
+<ips:template parameters="$blog, $url" />
+<div class='ipsEmbedded'>
+	<div class='ipsEmbedded_headerArea'>
+		<h4 class='ipsType_reset ipsType_normal ipsTruncate ipsTruncate_line'><i class='fa fa-file' data-ipsTooltip title='{lang="embed_blog"}'></i> &nbsp;<a href='{$url}' title='{lang="view_this_blog"}' target='_top'>{$blog->_title}</a></h4>
+	</div>
+
+	<div class='ipsEmbedded_content'>
+		<div class='ipsPhotoPanel ipsPhotoPanel_notPhone ipsPhotoPanel_mini ipsClearfix ipsType_medium'>
+			{{if $blog->owner() instanceof \IPS\Member}}
+				{template="userPhoto" group="global" app="core" params="$blog->owner(), 'mini', NULL, '', FALSE"}
+			{{endif}}
+			<div>
+				<strong>
+					{{if $blog->owner() instanceof \IPS\Member}}
+						{lang="blog_byline_nodate" htmlsprintf="$blog->owner()->link()"}
+					{{else}}
+						<i class='fa fa-users' data-ipsTooltip title='{lang="this_is_group"}'></i> {lang="blog_byline_nodate" sprintf="\IPS\Member::loggedIn()->language()->addToStack( 'blogs_groupblog_name_' . $blog->id )"}
+					{{endif}}
+				</strong>
+				{{if $blog->latestEntry()}}
+					<br>
+					<span class='ipsType_light ipsType_small'>
+						{lang="blog_last_entry_date" htmlsprintf="\IPS\DateTime::ts( $blog->latestEntry()->date )->html()"}
+					</span>
+				{{endif}}
+				<ul class='ipsGrid cBlogEmbedded_stats'>
+					<li class='ipsGrid_span4'><strong class='ipsType_normal'>{$blog->_items}</strong><br>{lang="blog_entries" pluralize="$blog->_items"}</li>
+					<li class='ipsGrid_span4'><strong class='ipsType_normal'>{$blog->_comments}</strong><br>{lang="blog_comments" pluralize="$blog->_comments"}</li>
+					<li class='ipsGrid_span4'><strong class='ipsType_normal'>{$blog->num_views}</strong><br>{lang="blog_views" pluralize="$blog->num_views"}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

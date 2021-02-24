@@ -1,0 +1,27 @@
+<ips:template parameters="$legal" />
+{template="includeCSS" app="core" group="global" location="global" params=""}
+<style>body { background: #fff none; }</style><br><br><br><br>
+<div class="ipsPrint">
+
+	<div class="ipsType_center ipsSpacer_bottom ipsSpacer_top">
+		<h1 class="ipsType_veryLarge ipsType_reset">Карточка клиента (заявка #{$legal['l_id']})</h1>
+	</div>
+
+	<table class="ipsTable ipsTable_responsive ipsTable_zebra">
+		<thead>
+			<tr class="ipsAreaBackground">
+				<th>Поле</th>
+				<th>Значение</th>
+			</tr>
+		</thead>
+		<tbody data-role="tableRows">
+			{{foreach $legal as $key => $option}}
+				<tr>
+					<td>{lang="valuation_lega$key"}</td>
+					<td>{$option|raw}</td>
+				</tr>
+			{{endforeach}}
+		</tbody>
+	</table>
+
+</div>

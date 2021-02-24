@@ -1,0 +1,60 @@
+<ips:template parameters="$blog, $table" />
+{template="blogHeader" group="view" app="blog" params="$blog"}
+
+{{if $blog->description}}
+	<section class='ipsAreaBackground_light ipsPad'>
+		<h3 class='ipsType_minorHeading'>{lang="about_this_blog"}</h3>
+		<div class='ipsType_richText ipsType_light ipsType_normal' data-ipsTruncate data-ipsTruncate-size='4 lines' data-ipsTruncate-type='hide'>
+			{$blog->description|raw}
+		</div>
+	</section>
+{{endif}}
+
+{{if \IPS\blog\Entry::canCreate( \IPS\Member::loggedIn(), $blog ) or $blog->canDelete() or $blog->canEdit() or ( $blog->pinned and \IPS\Member::loggedIn()->modPermission('can_unpin_content') ) || ( !$blog->pinned and \IPS\Member::loggedIn()->modPermission('can_pin_content') )}}
+	<ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsSpacer_both">
+		<li class='ipsToolList_primaryAction'>
+			<a class="ipsButton ipsButton_medium ipsButton_important ipsButton_fullWidth" href="{url="app=blog&module=blogs&controller=submit&id={$blog->id}" seoTemplate="blog_submit"}">{lang="add_blog_entry"}</a>
+		</li>
+		{{if $blog->canDelete() or $blog->canEdit() or ( $blog->pinned and \IPS\Member::loggedIn()->modPermission('can_unpin_content') ) || ( !$blog->pinned and \IPS\Member::loggedIn()->modPermission('can_pin_content') ) }}
+			<li>
+				<a href='#elBlogManage_menu' id='elBlogManage' data-ipsMenu class='ipsButton ipsButton_link ipsButton_medium ipsButton_fullWidth'>{lang="manage_blog"} <i class='fa fa-caret-down'></i></a>
+				<ul id='elBlogManage_menu' class='ipsMenu ipsMenu_normal ipsHide'>
+				
+					{{if $blog->canEdit() AND !$blog->groupblog_ids}}
+						<li class='ipsMenu_item'>
+							<a href='{$blog->url()->setQueryString( array( 'do' => 'editBlog', 'csrfKey' => \IPS\Session::i()->csrfKey ) )}' title="{lang="edit_blog"}" data-ipsDialog data-ipsDialog-title="{lang="edit_blog"}">{lang="edit_blog"}</a>
+						</li>
+						{{if \IPS\Settings::i()->blog_allow_rssimport }}
+							<li class='ipsMenu_item'>
+								<a href='{$blog->url()->setQueryString( array( 'do' => 'rssImport', 'csrfKey' => \IPS\Session::i()->csrfKey ) )}' title="{lang="blog_rss_import"}" data-ipsDialog data-ipsDialog-title="{lang="blog_rss_import"}">{lang="blog_rss_import"}</a>
+							</li>
+						{{endif}}
+					{{endif}}
+
+					{{if $blog->pinned and \IPS\Member::loggedIn()->modPermission('can_unpin_content')}}
+						<li class='ipsMenu_item'>
+							<a href='{$blog->url()->setQueryString( array( 'do' => 'changePin', 'csrfKey' => \IPS\Session::i()->csrfKey ) )}'>{lang="unpin_blog"}</a>
+						</li>
+					{{endif}}
+					{{if !$blog->pinned and \IPS\Member::loggedIn()->modPermission('can_pin_content')}}
+						<li class='ipsMenu_item'>
+							<a href='{$blog->url()->setQueryString( array( 'do' => 'changePin', 'csrfKey' => \IPS\Session::i()->csrfKey ) )}'>{lang="pin_blog"}</a>
+						</li>
+					{{endif}}
+					
+					{{if $blog->canDelete() }}
+						<li class='ipsMenu_item'>
+							<a href='{$blog->url()->setQueryString( array( 'do' => 'deleteBlog', 'csrfKey' => \IPS\Session::i()->csrfKey ) )}' data-confirm title="{lang="delete_blog"}" data-confirmMessage="{lang="delete_blog_confirm"}" >{lang="delete_blog"}</a>
+						</li>
+					{{endif}}
+				</ul>
+			</li>
+		{{endif}}
+	</ul>
+{{endif}}
+
+{$table|raw}
+
+<div class='ipsResponsive_showPhone ipsResponsive_block ipsSpacer_top'>
+	{template="follow" app="core" group="global" params="'blog', 'blog', $blog->_id, \IPS\blog\Entry::containerFollowerCount( $blog )"}
+</div>

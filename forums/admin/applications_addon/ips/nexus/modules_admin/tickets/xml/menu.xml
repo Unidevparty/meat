@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+	<tabitems>
+		<item>
+			<title>Support Requests</title>
+			<subitems>
+				<subitem>
+					<subitemtitle>Support Requests</subitemtitle>
+					<subsection>list</subsection>
+					<subitemurl></subitemurl>
+					<subitemrolekey>sr_view</subitemrolekey>
+					<subisredirect>0</subisredirect>
+					<subitemlang>tickets_list</subitemlang>
+				</subitem>
+			</subitems>
+		</item>
+	</tabitems>
+</menu>

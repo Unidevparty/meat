@@ -1,0 +1,58 @@
+<ips:template parameters="$category, $albums, $table" />
+<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle">{$category->_title}</h1>
+	<div class='ipsPos_right ipsResponsive_noFloat ipsResponsive_hidePhone'>
+		{{$followerCount = \IPS\gallery\Image::containerFollowerCount( $category );}}
+		{template="follow" app="core" group="global" params="'gallery', 'category', $category->_id, $followerCount"}
+	</div>
+</div>
+
+{{if $category->show_rules == 1}}
+	<hr class='ipsHr'>
+	<a href="{$category->rules_link}" class='ipsJS_show ipsType_normal' data-ipsDialog data-ipsDialog-title="{lang="gallery_category_{$category->id}_rulestitle"}" data-ipsDialog-content="#elCategoryRules">{lang="category_rules"}</a>
+	<div id='elCategoryRules' class='ipsHide ipsPad ipsType_richText ipsType_medium ipsSpacer_both'>{lang="gallery_category_{$category->id}_rules"}</div>
+{{elseif $category->show_rules == 2}}
+	<hr class='ipsHr'>
+	<strong class='ipsType_normal'>{lang="gallery_category_{$category->id}_rulestitle"}</strong>
+	<div class='ipsType_richText ipsType_medium ipsSpacer_both'>{lang="gallery_category_{$category->id}_rules"}</div>
+{{endif}}
+{{if $category->description}}
+	<div class='ipsType_richText ipsType_medium ipsSpacer_both'>
+		{$category->description|raw}
+	</div>
+{{endif}}
+
+{{if $category->can('add')}}
+	<ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsSpacer_bottom ipsResponsive_hidePhone">
+		{template="categoryButtons" group="browse" params="$category->can('add'), $category, NULL"}
+	</ul>
+{{endif}}
+
+
+{{if $category->children()}}
+	<div class="ipsAreaBackground_light ipsPad ipsSpacer_bottom">
+		{template="categoryGrid" group="browse" app="gallery" params="$category->children()"}
+	</div>
+{{endif}}
+
+{{if $albums}}
+	<div class='ipsBox ipsSpacer_bottom'>
+		{$albums|raw}
+	</div>
+{{endif}}
+
+{{if $table}}
+	<div class='ipsBox'>
+		{$table|raw}
+	</div>
+{{endif}}
+
+{{if \IPS\gallery\Category::canOnAny('add')}}
+	<ul class="ipsToolList ipsToolList_horizontal ipsResponsive_hideDesktop ipsResponsive_block ipsClearfix ipsSpacer_top">
+		{template="categoryButtons" group="browse" params="\IPS\gallery\Category::canOnAny('add'), $category"}
+	</ul>
+{{endif}}
+
+<div class='ipsResponsive_showPhone ipsResponsive_block'>
+	{template="follow" app="core" group="global" params="'gallery', 'category', $category->_id, $followerCount"}
+</div>

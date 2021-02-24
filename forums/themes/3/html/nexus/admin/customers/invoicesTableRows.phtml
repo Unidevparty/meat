@@ -1,0 +1,23 @@
+<ips:template parameters="$table, $headers, $rows" />
+
+{{foreach $rows as $row}}
+	<li class='ipsDataItem'>
+		<div class='ipsDataItem_main'>
+			<p class='ipsType_reset ipsType_normal'>
+				{{if $row['_buttons']['view']}}
+					<a href='{$row['_buttons']['view']['link']}'>
+				{{endif}}
+				<span class='ipsType_light ipsType_medium'>#{$row['i_id']}</span> {$row['i_title']|raw}
+				{{if $row['_buttons']['view']}}
+					</a>
+				{{endif}}
+			</p>
+			<p class='ipsType_reset ipsType_medium'>
+				{$row['i_status']|raw} &nbsp;&nbsp;<strong>{$row['i_total']}</strong> &nbsp;&nbsp;<span class='ipsType_light'>{lang="invoice_created"} {datetime="$row['i_date']"}</span>
+			</p>
+		</div>
+		<div class='ipsDataItem_generic ipsDataItem_size4 ipsType_right'>
+			{template="controlStrip" params="$row['_buttons']" group="global" app="core"}
+		</div>
+	</li>
+{{endforeach}}

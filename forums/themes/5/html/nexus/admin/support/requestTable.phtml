@@ -1,0 +1,114 @@
+<ips:template parameters="$table, $headers, $rows, $quickSearch" />
+
+<div data-baseurl="{$table->baseUrl}" data-resort='{$table->resortKey}' data-controller="core.global.core.table(support.requestTable)">
+	<div class='ipsColumns ipsColumns_collapsePhone'>
+		<aside class='ipsColumn ipsColumn_wide'>
+			<h2 class='acpBlock_title ipsResponsive_hidePhone'>{lang="request_filters"}</h2>
+			<div class='ipsAreaBackground_light ipsPad_half'>
+				<div class='ipsSideMenu ipsSpacer_top ipsSpacer_half' id='elSupport_menu' data-ipsSideMenu data-ipsSideMenu-type='check'>
+					<h3 class='ipsSideMenu_mainTitle ipsAreaBackground_light ipsType_medium'>
+						<a href='#elSupport_menu' class='ipsPad_double' data-action='openSideMenu'><i class='fa fa-bars'></i> &nbsp;{lang="request_filters"}&nbsp;<i class='fa fa-caret-down'></i></a>
+					</h3>
+
+					<ul class='ipsSideMenu_list ipsSideMenu_withRadios'>
+						<li data-action="tableFilter" data-filter="" data-support-filter="assigned" class='ipsSideMenu_item {{if request.assigned}}ipsSideMenu_itemActive{{endif}}' data-ipsMenuValue=''>
+							<a href='{$table->baseUrl->setQueryString( 'assigned', '1' )}'>{lang="filter_assigned_to_me"}</a>
+						</li>
+						<li data-action="tableFilter" data-filter="" data-support-filter="tracked" class='ipsSideMenu_item {{if request.tracked}}ipsSideMenu_itemActive{{endif}}' data-ipsMenuValue=''>
+							<a href='{$table->baseUrl->setQueryString( 'tracked', '1' )}'>{lang="tracked"}</a>
+						</li>
+						<li data-action="tableFilter" data-filter="" data-support-filter="replied" class='ipsSideMenu_item {{if request.replied}}ipsSideMenu_itemActive{{endif}}' data-ipsMenuValue=''>
+							<a href='{$table->baseUrl->setQueryString( 'replied', '1' )}'>{lang="i_have_replied"}</a>
+						</li>
+					</ul>
+					
+					{{$myFilters = \IPS\nexus\Support\Request::myFilters();}}
+
+					<h4 class='ipsSideMenu_title'>{lang="departments"}</h4>
+					<ul class='ipsSideMenu_list ipsSideMenu_withChecks'>
+						{{foreach \IPS\nexus\Support\Department::departmentsWithPermission() as $id => $department}}
+							<li class='ipsSideMenu_item {{if in_array( $id, $myFilters['departments'] )}}ipsSideMenu_itemActive{{endif}}' data-type='department' data-ipsMenuValue='{$id}'><a href='{$table->baseUrl->setQueryString( 'departments', implode( ',', \IPS\nexus\Support\Request::changeFilters( $myFilters['departments'], $id ) ) )}'>{$department->_title}</a></li>
+						{{endforeach}}
+					</ul>
+
+					<h4 class='ipsSideMenu_title'>{lang="statuses"}</h4>
+					<ul class='ipsSideMenu_list ipsSideMenu_withChecks'>
+						{{foreach \IPS\nexus\Support\Status::rootsAsArray() as $id => $name}}
+							<li class='ipsSideMenu_item {{if in_array( $id, $myFilters['statuses'] )}}ipsSideMenu_itemActive{{endif}}' data-type='status' data-ipsMenuValue='{$id}'><a href='{$table->baseUrl->setQueryString( array( 'statuses' => implode( ',', \IPS\nexus\Support\Request::changeFilters( $myFilters['statuses'], $id ) ) ) )}'>{lang="$name"}</a></li>
+						{{endforeach}}
+					</ul>
+				</div>
+			</div>
+		</aside>
+		<section class='ipsColumn ipsColumn_fluid'>
+		<div class="acpBlock ipsClear">
+			{{if $quickSearch !== NULL or $table->advancedSearch or !empty( $table->filters )}}
+				<div class='ipsClearfix ipsClear ipsPad acpWidgetToolbar ipsAreaBackground_dark' data-role="tableSortBar">
+					{{if $quickSearch !== NULL or $table->advancedSearch}}
+						{{if $table->advancedSearch}}
+							<a class='ipsPos_right acpWidgetSearch' data-ipsTooltip aria-label='{lang="search"}' href='{$table->baseUrl->setQueryString( array( 'advancedSearchForm' => '1', 'filter' => $table->filter, 'sortby' => $table->sortBy, 'sortdirection' => $table->sortDirection ) )}' data-ipsDialog data-ipsDialog-title='{lang="search"}'><i class='fa fa-cog'></i></a>
+						{{endif}}
+						{{if $quickSearch !== NULL}}
+							<input type='text' class='ipsField_short ipsPos_right acpTable_search ipsJS_show' data-role='tableSearch' results placeholder="{{if is_string( $quickSearch )}}{lang="search_prefix" sprintf="\IPS\Member::loggedIn()->language()->addToStack( $table->langPrefix . $quickSearch )"}{{else}}{lang="search"}{{endif}}" value="{expression="\IPS\Request::i()->quicksearch"}">
+						{{endif}}
+					{{endif}}
+				</div>
+
+				<div class='ipsButtonBar ipsClearfix ipsPad_half'>
+					<ul class='ipsButtonRow ipsPos_right ipsClearfix'>
+						<li>
+							<a href='#elSortMenu_menu' id='elSortMenu' data-ipsMenu data-ipsMenu-activeClass='ipsButtonRow_active' data-ipsMenu-selectable="radio">{lang="sort_by"} <i class='fa fa-caret-down'></i></a>
+							<ul class='ipsMenu ipsMenu_auto ipsMenu_withStem ipsMenu_selectable ipsHide' id='elSortMenu_menu'>
+								{{foreach array( 'r_started',  'r_last_new_reply', 'r_last_reply', 'r_last_staff_reply' ) as $val}}
+									<li class='ipsMenu_item {{if $val == str_replace( 'sev_position asc, ', '', $table->sortBy )}}ipsMenu_itemChecked{{endif}}' data-ipsMenuValue="{$val}">
+										<a href='{$table->baseUrl->setQueryString( array( 'sortby' => $val ) )}'>{lang="$val"}</a>
+									</li>
+								{{endforeach}}
+							</ul>
+						</li>
+						<li>
+							<a href='#elOrderMenu_menu' id='elOrderMenu' data-ipsMenu data-ipsMenu-activeClass='ipsButtonRow_active' data-ipsMenu-selectable="radio">{lang="order_by"} <i class='fa fa-caret-down'></i></a>
+							<ul class='ipsMenu ipsMenu_auto ipsMenu_withStem ipsMenu_selectable ipsHide' id='elOrderMenu_menu'>
+								<li class='ipsMenu_item {{if $table->sortDirection == 'asc'}}ipsMenu_itemChecked{{endif}}' data-ipsMenuValue='asc'>
+									<a href='{$table->baseUrl->setQueryString( array( 'sortdirection' => 'asc' ) )}'>{lang="ascending"}</a>
+								</li>
+								<li class='ipsMenu_item {{if $table->sortDirection == 'desc'}}ipsMenu_itemChecked{{endif}}' data-ipsMenuValue='desc'>
+									<a href='{$table->baseUrl->setQueryString( array( 'sortdirection' => 'desc' ) )}'>{lang="descending"}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+					{{if $table->pages > 1}}
+						<div data-role="tablePagination">
+							{template="pagination" group="global" app="core" location="global" params="$table->baseUrl, $table->pages, $table->page, $table->limit"}
+						</div>
+					{{endif}}
+				</div>
+			{{endif}}
+			
+			
+			
+			<table class='ipsTable ipsTable_responsive ipsTable_zebra {{foreach $table->classes as $class}}{$class} {{endforeach}}' data-role="table" data-ipsKeyNav data-ipsKeyNav-observe='e d return'>
+				<thead>
+					<tr class='ipsAreaBackground'>
+						<th>&nbsp;</th>
+						<th>{lang="request"}</th>
+						<th>{lang="status"}</th>
+						<th>{lang="request_started_by"}</th>
+						<th>{lang="request_last_by"}</th>
+						<th>&nbsp;</th>
+					</tr>
+				</thead>
+				<tbody data-role="tableRows">
+					{template="$table->rowsTemplate[1]" params="$table, $headers, $rows" object="$table->rowsTemplate[0]"}
+				</tbody>
+			</table>
+			<br>
+			{{if $table->pages > 1}}
+				<div data-role="tablePagination">
+					{template="pagination" group="global" app="core" location="global" params="$table->baseUrl, $table->pages, $table->page, $table->limit"}
+				</div>
+			{{endif}}
+		</div>
+	</section>
+</div>

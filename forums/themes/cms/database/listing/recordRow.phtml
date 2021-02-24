@@ -1,0 +1,148 @@
+<ips:template parameters="$table, $headers, $rows" original_group="listing" key="database_listing_recordRow" />
+{{$rowIds = array();}}
+{{foreach $rows as $row}}
+	{{$idField = $row::$databaseColumnId;}}
+	{{$rowIds[] = $row->$idField;}}
+{{endforeach}}
+{{$iposted = ( $table AND method_exists( $table, 'container' ) AND $table->container() !== NULL ) ? $table->container()->contentPostedIn( null, $rowIds ) : array();}}
+<section class='ipsType_normal ipsSpacer_both'>
+{{foreach $rows as $row}}
+	{{$idField = $row::$databaseColumnId;}}
+	{{$record = $row;}}
+	<article class='cCmsCategoryFeaturedEntry ipsClear ipsClearfix {{if $record->hidden()}}ipsModerated{{endif}}'>
+	<!-- <header class='ipsPhotoPanel ipsPhotoPanel_notPhone ipsPhotoPanel_small ipsSpacer_bottom'>
+		{template="userPhoto" app="core" params="$record->author()" group="global"}
+		<div> 
+			<h2 class='ipsType_pageTitle'>
+				{{if $record->prefix()}}
+					{template="prefix" group="global" app="core" params="$record->prefix( TRUE ), $record->prefix()"}
+				{{endif}}
+				{{if $record->mapped('pinned') || $record->mapped('featured') || $record->hidden() === -1 || $record->hidden() === 1}}
+					{{if $record->hidden() === -1}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_warning" data-ipsTooltip title='{$record->hiddenBlurb()}'><i class='fa fa-eye-slash'></i></span>
+					{{elseif $record->hidden() === 1}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_warning" data-ipsTooltip title='{lang="pending_approval"}'><i class='fa fa-warning'></i></span>
+					{{endif}}
+					{{if $record->mapped('pinned')}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_positive" data-ipsTooltip title='{lang="pinned"}'><i class='fa fa-thumb-tack'></i></span>
+					{{endif}}
+					{{if $record->mapped('featured')}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_positive" data-ipsTooltip title='{lang="featured"}'><i class='fa fa-star'></i></span>
+					{{endif}}
+				{{endif}}
+				
+				<a href="{$record->url()}" title="{lang="read_more_about" sprintf="$record->_title"}">
+					{{if $record->unread()}}
+					<span class='ipsItemStatus' data-ipsTooltip title="{lang="cms_unread_record"}"><i class="fa fa-circle"></i></span>
+					{{endif}}
+					{wordbreak="$record->_title"}
+				</a>
+			</h2>
+			<p class='ipsType_light ipsType_reset'>
+				{lang="cms_byline" htmlsprintf="$record->author()->link(), $record->container()->url(), $record->container()->_title"}{datetime="$record->record_publish_date"}
+			</p>
+		</div>
+	</header> -->
+  <div class='wa_theme_desc'>
+  <h2 class='ipsType_pageTitle'>
+				{{if $record->prefix()}}
+					{template="prefix" group="global" app="core" params="$record->prefix( TRUE ), $record->prefix()"}
+				{{endif}}
+				{{if $record->mapped('pinned') || $record->mapped('featured') || $record->hidden() === -1 || $record->hidden() === 1}}
+					{{if $record->hidden() === -1}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_warning" data-ipsTooltip title='{$record->hiddenBlurb()}'><i class='fa fa-eye-slash'></i></span>
+					{{elseif $record->hidden() === 1}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_warning" data-ipsTooltip title='{lang="pending_approval"}'><i class='fa fa-warning'></i></span>
+					{{endif}}
+					{{if $record->mapped('pinned')}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_positive" data-ipsTooltip title='{lang="pinned"}'><i class='fa fa-thumb-tack'></i></span>
+					{{endif}}
+					{{if $record->mapped('featured')}}
+					<span class="ipsBadge ipsBadge_icon ipsBadge_small ipsBadge_positive" data-ipsTooltip title='{lang="featured"}'><i class='fa fa-star'></i></span>
+					{{endif}}
+				{{endif}}
+				
+				<a href="{$record->url()}" title="{lang="read_more_about" sprintf="$record->_title"}">
+					{{if $record->unread()}}
+					<span class='ipsItemStatus' data-ipsTooltip title="{lang="cms_unread_record"}"><i class="fa fa-circle"></i></span>
+					{{endif}}
+					{wordbreak="$record->_title"}
+				</a>
+			</h2>
+	{{if count( $record->customFieldsForDisplay('listing') )}}
+		<div class='ipsDataItem_meta'>
+          <a href="{$record->url()}">
+		{{foreach $record->customFieldsForDisplay('listing') as $fieldId => $fieldValue}}
+			
+            {{if ($fieldId == 'teaser_paragraph' && mb_strlen(trim($fieldValue)) < 63)}}
+ 
+                {{$fieldValue = false;}}
+                <div data-ipsTruncate data-ipsTruncate-type="remove" data-ipsTruncate-size="2 lines">{$record->truncated()|raw}</div>
+            {{endif}}
+
+            {{if $fieldValue}}
+				{$fieldValue|raw}
+			{{endif}}
+		{{endforeach}}
+          </a>
+		</div>
+
+    <!--  {{if strlen($record->customFieldDisplayByKey('teaser_paragraph'))<30}}
+		{{foreach $record->customFieldsForDisplay('listing') as $fieldId => $fieldValue}}
+			{{if $fieldValue}}
+				{$fieldValue|raw}
+			{{endif}}
+		{{endforeach}}
+            {{else}}
+              {$record->truncated()|raw}
+{{endif}} --->
+    
+	{{endif}}
+  <div {{if $record->record_image}}class='ipsColumns ipsColumns_collapsePhone'{{endif}}>
+		
+			<div class='ipsColumn ipsColumn_fluid'>
+		
+
+				<!-- <section class='ipsType_normal ipsType_richText ipsType_break ipsSpacer_bottom' data-ipsTruncate data-ipsTruncate-size='7 lines' data-ipsTruncate-type='remove'>
+					{$record->truncated()|raw}
+				</section> -->
+
+				<!-- {{if count( $record->tags() )}}
+					{template="tags" group="global" app="core" params="$record->tags()"}
+				{{endif}} -->
+				<ul class='ipsList_inline ipsClear'>
+					<li title='Дата' data-ipstooltip=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {datetime="$record->record_publish_date"} {expression="\IPS\DateTime::ts( $record->record_publish_date )->format( 'H:i' )"}</li>
+					{{if $record::database()->options['reviews']}}
+					<li>{template="rating" app="core" params="'small', $record->averageReviewRating(), \IPS\Settings::i()->reviews_rating_out_of" group="global"}</li>
+					{{endif}}
+                    <!--{{if !member.inGroup( array( 15, 14, 21, 20, 10, 12, 8, 16, 7, 17, 3, 19, 2, 22, 23, 24, 25 ) )}}
+                    <li title='Просмотры' class='ipsType_light'><i class="fa fa-eye" aria-hidden="true"></i> {$record->record_views}</li>
+					{{endif}}-->
+                    {{if member.inGroup( array( 13, 4 ) )}}
+                    <li title='Просмотры' class='ipsType_light'><i class="fa fa-eye" aria-hidden="true"></i> {$record->record_views}</li>
+					{{endif}}
+                    <li title='Ответы' data-ipstooltip=""class='wa_news_comments'><a href='{$record->url()}#comments' title='{lang="view_comments"}'><i class='fa fa-commenting'></i> {$record->record_comments}</a></li>
+					<li title='Категория' data-ipstooltip="" class='ipsType_light'><i class="fa fa-folder-open" aria-hidden="true"></i> <a href="{$record->container()->url()}">{$record->container()->_title}</a></li>
+				</ul>
+
+		{{if $record->record_image}}
+			</div>
+		{{endif}}
+	</div>
+  </div>
+  
+  <div class='wa_theme_image'>
+  {{if $record->record_image}}
+			<div class='ipsColumn ipsColumn_medium'>
+				<div class="cCmsRecord_image">
+                  <a href="{$record->url()}">
+					<img class="ipsImage" src="{file="$record->_record_image_thumb" extension="cms_Records"}">
+                    </a>
+				</div>
+			</div>
+      {{endif}}
+    </div>
+	
+</article>
+{{endforeach}}
+</section>

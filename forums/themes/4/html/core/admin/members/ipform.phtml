@@ -1,0 +1,19 @@
+<ips:template parameters="$ip, $members" />
+
+<div class=''>
+	<div class='acpBlock'>
+		<h1 class='acpBlock_title acpBlock_titleDark acpBlock_titleSmall'>{lang="ipaddress_table_header"}</h1>
+		<div>
+			{$ip|raw}
+		</div>
+	</div>
+</div>
+
+<div class='ipsSpacer_top'>
+	<div class='acpBlock'>
+		<h1 class='acpBlock_title acpBlock_titleDark acpBlock_titleSmall'>{lang="memberip_table_header"}</h1>
+		<div>
+			{$members|raw}
+		</div>
+	</div>
+</div>

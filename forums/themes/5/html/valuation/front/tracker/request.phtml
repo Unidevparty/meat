@@ -1,0 +1,270 @@
+<ips:template parameters="$request, $form, $history, $gallerysize" />
+<div class="ipsType_center ipsSpacer_bottom">
+	<h1 class="ipsType_pageTitle ipsType_reset">Заявка на оценку #{$request->id}</h1>
+	<div class="ipsType_richText ipsType_large ipsType_light">
+		{lang="valuation_type_{$request->type}"} {lang="valuation_manufacturer_{$request->manufacturer}"}; Модель {$request->model}{{if $request->released}}, {$request->released} год.{{endif}}
+	</div>
+</div>
+
+<div class='ipsColumns ipsColumns_collapsePhone'>
+	<div class='ipsColumn ipsColumn_fluid'>
+		<div class='ipsAreaBackground_light ipsSpacer_bottom ipsPad'>
+			<div class='ipsGrid ipsGrid_collapsePhone ipsType_normal'>
+				<div class='ipsGrid_span4'>
+					<h3 class='ipsType_sectionHead'>Назначена на</h3><br>
+					{{if $request->request_assigned}}{{$member = \IPS\Member::load( $request->request_assigned);}}{$member->name}{{else}}<i>Не назначена</i>{{endif}}
+					{{if $request->canChangeAssignee() and $assignTo = \IPS\Member::valStaff( TRUE, TRUE, TRUE, TRUE ) and in_array( \IPS\Member::loggedIn()->currentRole(), array( 'admin', 'director' ) )}}
+						&nbsp;&nbsp;
+						<a href='#elAssignedMenu_menu' class='ipsType_small' data-ipsMenu id='elAssignedMenu'>Изменить <i class='fa fa-caret-down'></i></a>
+						<ul class='ipsHide ipsMenu ipsMenu_auto' id='elAssignedMenu_menu'>
+							{{foreach $assignTo as $member}}
+								<li class='ipsMenu_item'>
+									<a href="{$request->url()->setQueryString( 'assignTo', $member->member_id )->csrf()}">{$member->name}</a>
+								</li>
+							{{endforeach}}
+							<li class='ipsMenu_item'>
+								<a href="{$request->url()->setQueryString( 'assignTo', 0 )->csrf()}">Не назначена</a>
+							</li>
+						</ul>
+					{{endif}}
+				</div>
+				<div class='ipsGrid_span4'>
+					<h3 class='ipsType_sectionHead'>Тарифный план</h3><br>
+					{lang="valuation_plan_{$request->request_plan}"}
+				</div>
+				<div class='ipsGrid_span4'>
+					<h3 class='ipsType_sectionHead'>Скидочный купон</h3><br>
+					{$request->request_coupon}
+				</div>
+			</div>
+
+			{{if $request->purchase}}
+				<hr class='ipsHr'>
+				<div class='cNexusSupportMessage_purchase'>
+					<div class='ipsColumns ipsColumns_collapsePhone'>
+						<div class='ipsColumn ipsColumn_narrow'>
+							{{if $image = $request->purchase->image()}}
+								<span class='cNexusPurchase_image ipsThumb ipsThumb_small' style='background-image: url( "{expression="str_replace( array( '(', ')' ), array( '\(', '\)' ), $image->url )"}" );'>&nbsp;</span>
+							{{else}}
+								<span class='ipsThumb ipsThumb_small ipsNoThumb {{if $request->purchase->type == 'giftvoucher'}}ipsNoThumb_gift{{else}}ipsNoThumb_product{{endif}}'>&nbsp;</span>
+							{{endif}}
+						</div>
+						<div class='ipsColumn ipsColumn_fluid'>
+							<h3 class='ipsType_minorHeading'>{lang="request_is_for"}</h3>
+							<span class='ipsType_sectionHead'>{$request->purchase->_title}</span>
+							<ul class='ipsList_inline ipsType_normal ipsSpacer_top ipsSpacer_half'>
+								<li>
+									<strong>{lang="ps_start"}:</strong> {$request->purchase->start->localeDate()}
+								</li>
+								{{if $request->purchase->expire}}
+									<li>
+										<strong>{lang="ps_expire"}:</strong> {$request->purchase->expire->localeDate()}
+									</li>
+								{{endif}}
+							</ul>
+						</div>
+					</div>
+				</div>
+			{{endif}}
+		</div>
+
+		<div class="ipsGrid ipsGrid_collapseTablet">
+			<div class="ipsGrid_span6">
+				<h2 class="ipsType_sectionHead ipsSpacer_bottom">Информация об оборудовании</h2>
+
+				<table class="ipsTable ipsTable_responsive ipsTable_zebra ipsSpacer_bottom ipsAreaBackground_light valPlans">
+					<thead>
+						<tr>
+							<th style="width: 50%">Поле заявки</th>
+							<th>Значение поля</th>
+						</tr>
+					</thead>
+					<tbody class="ipsType_normal">
+						{{foreach array( 'type', 'manufacturer', 'model', 'released', 'condition' ) as $row }}
+							{{if $request->$row}}
+								<tr>
+									<td>{lang="valuation_field_r_$row"}</td>
+									<td>
+										{{if $row == 'type' or $row == 'manufacturer' or $row == 'condition'}}{lang="valuation_{$row}_{$request->$row}"}{{else}}{$request->$row}{{endif}}
+									</td>
+								</tr>
+							{{endif}}
+						{{endforeach}}
+					</tbody>
+				</table>
+			</div>
+			<div class="ipsGrid_span6">
+				<h2 class="ipsType_sectionHead ipsSpacer_bottom">Информация о местоположении</h2>
+
+				<table class="ipsTable ipsTable_responsive ipsTable_zebra ipsSpacer_bottom ipsAreaBackground_light valPlans">
+					<thead>
+						<tr>
+							<th style="width: 50%">Поле заявки</th>
+							<th>Значение поля</th>
+						</tr>
+					</thead>
+					<tbody class="ipsType_normal">
+						{{foreach array( 'country', 'region', 'city' ) as $row }}
+							{{if $request->$row}}
+								<tr>
+									<td>{lang="valuation_field_r_$row"}</td>
+									<td>
+										{{if $row == 'country'}}{lang="valuation_{$row}_{$request->$row}"}{{else}}{$request->$row}{{endif}}
+									</td>
+								</tr>
+							{{endif}}
+						{{endforeach}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<h2 class="ipsType_sectionHead ipsSpacer_bottom">Прикреплённые изображения <span class="ipsType_medium">(объём {filesize="$gallerysize"})</span></h2>
+
+		{{if $images = \IPS\gallery\Image::getItemsWithPermission( array( array( 'image_album_id=?', $request->request_album ) ) )}}
+			<div class='ipsCarousel ipsClearfix ipsSpacer_bottom ipsAreaBackground_light ipsPad' data-ipsCarousel data-ipsCarousel-showDots>
+				<ul class='cGalleryCarousel ipsGrid ipsGrid_collapsePhone' data-role="carouselItems">
+					{{foreach $images as $idx => $image}}
+						{template="imageRow" group="tracker" params="$image"}
+					{{endforeach}}
+				</ul>
+				<span class='ipsCarousel_shadow ipsCarousel_shadowLeft'></span>
+				<span class='ipsCarousel_shadow ipsCarousel_shadowRight'></span>
+				<a href='#' class='ipsCarousel_nav ipsHide' data-action='prev'><i class='fa fa-chevron-left'></i></a>
+				<a href='#' class='ipsCarousel_nav ipsHide' data-action='next'><i class='fa fa-chevron-right'></i></a>
+			</div>
+		{{endif}}
+
+		<h2 class="ipsType_sectionHead ipsSpacer_bottom">Прикреплённые файлы</h2>
+
+		<div class="ipsSpacer_bottom ipsAreaBackground_light ipsPad">@todo</div>
+
+		{{if $request->info}}
+			<h2 class="ipsType_sectionHead ipsSpacer_bottom">Иная информация</h2>
+			<div class="valInfoWindow ipsSpacer_bottom ipsAreaBackground_light ipsPad"><!--{$request->info}--> @todo</div>
+		{{endif}}
+
+		<h2 class="ipsType_sectionHead ipsSpacer_bottom">Комментарий оценщика</h2>
+
+		{{if \IPS\Member::loggedIn()->currentRole() and $request->canComment()}}
+			{$form|raw}
+		{{else}}
+			{$request->request_comment|raw}
+		{{endif}}
+	</div>
+
+	<div class='ipsColumn ipsColumn_veryWide'>
+		<div class="ipsSpacer_bottom ipsType_center ipsAreaBackground_light ipsPad">
+			<div class="ipsClearfix valBlock_separator">
+				<h2 class="ipsType_sectionHead">Состояние заявки</h2>
+			</div>
+			<div class='ipsType_normal valBlock_separator'>
+				<h3 class='ipsType_sectionHead'>Статус заявки</h3><br>
+				{template="status" group="tracker" params="$request->status"}{{if $request->resolve_autoreport}} - {lang="resolve_autoreport_{$request->resolve_autoreport}"}<br>{{endif}}
+				{{if $request->canChangeStatus() and $setStatuses = \IPS\valuation\Tracker\Request::getStatuses( $request )}}
+					&nbsp;&nbsp;
+					<a href='#elStatusMenu_menu' class='ipsType_small' data-ipsMenu id='elStatusMenu'>Изменить <i class='fa fa-caret-down'></i></a>
+					<ul class='ipsHide ipsMenu ipsMenu_auto' id='elStatusMenu_menu'>
+						{{foreach $setStatuses as $status}}
+							{{if empty( $autoreports = $request->get_autoreports( $status ) )}}
+								<li class='ipsMenu_item'>
+									<a href="{$request->url()->setQueryString( 'status', $status )->csrf()}">{lang="valuation_status_{$status}_action"}</a>
+								</li>
+							{{else}}
+								<li class='ipsMenu_item ipsMenu_subItems'>
+									<a href="#elStatus{$status}_menu" id='elNavLang'>{lang="valuation_status_{$status}_action"}</a>
+									<ul id="#elStatus{$status}_menu" class='ipsMenu ipsMenu_selectable ipsHide'>
+									{{foreach $request->get_autoreports( $status ) as $id => $lang}}
+										<li class='ipsMenu_item'>
+											<a href="{$request->url()->setQueryString( array( 'status' => $status, 'autoreport' => $id ) )->csrf()}">{lang="$lang"}</a>
+										</li>
+									{{endforeach}}
+									</ul>
+								</li>
+							{{endif}}
+						{{endforeach}}
+					</ul>
+				{{endif}}
+			</div>
+			{{if $request->canChangeAssignee() and ( $request->request_status == 'rcvd' and !$request->request_assigned ) or ( $request->request_status == 'open' and $request->canChangePrice() )}}
+				<div class="ipsType_normal valBlock_separator">
+					{{if $request->request_status == 'rcvd' and !$request->request_assigned}}
+						<a href="{$request->url()->setQueryString( array( 'status' => 'open', 'autoreport' => 'evaluating' ) )->csrf()}" class="ipsButton ipsButton_primary">Взять в работу</a>
+					{{endif}}
+
+					{{if $request->request_status == 'open' and $request->canChangePrice()}}
+						<a href="{$request->url()->setQueryString( array( 'status' => 'clsd', 'autoreport' => 'successful' ) )->csrf()}" class="ipsButton ipsButton_primary">Завершить оценку</a>
+					{{endif}}
+				</div>
+			{{endif}}
+			<div class="ipsType_normal valBlock_separator">
+				<p class="ipsType_reset valBlock_priced">{{if $request->resolve_price}}Оборудование оценено на {expression="\IPS\Member::loggedIn()->language()->formatNumber( $request->resolve_price, 1 )"} руб.{{else}}<i>Оборудование не оценено</i>{{endif}}</p>
+				{{if $request->canChangePrice()}}
+					<a href="{$request->url()->setQueryString( 'do', 'price' )}" class="ipsButton ipsButton_primary ipsButton_verySmall" data-ipsdialog data-ipsdialog-size="narrow" data-ipsdialog-title="Указать цену">Изменить оценочную стоимость</a>
+				{{endif}}
+			</div>
+			{{if \IPS\Member::loggedIn()->currentRole()}}
+				<div class="ipsType_normal valBlock_separator">
+					{{if $request->request_updated_by}}<p class="valRequest_editedBy ipsType_reset">Заявка изменена <!--{datetime="$request->request_updated" norelative="true" dateonly="true"}-->оценщиком <a href="{member="name" id="$request->request_updated_by"}">{member="name" id="$request->request_updated_by"}</a>.</p>{{endif}}
+
+					{{if $request->canEdit() and ( !$request->request_locked or in_array( \IPS\Member::loggedIn()->currentRole(), array( 'admin', 'director' ) ) )}}
+						<div class="ipsType_normal">
+							<a href="{$request->url()->setQueryString( 'do', 'edit' )}" class="ipsButton ipsButton_primary ipsButton_verySmall">Изменить заявку</a>
+						</div>
+					{{endif}}
+
+					<span class="ipsType_small">
+						{{if in_array( \IPS\Member::loggedIn()->currentRole(), array( 'admin', 'director' ) ) and $request->request_updated_by}}
+							<a href="{$request->url()->setQueryString( array( 'do' => 'edit', 'original' => '1' ) )}">(просмотреть оригинал)</a> или 
+						{{endif}}
+
+						{{if $request->canViewPdf() and \IPS\Member::loggedIn()->currentRole()}}
+							<a href="{$request->url()->setQueryString( 'to', 'pdf' )}" target="_blank">(просмотреть в pdf)</a>
+						{{endif}}
+					</span>
+				</div>
+			{{endif}}
+		</div>
+
+		{{if $request->canViewConfidential()}}
+			{template="requestMemberInfo" group="tracker" params="$request"}
+		{{endif}}
+
+		{{if $request->canEditCard()}}
+			<div class="ipsSpacer_bottom ipsType_center ipsAreaBackground_light ipsPad">
+				<div class="ipsClearfix valBlock_separator">
+					<h2 class="ipsType_sectionHead">Карточка клиента</h2>
+				</div>
+				<div class="ipsType_medium valBlock_separator">
+					{{$status = $request->legalComplete();}}
+					{{if $status === NULL}}<p class="ipsType_reset valLegalStatus_null"><i class="fa fa-times" aria-hidden="true"></i> Карточка клиента не заполнена</p>{{endif}}
+					{{if $status === TRUE}}<p class="ipsType_reset valLegalStatus_true"><i class="fa fa-check" aria-hidden="true"></i> Карточка клиента заполнена</p>{{endif}}
+					{{if $status === FALSE}}<p class="ipsType_reset valLegalStatus_false"><i class="fa fa-hourglass-half" aria-hidden="true"></i> Карточка клиента частично заполнена</p>{{endif}}
+
+					<span class="ipsType_small">
+						{{if \IPS\Member::loggedIn()->currentRole()}}
+							{{if $request->canEditCard()}}<a href="{url="app=valuation&module=valuation&controller=legal&id={$request->id}" seoTemplate="request_card"}">(изменить карточку)</a>{{endif}}
+							{{if $request->canViewPdf()}} или 
+							<a href="{url="app=valuation&module=valuation&controller=legal&id={$request->id}&to=pdf" seoTemplate="request_card"}" target="_blank">(просмотреть в pdf)</a>{{endif}}
+						{{endif}}
+					</span>
+				</div>
+			</div>
+		{{endif}}
+
+		{{if $request->canViewHistory()}}
+			<div class="ipsSpacer_bottom ipsType_center ipsAreaBackground_light ipsPad">
+				<div class="ipsClearfix valBlock_separator">
+					<h2 class="ipsType_sectionHead">История изменений</h2>
+				</div>
+				<div class="ipsType_medium valBlock_separator">
+					<a href="{$request->url()->setQueryString( 'do', 'history' )}" class="ipsButton ipsButton_primary ipsButton_verySmall" data-ipsdialog data-ipsdialog-size="medium" data-ipsdialog-title="История изменений">Просмотреть историю изменений</a>
+				</div>
+			</div>
+		{{endif}}
+	</div>
+</div>
+
+<div id="elHistoryDialog_content" class='ipsHide'>
+	{$history|raw}
+</div>
